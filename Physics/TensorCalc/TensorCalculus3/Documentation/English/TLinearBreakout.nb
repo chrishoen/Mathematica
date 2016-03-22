@@ -1,0 +1,264 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      5995,        192]*)
+(*NotebookOutlinePosition[      6981,        226]*)
+(*  CellTagsIndexPosition[      6907,        220]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["LinearBreakout", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          RowBox[{
+            StyleBox["LinearBreakout",
+              "MR"], 
+            StyleBox["[",
+              "MR"], 
+            StyleBox[\(f1, f2,  ... \),
+              "TI"], 
+            StyleBox["]",
+              "MR"]}], 
+          StyleBox["[",
+            "MR"], 
+          StyleBox[\(v1, v2,  ... \),
+            "TI"], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], "expr", 
+        StyleBox["]",
+          "MR"]}]]],
+  " will break out the linear terms of any expressions within expr that have \
+heads matching the patterns fi over variables matching the patterns vj."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["\<\
+Since tensor calculus is a theory of multilinear functions, LinearBreakout is \
+a very useful routine for manipulating expressions.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["PushOnto",
+    ButtonData:>{"PushOnto"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["BasisDotProductRules",
+    ButtonData:>{"BasisDotProductRules"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["EvaluateSlots",
+    ButtonData:>{"EvaluateSlots"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples", "ExampleSection"],
+
+Cell[BoxData[{
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\), "\n", 
+    \(DefineTensorShortcuts[{u, v, w, g}, 1]\), "\[IndentingNewLine]", 
+    \(DefineTensorShortcuts[{T, g}, 2]\)}], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["\<\
+The following is about the simplest example. The functions f and g are linear \
+in x and y.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(f[a\ x + b\ y] + g[c\ x + d\ y] // \(LinearBreakout[f, g]\)[x, 
+        y]\)], "Input",
+  CellLabel->"In[4]:="],
+
+Cell["The following breaks out the dot product of two vectors.", "Text"],
+
+Cell[BoxData[{
+    \(u . v\), "\[IndentingNewLine]", 
+    \(% /. {u \[Rule] uu[i] gd[i], 
+        v \[Rule] vu[j] gd[j]}\), "\[IndentingNewLine]", 
+    \(% // \(LinearBreakout[Dot]\)[gd[_]]\)}], "Input",
+  CellLabel->"In[5]:="],
+
+Cell["\<\
+In the following we want to breakout a triple product on Dot and Cross, but \
+we have to breakout the Dot on Cross patterns also.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(u\[Cross]v . w\), "\[IndentingNewLine]", 
+    \(% /. {u \[Rule] uu[i] gd[i], v \[Rule] vu[j] gd[j], 
+        w \[Rule] wu[k] gd[k]}\), "\[IndentingNewLine]", 
+    \(% // \(LinearBreakout[Dot, Cross]\)[Cross[__], gd[_]]\)}], "Input",
+  CellLabel->"In[8]:="],
+
+Cell["\<\
+If T is a second order tensor, then we can breakout a slot expression on the \
+basis vectors.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(T[u, v]\), "\[IndentingNewLine]", 
+    \(% /. {u \[Rule] uu[i] gd[i], 
+        v \[Rule] vu[j] gd[j]}\), "\[IndentingNewLine]", 
+    \(% // \(LinearBreakout[T]\)[gd[_]]\), "\[IndentingNewLine]", 
+    \(% /. T[gd[i_], gd[j_]] \[Rule] Tdd[i, j]\)}], "Input",
+  CellLabel->"In[11]:="],
+
+Cell["\<\
+In the following we create a dyad tensor (direct product) from u and v and \
+then evaluate it on w. (We are only evaluating on the second slot.)\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\((u\[CircleTimes]v)\)[\(,\)\(w\)]\), "\[IndentingNewLine]", 
+    \(% /. {u \[Rule] uu[i] gd[i], v \[Rule] vu[j] gd[j], 
+        w \[Rule] wu[k] gd[k]}\), "\[IndentingNewLine]", 
+    \(% // \(LinearBreakout[CircleTimes]\)[gd[_]]\), "\[IndentingNewLine]", 
+    \(% // PushOnto[{CircleTimes[__]}]\), "\[IndentingNewLine]", 
+    \(% // EvaluateSlots[g, \[Delta]]\)}], "Input",
+  CellLabel->"In[15]:="],
+
+Cell["\<\
+But EvaluateSlots, itself, actually does the LinearBreakout and PushOnto.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\((u\[CircleTimes]v)\)[\(,\)\(w\)]\), "\[IndentingNewLine]", 
+    \(% /. {u \[Rule] uu[i] gd[i], v \[Rule] vu[j] gd[j], 
+        w \[Rule] wu[k] gd[k]}\), "\[IndentingNewLine]", 
+    \(% // EvaluateSlots[g, \[Delta]]\)}], "Input",
+  CellLabel->"In[20]:="],
+
+Cell[BoxData[{
+    \(ClearTensorShortcuts[{u, v, w, g}, 1]\), "\[IndentingNewLine]", 
+    \(ClearTensorShortcuts[{T, g}, 2]\)}], "Input",
+  CellLabel->"In[23]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{674, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 61, 1, 31, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1840, 56, 759, 27, 49, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 6736, 211}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 61, 1, 31, "ObjectName",
+  CellTags->"Function?"],
+Cell[1840, 56, 759, 27, 49, "Usage",
+  CellTags->"Function?"],
+Cell[2602, 85, 162, 3, 48, "MathCaption"],
+Cell[2767, 90, 364, 14, 31, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[3156, 108, 34, 0, 40, "ExampleSection"],
+Cell[3193, 110, 219, 4, 69, "Input"],
+Cell[3415, 116, 115, 3, 25, "Text"],
+Cell[3533, 121, 131, 3, 29, "Input"],
+Cell[3667, 126, 72, 0, 25, "Text"],
+Cell[3742, 128, 227, 5, 69, "Input"],
+Cell[3972, 135, 153, 3, 42, "Text"],
+Cell[4128, 140, 277, 5, 69, "Input"],
+Cell[4408, 147, 117, 3, 25, "Text"],
+Cell[4528, 152, 302, 6, 89, "Input"],
+Cell[4833, 160, 168, 3, 42, "Text"],
+Cell[5004, 165, 419, 7, 109, "Input"],
+Cell[5426, 174, 97, 2, 25, "Text"],
+Cell[5526, 178, 276, 5, 69, "Input"],
+Cell[5805, 185, 162, 3, 49, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

@@ -1,0 +1,339 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      7682,        255]*)
+(*NotebookOutlinePosition[      8668,        289]*)
+(*  CellTagsIndexPosition[      8594,        283]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["PartialArray", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox["PartialArray",
+            "MR"], 
+          StyleBox["[",
+            "MR"], 
+          StyleBox[\(baseindex, newindices\),
+            "TI"], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will expand the free indices of a tensor expression into components that \
+have one or more baseindex indices and an unexpanded remainder. Symbolic \
+indices are replaced with newindices."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["The elements are returned as a list.", "MathCaption"],
+
+Cell["\<\
+ The newindices list of symbols is used to replace the existing free index \
+symbols. Greek indices might be replaced with Latin indices to indicate a \
+restricted further expansion. But it is up to the user to actually use a \
+restriced expansion when further expansions are performed.\
+\>", "MathCaption"],
+
+Cell["\<\
+Any flavor must be on the newindices but not on the baseindex.\
+\>", "MathCaption"],
+
+Cell["PartialArray is mapped over arrays, equations and sums.", "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["PartialSum",
+    ButtonData:>{"PartialSum"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["EinsteinSum",
+    ButtonData:>{"EinsteinSum"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["ArrayExpansion",
+    ButtonData:>{"ArrayExpansion"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SumExpansion",
+    ButtonData:>{"SumExpansion"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["Save the settings and declare base indices and flavors.", "Text"],
+
+Cell[BoxData[{
+    \(\(oldindices = BaseIndices;\)\), "\n", 
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(DeclareBaseIndices[{0, 1, 2, 3}]\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor[{red, Red}];\)\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[{{\[Lambda]}, 1}, {T, 2}, {T, 3}]\)], "Input",
+  CellLabel->"In[7]:="],
+
+Cell[TextData[{
+  "Let ",
+  Cell[BoxData[
+      \(\[Lambda]\)]],
+  " be a spacetime vector. The following expands it into its components."
+}], "Text"],
+
+Cell[BoxData[{
+    \(\[Lambda]u[\[Mu]]\), "\[IndentingNewLine]", 
+    \(% // EinsteinArray[]\)}], "Input",
+  CellLabel->"In[8]:="],
+
+Cell[TextData[{
+  "If instead we want to break ",
+  Cell[BoxData[
+      \(\[Lambda]\)]],
+  " into its temporal and spatial components we can use"
+}], "Text"],
+
+Cell[BoxData[{
+    \(\[Lambda]u[\[Mu]]\), "\[IndentingNewLine]", 
+    \(step1 = % // PartialArray[0, {i}]\)}], "Input",
+  CellLabel->"In[10]:="],
+
+Cell[TextData[{
+  Cell[BoxData[
+      \(0\)]],
+  " is the index for the temporal part. The Greek index ",
+  Cell[BoxData[
+      \(\[Mu]\)]],
+  " was replaced with the Latin i to indicate that the remaining part should \
+have a restricted expansion.  We could complete the expansion with"
+}], "Text"],
+
+Cell[BoxData[
+    \(MapAt[EinsteinArray[{1, 2, 3}], step1, 2]\)], "Input",
+  CellLabel->"In[12]:="],
+
+Cell["\<\
+The flavor must be on the replacement index but not on the base index.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\[Lambda]u[red@\[Mu]]\), "\[IndentingNewLine]", 
+    \(% // PartialArray[0, {red@i}]\)}], "Input",
+  CellLabel->"In[13]:="],
+
+Cell[TextData[{
+  "The following expands a rank 2 spacetime tensor on the temporal part and \
+then completes the expansion by mapping ",
+  Cell[BoxData[
+      \(EinsteinArray\)]],
+  " onto the parts. We have to map ",
+  Cell[BoxData[
+      \(EinsteinArray\)]],
+  " because the parts do not have matching free indices."
+}], "Text"],
+
+Cell[BoxData[{
+    \(Tuu[\[Mu], \[Nu]]\), "\[IndentingNewLine]", 
+    \(step1 = % // PartialArray[0, {i, j}]\), "\[IndentingNewLine]", 
+    \(EinsteinArray[{1, 2, 3}] /@ %\)}], "Input",
+  CellLabel->"In[15]:="],
+
+Cell["\<\
+Successive expansions can be performed on various base indices. The following \
+expands first on the 0 index, then on the 1 index and then on the remaining \
+indices.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Tuu[\[Mu], \[Nu]] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // PartialArray[0, red /@ {i, j}]\), "\[IndentingNewLine]", 
+    \(PartialArray[1, red /@ {i, j}] /@ %\), "\[IndentingNewLine]", 
+    \(Map[EinsteinArray[{2, 3}], %, {2}]\)}], "Input",
+  CellLabel->"In[18]:="],
+
+Cell[TextData[{
+  "If ",
+  Cell[BoxData[
+      \(PartialArray\)]],
+  " is applied to an expression without matching indices an error is \
+generated."
+}], "Text"],
+
+Cell[BoxData[{
+    \(Tuu[\[Mu], \[Nu]] \[Lambda]d[\[Sigma]] + Tuud[\[Mu], \[Nu], \[Beta]] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // PartialArray[0, red /@ {i, j, k}]\)}], "Input",
+  CellLabel->"In[22]:="],
+
+Cell["\<\
+The new indices must be sufficient to replace the old free indices after \
+removing any conflicts with dummy indices.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Tuud[\[Mu], \[Nu], i] \[Lambda]u[i] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // PartialArray[0, red /@ {i, j}]\)}], "Input",
+  CellLabel->"In[24]:="],
+
+Cell["Restore the initial values...", "Text"],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[{{\[Lambda]}, 1}, {T, 2}, {T, 3}]\)], "Input",
+  CellLabel->"In[26]:="],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[oldindices]\), "\[IndentingNewLine]", 
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(Clear[oldindices, oldflavors]\)}], "Input",
+  CellLabel->"In[27]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 941}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{665, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 59, 1, 41, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1838, 56, 658, 23, 50, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 8423, 274}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 59, 1, 41, "ObjectName",
+  CellTags->"Function?"],
+Cell[1838, 56, 658, 23, 50, "Usage",
+  CellTags->"Function?"],
+Cell[2499, 81, 59, 0, 41, "MathCaption"],
+Cell[2561, 83, 317, 5, 75, "MathCaption"],
+Cell[2881, 90, 93, 2, 41, "MathCaption"],
+Cell[2977, 94, 78, 0, 41, "MathCaption"],
+Cell[3058, 96, 454, 18, 41, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[3537, 118, 34, 0, 39, "ExampleSection"],
+Cell[3574, 120, 96, 2, 29, "Input"],
+Cell[3673, 124, 71, 0, 25, "Text"],
+Cell[3747, 126, 322, 6, 109, "Input"],
+Cell[4072, 134, 112, 2, 29, "Input"],
+Cell[4187, 138, 150, 5, 25, "Text"],
+Cell[4340, 145, 130, 3, 49, "Input"],
+Cell[4473, 150, 157, 5, 25, "Text"],
+Cell[4633, 157, 144, 3, 49, "Input"],
+Cell[4780, 162, 299, 8, 42, "Text"],
+Cell[5082, 172, 99, 2, 29, "Input"],
+Cell[5184, 176, 94, 2, 25, "Text"],
+Cell[5281, 180, 144, 3, 49, "Input"],
+Cell[5428, 185, 330, 9, 42, "Text"],
+Cell[5761, 196, 210, 4, 69, "Input"],
+Cell[5974, 202, 190, 4, 42, "Text"],
+Cell[6167, 208, 300, 5, 89, "Input"],
+Cell[6470, 215, 161, 6, 25, "Text"],
+Cell[6634, 223, 224, 4, 49, "Input"],
+Cell[6861, 229, 141, 3, 25, "Text"],
+Cell[7005, 234, 188, 4, 49, "Input"],
+Cell[7196, 240, 45, 0, 25, "Text"],
+Cell[7244, 242, 112, 2, 29, "Input"],
+Cell[7359, 246, 295, 5, 89, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

@@ -1,0 +1,271 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      5983,        198]*)
+(*NotebookOutlinePosition[      6969,        232]*)
+(*  CellTagsIndexPosition[      6895,        226]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["UpDownSwap", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox["UpDownSwap",
+            "MR"], 
+          StyleBox["[",
+            "MR"], 
+          StyleBox["dummy",
+            "TI"], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["term",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will swap the up and down positions of the dummy index in a term \
+consisting of simple Tensor products."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell[" The dummy index must contain the flavor.", "MathCaption"],
+
+Cell[TextData[{
+  " ",
+  Cell[BoxData[
+      \(UpDownSwap\)]],
+  " is automatically mapped onto arrays, equations and sums."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["IndexChange",
+    ButtonData:>{"IndexChange"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["DummySimplify",
+    ButtonData:>{"DummySimplify"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SimplifyTensorSum",
+    ButtonData:>{"SimplifyTensorSum"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["MetricSimplify",
+    ButtonData:>{"MetricSimplify"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["Save old settings and declare a flavor.", "Text"],
+
+Cell[BoxData[{
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(DeclareIndexFlavor[{red, Red}]\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[{{x, c}, 1}, {{a, b}, 2}]\)], "Input",
+  CellLabel->"In[5]:="],
+
+Cell[BoxData[{
+    \(2  auu[i, j] bdd[j, k] cd[i]\), "\[IndentingNewLine]", 
+    \(Print["\<Swap i index\>"]\), "\[IndentingNewLine]", 
+    \(%% // UpDownSwap[i]\), "\[IndentingNewLine]", 
+    \(Print["\<Swap j index\>"]\), "\[IndentingNewLine]", 
+    \(%% // UpDownSwap[j]\), "\[IndentingNewLine]", 
+    \(Print["\<Swapping k does nothing because it is not a dummy index\>"]\), \
+"\[IndentingNewLine]", 
+    \(%% // UpDownSwap[k]\)}], "Input",
+  CellLabel->"In[6]:="],
+
+Cell["The flavor must be on the index.", "Text"],
+
+Cell[BoxData[{
+    \(2  auu[i, j] bdd[j, k] cd[i] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(Print["\<Swap i index\>"]\), "\[IndentingNewLine]", 
+    \(%% // UpDownSwap[red@i]\), "\[IndentingNewLine]", 
+    \(Print["\<Swap j index\>"]\), "\[IndentingNewLine]", 
+    \(%% // UpDownSwap[red@j]\), "\[IndentingNewLine]", 
+    \(Print["\<Swapping i without the color has no effect\>"]\), "\
+\[IndentingNewLine]", 
+    \(%% // UpDownSwap[i]\)}], "Input",
+  CellLabel->"In[13]:="],
+
+Cell["\<\
+UpDownSwap is mapped over lists, single equations and sums, but not other \
+subexpressions.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \({xu[i] cd[i] + bud[i, i] \[Equal] aud[i, i], 
+      bud[i, j] xu[j] \[GreaterEqual] 
+        aud[i, j] cu[j]}\), "\[IndentingNewLine]", 
+    \(Print["\<Swapping i works on first equation\>"]\), \
+"\[IndentingNewLine]", 
+    \(%% // UpDownSwap[i]\), "\[IndentingNewLine]", 
+    \(Print["\<Swapping j works on second equation\>"]\), \
+"\[IndentingNewLine]", 
+    \(%% // UpDownSwap[j]\)}], "Input",
+  CellLabel->"In[20]:="],
+
+Cell["\<\
+UpDownSwap will work on any term that ParseTermIndices can extract the \
+indices.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \({adu[i, Dif[j]] xd[j], 
+      xu[j] \(PartialD[{x, \[Delta], g, \[CapitalGamma]}]\)[cd[i], 
+          xu[j]], \((k1\ xu[j])\) . \((k2\ cd[j])\), 
+      xu[j]\[CircleTimes]cd[j]}\), "\[IndentingNewLine]", 
+    \(% // UpDownSwap[j]\)}], "Input",
+  CellLabel->"In[25]:="],
+
+Cell["Restore old settings...", "Text"],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[{{x, c}, 1}, {{a, b}, 2}]\)], "Input",
+  CellLabel->"In[27]:="],
+
+Cell[BoxData[{
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(Clear[oldflavors]\)}], "Input",
+  CellLabel->"In[28]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 941}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{669, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 57, 1, 41, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1836, 56, 555, 22, 50, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 6724, 217}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 57, 1, 41, "ObjectName",
+  CellTags->"Function?"],
+Cell[1836, 56, 555, 22, 50, "Usage",
+  CellTags->"Function?"],
+Cell[2394, 80, 64, 0, 41, "MathCaption"],
+Cell[2461, 82, 143, 5, 41, "MathCaption"],
+Cell[2607, 89, 470, 18, 41, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[3102, 111, 34, 0, 39, "ExampleSection"],
+Cell[3139, 113, 96, 2, 29, "Input"],
+Cell[3238, 117, 55, 0, 25, "Text"],
+Cell[3296, 119, 205, 4, 69, "Input"],
+Cell[3504, 125, 104, 2, 29, "Input"],
+Cell[3611, 129, 468, 9, 149, "Input"],
+Cell[4082, 140, 48, 0, 25, "Text"],
+Cell[4133, 142, 488, 10, 149, "Input"],
+Cell[4624, 154, 115, 3, 25, "Text"],
+Cell[4742, 159, 442, 10, 109, "Input"],
+Cell[5187, 171, 105, 3, 25, "Text"],
+Cell[5295, 176, 289, 6, 69, "Input"],
+Cell[5587, 184, 39, 0, 25, "Text"],
+Cell[5629, 186, 104, 2, 29, "Input"],
+Cell[5736, 190, 219, 4, 69, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

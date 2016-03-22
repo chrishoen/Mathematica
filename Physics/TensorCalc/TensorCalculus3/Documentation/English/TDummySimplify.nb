@@ -1,0 +1,270 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.1'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      5616,        196]*)
+(*NotebookOutlinePosition[      6602,        230]*)
+(*  CellTagsIndexPosition[      6528,        224]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["DummySimplify (Deprecated)", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["DummySimplify",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will attempt to simplify the dummy indices in the tensor expression to \
+produce a minimum number of dummy indices."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["\<\
+DummySimplify is now deprecated and may be removed from future versions.\
+\>", "MathCaption"],
+
+Cell["\<\
+ IndexChange can be used to perform specific reindexing under the user's \
+control\
+\>", "MathCaption"],
+
+Cell["\<\
+ DummySimplify will perform automatic reindexing in an attempt to simplify \
+tensor expressions.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  " ",
+  Cell[BoxData[
+      \(SimplifyTensorSum\)]],
+  " is an alternative routine that sometimes works better."
+}], "MathCaption"],
+
+Cell[TextData[{
+  " The simplification routines are not high powered. They do not take into \
+account symmetries. See ",
+  Cell[BoxData[
+      \(SymmetrizeSlots\)]],
+  " to apply some symmetries."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["EinsteinSum",
+    ButtonData:>{"EinsteinSum"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["UpDownSwap",
+    ButtonData:>{"UpDownSwap"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["IndexChange",
+    ButtonData:>{"IndexChange"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SymmetrizeSlots",
+    ButtonData:>{"SymmetrizeSlots"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["NondependentPartialD",
+    ButtonData:>{"NondependentPartialD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SimplifyTensorSum",
+    ButtonData:>{"SimplifyTensorSum"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["Save old settings and declare an index flavor.", "Text"],
+
+Cell[BoxData[{
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(DeclareIndexFlavor[{red, Red}]\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[{{b, B, G, U}, 1}, {{A, G}, 2}, {a, 3}, {F, 
+        4}]\)], "Input",
+  CellLabel->"In[5]:="],
+
+Cell["\<\
+DummySimplify will usually perform the desired dummy index simplification in \
+expressions.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(a\ Auu[i, j] Gd[i] + b\ Auu[k, j] Gd[k]\), "\[IndentingNewLine]", 
+    \(% // DummySimplify\), "\[IndentingNewLine]", 
+    \(% // Simplify\)}], "Input",
+  CellLabel->"In[6]:="],
+
+Cell[BoxData[{
+    \(a\ Auu[i, j] Bu[k] Gdd[j, k] Ud[i] + 
+        b\ Auu[k, m] Bu[p] Gdd[m, p] Ud[k] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(\(% // DummySimplify\) // Simplify\)}], "Input",
+  CellLabel->"In[9]:="],
+
+Cell[BoxData[{
+    \(a\ Fdduu[i, j, i, j] + b\ Fdduu[j, p, j, p] + 
+      c\ Fdduu[m, r, m, r]\), "\n", 
+    \(\(% // DummySimplify\) // Simplify\)}], "Input",
+  CellLabel->"In[11]:="],
+
+Cell[BoxData[{
+    \(\((addd[r, s, t] + addd[s, r, t] + addd[s, t, r])\) bu[r] bu[s] bu[t] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // DummySimplify\)}], "Input",
+  CellLabel->"In[13]:="],
+
+Cell["Restore old settings...", "Text"],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[{{b, B, G, U}, 1}, {{A, G}, 2}, {a, 3}, {F, 
+        4}]\)], "Input",
+  CellLabel->"In[15]:="],
+
+Cell[BoxData[{
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(Clear[oldflavors]\)}], "Input",
+  CellLabel->"In[16]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"5.1 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 941}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{669, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 73, 1, 41, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1852, 56, 410, 15, 50, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 6357, 215}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 73, 1, 41, "ObjectName",
+  CellTags->"Function?"],
+Cell[1852, 56, 410, 15, 50, "Usage",
+  CellTags->"Function?"],
+Cell[2265, 73, 103, 2, 41, "MathCaption"],
+Cell[2371, 77, 113, 3, 41, "MathCaption"],
+Cell[2487, 82, 127, 3, 41, "MathCaption"],
+Cell[2617, 87, 148, 5, 41, "MathCaption"],
+Cell[2768, 94, 215, 6, 58, "MathCaption"],
+Cell[2986, 102, 684, 26, 58, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[3695, 132, 34, 0, 39, "ExampleSection"],
+Cell[3732, 134, 96, 2, 29, "Input"],
+Cell[3831, 138, 62, 0, 25, "Text"],
+Cell[3896, 140, 205, 4, 69, "Input"],
+Cell[4104, 146, 135, 3, 29, "Input"],
+Cell[4242, 151, 115, 3, 25, "Text"],
+Cell[4360, 156, 197, 4, 69, "Input"],
+Cell[4560, 162, 231, 5, 49, "Input"],
+Cell[4794, 169, 184, 4, 49, "Input"],
+Cell[4981, 175, 205, 4, 49, "Input"],
+Cell[5189, 181, 39, 0, 25, "Text"],
+Cell[5231, 183, 135, 3, 29, "Input"],
+Cell[5369, 188, 219, 4, 69, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

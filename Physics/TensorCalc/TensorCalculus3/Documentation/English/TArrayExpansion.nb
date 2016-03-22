@@ -1,0 +1,334 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      7352,        253]*)
+(*NotebookOutlinePosition[      8339,        287]*)
+(*  CellTagsIndexPosition[      8265,        281]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["ArrayExpansion", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox["ArrayExpansion",
+            "MR"], 
+          StyleBox["[",
+            "MR"], 
+          StyleBox[
+            RowBox[{"i", ",", "j", ",", "...", ",", 
+              RowBox[{"base", ":", "BaseIndices"}]}],
+            "TI"], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "MR"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will form an array on the indices i, j,..., in the expression. The range \
+of the expansion is over the base list, which has the default value of \
+BaseIndices.\n\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox["ArrayExpansion",
+            "MR"], 
+          StyleBox["[",
+            "MR"], 
+          RowBox[{
+            RowBox[{
+              StyleBox["{",
+                "MR"], 
+              StyleBox[
+                RowBox[{"i", ",", "j", ",", "..."}],
+                "TI"], 
+              StyleBox["}",
+                "TI"]}], 
+            StyleBox[",",
+              "TI"], 
+            StyleBox[
+              RowBox[{"base", ":", "BaseIndices"}],
+              "TI"]}], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "MR"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " may also be used."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["\<\
+ The expansion indices must carry their flavors. base indices are not \
+flavored.\
+\>", "MathCaption"],
+
+Cell["\<\
+ The first index will be at the highest level in the resulting array, and the \
+last index at the lowest level.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  " ",
+  Cell[BoxData[
+      \(EinsteinArray\)]],
+  ", which automatically expands on free indices, will often be more \
+convenient to use."
+}], "MathCaption"],
+
+Cell["\<\
+No tensor label may be the same as one of the expansion indices, otherwise \
+incorrect results will be obtained. If this unlikely case should occur you \
+can reindex to avoid the problem.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["SumExpansion",
+    ButtonData:>{"SumExpansion"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["EinsteinSum",
+    ButtonData:>{"EinsteinSum"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["EinsteinArray",
+    ButtonData:>{"EinsteinArray"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["ToArrayValues",
+    ButtonData:>{"ToArrayValues"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["Save the settings and declare base indices and flavors.", "Text"],
+
+Cell[BoxData[{
+    \(\(oldindices = BaseIndices;\)\), "\n", 
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(DeclareBaseIndices[{1, 2, 3}]\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ {{red, Red}, {rocket, 
+            SuperStar}};\)\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[{{x, y}, 1}, {S, 2}]\)], "Input",
+  CellLabel->"In[7]:="],
+
+Cell["The following expand vectors into their components...", "Text"],
+
+Cell[BoxData[{
+    \(xu[i]\), "\[IndentingNewLine]", 
+    \(% // ArrayExpansion[i]\)}], "Input",
+  CellLabel->"In[8]:="],
+
+Cell[BoxData[{
+    \(xu[i] + yu[i]\), "\[IndentingNewLine]", 
+    \(% // ArrayExpansion[i]\)}], "Input",
+  CellLabel->"In[10]:="],
+
+Cell["An expansion can be done over a subset of the BaseIndices.", "Text"],
+
+Cell[BoxData[{
+    \(xu[i] + yu[i]\), "\[IndentingNewLine]", 
+    \(% // ArrayExpansion[i, {1, 3}]\)}], "Input",
+  CellLabel->"In[12]:="],
+
+Cell["\<\
+With different indices we obtain a two-dimensional array. (However, this is \
+not a proper tensor expression.)\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(xu[i] + yu[j]\), "\[IndentingNewLine]", 
+    \(% // ArrayExpansion[i, j]\)}], "Input",
+  CellLabel->"In[14]:="],
+
+Cell["\<\
+The following expands a second order tensor into an array. The expansion \
+indices must match the flavor of the expression indices.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Suu[i, j] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // ArrayExpansion[red@i, red@j]\)}], "Input",
+  CellLabel->"In[16]:="],
+
+Cell["\<\
+The order of the expansion follows the order of the indices so this produces \
+the transpose of the above matrix.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Suu[i, j] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // ArrayExpansion[red@j, red@i]\)}], "Input",
+  CellLabel->"In[18]:="],
+
+Cell["The following expands a set of equations.", "Text"],
+
+Cell[BoxData[{
+    \(yu[i] \[Equal] Sud[i, j] xu[j] // 
+      ToFlavor[rocket]\), "\[IndentingNewLine]", 
+    \(% // SumExpansion[rocket@j]\), "\[IndentingNewLine]", 
+    \(\(% // ArrayExpansion[rocket@i]\) // TableForm\)}], "Input",
+  CellLabel->"In[20]:="],
+
+Cell["Restore the initial values...", "Text"],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[{{x, y}, 1}, {S, 2}]\)], "Input",
+  CellLabel->"In[23]:="],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[oldindices]\), "\[IndentingNewLine]", 
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(Clear[oldindices, oldflavors]\)}], "Input",
+  CellLabel->"In[24]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{665, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 61, 1, 31, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1840, 56, 1475, 55, 72, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 8093, 272}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 61, 1, 31, "ObjectName",
+  CellTags->"Function?"],
+Cell[1840, 56, 1475, 55, 72, "Usage",
+  CellTags->"Function?"],
+Cell[3318, 113, 112, 3, 31, "MathCaption"],
+Cell[3433, 118, 142, 3, 31, "MathCaption"],
+Cell[3578, 123, 175, 6, 31, "MathCaption"],
+Cell[3756, 131, 218, 4, 48, "MathCaption"],
+Cell[3977, 137, 458, 18, 31, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[4460, 159, 34, 0, 40, "ExampleSection"],
+Cell[4497, 161, 96, 2, 29, "Input"],
+Cell[4596, 165, 71, 0, 25, "Text"],
+Cell[4670, 167, 357, 7, 109, "Input"],
+Cell[5030, 176, 99, 2, 29, "Input"],
+Cell[5132, 180, 69, 0, 25, "Text"],
+Cell[5204, 182, 120, 3, 49, "Input"],
+Cell[5327, 187, 129, 3, 49, "Input"],
+Cell[5459, 192, 74, 0, 25, "Text"],
+Cell[5536, 194, 137, 3, 49, "Input"],
+Cell[5676, 199, 134, 3, 25, "Text"],
+Cell[5813, 204, 132, 3, 49, "Input"],
+Cell[5948, 209, 155, 3, 42, "Text"],
+Cell[6106, 214, 153, 3, 49, "Input"],
+Cell[6262, 219, 137, 3, 25, "Text"],
+Cell[6402, 224, 153, 3, 49, "Input"],
+Cell[6558, 229, 57, 0, 25, "Text"],
+Cell[6618, 231, 258, 5, 69, "Input"],
+Cell[6879, 238, 45, 0, 25, "Text"],
+Cell[6927, 240, 99, 2, 29, "Input"],
+Cell[7029, 244, 295, 5, 89, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

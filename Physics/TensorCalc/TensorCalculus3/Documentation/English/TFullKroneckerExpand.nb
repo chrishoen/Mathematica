@@ -1,0 +1,225 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      4663,        156]*)
+(*NotebookOutlinePosition[      5649,        190]*)
+(*  CellTagsIndexPosition[      5575,        184]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["FullKroneckerExpand", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox["FullKroneckerExpand",
+            "MR"], 
+          StyleBox["[",
+            "MR"], 
+          StyleBox["\[Delta]",
+            "TI"], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will fully expand tensors with label \[Delta], assumed to be generalized \
+Kroneckers, as first order Kroneckers."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["\<\
+ In Tensorial all Kronecker symbols must have one Void in each slot just like \
+all other indexed objects. Many texts use indices in both the up and down \
+positions, taking advantage of the fact that Kroneckers must be even order \
+with equal number of up and down indices.\
+\>", "MathCaption"],
+
+Cell["\<\
+Labels other that \[Delta] can be used to represent the Kronecker.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["ContractKroneckers",
+    ButtonData:>{"ContractKroneckers"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["PartialKroneckerExpand",
+    ButtonData:>{"PartialKroneckerExpand"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["KroneckerAbsorb",
+    ButtonData:>{"KroneckerAbsorb"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell[BoxData[{
+    \(\(\(DefineTensorShortcuts[\[Delta], #] &\) /@ {2, 4, 
+          6};\)\), "\[IndentingNewLine]", 
+    \(DefineTensorShortcuts[\[Kappa], 6]\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell["The following routine fully expands a generalized Kronecker.", "Text"],
+
+Cell[BoxData[{
+    \(\[Delta]uuuddd[i, j, k, r, s, t]\), "\[IndentingNewLine]", 
+    \(% // FullKroneckerExpand[\[Delta]]\)}], "Input",
+  CellLabel->"In[4]:="],
+
+Cell[BoxData[{
+    \(\[Delta]uudd[i, j, r, s]\), "\[IndentingNewLine]", 
+    \(% // FullKroneckerExpand[\[Delta]]\)}], "Input",
+  CellLabel->"In[6]:="],
+
+Cell["The Kronecker does not have to be in standard form.", "Text"],
+
+Cell[BoxData[{
+    \(\[Delta]ududud[i, s, k, r, j, t]\), "\[IndentingNewLine]", 
+    \(% // FullKroneckerExpand[\[Delta]]\)}], "Input",
+  CellLabel->"In[8]:="],
+
+Cell["\<\
+The Kronecker can be represented by a label different than \[Delta]\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\[Kappa]uuuddd[i, j, k, r, s, t]\), "\[IndentingNewLine]", 
+    \(% // FullKroneckerExpand[\[Kappa]]\)}], "Input",
+  CellLabel->"In[10]:="],
+
+Cell[BoxData[{
+    \(\(\(ClearTensorShortcuts[\[Delta], #] &\) /@ {2, 4, 6};\)\), "\n", 
+    \(ClearTensorShortcuts[\[Kappa], 6]\)}], "Input",
+  CellLabel->"In[12]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{674, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 66, 1, 31, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1845, 56, 576, 22, 49, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 5404, 175}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 66, 1, 31, "ObjectName",
+  CellTags->"Function?"],
+Cell[1845, 56, 576, 22, 49, "Usage",
+  CellTags->"Function?"],
+Cell[2424, 80, 305, 5, 65, "MathCaption"],
+Cell[2732, 87, 97, 2, 31, "MathCaption"],
+Cell[2832, 91, 392, 14, 31, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[3249, 109, 34, 0, 40, "ExampleSection"],
+Cell[3286, 111, 96, 2, 29, "Input"],
+Cell[3385, 115, 196, 4, 49, "Input"],
+Cell[3584, 121, 76, 0, 25, "Text"],
+Cell[3663, 123, 159, 3, 49, "Input"],
+Cell[3825, 128, 151, 3, 49, "Input"],
+Cell[3979, 133, 67, 0, 25, "Text"],
+Cell[4049, 135, 159, 3, 49, "Input"],
+Cell[4211, 140, 91, 2, 25, "Text"],
+Cell[4305, 144, 160, 3, 49, "Input"],
+Cell[4468, 149, 167, 3, 49, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

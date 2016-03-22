@@ -1,0 +1,307 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      6463,        227]*)
+(*NotebookOutlinePosition[      7470,        262]*)
+(*  CellTagsIndexPosition[      7396,        256]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["AbsoluteD", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["AbsoluteD",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox[
+          RowBox[{"tensor", ",", " ", "t"}],
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " represents the absolute derivative of tensor expression with respect to \
+t. \n\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["AbsoluteD",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox[
+          RowBox[{"tensor", ",", 
+            RowBox[{"{", 
+              RowBox[{"u", ",", "v", ",", "..."}], "}"}]}],
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " represents the absolute derivative with respect to the list of \
+variables."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["\<\
+ The absolute derivative is sometimes also known as the intrinsic derivative.\
+\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  " An absolute derivative given in representational form can later be \
+expanded in terms of the metric and coordinates using ",
+  Cell[BoxData["ExpandAbsoluteD"]],
+  "."
+}], "MathCaption"],
+
+Cell[TextData[{
+  " The output Format of the unexpanded absolute derivative can be changed \
+with ",
+  Cell[BoxData["SetDerivativeSymbols"]],
+  "."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "See also:  ",
+  ButtonBox["ExpandAbsoluteD",
+    ButtonData:>{"ExpandAbsoluteD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SetDerivativeSymbols",
+    ButtonData:>{"SetDerivativeSymbols"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["CovariantD",
+    ButtonData:>{"CovariantD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["PartialD",
+    ButtonData:>{"PartialD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["TotalD",
+    ButtonData:>{"TotalD"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["Save the settings.", "Text"],
+
+Cell[BoxData[{
+    \(\(oldindices = BaseIndices;\)\), "\[IndentingNewLine]", 
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(DeclareIndexFlavor[{red, Red}]\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[{{S, T}, 1}, {{S}, 2}]\)], "Input",
+  CellLabel->"In[6]:="],
+
+Cell["\<\
+The absolute derivative of a tensor scalar is the total derivative of the \
+scalar.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Tensor[F]\), "\[IndentingNewLine]", 
+    \(AbsoluteD[%, t]\), "\[IndentingNewLine]", 
+    \(% // FullForm\)}], "Input",
+  CellLabel->"In[7]:="],
+
+Cell[TextData[{
+  "The absolute derivative of a tensor is designated with the following \
+output form, using a capital D on the upper part of the derivative. \
+Internally, it remains unevaluated until expanded with ",
+  Cell[BoxData["ExpandAbsoluteD"]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(Su[i]\), "\[IndentingNewLine]", 
+    \(AbsoluteD[%, t]\), "\[IndentingNewLine]", 
+    \(% // FullForm\)}], "Input",
+  CellLabel->"In[10]:="],
+
+Cell["Higher order derivatives can be calculated.", "Text"],
+
+Cell[BoxData[{
+    \(Sud[i, j]\), "\[IndentingNewLine]", 
+    \(AbsoluteD[%, {u, v}]\)}], "Input",
+  CellLabel->"In[13]:="],
+
+Cell["\<\
+Absolute derivatives are linear and follow Liebniz's rule. Nothing special is \
+needed to handle flavored expressions.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(a\ Su[i] + b\ Tu[j] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(AbsoluteD[%, t]\)}], "Input",
+  CellLabel->"In[15]:="],
+
+Cell[BoxData[{
+    \(a\ Su[i] + b\ Tu[j] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(AbsoluteD[%, {u, v}]\)}], "Input",
+  CellLabel->"In[17]:="],
+
+Cell[BoxData[{
+    \(Su[i] Tu[j] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(AbsoluteD[%, t]\)}], "Input",
+  CellLabel->"In[19]:="],
+
+Cell[BoxData[{
+    \(Su[i] Tu[j] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(AbsoluteD[%, {u, v}]\)}], "Input",
+  CellLabel->"In[21]:="],
+
+Cell["The absolute derivative is more interesting when expanded.", "Text"],
+
+Cell["Restore setting...", "Text"],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[{{S, T}, 1}, {{S}, 2}]\)], "Input",
+  CellLabel->"In[23]:="],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[oldindices]\), "\[IndentingNewLine]", 
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(Clear[oldindices, oldflavors]\)}], "Input",
+  CellLabel->"In[24]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{665, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 56, 1, 31, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1835, 56, 829, 31, 55, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 7225, 247}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 56, 1, 31, "ObjectName",
+  CellTags->"Function?"],
+Cell[1835, 56, 829, 31, 55, "Usage",
+  CellTags->"Function?"],
+Cell[2667, 89, 110, 3, 31, "MathCaption"],
+Cell[2780, 94, 206, 5, 48, "MathCaption"],
+Cell[2989, 101, 166, 5, 31, "MathCaption"],
+Cell[3158, 108, 557, 22, 31, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[3740, 134, 34, 0, 40, "ExampleSection"],
+Cell[3777, 136, 96, 2, 29, "Input"],
+Cell[3876, 140, 34, 0, 25, "Text"],
+Cell[3913, 142, 268, 5, 89, "Input"],
+Cell[4184, 149, 101, 2, 29, "Input"],
+Cell[4288, 153, 107, 3, 25, "Text"],
+Cell[4398, 158, 164, 4, 69, "Input"],
+Cell[4565, 164, 271, 6, 42, "Text"],
+Cell[4839, 172, 161, 4, 69, "Input"],
+Cell[5003, 178, 59, 0, 25, "Text"],
+Cell[5065, 180, 123, 3, 49, "Input"],
+Cell[5191, 185, 142, 3, 25, "Text"],
+Cell[5336, 190, 145, 3, 49, "Input"],
+Cell[5484, 195, 150, 3, 49, "Input"],
+Cell[5637, 200, 137, 3, 49, "Input"],
+Cell[5777, 205, 142, 3, 49, "Input"],
+Cell[5922, 210, 74, 0, 25, "Text"],
+Cell[5999, 212, 34, 0, 25, "Text"],
+Cell[6036, 214, 101, 2, 29, "Input"],
+Cell[6140, 218, 295, 5, 89, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

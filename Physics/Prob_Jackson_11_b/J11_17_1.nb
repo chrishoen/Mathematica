@@ -1,0 +1,3831 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.1'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[    172937,       3759]*)
+(*NotebookOutlinePosition[    173643,       3783]*)
+(*  CellTagsIndexPosition[    173599,       3779]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+
+support\
+\>", "Subtitle"],
+
+Cell[BoxData[
+    \(\(\(\[IndentingNewLine]\)\(\(ClearAll;\)\[IndentingNewLine]
+    Needs["\<TensorCalculus3`Tensorial`\>"]\[IndentingNewLine]\
+\[IndentingNewLine]
+    DeclareBaseIndices[{0, 1, 2, 3}]\[IndentingNewLine]
+    DeclareIndexFlavor[{red, Red}, {green, CinnabarGreen}]\[IndentingNewLine]
+    DefineTensorShortcuts[G, 2]\[IndentingNewLine]
+    SetTensorValues[Gdd[i, j], 
+      DiagonalMatrix[{1, \(-1\), \(-1\), \(-1\)}]]\[IndentingNewLine]
+    SetTensorValues[Gdd[i, j] // ToFlavor[red], 
+      DiagonalMatrix[{1, \(-1\), \(-1\), \(-1\)}]]\[IndentingNewLine]
+    SetTensorValues[Guu[i, j], 
+      DiagonalMatrix[{1, \(-1\), \(-1\), \(-1\)}]]\[IndentingNewLine]
+    SetTensorValues[Guu[i, j] // ToFlavor[red], 
+      DiagonalMatrix[{1, \(-1\), \(-1\), \(-1\)}]]\[IndentingNewLine]\
+\[IndentingNewLine]
+    DefineTensorShortcuts[{X, 1}, {Y, 1}, {T, 2}]\)\)\)], "Input"],
+
+Cell[BoxData[""], "Input"],
+
+Cell[BoxData[{\(ClearAll[LorentzMatrixRules];\), "\[IndentingNewLine]", 
+    RowBox[{\(LorentzMatrixRules::usage = "\<LorentzMatrixRules[L, newflavor, \
+oldflavor][\[Beta], \[Phi], \[Theta]] will generate and store the component \
+rules of the Lorentz transformation matrix to a frame moving with the \
+velocity \[Beta] in the spherical direction \[Phi] (angle from xy-plane) and \
+\[Theta] (rotation from x axis about z axis). The components will be stored \
+under the label L with the upper index in the newflavor and the lower index \
+in the restflavor. Identity can be used as the flavor for plain indices. The \
+values are stored as TensorValueRules[L]. The inverse values are also stored.\
+\>";\), "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+    RowBox[{\(\(LorentzMatrixRules[L_, newflavor_, 
+          oldflavor_:  Identity]\)[\[Beta]_ /; 
+          If[NumericQ[\[Beta]], Abs[\[Beta]] < 1, 
+            True], \[Phi]_, \[Theta]_]\), ":=", "\[IndentingNewLine]", 
+      RowBox[{"Module", "[", "\[IndentingNewLine]", 
+        RowBox[{\({\[Gamma] = 1/\@\(1 - \[Beta]\^2\), \[IndentingNewLine]n1, 
+            n2, n3, \[Alpha], \[Gamma]1, matrix}\), ",", 
+          "\[IndentingNewLine]", 
+          
+          RowBox[{\(DefineTensorShortcuts[L, 2]\), ";", 
+            "\[IndentingNewLine]", \({n1, n2, 
+                n3} = {Cos[\[Phi]] Cos[\[Theta]], Cos[\[Phi]] Sin[\[Theta]], 
+                Sin[\[Phi]]}\), ";", 
+            "\[IndentingNewLine]", \(\[Gamma]1 = \[Gamma] - 1\), ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"matrix", "=", 
+              RowBox[{"(", GridBox[{
+                    {
+                      "\[Gamma]", \(\(-\[Alpha]\)\ \[Gamma]\ n1\), \(\(-\
+\[Alpha]\)\ \[Gamma]\ n2\), \(\(-\[Alpha]\)\ \[Gamma]\ n3\)},
+                    {\(\(-\[Alpha]\)\ \[Gamma]\ n1\), \(1 + \[Gamma]1\ n1\ n1\
+\), \(\[Gamma]1\ n1\ n2\), \(\[Gamma]1\ n1\ n3\)},
+                    {\(\(-\[Alpha]\)\ \[Gamma]\ n2\), \(\[Gamma]1\ n2\ n1\), \
+\(1 + \[Gamma]1\ n2\ n2\), \(\[Gamma]1\ n2\ n3\)},
+                    {\(\(-\[Alpha]\)\ \[Gamma]\ n3\), \(\[Gamma]1\ n3\ n1\), \
+\(\[Gamma]1\ n3\ n2\), \(1 + \[Gamma]1\ n3\ n3\)}
+                    }], ")"}]}], ";", 
+            "\[IndentingNewLine]", \(SetTensorValueRules[
+              Lud[newflavor@i, oldflavor@j], \ 
+              matrix /. \[Alpha] \[Rule] \[Beta]]\), ";", 
+            "\[IndentingNewLine]", \(SetTensorValueRules[
+              Lud[oldflavor@i, newflavor@j], \ 
+              matrix /. \[Alpha] \[Rule] \(-\[Beta]\)]\), ";"}]}], 
+        "\[IndentingNewLine]", "]"}]}]}], "Input"],
+
+Cell[BoxData[{\(ClearAll[LorentzMatrixValues];\), "\[IndentingNewLine]", 
+    RowBox[{\(LorentzMatrixValues::usage = "\<LorentzMatrixValues[L, \
+newflavor, oldflavor][\[Beta], \[Phi], \[Theta]] will generate and store the \
+component values of the Lorentz transformation matrix to a frame moving with \
+the velocity \[Beta] in the spherical direction \[Phi] (angle from xy-plane) \
+and \[Theta] (rotation from x axis about z axis). The components will be \
+stored under the label L with the upper index in the newflavor and the lower \
+index in the restflavor. Identity can be used as the flavor for plain \
+indices. The values are stored as TensorValueRules[L]. The inverse values are \
+also stored.\>";\), "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+    RowBox[{\(\(LorentzMatrixValues[L_, newflavor_, 
+          oldflavor_:  Identity]\)[\[Beta]_ /; 
+          If[NumericQ[\[Beta]], Abs[\[Beta]] < 1, 
+            True], \[Phi]_, \[Theta]_]\), ":=", "\[IndentingNewLine]", 
+      RowBox[{"Module", "[", "\[IndentingNewLine]", 
+        RowBox[{\({\[Gamma] = 1/\@\(1 - \[Beta]\^2\), \[IndentingNewLine]n1, 
+            n2, n3, \[Alpha], \[Gamma]1, matrix}\), ",", 
+          "\[IndentingNewLine]", 
+          
+          RowBox[{\(DefineTensorShortcuts[L, 2]\), ";", 
+            "\[IndentingNewLine]", \({n1, n2, 
+                n3} = {Cos[\[Phi]] Cos[\[Theta]], Cos[\[Phi]] Sin[\[Theta]], 
+                Sin[\[Phi]]}\), ";", 
+            "\[IndentingNewLine]", \(\[Gamma]1 = \[Gamma] - 1\), ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"matrix", "=", 
+              RowBox[{"(", GridBox[{
+                    {
+                      "\[Gamma]", \(\(-\[Alpha]\)\ \[Gamma]\ n1\), \(\(-\
+\[Alpha]\)\ \[Gamma]\ n2\), \(\(-\[Alpha]\)\ \[Gamma]\ n3\)},
+                    {\(\(-\[Alpha]\)\ \[Gamma]\ n1\), \(1 + \[Gamma]1\ n1\ n1\
+\), \(\[Gamma]1\ n1\ n2\), \(\[Gamma]1\ n1\ n3\)},
+                    {\(\(-\[Alpha]\)\ \[Gamma]\ n2\), \(\[Gamma]1\ n2\ n1\), \
+\(1 + \[Gamma]1\ n2\ n2\), \(\[Gamma]1\ n2\ n3\)},
+                    {\(\(-\[Alpha]\)\ \[Gamma]\ n3\), \(\[Gamma]1\ n3\ n1\), \
+\(\[Gamma]1\ n3\ n2\), \(1 + \[Gamma]1\ n3\ n3\)}
+                    }], ")"}]}], ";", 
+            "\[IndentingNewLine]", \(SetTensorValues[
+              Lud[newflavor@i, oldflavor@j], \ 
+              matrix /. \[Alpha] \[Rule] \[Beta]]\), ";", 
+            "\[IndentingNewLine]", \(SetTensorValues[
+              Lud[oldflavor@i, newflavor@j], \ 
+              matrix /. \[Alpha] \[Rule] \(-\[Beta]\)]\), ";"}]}], 
+        "\[IndentingNewLine]", "]"}]}]}], "Input"],
+
+Cell[BoxData[{
+    \(DefineTensorShortcuts[{X, 1}, {Y, 1}, {L, 
+        2}]\), "\[IndentingNewLine]", 
+    \(\(\(\(LorentzMatrixValues[L, red]\)[\[Beta], 0, 
+      0]\)\(\[IndentingNewLine]\)\(\[IndentingNewLine]\)\(\[IndentingNewLine]\
+\)
+    \)\), "\[IndentingNewLine]", 
+    \(\)}], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+
+content
+\
+\>", "Subtitle"],
+
+Cell[BoxData[
+    \(\(\(\[IndentingNewLine]\)\(\(DefineTensorShortcuts[{X, 1}, {U, 1}, {F, 
+        2}]\)\(\[IndentingNewLine]\)\( (*SetTensorValues[
+        Ju[red@i], {c\ Q, 0, 0, 0}]\ *) \)\(\[IndentingNewLine]\)
+    \)\)\)], "Input"],
+
+Cell[BoxData[
+    \(\(FuuValues\  = \ 
+        Xu[i] Uu[j] - Xu[j] Uu[i] // ToArrayValues[];\)\)], "Input"],
+
+Cell[BoxData[
+    \(\(\(SetTensorValues[Fuu[i, j], FuuValues]\)\(\[IndentingNewLine]\)
+    \)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(\(\(Fuu[i, j] // ToArrayValues[]\) // 
+      MatrixForm\)\(\[IndentingNewLine]\)
+    \)\)], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      StyleBox[
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", GridBox[{
+                {"0", 
+                  RowBox[{
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["1",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["1",
+                            SequenceForm[ 1],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]], 
+                          SequenceForm[ 1]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["0",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["0",
+                            SequenceForm[ 0],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 0, ShowContents -> False]], 
+                          SequenceForm[ 0]],
+                        Editable->False]}], "-", 
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["0",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["0",
+                            SequenceForm[ 0],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 0, ShowContents -> False]], 
+                          SequenceForm[ 0]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["1",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["1",
+                            SequenceForm[ 1],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]], 
+                          SequenceForm[ 1]],
+                        Editable->False]}]}], 
+                  RowBox[{
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["2",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["2",
+                            SequenceForm[ 2],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]], 
+                          SequenceForm[ 2]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["0",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["0",
+                            SequenceForm[ 0],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 0, ShowContents -> False]], 
+                          SequenceForm[ 0]],
+                        Editable->False]}], "-", 
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["0",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["0",
+                            SequenceForm[ 0],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 0, ShowContents -> False]], 
+                          SequenceForm[ 0]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["2",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["2",
+                            SequenceForm[ 2],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]], 
+                          SequenceForm[ 2]],
+                        Editable->False]}]}], 
+                  RowBox[{
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["3",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["3",
+                            SequenceForm[ 3],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]], 
+                          SequenceForm[ 3]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["0",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["0",
+                            SequenceForm[ 0],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 0, ShowContents -> False]], 
+                          SequenceForm[ 0]],
+                        Editable->False]}], "-", 
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["0",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["0",
+                            SequenceForm[ 0],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 0, ShowContents -> False]], 
+                          SequenceForm[ 0]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["3",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["3",
+                            SequenceForm[ 3],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]], 
+                          SequenceForm[ 3]],
+                        Editable->False]}]}]},
+                {
+                  RowBox[{
+                    RowBox[{
+                      RowBox[{"-", 
+                        InterpretationBox[
+                          SubsuperscriptBox["U", 
+                            InterpretationBox[
+                              TagBox[
+                                StyleBox["1",
+                                  ShowContents->False],
+                                (StyleForm[ #, ShowContents -> False]&)],
+                              SequenceForm[ 
+                                StyleForm[ 1, ShowContents -> False]],
+                              Editable->False], 
+                            InterpretationBox["1",
+                              SequenceForm[ 1],
+                              Editable->False]],
+                          Subsuperscript[ U, 
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]], 
+                            SequenceForm[ 1]],
+                          Editable->False]}], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["0",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["0",
+                            SequenceForm[ 0],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 0, ShowContents -> False]], 
+                          SequenceForm[ 0]],
+                        Editable->False]}], "+", 
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["0",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["0",
+                            SequenceForm[ 0],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 0, ShowContents -> False]], 
+                          SequenceForm[ 0]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["1",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["1",
+                            SequenceForm[ 1],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]], 
+                          SequenceForm[ 1]],
+                        Editable->False]}]}], "0", 
+                  RowBox[{
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["2",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["2",
+                            SequenceForm[ 2],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]], 
+                          SequenceForm[ 2]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["1",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["1",
+                            SequenceForm[ 1],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]], 
+                          SequenceForm[ 1]],
+                        Editable->False]}], "-", 
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["1",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["1",
+                            SequenceForm[ 1],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]], 
+                          SequenceForm[ 1]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["2",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["2",
+                            SequenceForm[ 2],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]], 
+                          SequenceForm[ 2]],
+                        Editable->False]}]}], 
+                  RowBox[{
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["3",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["3",
+                            SequenceForm[ 3],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]], 
+                          SequenceForm[ 3]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["1",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["1",
+                            SequenceForm[ 1],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]], 
+                          SequenceForm[ 1]],
+                        Editable->False]}], "-", 
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["1",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["1",
+                            SequenceForm[ 1],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]], 
+                          SequenceForm[ 1]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["3",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["3",
+                            SequenceForm[ 3],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]], 
+                          SequenceForm[ 3]],
+                        Editable->False]}]}]},
+                {
+                  RowBox[{
+                    RowBox[{
+                      RowBox[{"-", 
+                        InterpretationBox[
+                          SubsuperscriptBox["U", 
+                            InterpretationBox[
+                              TagBox[
+                                StyleBox["2",
+                                  ShowContents->False],
+                                (StyleForm[ #, ShowContents -> False]&)],
+                              SequenceForm[ 
+                                StyleForm[ 2, ShowContents -> False]],
+                              Editable->False], 
+                            InterpretationBox["2",
+                              SequenceForm[ 2],
+                              Editable->False]],
+                          Subsuperscript[ U, 
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]], 
+                            SequenceForm[ 2]],
+                          Editable->False]}], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["0",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["0",
+                            SequenceForm[ 0],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 0, ShowContents -> False]], 
+                          SequenceForm[ 0]],
+                        Editable->False]}], "+", 
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["0",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["0",
+                            SequenceForm[ 0],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 0, ShowContents -> False]], 
+                          SequenceForm[ 0]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["2",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["2",
+                            SequenceForm[ 2],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]], 
+                          SequenceForm[ 2]],
+                        Editable->False]}]}], 
+                  RowBox[{
+                    RowBox[{
+                      RowBox[{"-", 
+                        InterpretationBox[
+                          SubsuperscriptBox["U", 
+                            InterpretationBox[
+                              TagBox[
+                                StyleBox["2",
+                                  ShowContents->False],
+                                (StyleForm[ #, ShowContents -> False]&)],
+                              SequenceForm[ 
+                                StyleForm[ 2, ShowContents -> False]],
+                              Editable->False], 
+                            InterpretationBox["2",
+                              SequenceForm[ 2],
+                              Editable->False]],
+                          Subsuperscript[ U, 
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]], 
+                            SequenceForm[ 2]],
+                          Editable->False]}], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["1",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["1",
+                            SequenceForm[ 1],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]], 
+                          SequenceForm[ 1]],
+                        Editable->False]}], "+", 
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["1",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["1",
+                            SequenceForm[ 1],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]], 
+                          SequenceForm[ 1]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["2",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["2",
+                            SequenceForm[ 2],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]], 
+                          SequenceForm[ 2]],
+                        Editable->False]}]}], "0", 
+                  RowBox[{
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["3",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["3",
+                            SequenceForm[ 3],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]], 
+                          SequenceForm[ 3]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["2",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["2",
+                            SequenceForm[ 2],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]], 
+                          SequenceForm[ 2]],
+                        Editable->False]}], "-", 
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["2",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["2",
+                            SequenceForm[ 2],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]], 
+                          SequenceForm[ 2]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["3",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["3",
+                            SequenceForm[ 3],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]], 
+                          SequenceForm[ 3]],
+                        Editable->False]}]}]},
+                {
+                  RowBox[{
+                    RowBox[{
+                      RowBox[{"-", 
+                        InterpretationBox[
+                          SubsuperscriptBox["U", 
+                            InterpretationBox[
+                              TagBox[
+                                StyleBox["3",
+                                  ShowContents->False],
+                                (StyleForm[ #, ShowContents -> False]&)],
+                              SequenceForm[ 
+                                StyleForm[ 3, ShowContents -> False]],
+                              Editable->False], 
+                            InterpretationBox["3",
+                              SequenceForm[ 3],
+                              Editable->False]],
+                          Subsuperscript[ U, 
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]], 
+                            SequenceForm[ 3]],
+                          Editable->False]}], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["0",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["0",
+                            SequenceForm[ 0],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 0, ShowContents -> False]], 
+                          SequenceForm[ 0]],
+                        Editable->False]}], "+", 
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["0",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["0",
+                            SequenceForm[ 0],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 0, ShowContents -> False]], 
+                          SequenceForm[ 0]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["3",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["3",
+                            SequenceForm[ 3],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]], 
+                          SequenceForm[ 3]],
+                        Editable->False]}]}], 
+                  RowBox[{
+                    RowBox[{
+                      RowBox[{"-", 
+                        InterpretationBox[
+                          SubsuperscriptBox["U", 
+                            InterpretationBox[
+                              TagBox[
+                                StyleBox["3",
+                                  ShowContents->False],
+                                (StyleForm[ #, ShowContents -> False]&)],
+                              SequenceForm[ 
+                                StyleForm[ 3, ShowContents -> False]],
+                              Editable->False], 
+                            InterpretationBox["3",
+                              SequenceForm[ 3],
+                              Editable->False]],
+                          Subsuperscript[ U, 
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]], 
+                            SequenceForm[ 3]],
+                          Editable->False]}], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["1",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["1",
+                            SequenceForm[ 1],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]], 
+                          SequenceForm[ 1]],
+                        Editable->False]}], "+", 
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["1",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["1",
+                            SequenceForm[ 1],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]], 
+                          SequenceForm[ 1]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["3",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["3",
+                            SequenceForm[ 3],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]], 
+                          SequenceForm[ 3]],
+                        Editable->False]}]}], 
+                  RowBox[{
+                    RowBox[{
+                      RowBox[{"-", 
+                        InterpretationBox[
+                          SubsuperscriptBox["U", 
+                            InterpretationBox[
+                              TagBox[
+                                StyleBox["3",
+                                  ShowContents->False],
+                                (StyleForm[ #, ShowContents -> False]&)],
+                              SequenceForm[ 
+                                StyleForm[ 3, ShowContents -> False]],
+                              Editable->False], 
+                            InterpretationBox["3",
+                              SequenceForm[ 3],
+                              Editable->False]],
+                          Subsuperscript[ U, 
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]], 
+                            SequenceForm[ 3]],
+                          Editable->False]}], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["2",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["2",
+                            SequenceForm[ 2],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]], 
+                          SequenceForm[ 2]],
+                        Editable->False]}], "+", 
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["2",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["2",
+                            SequenceForm[ 2],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]], 
+                          SequenceForm[ 2]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["3",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["3",
+                            SequenceForm[ 3],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]], 
+                          SequenceForm[ 3]],
+                        Editable->False]}]}], "0"}
+                },
+              RowSpacings->1,
+              ColumnSpacings->1,
+              ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]],
+        FontFamily->"Courier",
+        FontSize->16],
+      (StyleForm[ #, FontSize -> 16, FontFamily -> "Courier"]&)]], "Output"]
+}, Open  ]],
+
+Cell[BoxData[{
+    \(\(FddValues = 
+        Gdd[i, m] Gdd[j, n] Fuu[m, n] // 
+          ToArrayValues[];\)\), "\[IndentingNewLine]", 
+    \(\(FddValues // MatrixForm;\)\)}], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(SetTensorValues[Fdd[i, j], FddValues]\), "\[IndentingNewLine]", 
+    \(\(Fdd[i, j] // ToArrayValues[]\) // MatrixForm\)}], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      StyleBox[
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", GridBox[{
+                {"0", 
+                  RowBox[{
+                    RowBox[{
+                      RowBox[{"-", 
+                        InterpretationBox[
+                          SubsuperscriptBox["U", 
+                            InterpretationBox[
+                              TagBox[
+                                StyleBox["1",
+                                  ShowContents->False],
+                                (StyleForm[ #, ShowContents -> False]&)],
+                              SequenceForm[ 
+                                StyleForm[ 1, ShowContents -> False]],
+                              Editable->False], 
+                            InterpretationBox["1",
+                              SequenceForm[ 1],
+                              Editable->False]],
+                          Subsuperscript[ U, 
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]], 
+                            SequenceForm[ 1]],
+                          Editable->False]}], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["0",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["0",
+                            SequenceForm[ 0],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 0, ShowContents -> False]], 
+                          SequenceForm[ 0]],
+                        Editable->False]}], "+", 
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["0",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["0",
+                            SequenceForm[ 0],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 0, ShowContents -> False]], 
+                          SequenceForm[ 0]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["1",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["1",
+                            SequenceForm[ 1],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]], 
+                          SequenceForm[ 1]],
+                        Editable->False]}]}], 
+                  RowBox[{
+                    RowBox[{
+                      RowBox[{"-", 
+                        InterpretationBox[
+                          SubsuperscriptBox["U", 
+                            InterpretationBox[
+                              TagBox[
+                                StyleBox["2",
+                                  ShowContents->False],
+                                (StyleForm[ #, ShowContents -> False]&)],
+                              SequenceForm[ 
+                                StyleForm[ 2, ShowContents -> False]],
+                              Editable->False], 
+                            InterpretationBox["2",
+                              SequenceForm[ 2],
+                              Editable->False]],
+                          Subsuperscript[ U, 
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]], 
+                            SequenceForm[ 2]],
+                          Editable->False]}], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["0",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["0",
+                            SequenceForm[ 0],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 0, ShowContents -> False]], 
+                          SequenceForm[ 0]],
+                        Editable->False]}], "+", 
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["0",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["0",
+                            SequenceForm[ 0],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 0, ShowContents -> False]], 
+                          SequenceForm[ 0]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["2",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["2",
+                            SequenceForm[ 2],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]], 
+                          SequenceForm[ 2]],
+                        Editable->False]}]}], 
+                  RowBox[{
+                    RowBox[{
+                      RowBox[{"-", 
+                        InterpretationBox[
+                          SubsuperscriptBox["U", 
+                            InterpretationBox[
+                              TagBox[
+                                StyleBox["3",
+                                  ShowContents->False],
+                                (StyleForm[ #, ShowContents -> False]&)],
+                              SequenceForm[ 
+                                StyleForm[ 3, ShowContents -> False]],
+                              Editable->False], 
+                            InterpretationBox["3",
+                              SequenceForm[ 3],
+                              Editable->False]],
+                          Subsuperscript[ U, 
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]], 
+                            SequenceForm[ 3]],
+                          Editable->False]}], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["0",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["0",
+                            SequenceForm[ 0],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 0, ShowContents -> False]], 
+                          SequenceForm[ 0]],
+                        Editable->False]}], "+", 
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["0",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["0",
+                            SequenceForm[ 0],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 0, ShowContents -> False]], 
+                          SequenceForm[ 0]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["3",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["3",
+                            SequenceForm[ 3],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]], 
+                          SequenceForm[ 3]],
+                        Editable->False]}]}]},
+                {
+                  RowBox[{
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["1",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["1",
+                            SequenceForm[ 1],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]], 
+                          SequenceForm[ 1]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["0",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["0",
+                            SequenceForm[ 0],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 0, ShowContents -> False]], 
+                          SequenceForm[ 0]],
+                        Editable->False]}], "-", 
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["0",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["0",
+                            SequenceForm[ 0],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 0, ShowContents -> False]], 
+                          SequenceForm[ 0]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["1",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["1",
+                            SequenceForm[ 1],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]], 
+                          SequenceForm[ 1]],
+                        Editable->False]}]}], "0", 
+                  RowBox[{
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["2",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["2",
+                            SequenceForm[ 2],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]], 
+                          SequenceForm[ 2]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["1",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["1",
+                            SequenceForm[ 1],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]], 
+                          SequenceForm[ 1]],
+                        Editable->False]}], "-", 
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["1",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["1",
+                            SequenceForm[ 1],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]], 
+                          SequenceForm[ 1]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["2",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["2",
+                            SequenceForm[ 2],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]], 
+                          SequenceForm[ 2]],
+                        Editable->False]}]}], 
+                  RowBox[{
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["3",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["3",
+                            SequenceForm[ 3],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]], 
+                          SequenceForm[ 3]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["1",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["1",
+                            SequenceForm[ 1],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]], 
+                          SequenceForm[ 1]],
+                        Editable->False]}], "-", 
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["1",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["1",
+                            SequenceForm[ 1],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]], 
+                          SequenceForm[ 1]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["3",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["3",
+                            SequenceForm[ 3],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]], 
+                          SequenceForm[ 3]],
+                        Editable->False]}]}]},
+                {
+                  RowBox[{
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["2",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["2",
+                            SequenceForm[ 2],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]], 
+                          SequenceForm[ 2]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["0",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["0",
+                            SequenceForm[ 0],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 0, ShowContents -> False]], 
+                          SequenceForm[ 0]],
+                        Editable->False]}], "-", 
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["0",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["0",
+                            SequenceForm[ 0],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 0, ShowContents -> False]], 
+                          SequenceForm[ 0]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["2",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["2",
+                            SequenceForm[ 2],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]], 
+                          SequenceForm[ 2]],
+                        Editable->False]}]}], 
+                  RowBox[{
+                    RowBox[{
+                      RowBox[{"-", 
+                        InterpretationBox[
+                          SubsuperscriptBox["U", 
+                            InterpretationBox[
+                              TagBox[
+                                StyleBox["2",
+                                  ShowContents->False],
+                                (StyleForm[ #, ShowContents -> False]&)],
+                              SequenceForm[ 
+                                StyleForm[ 2, ShowContents -> False]],
+                              Editable->False], 
+                            InterpretationBox["2",
+                              SequenceForm[ 2],
+                              Editable->False]],
+                          Subsuperscript[ U, 
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]], 
+                            SequenceForm[ 2]],
+                          Editable->False]}], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["1",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["1",
+                            SequenceForm[ 1],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]], 
+                          SequenceForm[ 1]],
+                        Editable->False]}], "+", 
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["1",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["1",
+                            SequenceForm[ 1],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]], 
+                          SequenceForm[ 1]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["2",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["2",
+                            SequenceForm[ 2],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]], 
+                          SequenceForm[ 2]],
+                        Editable->False]}]}], "0", 
+                  RowBox[{
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["3",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["3",
+                            SequenceForm[ 3],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]], 
+                          SequenceForm[ 3]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["2",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["2",
+                            SequenceForm[ 2],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]], 
+                          SequenceForm[ 2]],
+                        Editable->False]}], "-", 
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["2",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["2",
+                            SequenceForm[ 2],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]], 
+                          SequenceForm[ 2]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["3",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["3",
+                            SequenceForm[ 3],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]], 
+                          SequenceForm[ 3]],
+                        Editable->False]}]}]},
+                {
+                  RowBox[{
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["3",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["3",
+                            SequenceForm[ 3],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]], 
+                          SequenceForm[ 3]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["0",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["0",
+                            SequenceForm[ 0],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 0, ShowContents -> False]], 
+                          SequenceForm[ 0]],
+                        Editable->False]}], "-", 
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["0",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["0",
+                            SequenceForm[ 0],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 0, ShowContents -> False]], 
+                          SequenceForm[ 0]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["3",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["3",
+                            SequenceForm[ 3],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]], 
+                          SequenceForm[ 3]],
+                        Editable->False]}]}], 
+                  RowBox[{
+                    RowBox[{
+                      RowBox[{"-", 
+                        InterpretationBox[
+                          SubsuperscriptBox["U", 
+                            InterpretationBox[
+                              TagBox[
+                                StyleBox["3",
+                                  ShowContents->False],
+                                (StyleForm[ #, ShowContents -> False]&)],
+                              SequenceForm[ 
+                                StyleForm[ 3, ShowContents -> False]],
+                              Editable->False], 
+                            InterpretationBox["3",
+                              SequenceForm[ 3],
+                              Editable->False]],
+                          Subsuperscript[ U, 
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]], 
+                            SequenceForm[ 3]],
+                          Editable->False]}], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["1",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["1",
+                            SequenceForm[ 1],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]], 
+                          SequenceForm[ 1]],
+                        Editable->False]}], "+", 
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["1",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["1",
+                            SequenceForm[ 1],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]], 
+                          SequenceForm[ 1]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["3",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["3",
+                            SequenceForm[ 3],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]], 
+                          SequenceForm[ 3]],
+                        Editable->False]}]}], 
+                  RowBox[{
+                    RowBox[{
+                      RowBox[{"-", 
+                        InterpretationBox[
+                          SubsuperscriptBox["U", 
+                            InterpretationBox[
+                              TagBox[
+                                StyleBox["3",
+                                  ShowContents->False],
+                                (StyleForm[ #, ShowContents -> False]&)],
+                              SequenceForm[ 
+                                StyleForm[ 3, ShowContents -> False]],
+                              Editable->False], 
+                            InterpretationBox["3",
+                              SequenceForm[ 3],
+                              Editable->False]],
+                          Subsuperscript[ U, 
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]], 
+                            SequenceForm[ 3]],
+                          Editable->False]}], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["2",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["2",
+                            SequenceForm[ 2],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]], 
+                          SequenceForm[ 2]],
+                        Editable->False]}], "+", 
+                    RowBox[{
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["2",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["2",
+                            SequenceForm[ 2],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]], 
+                          SequenceForm[ 2]],
+                        Editable->False], " ", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["3",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["3",
+                            SequenceForm[ 3],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]], 
+                          SequenceForm[ 3]],
+                        Editable->False]}]}], "0"}
+                },
+              RowSpacings->1,
+              ColumnSpacings->1,
+              ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]],
+        FontFamily->"Courier",
+        FontSize->16],
+      (StyleForm[ #, FontSize -> 16, FontFamily -> "Courier"]&)]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(term11\  = \ \((Fuu[i, j] Fdd[i, j])\)/2 // EinsteinSum[]\)], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      StyleBox[
+        RowBox[{
+          RowBox[{
+            RowBox[{"(", 
+              RowBox[{
+                RowBox[{
+                  InterpretationBox[
+                    SubsuperscriptBox["U", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["1",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 1, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["1",
+                        SequenceForm[ 1],
+                        Editable->False]],
+                    Subsuperscript[ U, 
+                      SequenceForm[ 
+                        StyleForm[ 1, ShowContents -> False]], 
+                      SequenceForm[ 1]],
+                    Editable->False], " ", 
+                  InterpretationBox[
+                    SubsuperscriptBox["X", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["0",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 0, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["0",
+                        SequenceForm[ 0],
+                        Editable->False]],
+                    Subsuperscript[ X, 
+                      SequenceForm[ 
+                        StyleForm[ 0, ShowContents -> False]], 
+                      SequenceForm[ 0]],
+                    Editable->False]}], "-", 
+                RowBox[{
+                  InterpretationBox[
+                    SubsuperscriptBox["U", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["0",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 0, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["0",
+                        SequenceForm[ 0],
+                        Editable->False]],
+                    Subsuperscript[ U, 
+                      SequenceForm[ 
+                        StyleForm[ 0, ShowContents -> False]], 
+                      SequenceForm[ 0]],
+                    Editable->False], " ", 
+                  InterpretationBox[
+                    SubsuperscriptBox["X", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["1",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 1, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["1",
+                        SequenceForm[ 1],
+                        Editable->False]],
+                    Subsuperscript[ X, 
+                      SequenceForm[ 
+                        StyleForm[ 1, ShowContents -> False]], 
+                      SequenceForm[ 1]],
+                    Editable->False]}]}], ")"}], " ", 
+            RowBox[{"(", 
+              RowBox[{
+                RowBox[{
+                  RowBox[{"-", 
+                    InterpretationBox[
+                      SubsuperscriptBox["U", 
+                        InterpretationBox[
+                          TagBox[
+                            StyleBox["1",
+                              ShowContents->False],
+                            (StyleForm[ #, ShowContents -> False]&)],
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]],
+                          Editable->False], 
+                        InterpretationBox["1",
+                          SequenceForm[ 1],
+                          Editable->False]],
+                      Subsuperscript[ U, 
+                        SequenceForm[ 
+                          StyleForm[ 1, ShowContents -> False]], 
+                        SequenceForm[ 1]],
+                      Editable->False]}], " ", 
+                  InterpretationBox[
+                    SubsuperscriptBox["X", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["0",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 0, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["0",
+                        SequenceForm[ 0],
+                        Editable->False]],
+                    Subsuperscript[ X, 
+                      SequenceForm[ 
+                        StyleForm[ 0, ShowContents -> False]], 
+                      SequenceForm[ 0]],
+                    Editable->False]}], "+", 
+                RowBox[{
+                  InterpretationBox[
+                    SubsuperscriptBox["U", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["0",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 0, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["0",
+                        SequenceForm[ 0],
+                        Editable->False]],
+                    Subsuperscript[ U, 
+                      SequenceForm[ 
+                        StyleForm[ 0, ShowContents -> False]], 
+                      SequenceForm[ 0]],
+                    Editable->False], " ", 
+                  InterpretationBox[
+                    SubsuperscriptBox["X", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["1",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 1, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["1",
+                        SequenceForm[ 1],
+                        Editable->False]],
+                    Subsuperscript[ X, 
+                      SequenceForm[ 
+                        StyleForm[ 1, ShowContents -> False]], 
+                      SequenceForm[ 1]],
+                    Editable->False]}]}], ")"}]}], "+", 
+          RowBox[{
+            RowBox[{"(", 
+              RowBox[{
+                RowBox[{
+                  InterpretationBox[
+                    SubsuperscriptBox["U", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["2",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 2, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["2",
+                        SequenceForm[ 2],
+                        Editable->False]],
+                    Subsuperscript[ U, 
+                      SequenceForm[ 
+                        StyleForm[ 2, ShowContents -> False]], 
+                      SequenceForm[ 2]],
+                    Editable->False], " ", 
+                  InterpretationBox[
+                    SubsuperscriptBox["X", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["0",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 0, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["0",
+                        SequenceForm[ 0],
+                        Editable->False]],
+                    Subsuperscript[ X, 
+                      SequenceForm[ 
+                        StyleForm[ 0, ShowContents -> False]], 
+                      SequenceForm[ 0]],
+                    Editable->False]}], "-", 
+                RowBox[{
+                  InterpretationBox[
+                    SubsuperscriptBox["U", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["0",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 0, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["0",
+                        SequenceForm[ 0],
+                        Editable->False]],
+                    Subsuperscript[ U, 
+                      SequenceForm[ 
+                        StyleForm[ 0, ShowContents -> False]], 
+                      SequenceForm[ 0]],
+                    Editable->False], " ", 
+                  InterpretationBox[
+                    SubsuperscriptBox["X", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["2",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 2, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["2",
+                        SequenceForm[ 2],
+                        Editable->False]],
+                    Subsuperscript[ X, 
+                      SequenceForm[ 
+                        StyleForm[ 2, ShowContents -> False]], 
+                      SequenceForm[ 2]],
+                    Editable->False]}]}], ")"}], " ", 
+            RowBox[{"(", 
+              RowBox[{
+                RowBox[{
+                  RowBox[{"-", 
+                    InterpretationBox[
+                      SubsuperscriptBox["U", 
+                        InterpretationBox[
+                          TagBox[
+                            StyleBox["2",
+                              ShowContents->False],
+                            (StyleForm[ #, ShowContents -> False]&)],
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]],
+                          Editable->False], 
+                        InterpretationBox["2",
+                          SequenceForm[ 2],
+                          Editable->False]],
+                      Subsuperscript[ U, 
+                        SequenceForm[ 
+                          StyleForm[ 2, ShowContents -> False]], 
+                        SequenceForm[ 2]],
+                      Editable->False]}], " ", 
+                  InterpretationBox[
+                    SubsuperscriptBox["X", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["0",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 0, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["0",
+                        SequenceForm[ 0],
+                        Editable->False]],
+                    Subsuperscript[ X, 
+                      SequenceForm[ 
+                        StyleForm[ 0, ShowContents -> False]], 
+                      SequenceForm[ 0]],
+                    Editable->False]}], "+", 
+                RowBox[{
+                  InterpretationBox[
+                    SubsuperscriptBox["U", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["0",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 0, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["0",
+                        SequenceForm[ 0],
+                        Editable->False]],
+                    Subsuperscript[ U, 
+                      SequenceForm[ 
+                        StyleForm[ 0, ShowContents -> False]], 
+                      SequenceForm[ 0]],
+                    Editable->False], " ", 
+                  InterpretationBox[
+                    SubsuperscriptBox["X", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["2",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 2, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["2",
+                        SequenceForm[ 2],
+                        Editable->False]],
+                    Subsuperscript[ X, 
+                      SequenceForm[ 
+                        StyleForm[ 2, ShowContents -> False]], 
+                      SequenceForm[ 2]],
+                    Editable->False]}]}], ")"}]}], "+", 
+          RowBox[{\(1\/2\), " ", 
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{
+                  RowBox[{
+                    InterpretationBox[
+                      SubsuperscriptBox["U", 
+                        InterpretationBox[
+                          TagBox[
+                            StyleBox["2",
+                              ShowContents->False],
+                            (StyleForm[ #, ShowContents -> False]&)],
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]],
+                          Editable->False], 
+                        InterpretationBox["2",
+                          SequenceForm[ 2],
+                          Editable->False]],
+                      Subsuperscript[ U, 
+                        SequenceForm[ 
+                          StyleForm[ 2, ShowContents -> False]], 
+                        SequenceForm[ 2]],
+                      Editable->False], " ", 
+                    InterpretationBox[
+                      SubsuperscriptBox["X", 
+                        InterpretationBox[
+                          TagBox[
+                            StyleBox["1",
+                              ShowContents->False],
+                            (StyleForm[ #, ShowContents -> False]&)],
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]],
+                          Editable->False], 
+                        InterpretationBox["1",
+                          SequenceForm[ 1],
+                          Editable->False]],
+                      Subsuperscript[ X, 
+                        SequenceForm[ 
+                          StyleForm[ 1, ShowContents -> False]], 
+                        SequenceForm[ 1]],
+                      Editable->False]}], "-", 
+                  RowBox[{
+                    InterpretationBox[
+                      SubsuperscriptBox["U", 
+                        InterpretationBox[
+                          TagBox[
+                            StyleBox["1",
+                              ShowContents->False],
+                            (StyleForm[ #, ShowContents -> False]&)],
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]],
+                          Editable->False], 
+                        InterpretationBox["1",
+                          SequenceForm[ 1],
+                          Editable->False]],
+                      Subsuperscript[ U, 
+                        SequenceForm[ 
+                          StyleForm[ 1, ShowContents -> False]], 
+                        SequenceForm[ 1]],
+                      Editable->False], " ", 
+                    InterpretationBox[
+                      SubsuperscriptBox["X", 
+                        InterpretationBox[
+                          TagBox[
+                            StyleBox["2",
+                              ShowContents->False],
+                            (StyleForm[ #, ShowContents -> False]&)],
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]],
+                          Editable->False], 
+                        InterpretationBox["2",
+                          SequenceForm[ 2],
+                          Editable->False]],
+                      Subsuperscript[ X, 
+                        SequenceForm[ 
+                          StyleForm[ 2, ShowContents -> False]], 
+                        SequenceForm[ 2]],
+                      Editable->False]}]}], ")"}], "2"]}], "+", 
+          RowBox[{\(1\/2\), " ", 
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{
+                  RowBox[{
+                    RowBox[{"-", 
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["2",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["2",
+                            SequenceForm[ 2],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]], 
+                          SequenceForm[ 2]],
+                        Editable->False]}], " ", 
+                    InterpretationBox[
+                      SubsuperscriptBox["X", 
+                        InterpretationBox[
+                          TagBox[
+                            StyleBox["1",
+                              ShowContents->False],
+                            (StyleForm[ #, ShowContents -> False]&)],
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]],
+                          Editable->False], 
+                        InterpretationBox["1",
+                          SequenceForm[ 1],
+                          Editable->False]],
+                      Subsuperscript[ X, 
+                        SequenceForm[ 
+                          StyleForm[ 1, ShowContents -> False]], 
+                        SequenceForm[ 1]],
+                      Editable->False]}], "+", 
+                  RowBox[{
+                    InterpretationBox[
+                      SubsuperscriptBox["U", 
+                        InterpretationBox[
+                          TagBox[
+                            StyleBox["1",
+                              ShowContents->False],
+                            (StyleForm[ #, ShowContents -> False]&)],
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]],
+                          Editable->False], 
+                        InterpretationBox["1",
+                          SequenceForm[ 1],
+                          Editable->False]],
+                      Subsuperscript[ U, 
+                        SequenceForm[ 
+                          StyleForm[ 1, ShowContents -> False]], 
+                        SequenceForm[ 1]],
+                      Editable->False], " ", 
+                    InterpretationBox[
+                      SubsuperscriptBox["X", 
+                        InterpretationBox[
+                          TagBox[
+                            StyleBox["2",
+                              ShowContents->False],
+                            (StyleForm[ #, ShowContents -> False]&)],
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]],
+                          Editable->False], 
+                        InterpretationBox["2",
+                          SequenceForm[ 2],
+                          Editable->False]],
+                      Subsuperscript[ X, 
+                        SequenceForm[ 
+                          StyleForm[ 2, ShowContents -> False]], 
+                        SequenceForm[ 2]],
+                      Editable->False]}]}], ")"}], "2"]}], "+", 
+          RowBox[{
+            RowBox[{"(", 
+              RowBox[{
+                RowBox[{
+                  InterpretationBox[
+                    SubsuperscriptBox["U", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["3",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 3, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["3",
+                        SequenceForm[ 3],
+                        Editable->False]],
+                    Subsuperscript[ U, 
+                      SequenceForm[ 
+                        StyleForm[ 3, ShowContents -> False]], 
+                      SequenceForm[ 3]],
+                    Editable->False], " ", 
+                  InterpretationBox[
+                    SubsuperscriptBox["X", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["0",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 0, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["0",
+                        SequenceForm[ 0],
+                        Editable->False]],
+                    Subsuperscript[ X, 
+                      SequenceForm[ 
+                        StyleForm[ 0, ShowContents -> False]], 
+                      SequenceForm[ 0]],
+                    Editable->False]}], "-", 
+                RowBox[{
+                  InterpretationBox[
+                    SubsuperscriptBox["U", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["0",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 0, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["0",
+                        SequenceForm[ 0],
+                        Editable->False]],
+                    Subsuperscript[ U, 
+                      SequenceForm[ 
+                        StyleForm[ 0, ShowContents -> False]], 
+                      SequenceForm[ 0]],
+                    Editable->False], " ", 
+                  InterpretationBox[
+                    SubsuperscriptBox["X", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["3",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 3, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["3",
+                        SequenceForm[ 3],
+                        Editable->False]],
+                    Subsuperscript[ X, 
+                      SequenceForm[ 
+                        StyleForm[ 3, ShowContents -> False]], 
+                      SequenceForm[ 3]],
+                    Editable->False]}]}], ")"}], " ", 
+            RowBox[{"(", 
+              RowBox[{
+                RowBox[{
+                  RowBox[{"-", 
+                    InterpretationBox[
+                      SubsuperscriptBox["U", 
+                        InterpretationBox[
+                          TagBox[
+                            StyleBox["3",
+                              ShowContents->False],
+                            (StyleForm[ #, ShowContents -> False]&)],
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]],
+                          Editable->False], 
+                        InterpretationBox["3",
+                          SequenceForm[ 3],
+                          Editable->False]],
+                      Subsuperscript[ U, 
+                        SequenceForm[ 
+                          StyleForm[ 3, ShowContents -> False]], 
+                        SequenceForm[ 3]],
+                      Editable->False]}], " ", 
+                  InterpretationBox[
+                    SubsuperscriptBox["X", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["0",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 0, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["0",
+                        SequenceForm[ 0],
+                        Editable->False]],
+                    Subsuperscript[ X, 
+                      SequenceForm[ 
+                        StyleForm[ 0, ShowContents -> False]], 
+                      SequenceForm[ 0]],
+                    Editable->False]}], "+", 
+                RowBox[{
+                  InterpretationBox[
+                    SubsuperscriptBox["U", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["0",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 0, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["0",
+                        SequenceForm[ 0],
+                        Editable->False]],
+                    Subsuperscript[ U, 
+                      SequenceForm[ 
+                        StyleForm[ 0, ShowContents -> False]], 
+                      SequenceForm[ 0]],
+                    Editable->False], " ", 
+                  InterpretationBox[
+                    SubsuperscriptBox["X", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["3",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 3, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["3",
+                        SequenceForm[ 3],
+                        Editable->False]],
+                    Subsuperscript[ X, 
+                      SequenceForm[ 
+                        StyleForm[ 3, ShowContents -> False]], 
+                      SequenceForm[ 3]],
+                    Editable->False]}]}], ")"}]}], "+", 
+          RowBox[{\(1\/2\), " ", 
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{
+                  RowBox[{
+                    InterpretationBox[
+                      SubsuperscriptBox["U", 
+                        InterpretationBox[
+                          TagBox[
+                            StyleBox["3",
+                              ShowContents->False],
+                            (StyleForm[ #, ShowContents -> False]&)],
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]],
+                          Editable->False], 
+                        InterpretationBox["3",
+                          SequenceForm[ 3],
+                          Editable->False]],
+                      Subsuperscript[ U, 
+                        SequenceForm[ 
+                          StyleForm[ 3, ShowContents -> False]], 
+                        SequenceForm[ 3]],
+                      Editable->False], " ", 
+                    InterpretationBox[
+                      SubsuperscriptBox["X", 
+                        InterpretationBox[
+                          TagBox[
+                            StyleBox["1",
+                              ShowContents->False],
+                            (StyleForm[ #, ShowContents -> False]&)],
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]],
+                          Editable->False], 
+                        InterpretationBox["1",
+                          SequenceForm[ 1],
+                          Editable->False]],
+                      Subsuperscript[ X, 
+                        SequenceForm[ 
+                          StyleForm[ 1, ShowContents -> False]], 
+                        SequenceForm[ 1]],
+                      Editable->False]}], "-", 
+                  RowBox[{
+                    InterpretationBox[
+                      SubsuperscriptBox["U", 
+                        InterpretationBox[
+                          TagBox[
+                            StyleBox["1",
+                              ShowContents->False],
+                            (StyleForm[ #, ShowContents -> False]&)],
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]],
+                          Editable->False], 
+                        InterpretationBox["1",
+                          SequenceForm[ 1],
+                          Editable->False]],
+                      Subsuperscript[ U, 
+                        SequenceForm[ 
+                          StyleForm[ 1, ShowContents -> False]], 
+                        SequenceForm[ 1]],
+                      Editable->False], " ", 
+                    InterpretationBox[
+                      SubsuperscriptBox["X", 
+                        InterpretationBox[
+                          TagBox[
+                            StyleBox["3",
+                              ShowContents->False],
+                            (StyleForm[ #, ShowContents -> False]&)],
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]],
+                          Editable->False], 
+                        InterpretationBox["3",
+                          SequenceForm[ 3],
+                          Editable->False]],
+                      Subsuperscript[ X, 
+                        SequenceForm[ 
+                          StyleForm[ 3, ShowContents -> False]], 
+                        SequenceForm[ 3]],
+                      Editable->False]}]}], ")"}], "2"]}], "+", 
+          RowBox[{\(1\/2\), " ", 
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{
+                  RowBox[{
+                    RowBox[{"-", 
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["3",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["3",
+                            SequenceForm[ 3],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]], 
+                          SequenceForm[ 3]],
+                        Editable->False]}], " ", 
+                    InterpretationBox[
+                      SubsuperscriptBox["X", 
+                        InterpretationBox[
+                          TagBox[
+                            StyleBox["1",
+                              ShowContents->False],
+                            (StyleForm[ #, ShowContents -> False]&)],
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]],
+                          Editable->False], 
+                        InterpretationBox["1",
+                          SequenceForm[ 1],
+                          Editable->False]],
+                      Subsuperscript[ X, 
+                        SequenceForm[ 
+                          StyleForm[ 1, ShowContents -> False]], 
+                        SequenceForm[ 1]],
+                      Editable->False]}], "+", 
+                  RowBox[{
+                    InterpretationBox[
+                      SubsuperscriptBox["U", 
+                        InterpretationBox[
+                          TagBox[
+                            StyleBox["1",
+                              ShowContents->False],
+                            (StyleForm[ #, ShowContents -> False]&)],
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]],
+                          Editable->False], 
+                        InterpretationBox["1",
+                          SequenceForm[ 1],
+                          Editable->False]],
+                      Subsuperscript[ U, 
+                        SequenceForm[ 
+                          StyleForm[ 1, ShowContents -> False]], 
+                        SequenceForm[ 1]],
+                      Editable->False], " ", 
+                    InterpretationBox[
+                      SubsuperscriptBox["X", 
+                        InterpretationBox[
+                          TagBox[
+                            StyleBox["3",
+                              ShowContents->False],
+                            (StyleForm[ #, ShowContents -> False]&)],
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]],
+                          Editable->False], 
+                        InterpretationBox["3",
+                          SequenceForm[ 3],
+                          Editable->False]],
+                      Subsuperscript[ X, 
+                        SequenceForm[ 
+                          StyleForm[ 3, ShowContents -> False]], 
+                        SequenceForm[ 3]],
+                      Editable->False]}]}], ")"}], "2"]}], "+", 
+          RowBox[{\(1\/2\), " ", 
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{
+                  RowBox[{
+                    InterpretationBox[
+                      SubsuperscriptBox["U", 
+                        InterpretationBox[
+                          TagBox[
+                            StyleBox["3",
+                              ShowContents->False],
+                            (StyleForm[ #, ShowContents -> False]&)],
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]],
+                          Editable->False], 
+                        InterpretationBox["3",
+                          SequenceForm[ 3],
+                          Editable->False]],
+                      Subsuperscript[ U, 
+                        SequenceForm[ 
+                          StyleForm[ 3, ShowContents -> False]], 
+                        SequenceForm[ 3]],
+                      Editable->False], " ", 
+                    InterpretationBox[
+                      SubsuperscriptBox["X", 
+                        InterpretationBox[
+                          TagBox[
+                            StyleBox["2",
+                              ShowContents->False],
+                            (StyleForm[ #, ShowContents -> False]&)],
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]],
+                          Editable->False], 
+                        InterpretationBox["2",
+                          SequenceForm[ 2],
+                          Editable->False]],
+                      Subsuperscript[ X, 
+                        SequenceForm[ 
+                          StyleForm[ 2, ShowContents -> False]], 
+                        SequenceForm[ 2]],
+                      Editable->False]}], "-", 
+                  RowBox[{
+                    InterpretationBox[
+                      SubsuperscriptBox["U", 
+                        InterpretationBox[
+                          TagBox[
+                            StyleBox["2",
+                              ShowContents->False],
+                            (StyleForm[ #, ShowContents -> False]&)],
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]],
+                          Editable->False], 
+                        InterpretationBox["2",
+                          SequenceForm[ 2],
+                          Editable->False]],
+                      Subsuperscript[ U, 
+                        SequenceForm[ 
+                          StyleForm[ 2, ShowContents -> False]], 
+                        SequenceForm[ 2]],
+                      Editable->False], " ", 
+                    InterpretationBox[
+                      SubsuperscriptBox["X", 
+                        InterpretationBox[
+                          TagBox[
+                            StyleBox["3",
+                              ShowContents->False],
+                            (StyleForm[ #, ShowContents -> False]&)],
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]],
+                          Editable->False], 
+                        InterpretationBox["3",
+                          SequenceForm[ 3],
+                          Editable->False]],
+                      Subsuperscript[ X, 
+                        SequenceForm[ 
+                          StyleForm[ 3, ShowContents -> False]], 
+                        SequenceForm[ 3]],
+                      Editable->False]}]}], ")"}], "2"]}], "+", 
+          RowBox[{\(1\/2\), " ", 
+            SuperscriptBox[
+              RowBox[{"(", 
+                RowBox[{
+                  RowBox[{
+                    RowBox[{"-", 
+                      InterpretationBox[
+                        SubsuperscriptBox["U", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["3",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["3",
+                            SequenceForm[ 3],
+                            Editable->False]],
+                        Subsuperscript[ U, 
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]], 
+                          SequenceForm[ 3]],
+                        Editable->False]}], " ", 
+                    InterpretationBox[
+                      SubsuperscriptBox["X", 
+                        InterpretationBox[
+                          TagBox[
+                            StyleBox["2",
+                              ShowContents->False],
+                            (StyleForm[ #, ShowContents -> False]&)],
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]],
+                          Editable->False], 
+                        InterpretationBox["2",
+                          SequenceForm[ 2],
+                          Editable->False]],
+                      Subsuperscript[ X, 
+                        SequenceForm[ 
+                          StyleForm[ 2, ShowContents -> False]], 
+                        SequenceForm[ 2]],
+                      Editable->False]}], "+", 
+                  RowBox[{
+                    InterpretationBox[
+                      SubsuperscriptBox["U", 
+                        InterpretationBox[
+                          TagBox[
+                            StyleBox["2",
+                              ShowContents->False],
+                            (StyleForm[ #, ShowContents -> False]&)],
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]],
+                          Editable->False], 
+                        InterpretationBox["2",
+                          SequenceForm[ 2],
+                          Editable->False]],
+                      Subsuperscript[ U, 
+                        SequenceForm[ 
+                          StyleForm[ 2, ShowContents -> False]], 
+                        SequenceForm[ 2]],
+                      Editable->False], " ", 
+                    InterpretationBox[
+                      SubsuperscriptBox["X", 
+                        InterpretationBox[
+                          TagBox[
+                            StyleBox["3",
+                              ShowContents->False],
+                            (StyleForm[ #, ShowContents -> False]&)],
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]],
+                          Editable->False], 
+                        InterpretationBox["3",
+                          SequenceForm[ 3],
+                          Editable->False]],
+                      Subsuperscript[ X, 
+                        SequenceForm[ 
+                          StyleForm[ 3, ShowContents -> False]], 
+                        SequenceForm[ 3]],
+                      Editable->False]}]}], ")"}], "2"]}]}],
+        FontFamily->"Courier",
+        FontSize->16],
+      (StyleForm[ #, FontSize -> 16, FontFamily -> "Courier"]&)]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(FullSimplify[term11]\)], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      StyleBox[
+        RowBox[{
+          RowBox[{
+            RowBox[{"-", 
+              TagBox[
+                SuperscriptBox[
+                  RowBox[{"(", 
+                    InterpretationBox[
+                      SubsuperscriptBox["U", 
+                        InterpretationBox[
+                          TagBox[
+                            StyleBox["3",
+                              ShowContents->False],
+                            (StyleForm[ #, ShowContents -> False]&)],
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]],
+                          Editable->False], 
+                        InterpretationBox["3",
+                          SequenceForm[ 3],
+                          Editable->False]],
+                      Subsuperscript[ U, 
+                        SequenceForm[ 
+                          StyleForm[ 3, ShowContents -> False]], 
+                        SequenceForm[ 3]],
+                      Editable->False], ")"}], "2"],
+                DisplayForm]}], " ", 
+            RowBox[{"(", 
+              RowBox[{
+                TagBox[
+                  SuperscriptBox[
+                    RowBox[{"(", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["0",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["0",
+                            SequenceForm[ 0],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 0, ShowContents -> False]], 
+                          SequenceForm[ 0]],
+                        Editable->False], ")"}], "2"],
+                  DisplayForm], "-", 
+                TagBox[
+                  SuperscriptBox[
+                    RowBox[{"(", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["1",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["1",
+                            SequenceForm[ 1],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]], 
+                          SequenceForm[ 1]],
+                        Editable->False], ")"}], "2"],
+                  DisplayForm], "-", 
+                TagBox[
+                  SuperscriptBox[
+                    RowBox[{"(", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["2",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["2",
+                            SequenceForm[ 2],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]], 
+                          SequenceForm[ 2]],
+                        Editable->False], ")"}], "2"],
+                  DisplayForm]}], ")"}]}], "-", 
+          RowBox[{
+            TagBox[
+              SuperscriptBox[
+                RowBox[{"(", 
+                  InterpretationBox[
+                    SubsuperscriptBox["U", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["0",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 0, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["0",
+                        SequenceForm[ 0],
+                        Editable->False]],
+                    Subsuperscript[ U, 
+                      SequenceForm[ 
+                        StyleForm[ 0, ShowContents -> False]], 
+                      SequenceForm[ 0]],
+                    Editable->False], ")"}], "2"],
+              DisplayForm], " ", 
+            RowBox[{"(", 
+              RowBox[{
+                TagBox[
+                  SuperscriptBox[
+                    RowBox[{"(", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["1",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["1",
+                            SequenceForm[ 1],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]], 
+                          SequenceForm[ 1]],
+                        Editable->False], ")"}], "2"],
+                  DisplayForm], "+", 
+                TagBox[
+                  SuperscriptBox[
+                    RowBox[{"(", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["2",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["2",
+                            SequenceForm[ 2],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]], 
+                          SequenceForm[ 2]],
+                        Editable->False], ")"}], "2"],
+                  DisplayForm]}], ")"}]}], "+", 
+          RowBox[{"2", " ", 
+            InterpretationBox[
+              SubsuperscriptBox["U", 
+                InterpretationBox[
+                  TagBox[
+                    StyleBox["0",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)],
+                  SequenceForm[ 
+                    StyleForm[ 0, ShowContents -> False]],
+                  Editable->False], 
+                InterpretationBox["0",
+                  SequenceForm[ 0],
+                  Editable->False]],
+              Subsuperscript[ U, 
+                SequenceForm[ 
+                  StyleForm[ 0, ShowContents -> False]], 
+                SequenceForm[ 0]],
+              Editable->False], " ", 
+            InterpretationBox[
+              SubsuperscriptBox["U", 
+                InterpretationBox[
+                  TagBox[
+                    StyleBox["3",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)],
+                  SequenceForm[ 
+                    StyleForm[ 3, ShowContents -> False]],
+                  Editable->False], 
+                InterpretationBox["3",
+                  SequenceForm[ 3],
+                  Editable->False]],
+              Subsuperscript[ U, 
+                SequenceForm[ 
+                  StyleForm[ 3, ShowContents -> False]], 
+                SequenceForm[ 3]],
+              Editable->False], " ", 
+            InterpretationBox[
+              SubsuperscriptBox["X", 
+                InterpretationBox[
+                  TagBox[
+                    StyleBox["0",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)],
+                  SequenceForm[ 
+                    StyleForm[ 0, ShowContents -> False]],
+                  Editable->False], 
+                InterpretationBox["0",
+                  SequenceForm[ 0],
+                  Editable->False]],
+              Subsuperscript[ X, 
+                SequenceForm[ 
+                  StyleForm[ 0, ShowContents -> False]], 
+                SequenceForm[ 0]],
+              Editable->False], " ", 
+            InterpretationBox[
+              SubsuperscriptBox["X", 
+                InterpretationBox[
+                  TagBox[
+                    StyleBox["3",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)],
+                  SequenceForm[ 
+                    StyleForm[ 3, ShowContents -> False]],
+                  Editable->False], 
+                InterpretationBox["3",
+                  SequenceForm[ 3],
+                  Editable->False]],
+              Subsuperscript[ X, 
+                SequenceForm[ 
+                  StyleForm[ 3, ShowContents -> False]], 
+                SequenceForm[ 3]],
+              Editable->False]}], "-", 
+          RowBox[{
+            TagBox[
+              SuperscriptBox[
+                RowBox[{"(", 
+                  InterpretationBox[
+                    SubsuperscriptBox["U", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["0",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 0, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["0",
+                        SequenceForm[ 0],
+                        Editable->False]],
+                    Subsuperscript[ U, 
+                      SequenceForm[ 
+                        StyleForm[ 0, ShowContents -> False]], 
+                      SequenceForm[ 0]],
+                    Editable->False], ")"}], "2"],
+              DisplayForm], " ", 
+            TagBox[
+              SuperscriptBox[
+                RowBox[{"(", 
+                  InterpretationBox[
+                    SubsuperscriptBox["X", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["3",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 3, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["3",
+                        SequenceForm[ 3],
+                        Editable->False]],
+                    Subsuperscript[ X, 
+                      SequenceForm[ 
+                        StyleForm[ 3, ShowContents -> False]], 
+                      SequenceForm[ 3]],
+                    Editable->False], ")"}], "2"],
+              DisplayForm]}], "+", 
+          RowBox[{"2", " ", 
+            InterpretationBox[
+              SubsuperscriptBox["U", 
+                InterpretationBox[
+                  TagBox[
+                    StyleBox["2",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)],
+                  SequenceForm[ 
+                    StyleForm[ 2, ShowContents -> False]],
+                  Editable->False], 
+                InterpretationBox["2",
+                  SequenceForm[ 2],
+                  Editable->False]],
+              Subsuperscript[ U, 
+                SequenceForm[ 
+                  StyleForm[ 2, ShowContents -> False]], 
+                SequenceForm[ 2]],
+              Editable->False], " ", 
+            InterpretationBox[
+              SubsuperscriptBox["X", 
+                InterpretationBox[
+                  TagBox[
+                    StyleBox["2",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)],
+                  SequenceForm[ 
+                    StyleForm[ 2, ShowContents -> False]],
+                  Editable->False], 
+                InterpretationBox["2",
+                  SequenceForm[ 2],
+                  Editable->False]],
+              Subsuperscript[ X, 
+                SequenceForm[ 
+                  StyleForm[ 2, ShowContents -> False]], 
+                SequenceForm[ 2]],
+              Editable->False], " ", 
+            RowBox[{"(", 
+              RowBox[{
+                RowBox[{
+                  InterpretationBox[
+                    SubsuperscriptBox["U", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["0",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 0, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["0",
+                        SequenceForm[ 0],
+                        Editable->False]],
+                    Subsuperscript[ U, 
+                      SequenceForm[ 
+                        StyleForm[ 0, ShowContents -> False]], 
+                      SequenceForm[ 0]],
+                    Editable->False], " ", 
+                  InterpretationBox[
+                    SubsuperscriptBox["X", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["0",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 0, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["0",
+                        SequenceForm[ 0],
+                        Editable->False]],
+                    Subsuperscript[ X, 
+                      SequenceForm[ 
+                        StyleForm[ 0, ShowContents -> False]], 
+                      SequenceForm[ 0]],
+                    Editable->False]}], "-", 
+                RowBox[{
+                  InterpretationBox[
+                    SubsuperscriptBox["U", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["3",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 3, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["3",
+                        SequenceForm[ 3],
+                        Editable->False]],
+                    Subsuperscript[ U, 
+                      SequenceForm[ 
+                        StyleForm[ 3, ShowContents -> False]], 
+                      SequenceForm[ 3]],
+                    Editable->False], " ", 
+                  InterpretationBox[
+                    SubsuperscriptBox["X", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["3",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 3, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["3",
+                        SequenceForm[ 3],
+                        Editable->False]],
+                    Subsuperscript[ X, 
+                      SequenceForm[ 
+                        StyleForm[ 3, ShowContents -> False]], 
+                      SequenceForm[ 3]],
+                    Editable->False]}]}], ")"}]}], "+", 
+          RowBox[{"2", " ", 
+            InterpretationBox[
+              SubsuperscriptBox["U", 
+                InterpretationBox[
+                  TagBox[
+                    StyleBox["1",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)],
+                  SequenceForm[ 
+                    StyleForm[ 1, ShowContents -> False]],
+                  Editable->False], 
+                InterpretationBox["1",
+                  SequenceForm[ 1],
+                  Editable->False]],
+              Subsuperscript[ U, 
+                SequenceForm[ 
+                  StyleForm[ 1, ShowContents -> False]], 
+                SequenceForm[ 1]],
+              Editable->False], " ", 
+            InterpretationBox[
+              SubsuperscriptBox["X", 
+                InterpretationBox[
+                  TagBox[
+                    StyleBox["1",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)],
+                  SequenceForm[ 
+                    StyleForm[ 1, ShowContents -> False]],
+                  Editable->False], 
+                InterpretationBox["1",
+                  SequenceForm[ 1],
+                  Editable->False]],
+              Subsuperscript[ X, 
+                SequenceForm[ 
+                  StyleForm[ 1, ShowContents -> False]], 
+                SequenceForm[ 1]],
+              Editable->False], " ", 
+            RowBox[{"(", 
+              RowBox[{
+                RowBox[{
+                  InterpretationBox[
+                    SubsuperscriptBox["U", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["0",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 0, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["0",
+                        SequenceForm[ 0],
+                        Editable->False]],
+                    Subsuperscript[ U, 
+                      SequenceForm[ 
+                        StyleForm[ 0, ShowContents -> False]], 
+                      SequenceForm[ 0]],
+                    Editable->False], " ", 
+                  InterpretationBox[
+                    SubsuperscriptBox["X", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["0",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 0, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["0",
+                        SequenceForm[ 0],
+                        Editable->False]],
+                    Subsuperscript[ X, 
+                      SequenceForm[ 
+                        StyleForm[ 0, ShowContents -> False]], 
+                      SequenceForm[ 0]],
+                    Editable->False]}], "-", 
+                RowBox[{
+                  InterpretationBox[
+                    SubsuperscriptBox["U", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["2",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 2, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["2",
+                        SequenceForm[ 2],
+                        Editable->False]],
+                    Subsuperscript[ U, 
+                      SequenceForm[ 
+                        StyleForm[ 2, ShowContents -> False]], 
+                      SequenceForm[ 2]],
+                    Editable->False], " ", 
+                  InterpretationBox[
+                    SubsuperscriptBox["X", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["2",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 2, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["2",
+                        SequenceForm[ 2],
+                        Editable->False]],
+                    Subsuperscript[ X, 
+                      SequenceForm[ 
+                        StyleForm[ 2, ShowContents -> False]], 
+                      SequenceForm[ 2]],
+                    Editable->False]}], "-", 
+                RowBox[{
+                  InterpretationBox[
+                    SubsuperscriptBox["U", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["3",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 3, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["3",
+                        SequenceForm[ 3],
+                        Editable->False]],
+                    Subsuperscript[ U, 
+                      SequenceForm[ 
+                        StyleForm[ 3, ShowContents -> False]], 
+                      SequenceForm[ 3]],
+                    Editable->False], " ", 
+                  InterpretationBox[
+                    SubsuperscriptBox["X", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["3",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 3, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["3",
+                        SequenceForm[ 3],
+                        Editable->False]],
+                    Subsuperscript[ X, 
+                      SequenceForm[ 
+                        StyleForm[ 3, ShowContents -> False]], 
+                      SequenceForm[ 3]],
+                    Editable->False]}]}], ")"}]}], "+", 
+          RowBox[{
+            TagBox[
+              SuperscriptBox[
+                RowBox[{"(", 
+                  InterpretationBox[
+                    SubsuperscriptBox["U", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["2",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 2, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["2",
+                        SequenceForm[ 2],
+                        Editable->False]],
+                    Subsuperscript[ U, 
+                      SequenceForm[ 
+                        StyleForm[ 2, ShowContents -> False]], 
+                      SequenceForm[ 2]],
+                    Editable->False], ")"}], "2"],
+              DisplayForm], " ", 
+            RowBox[{"(", 
+              RowBox[{
+                RowBox[{"-", 
+                  TagBox[
+                    SuperscriptBox[
+                      RowBox[{"(", 
+                        InterpretationBox[
+                          SubsuperscriptBox["X", 
+                            InterpretationBox[
+                              TagBox[
+                                StyleBox["0",
+                                  ShowContents->False],
+                                (StyleForm[ #, ShowContents -> False]&)],
+                              SequenceForm[ 
+                                StyleForm[ 0, ShowContents -> False]],
+                              Editable->False], 
+                            InterpretationBox["0",
+                              SequenceForm[ 0],
+                              Editable->False]],
+                          Subsuperscript[ X, 
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]], 
+                            SequenceForm[ 0]],
+                          Editable->False], ")"}], "2"],
+                    DisplayForm]}], "+", 
+                TagBox[
+                  SuperscriptBox[
+                    RowBox[{"(", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["1",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 1, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["1",
+                            SequenceForm[ 1],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 1, ShowContents -> False]], 
+                          SequenceForm[ 1]],
+                        Editable->False], ")"}], "2"],
+                  DisplayForm], "+", 
+                TagBox[
+                  SuperscriptBox[
+                    RowBox[{"(", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["3",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["3",
+                            SequenceForm[ 3],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]], 
+                          SequenceForm[ 3]],
+                        Editable->False], ")"}], "2"],
+                  DisplayForm]}], ")"}]}], "+", 
+          RowBox[{
+            TagBox[
+              SuperscriptBox[
+                RowBox[{"(", 
+                  InterpretationBox[
+                    SubsuperscriptBox["U", 
+                      InterpretationBox[
+                        TagBox[
+                          StyleBox["1",
+                            ShowContents->False],
+                          (StyleForm[ #, ShowContents -> False]&)],
+                        SequenceForm[ 
+                          StyleForm[ 1, ShowContents -> False]],
+                        Editable->False], 
+                      InterpretationBox["1",
+                        SequenceForm[ 1],
+                        Editable->False]],
+                    Subsuperscript[ U, 
+                      SequenceForm[ 
+                        StyleForm[ 1, ShowContents -> False]], 
+                      SequenceForm[ 1]],
+                    Editable->False], ")"}], "2"],
+              DisplayForm], " ", 
+            RowBox[{"(", 
+              RowBox[{
+                RowBox[{"-", 
+                  TagBox[
+                    SuperscriptBox[
+                      RowBox[{"(", 
+                        InterpretationBox[
+                          SubsuperscriptBox["X", 
+                            InterpretationBox[
+                              TagBox[
+                                StyleBox["0",
+                                  ShowContents->False],
+                                (StyleForm[ #, ShowContents -> False]&)],
+                              SequenceForm[ 
+                                StyleForm[ 0, ShowContents -> False]],
+                              Editable->False], 
+                            InterpretationBox["0",
+                              SequenceForm[ 0],
+                              Editable->False]],
+                          Subsuperscript[ X, 
+                            SequenceForm[ 
+                              StyleForm[ 0, ShowContents -> False]], 
+                            SequenceForm[ 0]],
+                          Editable->False], ")"}], "2"],
+                    DisplayForm]}], "+", 
+                TagBox[
+                  SuperscriptBox[
+                    RowBox[{"(", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["2",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 2, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["2",
+                            SequenceForm[ 2],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 2, ShowContents -> False]], 
+                          SequenceForm[ 2]],
+                        Editable->False], ")"}], "2"],
+                  DisplayForm], "+", 
+                TagBox[
+                  SuperscriptBox[
+                    RowBox[{"(", 
+                      InterpretationBox[
+                        SubsuperscriptBox["X", 
+                          InterpretationBox[
+                            TagBox[
+                              StyleBox["3",
+                                ShowContents->False],
+                              (StyleForm[ #, ShowContents -> False]&)],
+                            SequenceForm[ 
+                              StyleForm[ 3, ShowContents -> False]],
+                            Editable->False], 
+                          InterpretationBox["3",
+                            SequenceForm[ 3],
+                            Editable->False]],
+                        Subsuperscript[ X, 
+                          SequenceForm[ 
+                            StyleForm[ 3, ShowContents -> False]], 
+                          SequenceForm[ 3]],
+                        Editable->False], ")"}], "2"],
+                  DisplayForm]}], ")"}]}]}],
+        FontFamily->"Courier",
+        FontSize->16],
+      (StyleForm[ #, FontSize -> 16, FontFamily -> "Courier"]&)]], "Output"]
+}, Open  ]]
+}, Open  ]]
+},
+FrontEndVersion->"5.1 for Microsoft Windows",
+ScreenRectangle->{{0, 1173}, {0, 979}},
+WindowSize->{1013, 537},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrintingCopies->1,
+PrintingPageRange->{Automatic, Automatic}
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 36, 3, 80, "Subtitle"],
+Cell[1815, 58, 878, 16, 270, "Input"],
+Cell[2696, 76, 26, 0, 30, "Input"],
+Cell[2725, 78, 2585, 43, 453, "Input"],
+Cell[5313, 123, 2582, 43, 453, "Input"],
+Cell[7898, 168, 294, 7, 130, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[8229, 180, 37, 4, 111, "Subtitle"],
+Cell[8269, 186, 237, 4, 90, "Input"],
+Cell[8509, 192, 107, 2, 30, "Input"],
+Cell[8619, 196, 106, 2, 50, "Input"],
+
+Cell[CellGroupData[{
+Cell[8750, 202, 122, 3, 50, "Input"],
+Cell[8875, 207, 44594, 923, 117, "Output"]
+}, Open  ]],
+Cell[53484, 1133, 182, 4, 50, "Input"],
+
+Cell[CellGroupData[{
+Cell[53691, 1141, 152, 2, 50, "Input"],
+Cell[53846, 1145, 44594, 923, 117, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[98477, 2073, 90, 1, 30, "Input"],
+Cell[98570, 2076, 42470, 939, 109, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[141077, 3020, 53, 1, 30, "Input"],
+Cell[141133, 3023, 31776, 732, 63, "Output"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

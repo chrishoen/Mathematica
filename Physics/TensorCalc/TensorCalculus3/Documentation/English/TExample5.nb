@@ -1,0 +1,667 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     16301,        519]*)
+(*NotebookOutlinePosition[     16985,        542]*)
+(*  CellTagsIndexPosition[     16941,        538]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Relativistic Quantum Mechanics: Dirac Equation", "Title"],
+
+Cell["\<\
+Renan Cabrera
+rencabla@ceibo.entelnet.bo\
+\>", "Subtitle"],
+
+Cell[CellGroupData[{
+
+Cell["Initialization", "Section"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input"],
+
+Cell[BoxData[
+    \(Needs["\<LinearAlgebra`MatrixManipulation`\>"]\)], "Input"],
+
+Cell[BoxData[
+    \(DeclareBaseIndices[{0, 1, 2, 3}]\)], "Input"],
+
+Cell[BoxData[{
+    \(DefineTensorShortcuts[{{\[Gamma], x, \[Psi], \[Alpha], P, c}, 
+        1}, {{g, \[Delta]}, 2}]\), "\[IndentingNewLine]", 
+    \(\(labs = {x, \[Delta], g, \[CapitalGamma]};\)\)}], "Input"],
+
+Cell[BoxData[{
+    \(\(SetMetricValueRules[g, \ 
+        DiagonalMatrix[{1, \(-1\), \(-1\), \(-1\)}]];\)\), "\
+\[IndentingNewLine]", 
+    \(\(SetTensorValues[\[Delta]ud[i, j], 
+        IdentityMatrix[NDim]];\)\)}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Dirac's Gamma", "Section"],
+
+Cell["\<\
+First let's define the \[Alpha] matrices directly from the Pauli matrices\
+\>", "Text"],
+
+Cell[BoxData[
+    \(SetTensorValues[\[Alpha]u[\[Mu]], {None, {{0, 0, 0, 1}, {0, 0, 1, 
+            0}, {0, 1, 0, 0}, {1, 0, 0, 0}}, {{0, 0, 0, \(-I\)}, {0, 0, I, 
+            0}, {0, \(-I\), 0, 0}, {I, 0, 0, 0}}, {{0, 0, 1, 0}, {0, 0, 
+            0, \(-1\)}, {1, 0, 0, 0}, {0, \(-1\), 0, 0}}}]\)], "Input"],
+
+Cell[BoxData[{
+    \(\[Alpha]u[\[Mu]]\), "\[IndentingNewLine]", 
+    \(% // ArrayExpansion[\[Mu]]\)}], "Input"],
+
+Cell["We also need \[Beta]", "Text"],
+
+Cell[BoxData[
+    \(\[Beta] = {{1, 0, 0, 0}, {0, 1, 0, 0}, {0, 0, \(-1\), 0}, {0, 0, 
+          0, \(-1\)}}\)], "Input"],
+
+Cell["They  anticommute", "Text"],
+
+Cell[BoxData[{
+    \(\[Alpha]u[i] . \[Alpha]u[j] + \[Alpha]u[j] . \[Alpha]u[
+          i]\), "\[IndentingNewLine]", 
+    \(\(% // ArrayExpansion[i, {1, 2, 3}]\) // 
+      ArrayExpansion[j, {1, 2, 3}]\)}], "Input"],
+
+Cell[BoxData[{
+    \(\[Beta] . \[Beta]\), "\[IndentingNewLine]", 
+    \(\[Beta] . \[Alpha]u[j] + \[Alpha]u[j] . \[Beta] \[Equal] 
+      Array[0 &, {NDim, NDim}]\), "\[IndentingNewLine]", 
+    \(% // ArrayExpansion[j, {1, 2, 3}]\)}], "Input"],
+
+Cell["\<\
+The following cell illustrates the commutation relation in detail. Just set \
+the index equal to 1,2 or 3.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\(index = 1;\)\), "\[IndentingNewLine]", 
+    \(HoldForm[\[Beta]] . \[Alpha]u[j] + \[Alpha]u[j] . 
+          HoldForm[\[Beta]] \[Equal] 0\), "\[IndentingNewLine]", 
+    \(Print[
+      SequenceForm["\<Case for j = \>", index]]\), "\[IndentingNewLine]", 
+    \(%% /. {HoldForm[\[Beta]] \[Rule] 
+          MatrixForm[\[Beta]], \[Alpha]u[j] \[Rule] 
+          MatrixForm[\[Alpha]u[index] /. TensorValueRules[\[Alpha]]], 
+        0 \[Rule] Array[0 &, {NDim, NDim}]}\), "\[IndentingNewLine]", 
+    \(MapAt[
+      HoldForm @@ {# /. MatrixForm \[Rule] Identity} &, %, {{1, 1}, {1, 
+          2}}]\), "\[IndentingNewLine]", 
+    \(% // ReleaseHold\), "\[IndentingNewLine]", 
+    \(Clear[index]\)}], "Input"],
+
+Cell["\<\
+The convenient Dirac's Gamma are defined from the \[Alpha] and \[Beta] \
+matrices suitable for the metric we defined.(other shapes of the metric would \
+require silight changes)\
+\>", "Text"],
+
+Cell[BoxData[
+    \(SetTensorValueRules[\[Gamma]u[\[Mu]], {\[Beta], \[Beta] . \[Alpha]u[
+            1], \[Beta] . \[Alpha]u[2], \[Beta] . \[Alpha]u[3]}]\)], "Input"],
+
+Cell["\<\
+But it is also useful to define more components for \[Gamma] and the identity \
+matrix\
+\>", "Text"],
+
+Cell[BoxData[
+    \(NewTensorValueRules[\[Gamma]] = 
+      Join[TensorValueRules[\[Gamma]], {\[Gamma]u[5] \[Rule] 
+              I*\[Gamma]u[0] . \[Gamma]u[1] . \[Gamma]u[2] . \[Gamma]u[3] /. 
+            TensorValueRules[\[Gamma]], 
+          Id \[Rule] IdentityMatrix[NDim]}]\)], "Input"],
+
+Cell[BoxData[
+    \(\(Format[Id] = "\<I\>";\)\)], "Input"],
+
+Cell[BoxData[
+    FormBox[
+      RowBox[{
+      "Now", " ", \(let'\), "s", " ", "test", " ", "the", " ", 
+        "anticommutation", " ", "of", "  ", 
+        StyleBox["\[Gamma]",
+          FontWeight->"Bold"]}], TraditionalForm]], "Text"],
+
+Cell[BoxData[{
+    \(\[Gamma]u[i] . \[Gamma]u[j] + \[Gamma]u[j] . \[Gamma]u[
+            i] \[Equal] \(\(2\)\(*\)\(guu[i, 
+          j]\) \(Id\)\(\ \)\)\), "\[IndentingNewLine]", 
+    \(\(\((% // ArrayExpansion[{i, j}])\) /. NewTensorValueRules[\[Gamma]]\) /. 
+      TensorValueRules[g]\)}], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Dirac Equation", "Section"],
+
+Cell["\<\
+Now let's define the Dirac Spinor \[Psi]\
+\>", "Text"],
+
+Cell[BoxData[
+    \(SetTensorValueRules[\ 
+      Tensor[\[Psi]], \ {\[Psi]d[0], \[Psi]d[1], \[Psi]d[2], \[Psi]d[
+          3]}]\)], "Input"],
+
+Cell["Then The Dirac equation is:", "Text"],
+
+Cell[BoxData[{
+    \(I*\[Gamma]u[\[Mu]] . PartialD[Tensor[\[Psi]], \[Mu]] - 
+        m^2*Id . Tensor[\[Psi]] \[Equal] 0\), "\[IndentingNewLine]", 
+    \(\(Attributes[m] = {Constant};\)\)}], "Input"],
+
+Cell["Adding some additional rules.", "Text"],
+
+Cell[BoxData[{
+    \(\(\(PartialD[_]\)[Id, _] = 0;\)\), "\[IndentingNewLine]", 
+    \(\(\(PartialD[_]\)[Tensor[\[Gamma], __], _] = 
+        0;\)\), "\[IndentingNewLine]", 
+    \(\(Unprotect[Dot];\)\), "\[IndentingNewLine]", 
+    \(\(Dot[0, _] = 0;\)\), "\[IndentingNewLine]", 
+    \(\(Dot[_, 0] = 0;\)\), "\[IndentingNewLine]", 
+    \(\(Protect[Dot];\)\)}], "Input"],
+
+Cell["The Dirac equation with the coordinates explicitly: ", "Text"],
+
+Cell[BoxData[
+    \(DiracEquation = \((I*\[Gamma]u[\[Mu]] . \(PartialD[labs]\)[
+                  Tensor[\[Psi]], xu[\[Mu]]] - 
+            m^2*Id . Tensor[\[Psi]] \[Equal] 0)\)\)], "Input"],
+
+Cell["\<\
+where m is the mass and its sign can be either positive or negative. Dirac \
+interpretations says that they represent a particle and its antiparticle.\
+\>", "Text"],
+
+Cell["Expanding over the \[Gamma] 's", "Text"],
+
+Cell[BoxData[
+    \(DiracEquation\  // EinsteinSum[]\)], "Input"],
+
+Cell["\<\
+Expanding and replacing values we get the following system of first order \
+partial differential equations.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\((DiracEquation[\([1]\)]\  // EinsteinSum[])\) /. 
+      TensorValueRules[\ \[Psi]]\), "\[IndentingNewLine]", 
+    \(ExpandedDiracEquation = 
+      Thread@Equal[% /. NewTensorValueRules[\ \[Gamma]], 0]\)}], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Particle in the Rest Frame", "Section"],
+
+Cell[BoxData[
+    \(ExpandedDiracEquation\)], "Input"],
+
+Cell["\<\
+Let P to be the 4momentum vector. Let's try a solution for a free particle in \
+a rest frame system. This means that the only component of the momentum that \
+survives is the zero one.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(TrialSolutionRF = \[Psi]d[i_] \[Rule] 
+        cd[i]\ Exp[\(-I\)*Pd[0]*xu[0] // 
+              SumExpansion[\[Rho]]]\), "\[IndentingNewLine]", 
+    \(\(Format[Pd[0]] := "\<E\>";\)\)}], "Input"],
+
+Cell[TextData[{
+  "Where we  define the tensor object ",
+  StyleBox["c",
+    FontWeight->"Bold"],
+  " as a constant. The same for the components of the momentum and we format \
+the zero component as ",
+  StyleBox["E",
+    FontWeight->"Bold"],
+  " refering as the enegy."
+}], "Text"],
+
+Cell[BoxData[{
+    \(\(\(PartialD[_]\)[cd[_], _] = 0;\)\), "\[IndentingNewLine]", 
+    \(\(\(PartialD[_]\)[Pd[_], _] = 0;\)\), "\[IndentingNewLine]", 
+    \(\(\(PartialD[_]\)[Pu[_], _] = 0;\)\), "\[IndentingNewLine]", 
+    \(\(\(PartialD[_]\)[gdd[__], _] = 0;\)\)}], "Input"],
+
+Cell["\<\
+Plugging in this trial solution into the actual Dirac equation we get.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(ExpandedDiracEquation /. TrialSolutionRF // 
+      Simplify\), "\[IndentingNewLine]", 
+    \(TrialExpandedDiracEquationRF = % /. Exp[_] \[Rule] 1\)}], "Input"],
+
+Cell["And after some simplification:", "Text"],
+
+Cell[BoxData[
+    \(MRF = 
+      First@LinearEquationsToMatrices[TrialExpandedDiracEquationRF, 
+          cd[i] // ToArrayValues[]]\)], "Input"],
+
+Cell["\<\
+The system has a non trivial solution only if the determinat is zero. (Not \
+all the equations are independent)\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Det[MRF] // Simplify\)], "Input"],
+
+Cell[TextData[{
+  "If we let the Energy or ",
+  Cell[BoxData[
+      FormBox[
+        SubsuperscriptBox["P", 
+          InterpretationBox["0",
+            SequenceForm[ 0],
+            Editable->False], 
+          InterpretationBox[
+            TagBox[
+              StyleBox["0",
+                ShowContents->False],
+              (StyleForm[ #, ShowContents -> False]&)],
+            SequenceForm[ 
+              StyleForm[ 0, ShowContents -> False]],
+            Editable->False]], TraditionalForm]]],
+  " to be a free parameter we get two solutions that will make the \
+determinant zero."
+}], "Text"],
+
+Cell[BoxData[
+    \(Solve[\ Evaluate[Simplify@Det[MRF]] \[Equal] 0, Pd[0]]\)], "Input"],
+
+Cell["\<\
+One corresponds to a positive energy (particle?)and the other to a negative \
+energy (antiparticle?)\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Eigensystem[MRF]\)], "Input"],
+
+Cell["\<\
+Recalling the trial solution, this means that the solutions are four; the \
+first two corresponding to the positive energy.\
+\>", "Text"],
+
+Cell[BoxData[
+    \({1, 0, 0, 0}*Exp[\(-I\)*m*xu[0]]\)], "Input"],
+
+Cell[BoxData[
+    \({0, 1, 0, 0}*Exp[\(-I\)*m*xu[0]]\)], "Input"],
+
+Cell["And the last two corresponding to the negative energy", "Text"],
+
+Cell[BoxData[
+    \({0, 0, 1, 0}*Exp[I*m*xu[0]]\)], "Input"],
+
+Cell[BoxData[
+    \({0, 0, 0, 1}*Exp[I*m*xu[0]]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Free Particle Solution", "Section"],
+
+Cell["\<\
+Let P to be the 4momentum vector. Let's try a solution for the free particle \
+with the following plane wave.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(TrialSolution = \[Psi]d[i_] \[Rule] 
+        cd[i]\ Exp[\(-I\)*gdd[\[Rho], s] Pu[s]*xu[\[Rho]] // 
+              ToArrayValues[]\ ]\)], "Input"],
+
+Cell[TextData[{
+  "Where we  define the tensor obejct ",
+  StyleBox["c",
+    FontWeight->"Bold"],
+  " as a constant. The same for the components of the momentum."
+}], "Text"],
+
+Cell[BoxData[{
+    \(\(\(PartialD[_]\)[cd[_], _] = 0;\)\), "\[IndentingNewLine]", 
+    \(\(\(PartialD[_]\)[Pd[_], _] = 0;\)\), "\[IndentingNewLine]", 
+    \(\(\(PartialD[_]\)[Pu[_], _] = 0;\)\), "\[IndentingNewLine]", 
+    \(\(\(PartialD[_]\)[gdd[__], _] = 0;\)\), "\[IndentingNewLine]", 
+    \(\(Format[Pu[0]] := "\<E\>";\)\)}], "Input"],
+
+Cell["\<\
+Plugging in this trial solution into the actual Dirac equation we get.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(\[Psi]d[i] /. TrialSolution\)], "Input"],
+
+Cell[BoxData[{
+    \(\((ExpandedDiracEquation /. TrialSolution // 
+        Simplify)\)\), "\[IndentingNewLine]", 
+    \(% /. Exp[_] \[Rule] 1\), "\[IndentingNewLine]", 
+    \(TrialExpandedDiracEquation = 
+      Map[Collect[#, cd[_]] &, %, {2}]\)}], "Input"],
+
+Cell["And after some simplification:", "Text"],
+
+Cell[BoxData[
+    \(TrialExpandedDiracEquation // MatrixForm\)], "Input"],
+
+Cell["Extracting a matrix from the system of equations", "Text"],
+
+Cell[BoxData[
+    \(M = 
+      First@LinearEquationsToMatrices[TrialExpandedDiracEquation, 
+          cd[i] // ToArrayValues[]]\)], "Input"],
+
+Cell["\<\
+The system has a non trivial solution only if the determinant is zero. (Not \
+all the equations are independent)\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Det[M] // Simplify\)], "Input"],
+
+Cell[TextData[{
+  "If we let the Energy or ",
+  Cell[BoxData[
+      FormBox[
+        SubsuperscriptBox["P", 
+          InterpretationBox["0",
+            SequenceForm[ 0],
+            Editable->False], 
+          InterpretationBox[
+            TagBox[
+              StyleBox["0",
+                ShowContents->False],
+              (StyleForm[ #, ShowContents -> False]&)],
+            SequenceForm[ 
+              StyleForm[ 0, ShowContents -> False]],
+            Editable->False]], TraditionalForm]]],
+  " to be a free parameter we get two solutions that will make the determinat \
+zero."
+}], "Text"],
+
+Cell[BoxData[
+    \(Energies = 
+      Union@Flatten[
+          Solve[\ Evaluate[Simplify@Det[M]] \[Equal] 0, Pu[0]]]\)], "Input"],
+
+Cell["With positive and negative possibilities for the energy.", "Text"],
+
+Cell["\<\
+There are only two different eigenvalues, this means that for each one there \
+is a 2D plane space, included into the original 4D space. In other words for \
+each energy we can choose two arbitrary parameters to span a 2D plane and we \
+can choose any pair of equations to solve the parameters provided that a the \
+particular pair of equations are not parallel (linearly dependent) \
+\>", "Text"],
+
+Cell["\<\
+I played numerically with the equations and it seems that no pair of \
+equations are ever parallel for any case of the autovalues, but \
+conventionally there is a particular way to choose them as follows.\
+\>", "Text"],
+
+Cell["For the positive energy:", "Text"],
+
+Cell[BoxData[{
+    \(Thread[
+      M . {u1, u2, u3, u4} \[Equal] {0, 0, 0, 0}]\), "\[IndentingNewLine]", 
+    \(SolPositive = \(Solve[\ %[\([{2, 3}]\)], {u3, u4}]\)[\([1]\)] // 
+        Cancel\)}], "Input"],
+
+Cell["The first eigenvector is:", "Text"],
+
+Cell[BoxData[
+    \(EigenVectorPositiveE1 = \({u1, u2, u3, u4} /. 
+            SolPositive\) /. {u2 \[Rule] 0, u1 \[Rule] 1} // 
+        Cancel\)], "Input"],
+
+Cell["The second eigenvector is:", "Text"],
+
+Cell[BoxData[
+    \(EigenVectorPositiveE1 = \(\({u1, u2, u3, u4} /. 
+            SolPositive\) /. {u1 \[Rule] 0, u2 \[Rule] 1}\) /. 
+        Pu[0]^2 \[Rule] Pu[1]^2 + Pu[2]^2 + Pu[3]^2 + m^2\)], "Input"],
+
+Cell["Now for the eigenvectors of negative energy", "Text"],
+
+Cell[BoxData[{
+    \(Thread[
+      M . {u1, u2, u3, u4} \[Equal] {0, 0, 0, 0}]\), "\[IndentingNewLine]", 
+    \(SolNegativeE = \(Solve[\ %[\([{1, 2}]\)], {u1, u2}]\)[\([1]\)] // 
+        Cancel\)}], "Input"],
+
+Cell[BoxData[
+    \(EigenVectorNegativeE1 = \(EigenVectorNegativeE1 = \({u1, u2, u3, u4} /. 
+            SolNegativeE\) /. {u3 \[Rule] 1, u4 \[Rule] 0}\)\)], "Input"],
+
+Cell[BoxData[
+    \(EigenVectorNegativeE2 = \(EigenVectorNegativeE1 = \({u1, u2, u3, u4} /. 
+            SolNegativeE\) /. {u3 \[Rule] 0, u4 \[Rule] 1}\)\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["References", "Section"],
+
+Cell[TextData[{
+  "1) Kane, Gordon. ",
+  StyleBox["Modern Elementary Particel Physics",
+    FontSlant->"Italic"],
+  ". (1993) Addison-Wesley. Section 5.1\n2) Greiner, Walter & Reinhardt, \
+Jochim. ",
+  StyleBox["Field Quantization",
+    FontSlant->"Italic"],
+  ". (1996) Springer. Section 5\n3) Doughty, Noel E. ",
+  StyleBox["Lagrangian Interaction",
+    FontSlant->"Italic"],
+  ". (1990) Addison-Wesley Section 20.3"
+}], "Text"]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+WindowSize->{844, 613},
+WindowMargins->{{2, Automatic}, {Automatic, 1}},
+StyleDefinitions -> "TensorialStyle.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 63, 0, 131, "Title"],
+Cell[1842, 55, 68, 3, 74, "Subtitle"],
+
+Cell[CellGroupData[{
+Cell[1935, 62, 33, 0, 61, "Section"],
+Cell[1971, 64, 72, 1, 46, "Input"],
+Cell[2046, 67, 79, 1, 46, "Input"],
+Cell[2128, 70, 65, 1, 46, "Input"],
+Cell[2196, 73, 208, 3, 66, "Input"],
+Cell[2407, 78, 223, 5, 66, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2667, 88, 32, 0, 61, "Section"],
+Cell[2702, 90, 97, 2, 34, "Text"],
+Cell[2802, 94, 307, 4, 86, "Input"],
+Cell[3112, 100, 111, 2, 66, "Input"],
+Cell[3226, 104, 36, 0, 34, "Text"],
+Cell[3265, 106, 120, 2, 46, "Input"],
+Cell[3388, 110, 33, 0, 34, "Text"],
+Cell[3424, 112, 213, 4, 66, "Input"],
+Cell[3640, 118, 241, 4, 86, "Input"],
+Cell[3884, 124, 130, 3, 34, "Text"],
+Cell[4017, 129, 719, 14, 186, "Input"],
+Cell[4739, 145, 201, 4, 54, "Text"],
+Cell[4943, 151, 166, 2, 46, "Input"],
+Cell[5112, 155, 110, 3, 34, "Text"],
+Cell[5225, 160, 290, 5, 86, "Input"],
+Cell[5518, 167, 58, 1, 46, "Input"],
+Cell[5579, 170, 239, 6, 32, "Text"],
+Cell[5821, 178, 300, 5, 66, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[6158, 188, 33, 0, 41, "Section"],
+Cell[6194, 190, 64, 2, 34, "Text"],
+Cell[6261, 194, 140, 3, 46, "Input"],
+Cell[6404, 199, 43, 0, 34, "Text"],
+Cell[6450, 201, 198, 3, 66, "Input"],
+Cell[6651, 206, 45, 0, 34, "Text"],
+Cell[6699, 208, 366, 7, 146, "Input"],
+Cell[7068, 217, 68, 0, 34, "Text"],
+Cell[7139, 219, 190, 3, 46, "Input"],
+Cell[7332, 224, 174, 3, 54, "Text"],
+Cell[7509, 229, 46, 0, 34, "Text"],
+Cell[7558, 231, 65, 1, 46, "Input"],
+Cell[7626, 234, 131, 3, 34, "Text"],
+Cell[7760, 239, 237, 4, 66, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[8034, 248, 45, 0, 41, "Section"],
+Cell[8082, 250, 54, 1, 46, "Input"],
+Cell[8139, 253, 208, 4, 54, "Text"],
+Cell[8350, 259, 214, 4, 66, "Input"],
+Cell[8567, 265, 282, 9, 56, "Text"],
+Cell[8852, 276, 275, 4, 106, "Input"],
+Cell[9130, 282, 94, 2, 34, "Text"],
+Cell[9227, 286, 180, 3, 66, "Input"],
+Cell[9410, 291, 46, 0, 34, "Text"],
+Cell[9459, 293, 144, 3, 46, "Input"],
+Cell[9606, 298, 135, 3, 34, "Text"],
+Cell[9744, 303, 53, 1, 46, "Input"],
+Cell[9800, 306, 604, 18, 34, "Text"],
+Cell[10407, 326, 87, 1, 46, "Input"],
+Cell[10497, 329, 124, 3, 34, "Text"],
+Cell[10624, 334, 49, 1, 46, "Input"],
+Cell[10676, 337, 147, 3, 34, "Text"],
+Cell[10826, 342, 65, 1, 46, "Input"],
+Cell[10894, 345, 65, 1, 46, "Input"],
+Cell[10962, 348, 69, 0, 34, "Text"],
+Cell[11034, 350, 60, 1, 46, "Input"],
+Cell[11097, 353, 60, 1, 46, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[11194, 359, 41, 0, 41, "Section"],
+Cell[11238, 361, 133, 3, 34, "Text"],
+Cell[11374, 366, 164, 3, 46, "Input"],
+Cell[11541, 371, 174, 5, 35, "Text"],
+Cell[11718, 378, 338, 5, 126, "Input"],
+Cell[12059, 385, 94, 2, 34, "Text"],
+Cell[12156, 389, 60, 1, 46, "Input"],
+Cell[12219, 392, 257, 5, 86, "Input"],
+Cell[12479, 399, 46, 0, 34, "Text"],
+Cell[12528, 401, 73, 1, 46, "Input"],
+Cell[12604, 404, 64, 0, 34, "Text"],
+Cell[12671, 406, 140, 3, 46, "Input"],
+Cell[12814, 411, 136, 3, 34, "Text"],
+Cell[12953, 416, 51, 1, 46, "Input"],
+Cell[13007, 419, 603, 18, 34, "Text"],
+Cell[13613, 439, 129, 3, 46, "Input"],
+Cell[13745, 444, 72, 0, 34, "Text"],
+Cell[13820, 446, 407, 6, 74, "Text"],
+Cell[14230, 454, 228, 4, 54, "Text"],
+Cell[14461, 460, 40, 0, 34, "Text"],
+Cell[14504, 462, 206, 4, 66, "Input"],
+Cell[14713, 468, 41, 0, 34, "Text"],
+Cell[14757, 470, 156, 3, 46, "Input"],
+Cell[14916, 475, 42, 0, 34, "Text"],
+Cell[14961, 477, 203, 3, 66, "Input"],
+Cell[15167, 482, 59, 0, 34, "Text"],
+Cell[15229, 484, 207, 4, 66, "Input"],
+Cell[15439, 490, 166, 2, 66, "Input"],
+Cell[15608, 494, 166, 2, 66, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[15811, 501, 29, 0, 41, "Section"],
+Cell[15843, 503, 430, 12, 74, "Text"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

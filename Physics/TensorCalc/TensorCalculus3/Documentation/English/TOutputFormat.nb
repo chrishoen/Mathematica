@@ -1,0 +1,195 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      4640,        140]*)
+(*NotebookOutlinePosition[      5397,        165]*)
+(*  CellTagsIndexPosition[      5353,        161]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Output Format", "Title"],
+
+Cell["", "Text"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input"],
+
+Cell["\<\
+When the Tensorial package is loaded it evaluates the following statement.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(\($PrePrint = 
+        StyleForm[##, FontSize \[Rule] 16, 
+            FontFamily \[Rule] "\<Courier\>"] &;\)\)], "Input",
+  Evaluatable->False],
+
+Cell[TextData[{
+  "This sets a larger font size to make tensor expressions and their indices \
+easier to read.  You can change this by evaluating a similar statement or \
+using ",
+  Cell[BoxData[
+      \($PrePrint =. \)]],
+  ". The Courier font was initially used to obtain a monospace font for \
+proper index spacing. However, in later versions of Tensorial it is no longer \
+necessary to use a monospace font."
+}], "Text"],
+
+Cell["\<\
+Tensorial output generally looks better in TraditionalForm.  There are \
+several ways to set TraditionalForm. The first way is to use \
+Menu\\Cell\\DefaultOutputFormatType\\TraditionalForm. This will set your \
+system to TraditionalForm and, if you want to use StandardForm in other \
+notebooks, you will have to change it back.\
+\>", "Text"],
+
+Cell["\<\
+If you wish to use TraditionalForm output only for a specific notebook, you \
+can use the Option Inspector (Ctrl-Shift-O). Set the option inspector for \
+notebook and go to CellOptions\\New Cell Defaults\\CommonDefaultFormatType \
+and change Output to TraditionalForm. \
+\>", "Text"],
+
+Cell["\<\
+A second way to set TraditionalForm within a single notebook is to evaluate \
+the following statement within the notebook.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(SetOptions[\n\ \ EvaluationNotebook[], \n\ \ CommonDefaultFormatTypes\  \
+-> \ {"\<Output\>"\  -> \ TraditionalForm}\n]\)], "Input",
+  Evaluatable->False],
+
+Cell[TextData[{
+  "The easiest way to obtain ",
+  Cell[BoxData[
+      \(TraditionalForm\)]],
+  " is to use the ",
+  Cell[BoxData[
+      \(TensorialStyle\)]],
+  " as the style for your notebook. You can do this using the menu item \
+Format\\Style Sheet\\TensorialStyle."
+}], "Text"],
+
+Cell["\<\
+The main difference between TraditionalForm and StandardForm for Tensorial is \
+the formatting of partial derivatives.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(DefineTensorShortcuts[{{F, x}, 1}]\), "\[IndentingNewLine]", 
+    \({\(PartialD[{x, \[Delta], g, \[CapitalGamma]}]\)[Fu[i], 
+        xu[j]], \[IndentingNewLine]\(PartialD[{x, \[Delta], 
+              g, \[CapitalGamma]}]\)[Fu[i], xu[j]] // 
+        StandardForm}\), "\[IndentingNewLine]", 
+    \(ClearTensorShortcuts[{{F, x}, 1}]\)}], "Input"],
+
+Cell[TextData[{
+  "Matrices are also automatically formatted with MatrixForm in \
+TraditionalForm output. In some cases, this may prove inconvenient and then \
+you can just add ",
+  Cell[BoxData[
+      \(\(\(//\)\(StandardForm\)\)\)]],
+  "."
+}], "Text"]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+WindowSize->{806, 706},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+Magnification->1,
+StyleDefinitions -> "TensorialStyle.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 30, 0, 76, "Title"],
+Cell[1809, 55, 16, 0, 34, "Text"],
+Cell[1828, 57, 72, 1, 46, "Input"],
+Cell[1903, 60, 98, 2, 34, "Text"],
+Cell[2004, 64, 164, 4, 46, "Input",
+  Evaluatable->False],
+Cell[2171, 70, 424, 9, 74, "Text"],
+Cell[2598, 81, 352, 6, 74, "Text"],
+Cell[2953, 89, 293, 5, 74, "Text"],
+Cell[3249, 96, 146, 3, 34, "Text"],
+Cell[3398, 101, 174, 3, 106, "Input",
+  Evaluatable->False],
+Cell[3575, 106, 281, 9, 54, "Text"],
+Cell[3859, 117, 142, 3, 34, "Text"],
+Cell[4004, 122, 364, 6, 106, "Input"],
+Cell[4371, 130, 253, 7, 54, "Text"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

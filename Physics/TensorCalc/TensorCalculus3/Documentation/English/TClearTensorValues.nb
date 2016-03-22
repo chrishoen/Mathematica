@@ -1,0 +1,354 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      7765,        265]*)
+(*NotebookOutlinePosition[      8791,        301]*)
+(*  CellTagsIndexPosition[      8717,        295]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["ClearTensorValues", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["ClearTensorValues",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox[\(Tensor[label, upindices, downindices]\),
+          "TI"], 
+        StyleBox["]",
+          "TI"]}]]],
+  " will clear any component value definitions of the tensor from ",
+  Cell[BoxData[
+      \(UpValues[label]\)]],
+  " and remove any substitution rules from ",
+  Cell[BoxData[
+      \(TensorValueRules[label]\)]],
+  ". \n\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["ClearTensorValues",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox[\(Tensor[label]\),
+          "TI"], 
+        StyleBox["]",
+          "TI"]}]]],
+  " will clear any values and rules for a scalar tensor. \n\
+\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["ClearTensorValues",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox[\({tensor1, tensor2 ... }\),
+          "TI"], 
+        StyleBox["]",
+          "TI"]}]]],
+  " will clear a number of tensor values or rules. "
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["\<\
+Definitions or rules that are based on the same label but with a different \
+index forms or structures will not be removed.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["SetTensorValueRules",
+    ButtonData:>{"SetTensorValueRules"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SetTensorValues",
+    ButtonData:>{"SetTensorValues"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["Tensor",
+    ButtonData:>{"Tensor"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["UseCoordinates",
+    ButtonData:>{"UseCoordinates"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["Save the settings and declare base indices and flavors.", "Text"],
+
+Cell[BoxData[{
+    \(\(oldindices = BaseIndices;\)\), "\n", 
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(DeclareBaseIndices[{1, 2, 3}]\), "\[IndentingNewLine]", 
+    \(DeclareIndexFlavor[{red, Red}]\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[T, 1]\)], "Input",
+  CellLabel->"In[7]:="],
+
+Cell[TextData[{
+  "This creates tensor values in the red frame and a value for a scalar \
+tensor ",
+  Cell[BoxData[
+      \(\[Phi]\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(\(Clear[T, \[Phi]];\)\), "\[IndentingNewLine]", 
+    \(SetTensorValues[
+      Tu[i] // ToFlavor[red], {1, 2, 3}]\), "\[IndentingNewLine]", 
+    \(SetTensorValues[Tensor[\[Phi]], t\^2]\), "\[IndentingNewLine]", 
+    \(UpValues[T]\), "\[IndentingNewLine]", 
+    \(UpValues[\[Phi]]\)}], "Input",
+  CellLabel->"In[8]:="],
+
+Cell[TextData[{
+  "This creates values for ",
+  Cell[BoxData[
+      \(T\)]],
+  " in the plain frame. (We have simply picked arbitrary values for the \
+components.) The plain definitions have been added to the red definitions. "
+}], "Text"],
+
+Cell[BoxData[{
+    \(SetTensorValues[Tu[i], {4, 5, 6}]\), "\[IndentingNewLine]", 
+    \(UpValues[T]\)}], "Input",
+  CellLabel->"In[13]:="],
+
+Cell["Now, we clear the red definitions...", "Text"],
+
+Cell[BoxData[{
+    \(ClearTensorValues[Tu[i] // ToFlavor[red]]\), "\[IndentingNewLine]", 
+    \(UpValues[T]\)}], "Input",
+  CellLabel->"In[15]:="],
+
+Cell["...and then the plain definitions...", "Text"],
+
+Cell[BoxData[{
+    \(ClearTensorValues[Tu[i]]\), "\[IndentingNewLine]", 
+    \(UpValues[T]\)}], "Input",
+  CellLabel->"In[17]:="],
+
+Cell["...and the scalar tensor value.", "Text"],
+
+Cell[BoxData[{
+    \(ClearTensorValues[Tensor[\[Phi]]]\), "\[IndentingNewLine]", 
+    \(UpValues[\[Phi]]\)}], "Input",
+  CellLabel->"In[19]:="],
+
+Cell["\<\
+We can follow the same procedure with value substitution rules. This creates \
+all the substitution rules.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(SetTensorValueRules[Tu[i], {4, 5, 6}]\), "\[IndentingNewLine]", 
+    \(SetTensorValueRules[
+      Tu[i] // ToFlavor[red], {1, 2, 3}]\), "\[IndentingNewLine]", 
+    \(SetTensorValueRules[Tensor[\[Phi]], t\^2]\), "\n", 
+    \(TensorValueRules[T, \[Phi]]\)}], "Input",
+  CellLabel->"In[21]:="],
+
+Cell["Now, we clear the red rules...", "Text"],
+
+Cell[BoxData[{
+    \(ClearTensorValues[Tu[i] // ToFlavor[red]]\), "\n", 
+    \(TensorValueRules[T, \[Phi]]\)}], "Input",
+  CellLabel->"In[25]:="],
+
+Cell["...and the plain rules...", "Text"],
+
+Cell[BoxData[{
+    \(ClearTensorValues[Tu[i]]\), "\n", 
+    \(TensorValueRules[T, \[Phi]]\)}], "Input",
+  CellLabel->"In[27]:="],
+
+Cell["...and the scalar tensor.", "Text"],
+
+Cell[BoxData[{
+    \(ClearTensorValues[Tensor[\[Phi]]]\), "\n", 
+    \(TensorValueRules[T, \[Phi]]\)}], "Input",
+  CellLabel->"In[29]:="],
+
+Cell["Set them all again.", "Text"],
+
+Cell[BoxData[{
+    \(SetTensorValueRules[Tu[i], {4, 5, 6}]\), "\[IndentingNewLine]", 
+    \(SetTensorValueRules[
+      Tu[i] // ToFlavor[red], {1, 2, 3}]\), "\[IndentingNewLine]", 
+    \(SetTensorValueRules[Tensor[\[Phi]], t\^2]\), "\n", 
+    \(TensorValueRules[T, \[Phi]]\)}], "Input",
+  CellLabel->"In[31]:="],
+
+Cell["This clears them all at once.", "Text"],
+
+Cell[BoxData[{
+    \(ClearTensorValues[{Tensor[\[Phi]], Tu[i], Tu[red@i]}]\), "\n", 
+    \(TensorValueRules[T, \[Phi]]\)}], "Input",
+  CellLabel->"In[35]:="],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[T, 1]\)], "Input",
+  CellLabel->"In[37]:="],
+
+Cell["Restore the original state...", "Text"],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[oldindices]\), "\[IndentingNewLine]", 
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(Clear[oldindices, oldflavors]\)}], "Input",
+  CellLabel->"In[38]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{665, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+Magnification->1,
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 64, 1, 31, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1843, 56, 1168, 43, 95, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 8545, 286}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 64, 1, 31, "ObjectName",
+  CellTags->"Function?"],
+Cell[1843, 56, 1168, 43, 95, "Usage",
+  CellTags->"Function?"],
+Cell[3014, 101, 154, 3, 48, "MathCaption"],
+Cell[3171, 106, 468, 18, 31, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[3664, 128, 34, 0, 40, "ExampleSection"],
+Cell[3701, 130, 96, 2, 29, "Input"],
+Cell[3800, 134, 71, 0, 25, "Text"],
+Cell[3874, 136, 314, 6, 109, "Input"],
+Cell[4191, 144, 84, 2, 29, "Input"],
+Cell[4278, 148, 153, 6, 25, "Text"],
+Cell[4434, 156, 337, 7, 110, "Input"],
+Cell[4774, 165, 239, 6, 42, "Text"],
+Cell[5016, 173, 138, 3, 49, "Input"],
+Cell[5157, 178, 52, 0, 25, "Text"],
+Cell[5212, 180, 146, 3, 49, "Input"],
+Cell[5361, 185, 52, 0, 25, "Text"],
+Cell[5416, 187, 129, 3, 49, "Input"],
+Cell[5548, 192, 47, 0, 25, "Text"],
+Cell[5598, 194, 143, 3, 49, "Input"],
+Cell[5744, 199, 130, 3, 25, "Text"],
+Cell[5877, 204, 311, 6, 90, "Input"],
+Cell[6191, 212, 46, 0, 25, "Text"],
+Cell[6240, 214, 145, 3, 49, "Input"],
+Cell[6388, 219, 41, 0, 25, "Text"],
+Cell[6432, 221, 128, 3, 49, "Input"],
+Cell[6563, 226, 41, 0, 25, "Text"],
+Cell[6607, 228, 137, 3, 49, "Input"],
+Cell[6747, 233, 35, 0, 25, "Text"],
+Cell[6785, 235, 311, 6, 90, "Input"],
+Cell[7099, 243, 45, 0, 25, "Text"],
+Cell[7147, 245, 157, 3, 49, "Input"],
+Cell[7307, 250, 84, 2, 29, "Input"],
+Cell[7394, 254, 45, 0, 25, "Text"],
+Cell[7442, 256, 295, 5, 89, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

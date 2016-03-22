@@ -1,0 +1,568 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     13452,        445]*)
+(*NotebookOutlinePosition[     14439,        479]*)
+(*  CellTagsIndexPosition[     14364,        473]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["MetricSimplify", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox["MetricSimplify",
+            "MR"], 
+          StyleBox["[",
+            "MR"], 
+          StyleBox[\(g, dopartials : False\),
+            "TI"], 
+          StyleBox[" ",
+            "TI"], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expression",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will raise or lower indices when products with the metric tensor g \
+appear."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["\<\
+ g is the label of the metric tensor. The routine assumes that any second \
+order tensor with the label g is a metric tensor. One could also use other \
+labels to stand for the metric tensor, for example \[Eta] or h.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "Simplification occurs only if the two indices of ",
+  Cell[BoxData[
+      \(g\)]],
+  " have the same flavor."
+}], "MathCaption"],
+
+Cell["\<\
+ Up/down and down/up metric tensors will act as Kroneckers, performing index \
+substitution. Up/down and down/up metric tensors that contain base indices \
+will simplify to 0 or 1. Hence you can use MetricSimplify to evaluate \
+Kroneckers.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "The decision to use ",
+  Cell[BoxData[
+      \(MetricSimplify\)]],
+  " may depend upon the particular tensor forms that have stored values. You \
+may often wish to use ",
+  Cell[BoxData[
+      \(MetricSimplify\)]],
+  " on only portions of an expression using ",
+  Cell[BoxData[
+      \(MapLevelParts\)]],
+  "."
+}], "MathCaption"],
+
+Cell["\<\
+If both indices of a metric tensor are dummy indices in an expression, then \
+the lowest sort order index is used as the active dummy index in the \
+simplification.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "MetricSimplify will not commute with ",
+  Cell[BoxData[
+      \(PartialD\)]],
+  " or ",
+  Cell[BoxData[
+      \(TotalD\)]],
+  " nor will it raise or lower Dif indices unless the optional argument \
+dopartials is set to true. It will commute with CovariantD and AbsoluteD \
+since the covariant derivative of the metric tensor is zero."
+}], "MathCaption"],
+
+Cell["\<\
+MetricSimplify uses ParseTermIndices and as a result will not operate on base \
+indices.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["SetMetricValues",
+    ButtonData:>{"SetMetricValues"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SetMetricValueRules",
+    ButtonData:>{"SetMetricValueRules"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["EvaluateDotProducts",
+    ButtonData:>{"EvaluateDotProducts"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["MapLevelParts",
+    ButtonData:>{"MapLevelParts"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["Save the settings and declare base indices and flavors...", "Text"],
+
+Cell[BoxData[{
+    \(\(oldindices = BaseIndices;\)\), "\n", 
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(DeclareBaseIndices[{1, 2, 3}]\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ {{red, Red}, {rocket, 
+            SuperStar}};\)\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell[BoxData[{
+    \(DefineTensorShortcuts[{{A, x, y}, 1}, {{g, h, \[Eta], \[Delta], S}, 
+        2}]\), "\[IndentingNewLine]", 
+    \(\(labs = {x, \[Delta], g, \[CapitalGamma]};\)\)}], "Input",
+  CellLabel->"In[7]:="],
+
+Cell["Lowering indices...", "Text"],
+
+Cell[BoxData[{
+    \(gdd[i, j] xu[i]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g]\)}], "Input",
+  CellLabel->"In[9]:="],
+
+Cell["Raising indices....", "Text"],
+
+Cell[BoxData[{
+    \(guu[i, j] xd[j]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g]\)}], "Input",
+  CellLabel->"In[11]:="],
+
+Cell["Mixed up/down metric tensors act like Kroneckers.", "Text"],
+
+Cell[BoxData[{
+    \(gud[i, j] xu[j]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g]\)}], "Input",
+  CellLabel->"In[13]:="],
+
+Cell[BoxData[{
+    \(gdu[i, j] xu[i]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g]\)}], "Input",
+  CellLabel->"In[15]:="],
+
+Cell["\<\
+When an up/down or down/up metric tensor contains base indices it is \
+evaluated to 0 or 1.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\({gud[1, 1], gud[1, 2], guu[1, 1], gdd[1, 2], gud[red@1, red@1], 
+        gdu[red@1, red@2]};\)\), "\[IndentingNewLine]", 
+    \(Thread[% \[Rule] \((% // MetricSimplify[g])\)]\)}], "Input",
+  CellLabel->"In[17]:="],
+
+Cell[BoxData[{
+    \(\[Delta]ud[3, 3]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[\[Delta]]\)}], "Input",
+  CellLabel->"In[19]:="],
+
+Cell["The base indicies don't have to be integers.", "Text"],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[{\[Rho], \[Theta], \[Phi]}]\), \
+"\[IndentingNewLine]", 
+    \(\({gud[\[Rho], \[Rho]], gud[\[Rho], \[Theta]], guu[\[Rho], \[Rho]], 
+        gdd[\[Rho], \[Phi]], gud[red@\[Rho], red@\[Rho]], 
+        gdu[red@\[Theta], red@\[Phi]]};\)\), "\[IndentingNewLine]", 
+    \(Thread[% \[Rule] \((% // 
+            MetricSimplify[g])\)]\), "\[IndentingNewLine]", 
+    \(DeclareBaseIndices[{1, 2, 3}]\)}], "Input",
+  CellLabel->"In[21]:="],
+
+Cell["The index flavors must match...", "Text"],
+
+Cell[BoxData[{
+    \(gdd[i, j] \((Sdu[m, i] // ToFlavor[red])\)\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g]\)}], "Input",
+  CellLabel->"In[25]:="],
+
+Cell[BoxData[{
+    \(gdd[i, j] Sdu[m, i] // ToFlavor[rocket]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g]\)}], "Input",
+  CellLabel->"In[27]:="],
+
+Cell["Both indices on the metric matrix must be the same flavor.", "Text"],
+
+Cell[BoxData[{
+    \(gdd[red@i, j] xu[j]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g]\)}], "Input",
+  CellLabel->"In[29]:="],
+
+Cell["\<\
+MetricSimplify can use base indices as the replacement value.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(guu[3, i] Sdd[i, j]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g]\)}], "Input",
+  CellLabel->"In[31]:="],
+
+Cell["\<\
+MetricSimplify will not commute with partial or total differentiation\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(guu[i, j] Sdd[m, Dif[j]] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g]\)}], "Input",
+  CellLabel->"In[33]:="],
+
+Cell["unless the optional argument dopartials is set to True.", "Text"],
+
+Cell[BoxData[{
+    \(guu[i, j] Sdd[m, Dif[j]] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g, True]\)}], "Input",
+  CellLabel->"In[35]:="],
+
+Cell[BoxData[{
+    \(gdd[\[Alpha], p] 
+        guu[\[Beta], q] \(PartialD[labs]\)[Au[p], {xu[q], xu[\[Beta]]}] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g]\)}], "Input",
+  CellLabel->"In[37]:="],
+
+Cell[BoxData[{
+    \(gdd[\[Alpha], p] 
+        guu[\[Beta], q] \(PartialD[labs]\)[Au[p], {xu[q], xu[\[Beta]]}] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g, True]\)}], "Input",
+  CellLabel->"In[39]:="],
+
+Cell[BoxData[{
+    \(gdd[a, i] TotalD[Au[i], t]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g]\)}], "Input",
+  CellLabel->"In[41]:="],
+
+Cell[BoxData[{
+    \(gdd[a, i] TotalD[Au[i], t]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g, True]\)}], "Input",
+  CellLabel->"In[43]:="],
+
+Cell["\<\
+The following would be correct because the covariant and absolute derivatives \
+of the metric tensor are zero.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(gdd[\[Alpha], p] CovariantD[Au[p], b] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g]\)}], "Input",
+  CellLabel->"In[45]:="],
+
+Cell[BoxData[{
+    \(gdd[\[Alpha], p] AbsoluteD[Au[p], t] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g]\)}], "Input",
+  CellLabel->"In[47]:="],
+
+Cell["\<\
+The following is allowed but we are not certain of a theoretical \
+justification.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(guu[i, j] Sdd[m, Cov[j]] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g]\)}], "Input",
+  CellLabel->"In[49]:="],
+
+Cell["An equation...", "Text"],
+
+Cell[BoxData[{
+    \(gdd[j, i] xu[i] \[Equal] gdd[i, j] yu[i] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g]\)}], "Input",
+  CellLabel->"In[51]:="],
+
+Cell["Double application...", "Text"],
+
+Cell[BoxData[{
+    \(guu[i, m]\ guu[j, n] xd[i] xd[j] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g]\)}], "Input",
+  CellLabel->"In[53]:="],
+
+Cell[BoxData[{
+    \(guu[i, m] xd[i] yu[n] + guu[i, m]\ guu[j, n] xd[i] xd[j] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g]\)}], "Input",
+  CellLabel->"In[55]:="],
+
+Cell["The metric tensor does not have to be named g.", "Text"],
+
+Cell[BoxData[{
+    \(huu[i, m]\ huu[j, n] xd[i] xd[j]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[h]\)}], "Input",
+  CellLabel->"In[57]:="],
+
+Cell["\<\
+We could even have two versions of a metric tensor and simplify \
+selectively.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(huu[i, m]\ \[Eta]uu[j, n] xd[i] xd[j]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[h]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[\[Eta]]\)}], "Input",
+  CellLabel->"In[59]:="],
+
+Cell["\<\
+We can use rules to do partial metric simplifications. We exclude a factor we \
+don't want in the simplification.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(guu[i, m]\ guu[j, n] xd[i] yd[j]\), "\[IndentingNewLine]", 
+    \(% /. a_.  xd[i] \[RuleDelayed] 
+        xd[i] \(MetricSimplify[g]\)[a]\)}], "Input",
+  CellLabel->"In[62]:="],
+
+Cell[BoxData[{
+    \(guu[i, m]\ guu[j, n] xd[i] yd[j]\), "\[IndentingNewLine]", 
+    \(% /. a_.  guu[j, n] \[RuleDelayed] 
+        guu[j, n] \(MetricSimplify[g]\)[a]\)}], "Input",
+  CellLabel->"In[64]:="],
+
+Cell[TextData[{
+  "A better method is to use ",
+  Cell[BoxData[
+      \(MapLevelParts\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(guu[i, m]\ guu[j, n] xd[i] yd[j]\), "\[IndentingNewLine]", 
+    \(% // MapLevelParts[MetricSimplify[g], {{1, 3}}]\)}], "Input",
+  CellLabel->"In[66]:="],
+
+Cell["\<\
+The following is probably not the metric simplification that is desired. The \
+desired simplification is ambiguous, but Tensorial uses the lowest sort order \
+index as the dummy index and hence lowers the index on x.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(gdd[i, j] xu[i] yu[j] - xu[i] yd[i]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g]\)}], "Input",
+  CellLabel->"In[68]:="],
+
+Cell["MapLevelParts will do the simplification we want.", "Text"],
+
+Cell[BoxData[{
+    \(gdd[i, j] xu[i] yu[j] - xu[i] yd[i]\), "\[IndentingNewLine]", 
+    \(% // MapLevelParts[MetricSimplify[g], {1, {1, 3}}]\)}], "Input",
+  CellLabel->"In[70]:="],
+
+Cell["Or we could have done the following...", "Text"],
+
+Cell[BoxData[{
+    \(gdd[i, j] xu[i] yu[j] - xu[i] yd[i]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g]\), "\[IndentingNewLine]", 
+    \(MapAt[UpDownSwap[j], %, 1] // SimplifyTensorSum\)}], "Input",
+  CellLabel->"In[72]:="],
+
+Cell["Restore the settings...", "Text"],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[{{A, x, y}, 1}, {{g, h, \[Eta], S}, 2}]\)], "Input",\
+
+  CellLabel->"In[75]:="],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[oldindices]\), "\[IndentingNewLine]", 
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(Clear[oldindices, oldflavors, labs]\)}], "Input",
+  CellLabel->"In[76]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 941}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{665, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 61, 1, 41, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1840, 56, 599, 24, 50, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 14193, 464}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 61, 1, 41, "ObjectName",
+  CellTags->"Function?"],
+Cell[1840, 56, 599, 24, 50, "Usage",
+  CellTags->"Function?"],
+Cell[2442, 82, 247, 4, 58, "MathCaption"],
+Cell[2692, 88, 147, 5, 41, "MathCaption"],
+Cell[2842, 95, 270, 5, 75, "MathCaption"],
+Cell[3115, 102, 348, 12, 58, "MathCaption"],
+Cell[3466, 116, 195, 4, 58, "MathCaption"],
+Cell[3664, 122, 372, 10, 75, "MathCaption"],
+Cell[4039, 134, 119, 3, 41, "MathCaption"],
+Cell[4161, 139, 492, 18, 41, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[4678, 161, 34, 0, 39, "ExampleSection"],
+Cell[4715, 163, 96, 2, 29, "Input"],
+Cell[4814, 167, 73, 0, 25, "Text"],
+Cell[4890, 169, 357, 7, 109, "Input"],
+Cell[5250, 178, 218, 4, 49, "Input"],
+Cell[5471, 184, 35, 0, 25, "Text"],
+Cell[5509, 186, 130, 3, 49, "Input"],
+Cell[5642, 191, 35, 0, 25, "Text"],
+Cell[5680, 193, 131, 3, 49, "Input"],
+Cell[5814, 198, 65, 0, 25, "Text"],
+Cell[5882, 200, 131, 3, 49, "Input"],
+Cell[6016, 205, 131, 3, 49, "Input"],
+Cell[6150, 210, 115, 3, 25, "Text"],
+Cell[6268, 215, 236, 4, 69, "Input"],
+Cell[6507, 221, 139, 3, 49, "Input"],
+Cell[6649, 226, 60, 0, 25, "Text"],
+Cell[6712, 228, 467, 9, 109, "Input"],
+Cell[7182, 239, 47, 0, 25, "Text"],
+Cell[7232, 241, 158, 3, 49, "Input"],
+Cell[7393, 246, 155, 3, 49, "Input"],
+Cell[7551, 251, 74, 0, 25, "Text"],
+Cell[7628, 253, 135, 3, 49, "Input"],
+Cell[7766, 258, 85, 2, 25, "Text"],
+Cell[7854, 262, 135, 3, 49, "Input"],
+Cell[7992, 267, 93, 2, 25, "Text"],
+Cell[8088, 271, 157, 3, 49, "Input"],
+Cell[8248, 276, 71, 0, 25, "Text"],
+Cell[8322, 278, 163, 3, 49, "Input"],
+Cell[8488, 283, 229, 5, 49, "Input"],
+Cell[8720, 290, 235, 5, 49, "Input"],
+Cell[8958, 297, 142, 3, 49, "Input"],
+Cell[9103, 302, 148, 3, 49, "Input"],
+Cell[9254, 307, 134, 3, 25, "Text"],
+Cell[9391, 312, 177, 4, 49, "Input"],
+Cell[9571, 318, 176, 4, 49, "Input"],
+Cell[9750, 324, 105, 3, 25, "Text"],
+Cell[9858, 329, 157, 3, 49, "Input"],
+Cell[10018, 334, 30, 0, 25, "Text"],
+Cell[10051, 336, 180, 4, 49, "Input"],
+Cell[10234, 342, 37, 0, 25, "Text"],
+Cell[10274, 344, 172, 4, 49, "Input"],
+Cell[10449, 350, 196, 4, 49, "Input"],
+Cell[10648, 356, 62, 0, 25, "Text"],
+Cell[10713, 358, 148, 3, 49, "Input"],
+Cell[10864, 363, 102, 3, 25, "Text"],
+Cell[10969, 368, 214, 4, 69, "Input"],
+Cell[11186, 374, 137, 3, 25, "Text"],
+Cell[11326, 379, 196, 4, 49, "Input"],
+Cell[11525, 385, 204, 4, 49, "Input"],
+Cell[11732, 391, 108, 5, 25, "Text"],
+Cell[11843, 398, 173, 3, 49, "Input"],
+Cell[12019, 403, 240, 4, 42, "Text"],
+Cell[12262, 409, 151, 3, 49, "Input"],
+Cell[12416, 414, 65, 0, 25, "Text"],
+Cell[12484, 416, 179, 3, 49, "Input"],
+Cell[12666, 421, 54, 0, 25, "Text"],
+Cell[12723, 423, 232, 4, 69, "Input"],
+Cell[12958, 429, 39, 0, 25, "Text"],
+Cell[13000, 431, 120, 3, 29, "Input"],
+Cell[13123, 436, 301, 5, 89, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

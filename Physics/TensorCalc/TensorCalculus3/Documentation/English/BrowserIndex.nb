@@ -1,0 +1,1230 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.1'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     17054,        622]*)
+(*NotebookOutlinePosition[     30495,       1023]*)
+(*  CellTagsIndexPosition[     27241,        926]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell["Master Index Entries for Tensorial", "Chapter"],
+
+Cell["Tensorial Package", "IndexSection",
+  CellTags->"MasterIndexHeading"],
+
+Cell[CellGroupData[{
+
+Cell["Tensorial", "IndexSection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    ButtonBox["Tensor",
+      ButtonData:>{"Tensor"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"Tensor"],
+
+Cell[BoxData[
+    ButtonBox["NestedTensor",
+      ButtonData:>{"NestedTensor"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"NestedTensor"],
+
+Cell[BoxData[
+    ButtonBox["UnnestTensor",
+      ButtonData:>{"UnnestTensor"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"UnnestTensor"],
+
+Cell[BoxData[
+    ButtonBox["CircleTimes",
+      ButtonData:>{"CircleTimes"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"Tensor"],
+
+Cell[BoxData[
+    ButtonBox["SetTensorValues",
+      ButtonData:>{"SetTensorValues"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"SetTensorValues"],
+
+Cell[BoxData[
+    ButtonBox["SetTensorValueRules",
+      ButtonData:>{"SetTensorValueRules"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"SetTensorValueRules"],
+
+Cell[BoxData[
+    ButtonBox["TensorValueRules",
+      ButtonData:>{"TensorValueRules"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"TensorValueRules"],
+
+Cell[BoxData[
+    ButtonBox["ClearTensorValues",
+      ButtonData:>{"ClearTensorValues"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"ClearTensorValues"],
+
+Cell[BoxData[
+    ButtonBox["DeclareZeroTensor",
+      ButtonData:>{"DeclareZeroTensor"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"DeclareZeroTensor"],
+
+Cell[BoxData[
+    ButtonBox["NonzeroValueRules",
+      ButtonData:>{"NonzeroValueRules"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"NonzeroValueRules"],
+
+Cell[BoxData[
+    ButtonBox["SelectedTensorRules",
+      ButtonData:>{"SelectedTensorRules"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"SelectedTensorRules"],
+
+Cell[BoxData[
+    ButtonBox["DefineTensorShortcuts",
+      ButtonData:>{"DefineTensorShortcuts"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"DefineTensorShortcuts"],
+
+Cell[BoxData[
+    ButtonBox["ClearTensorShortcuts",
+      ButtonData:>{"ClearTensorShortcuts"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"ClearTensorShortcuts"],
+
+Cell[BoxData[
+    ButtonBox["Void",
+      ButtonData:>{"Void"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"Void"],
+
+Cell[BoxData[
+    ButtonBox["Cov",
+      ButtonData:>{"Cov"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"Cov"],
+
+Cell[BoxData[
+    ButtonBox["Dif",
+      ButtonData:>{"Dif"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"Cov"],
+
+Cell[BoxData[
+    ButtonBox["BaseIndices",
+      ButtonData:>{"BaseIndices"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"BaseIndices"],
+
+Cell[BoxData[
+    ButtonBox["DeclareBaseIndices",
+      ButtonData:>{"DeclareBaseIndices"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"DeclareBaseIndices"],
+
+Cell[BoxData[
+    ButtonBox["NDim",
+      ButtonData:>{"NDim"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"NDim"],
+
+Cell[BoxData[
+    ButtonBox["BaseIndexQ",
+      ButtonData:>{"BaseIndexQ"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"BaseIndexQ"],
+
+Cell[BoxData[
+    ButtonBox["MetricSimplify",
+      ButtonData:>{"MetricSimplify"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"MetricSimplify"],
+
+Cell[BoxData[
+    ButtonBox["RawIndex",
+      ButtonData:>{"RawIndex"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"RawIndex"],
+
+Cell[BoxData[
+    ButtonBox["SymbolicIndexQ",
+      ButtonData:>{"SymbolicIndexQ"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"SymbolicIndexQ"],
+
+Cell[BoxData[
+    ButtonBox["ExtractFreeIndices",
+      ButtonData:>{"ExtractFreeIndices"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"ExtractFreeIndices"],
+
+Cell[BoxData[
+    ButtonBox["RaiseIndex",
+      ButtonData:>{"RaiseIndex"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"RaiseIndex"],
+
+Cell[BoxData[
+    ButtonBox["LowerIndex",
+      ButtonData:>{"LowerIndex"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"LowerIndex"],
+
+Cell[BoxData[
+    ButtonBox["ReplaceIndex",
+      ButtonData:>{"ReplaceIndex"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"ReplaceIndex"],
+
+Cell[BoxData[
+    ButtonBox["IndexFlavors",
+      ButtonData:>{"IndexFlavors"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"IndexFlavors"],
+
+Cell[BoxData[
+    ButtonBox["DeclareIndexFlavor",
+      ButtonData:>{"DeclareIndexFlavor"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"DeclareIndexFlavor"],
+
+Cell[BoxData[
+    ButtonBox["ClearIndexFlavor",
+      ButtonData:>{"ClearIndexFlavor"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"ClearIndexFlavor"],
+
+Cell[BoxData[
+    ButtonBox["ToFlavor",
+      ButtonData:>{"ToFlavor"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"ToFlavor"],
+
+Cell[BoxData[
+    ButtonBox["IndexFlavorQ",
+      ButtonData:>{"IndexFlavorQ"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"IndexFlavorQ"],
+
+Cell[BoxData[
+    ButtonBox["GetIndexFlavor",
+      ButtonData:>{"GetIndexFlavor"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"GetIndexFlavor"],
+
+Cell[BoxData[
+    ButtonBox["UseCoordinates",
+      ButtonData:>{"UseCoordinates"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"UseCoordinates"],
+
+Cell[BoxData[
+    ButtonBox["CoordinatesToTensors",
+      ButtonData:>{"CoordinatesToTensors"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"CoordinatesToTensors"],
+
+Cell[BoxData[
+    ButtonBox["ArrayExpansion",
+      ButtonData:>{"ArrayExpansion"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"ArrayExpansion"],
+
+Cell[BoxData[
+    ButtonBox["SumExpansion",
+      ButtonData:>{"SumExpansion"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"SumExpansion"],
+
+Cell[BoxData[
+    ButtonBox["EinsteinSum",
+      ButtonData:>{"EinsteinSum"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"EinsteinSum"],
+
+Cell[BoxData[
+    ButtonBox["EinsteinArray",
+      ButtonData:>{"EinsteinArray"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"EinsteinArray"],
+
+Cell[BoxData[
+    ButtonBox["EinsteinArgument",
+      ButtonData:>{"EinsteinArgument"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"EinsteinArgument"],
+
+Cell[BoxData[
+    ButtonBox["PartialSum",
+      ButtonData:>{"PartialSum"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"PartialSum"],
+
+Cell[BoxData[
+    ButtonBox["PartialArray",
+      ButtonData:>{"PartialArray"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"PartialArray"],
+
+Cell[BoxData[
+    ButtonBox["IndexChange",
+      ButtonData:>{"IndexChange"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"IndexChange"],
+
+Cell[BoxData[
+    ButtonBox["UpDownSwap",
+      ButtonData:>{"UpDownSwap"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"UpDownSwap"],
+
+Cell[BoxData[
+    ButtonBox["Symmetric",
+      ButtonData:>{"Symmetric"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"Symmetric"],
+
+Cell[BoxData[
+    ButtonBox["AntiSymmetric",
+      ButtonData:>{"AntiSymmetric"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"AntiSymmetric"],
+
+Cell[BoxData[
+    ButtonBox["DummySimplify",
+      ButtonData:>{"DummySimplify"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"DummySimplify"],
+
+Cell[BoxData[
+    ButtonBox["SimplifyTensorSum",
+      ButtonData:>{"SimplifyTensorSum"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"SimplifyTensorSum"],
+
+Cell[BoxData[
+    ButtonBox["PatternReplaceIndex",
+      ButtonData:>{"PatternReplaceIndex"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"PatternReplaceIndex"],
+
+Cell[BoxData[
+    ButtonBox["MapLevelParts",
+      ButtonData:>{"MapLevelParts"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"MapLevelParts"],
+
+Cell[BoxData[
+    ButtonBox["MapLevelPatterns",
+      ButtonData:>{"MapLevelPatterns"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"MapLevelPatterns"],
+
+Cell[BoxData[
+    ButtonBox["ParseTermIndices",
+      ButtonData:>{"ParseTermIndices"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"ParseTermIndices"],
+
+Cell[BoxData[
+    ButtonBox["PartialD",
+      ButtonData:>{"PartialD"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"PartialD"],
+
+Cell[BoxData[
+    ButtonBox["ExpandPartialD",
+      ButtonData:>{"ExpandPartialD"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"ExpandPartialD"],
+
+Cell[BoxData[
+    ButtonBox["NondependentPartialD",
+      ButtonData:>{"NondependentPartialD"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"NondependentPartialD"],
+
+Cell[BoxData[
+    ButtonBox["CovariantD",
+      ButtonData:>{"CovariantD"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"CovariantD"],
+
+Cell[BoxData[
+    ButtonBox["ExpandCovariantD",
+      ButtonData:>{"ExpandCovariantD"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"ExpandCovariantD"],
+
+Cell[BoxData[
+    ButtonBox["TotalD",
+      ButtonData:>{"TotalD"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"TotalD"],
+
+Cell[BoxData[
+    ButtonBox["ExpandTotalD",
+      ButtonData:>{"ExpandTotalD"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"ExpandTotalD"],
+
+Cell[BoxData[
+    ButtonBox["AbsoluteD",
+      ButtonData:>{"AbsoluteD"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"AbsoluteD"],
+
+Cell[BoxData[
+    ButtonBox["ExpandAbsoluteD",
+      ButtonData:>{"ExpandAbsoluteD"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"ExpandAbsoluteD"],
+
+Cell[BoxData[
+    ButtonBox["LieD",
+      ButtonData:>{"LieD"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"LieD"],
+
+Cell[BoxData[
+    ButtonBox["ExpandLieD",
+      ButtonData:>{"ExpandLieD"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"ExpandLieD"],
+
+Cell[BoxData[
+    ButtonBox["SetMetricValues",
+      ButtonData:>{"SetMetricValues"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"SetMetricValues"],
+
+Cell[BoxData[
+    ButtonBox["SetMetricValueRules",
+      ButtonData:>{"SetMetricValueRules"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"SetMetricValueRules"],
+
+Cell[BoxData[
+    ButtonBox["CalculateChristoffelu",
+      ButtonData:>{"CalculateChristoffelu"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"CalculateChristoffelu"],
+
+Cell[BoxData[
+    ButtonBox["CalculateChristoffeld",
+      ButtonData:>{"CalculateChristoffeld"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"CalculateChristoffeld"],
+
+Cell[BoxData[
+    ButtonBox["SetChristoffelValues",
+      ButtonData:>{"SetChristoffelValues"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"SetChristoffelValues"],
+
+Cell[BoxData[
+    ButtonBox["SetChristoffelValueRules",
+      ButtonData:>{"SetChristoffelValueRules"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"SetChristoffelValueRules"],
+
+Cell[BoxData[
+    ButtonBox["BasisDotProductRules",
+      ButtonData:>{"BasisDotProductRules"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"BasisDotProductRules"],
+
+Cell[BoxData[
+    ButtonBox["ReverseBasisDotProductRules",
+      ButtonData:>{"ReverseBasisDotProductRules"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"ReverseBasisDotProductRules"],
+
+Cell[BoxData[
+    ButtonBox["EvaluateDotProducts",
+      ButtonData:>{"EvaluateDotProducts"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"EvaluateDotProducts"],
+
+Cell[BoxData[
+    ButtonBox["CircleEvalRule",
+      ButtonData:>{"CircleEvalRule"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"CircleEvalRule"],
+
+Cell[BoxData[
+    ButtonBox["ConstructDirectProduct",
+      ButtonData:>{"ConstructDirectProduct"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"ConstructDirectProduct"],
+
+Cell[BoxData[
+    ButtonBox["UsePartialDChainRule",
+      ButtonData:>{"UsePartialDChainRule"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"UsePartialDChainRule"],
+
+Cell[BoxData[
+    ButtonBox["UseTotalDChainRule",
+      ButtonData:>{"UseTotalDChainRule"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"UseTotalDChainRule"],
+
+Cell[BoxData[
+    ButtonBox["ContractArray",
+      ButtonData:>{"ContractArray"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"ContractArray"],
+
+Cell[BoxData[
+    ButtonBox["ToArrayValues",
+      ButtonData:>{"ToArrayValues"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"ToArrayValues"],
+
+Cell[BoxData[
+    ButtonBox["ContractKroneckers",
+      ButtonData:>{"ContractKroneckers"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"ContractKroneckers"],
+
+Cell[BoxData[
+    ButtonBox["EvaluateSlots",
+      ButtonData:>{"EvaluateSlots"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"EvaluateSlots"],
+
+Cell[BoxData[
+    ButtonBox["FullKroneckerExpand",
+      ButtonData:>{"FullKroneckerExpand"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"FullKroneckerExpand"],
+
+Cell[BoxData[
+    ButtonBox["GenerateBasisTensors",
+      ButtonData:>{"GenerateBasisTensors"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"GenerateBasisTensors"],
+
+Cell[BoxData[
+    ButtonBox["KroneckerAbsorb",
+      ButtonData:>{"KroneckerAbsorb"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"KroneckerAbsorb"],
+
+Cell[BoxData[
+    ButtonBox["PermutationPseudotensor",
+      ButtonData:>{"PermutationPseudotensor"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"PermutationPseudotensor"],
+
+Cell[BoxData[
+    ButtonBox["PermutationSymbolRule",
+      ButtonData:>{"PermutationSymbolRule"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"PermutationSymbolRule"],
+
+Cell[BoxData[
+    ButtonBox["LeviCivitaDefinition3D",
+      ButtonData:>{"LeviCivitaDefinition3D"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"LeviCivitaDefinition3D"],
+
+Cell[BoxData[
+    ButtonBox["LinearBreakout",
+      ButtonData:>{"LinearBreakout"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"LinearBreakout"],
+
+Cell[BoxData[
+    ButtonBox["PartialKroneckerExpand",
+      ButtonData:>{"PartialKroneckerExpand"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"PartialKroneckerExpand"],
+
+Cell[BoxData[
+    ButtonBox["PushOnto",
+      ButtonData:>{"PushOnto"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"PushOnto"],
+
+Cell[BoxData[
+    ButtonBox["SymmetrizeSlots",
+      ButtonData:>{"SymmetrizeSlots"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"SymmetrizeSlots"],
+
+Cell[BoxData[
+    ButtonBox["SymmetrizePattern",
+      ButtonData:>{"SymmetrizePattern"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"SymmetrizePattern"],
+
+Cell[BoxData[
+    ButtonBox["DeclareTensorSymmetries",
+      ButtonData:>{"DeclareTensorSymmetries"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"DeclareTensorSymmetries"],
+
+Cell[BoxData[
+    ButtonBox["DeclarePatternSymmetries",
+      ButtonData:>{"DeclarePatternSymmetries"},
+      ButtonStyle->"AddOnsLink"]], "Index",
+  CellTags->"DeclarePatternSymmetries"]
+}, Open  ]]
+}, Open  ]]
+},
+FrontEndVersion->"5.1 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 941}},
+ScreenStyleEnvironment->"Brackets",
+WindowToolbars->"EditBar",
+CellGrouping->Manual,
+WindowSize->{448, 728},
+WindowMargins->{{6, Automatic}, {Automatic, 0}},
+ShowCellBracket->True,
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "MasterIndexHeading"->{
+    Cell[1810, 53, 75, 1, 42, "IndexSection",
+      CellTags->"MasterIndexHeading"]},
+  "Tensor"->{
+    Cell[1968, 62, 133, 4, 17, "Index",
+      CellTags->"Tensor"],
+    Cell[2412, 80, 143, 4, 17, "Index",
+      CellTags->"Tensor"]},
+  "NestedTensor"->{
+    Cell[2104, 68, 151, 4, 17, "Index",
+      CellTags->"NestedTensor"]},
+  "UnnestTensor"->{
+    Cell[2258, 74, 151, 4, 17, "Index",
+      CellTags->"UnnestTensor"]},
+  "SetTensorValues"->{
+    Cell[2558, 86, 160, 4, 17, "Index",
+      CellTags->"SetTensorValues"]},
+  "SetTensorValueRules"->{
+    Cell[2721, 92, 172, 4, 17, "Index",
+      CellTags->"SetTensorValueRules"]},
+  "TensorValueRules"->{
+    Cell[2896, 98, 163, 4, 17, "Index",
+      CellTags->"TensorValueRules"]},
+  "ClearTensorValues"->{
+    Cell[3062, 104, 166, 4, 17, "Index",
+      CellTags->"ClearTensorValues"]},
+  "DeclareZeroTensor"->{
+    Cell[3231, 110, 166, 4, 17, "Index",
+      CellTags->"DeclareZeroTensor"]},
+  "NonzeroValueRules"->{
+    Cell[3400, 116, 166, 4, 17, "Index",
+      CellTags->"NonzeroValueRules"]},
+  "SelectedTensorRules"->{
+    Cell[3569, 122, 172, 4, 17, "Index",
+      CellTags->"SelectedTensorRules"]},
+  "DefineTensorShortcuts"->{
+    Cell[3744, 128, 178, 4, 17, "Index",
+      CellTags->"DefineTensorShortcuts"]},
+  "ClearTensorShortcuts"->{
+    Cell[3925, 134, 175, 4, 17, "Index",
+      CellTags->"ClearTensorShortcuts"]},
+  "Void"->{
+    Cell[4103, 140, 127, 4, 17, "Index",
+      CellTags->"Void"]},
+  "Cov"->{
+    Cell[4233, 146, 124, 4, 17, "Index",
+      CellTags->"Cov"],
+    Cell[4360, 152, 124, 4, 17, "Index",
+      CellTags->"Cov"]},
+  "BaseIndices"->{
+    Cell[4487, 158, 148, 4, 17, "Index",
+      CellTags->"BaseIndices"]},
+  "DeclareBaseIndices"->{
+    Cell[4638, 164, 169, 4, 17, "Index",
+      CellTags->"DeclareBaseIndices"]},
+  "NDim"->{
+    Cell[4810, 170, 127, 4, 17, "Index",
+      CellTags->"NDim"]},
+  "BaseIndexQ"->{
+    Cell[4940, 176, 145, 4, 17, "Index",
+      CellTags->"BaseIndexQ"]},
+  "MetricSimplify"->{
+    Cell[5088, 182, 157, 4, 17, "Index",
+      CellTags->"MetricSimplify"]},
+  "RawIndex"->{
+    Cell[5248, 188, 139, 4, 17, "Index",
+      CellTags->"RawIndex"]},
+  "SymbolicIndexQ"->{
+    Cell[5390, 194, 157, 4, 17, "Index",
+      CellTags->"SymbolicIndexQ"]},
+  "ExtractFreeIndices"->{
+    Cell[5550, 200, 169, 4, 17, "Index",
+      CellTags->"ExtractFreeIndices"]},
+  "RaiseIndex"->{
+    Cell[5722, 206, 145, 4, 17, "Index",
+      CellTags->"RaiseIndex"]},
+  "LowerIndex"->{
+    Cell[5870, 212, 145, 4, 17, "Index",
+      CellTags->"LowerIndex"]},
+  "ReplaceIndex"->{
+    Cell[6018, 218, 151, 4, 17, "Index",
+      CellTags->"ReplaceIndex"]},
+  "IndexFlavors"->{
+    Cell[6172, 224, 151, 4, 17, "Index",
+      CellTags->"IndexFlavors"]},
+  "DeclareIndexFlavor"->{
+    Cell[6326, 230, 169, 4, 17, "Index",
+      CellTags->"DeclareIndexFlavor"]},
+  "ClearIndexFlavor"->{
+    Cell[6498, 236, 163, 4, 17, "Index",
+      CellTags->"ClearIndexFlavor"]},
+  "ToFlavor"->{
+    Cell[6664, 242, 139, 4, 17, "Index",
+      CellTags->"ToFlavor"]},
+  "IndexFlavorQ"->{
+    Cell[6806, 248, 151, 4, 17, "Index",
+      CellTags->"IndexFlavorQ"]},
+  "GetIndexFlavor"->{
+    Cell[6960, 254, 157, 4, 17, "Index",
+      CellTags->"GetIndexFlavor"]},
+  "UseCoordinates"->{
+    Cell[7120, 260, 157, 4, 17, "Index",
+      CellTags->"UseCoordinates"]},
+  "CoordinatesToTensors"->{
+    Cell[7280, 266, 175, 4, 17, "Index",
+      CellTags->"CoordinatesToTensors"]},
+  "ArrayExpansion"->{
+    Cell[7458, 272, 157, 4, 17, "Index",
+      CellTags->"ArrayExpansion"]},
+  "SumExpansion"->{
+    Cell[7618, 278, 151, 4, 17, "Index",
+      CellTags->"SumExpansion"]},
+  "EinsteinSum"->{
+    Cell[7772, 284, 148, 4, 17, "Index",
+      CellTags->"EinsteinSum"]},
+  "EinsteinArray"->{
+    Cell[7923, 290, 154, 4, 17, "Index",
+      CellTags->"EinsteinArray"]},
+  "EinsteinArgument"->{
+    Cell[8080, 296, 163, 4, 17, "Index",
+      CellTags->"EinsteinArgument"]},
+  "PartialSum"->{
+    Cell[8246, 302, 145, 4, 17, "Index",
+      CellTags->"PartialSum"]},
+  "PartialArray"->{
+    Cell[8394, 308, 151, 4, 17, "Index",
+      CellTags->"PartialArray"]},
+  "IndexChange"->{
+    Cell[8548, 314, 148, 4, 17, "Index",
+      CellTags->"IndexChange"]},
+  "UpDownSwap"->{
+    Cell[8699, 320, 145, 4, 17, "Index",
+      CellTags->"UpDownSwap"]},
+  "Symmetric"->{
+    Cell[8847, 326, 142, 4, 17, "Index",
+      CellTags->"Symmetric"]},
+  "AntiSymmetric"->{
+    Cell[8992, 332, 154, 4, 17, "Index",
+      CellTags->"AntiSymmetric"]},
+  "DummySimplify"->{
+    Cell[9149, 338, 154, 4, 17, "Index",
+      CellTags->"DummySimplify"]},
+  "SimplifyTensorSum"->{
+    Cell[9306, 344, 166, 4, 17, "Index",
+      CellTags->"SimplifyTensorSum"]},
+  "PatternReplaceIndex"->{
+    Cell[9475, 350, 172, 4, 17, "Index",
+      CellTags->"PatternReplaceIndex"]},
+  "MapLevelParts"->{
+    Cell[9650, 356, 154, 4, 17, "Index",
+      CellTags->"MapLevelParts"]},
+  "MapLevelPatterns"->{
+    Cell[9807, 362, 163, 4, 17, "Index",
+      CellTags->"MapLevelPatterns"]},
+  "ParseTermIndices"->{
+    Cell[9973, 368, 163, 4, 17, "Index",
+      CellTags->"ParseTermIndices"]},
+  "PartialD"->{
+    Cell[10139, 374, 139, 4, 17, "Index",
+      CellTags->"PartialD"]},
+  "ExpandPartialD"->{
+    Cell[10281, 380, 157, 4, 17, "Index",
+      CellTags->"ExpandPartialD"]},
+  "NondependentPartialD"->{
+    Cell[10441, 386, 175, 4, 17, "Index",
+      CellTags->"NondependentPartialD"]},
+  "CovariantD"->{
+    Cell[10619, 392, 145, 4, 17, "Index",
+      CellTags->"CovariantD"]},
+  "ExpandCovariantD"->{
+    Cell[10767, 398, 163, 4, 17, "Index",
+      CellTags->"ExpandCovariantD"]},
+  "TotalD"->{
+    Cell[10933, 404, 133, 4, 17, "Index",
+      CellTags->"TotalD"]},
+  "ExpandTotalD"->{
+    Cell[11069, 410, 151, 4, 17, "Index",
+      CellTags->"ExpandTotalD"]},
+  "AbsoluteD"->{
+    Cell[11223, 416, 142, 4, 17, "Index",
+      CellTags->"AbsoluteD"]},
+  "ExpandAbsoluteD"->{
+    Cell[11368, 422, 160, 4, 17, "Index",
+      CellTags->"ExpandAbsoluteD"]},
+  "LieD"->{
+    Cell[11531, 428, 127, 4, 17, "Index",
+      CellTags->"LieD"]},
+  "ExpandLieD"->{
+    Cell[11661, 434, 145, 4, 17, "Index",
+      CellTags->"ExpandLieD"]},
+  "SetMetricValues"->{
+    Cell[11809, 440, 160, 4, 17, "Index",
+      CellTags->"SetMetricValues"]},
+  "SetMetricValueRules"->{
+    Cell[11972, 446, 172, 4, 17, "Index",
+      CellTags->"SetMetricValueRules"]},
+  "CalculateChristoffelu"->{
+    Cell[12147, 452, 178, 4, 17, "Index",
+      CellTags->"CalculateChristoffelu"]},
+  "CalculateChristoffeld"->{
+    Cell[12328, 458, 178, 4, 17, "Index",
+      CellTags->"CalculateChristoffeld"]},
+  "SetChristoffelValues"->{
+    Cell[12509, 464, 175, 4, 17, "Index",
+      CellTags->"SetChristoffelValues"]},
+  "SetChristoffelValueRules"->{
+    Cell[12687, 470, 187, 4, 17, "Index",
+      CellTags->"SetChristoffelValueRules"]},
+  "BasisDotProductRules"->{
+    Cell[12877, 476, 175, 4, 17, "Index",
+      CellTags->"BasisDotProductRules"]},
+  "ReverseBasisDotProductRules"->{
+    Cell[13055, 482, 196, 4, 17, "Index",
+      CellTags->"ReverseBasisDotProductRules"]},
+  "EvaluateDotProducts"->{
+    Cell[13254, 488, 172, 4, 17, "Index",
+      CellTags->"EvaluateDotProducts"]},
+  "CircleEvalRule"->{
+    Cell[13429, 494, 157, 4, 17, "Index",
+      CellTags->"CircleEvalRule"]},
+  "ConstructDirectProduct"->{
+    Cell[13589, 500, 181, 4, 17, "Index",
+      CellTags->"ConstructDirectProduct"]},
+  "UsePartialDChainRule"->{
+    Cell[13773, 506, 175, 4, 17, "Index",
+      CellTags->"UsePartialDChainRule"]},
+  "UseTotalDChainRule"->{
+    Cell[13951, 512, 169, 4, 17, "Index",
+      CellTags->"UseTotalDChainRule"]},
+  "ContractArray"->{
+    Cell[14123, 518, 154, 4, 17, "Index",
+      CellTags->"ContractArray"]},
+  "ToArrayValues"->{
+    Cell[14280, 524, 154, 4, 17, "Index",
+      CellTags->"ToArrayValues"]},
+  "ContractKroneckers"->{
+    Cell[14437, 530, 169, 4, 17, "Index",
+      CellTags->"ContractKroneckers"]},
+  "EvaluateSlots"->{
+    Cell[14609, 536, 154, 4, 17, "Index",
+      CellTags->"EvaluateSlots"]},
+  "FullKroneckerExpand"->{
+    Cell[14766, 542, 172, 4, 17, "Index",
+      CellTags->"FullKroneckerExpand"]},
+  "GenerateBasisTensors"->{
+    Cell[14941, 548, 175, 4, 17, "Index",
+      CellTags->"GenerateBasisTensors"]},
+  "KroneckerAbsorb"->{
+    Cell[15119, 554, 160, 4, 17, "Index",
+      CellTags->"KroneckerAbsorb"]},
+  "PermutationPseudotensor"->{
+    Cell[15282, 560, 184, 4, 17, "Index",
+      CellTags->"PermutationPseudotensor"]},
+  "PermutationSymbolRule"->{
+    Cell[15469, 566, 178, 4, 17, "Index",
+      CellTags->"PermutationSymbolRule"]},
+  "LeviCivitaDefinition3D"->{
+    Cell[15650, 572, 181, 4, 17, "Index",
+      CellTags->"LeviCivitaDefinition3D"]},
+  "LinearBreakout"->{
+    Cell[15834, 578, 157, 4, 17, "Index",
+      CellTags->"LinearBreakout"]},
+  "PartialKroneckerExpand"->{
+    Cell[15994, 584, 181, 4, 17, "Index",
+      CellTags->"PartialKroneckerExpand"]},
+  "PushOnto"->{
+    Cell[16178, 590, 139, 4, 17, "Index",
+      CellTags->"PushOnto"]},
+  "SymmetrizeSlots"->{
+    Cell[16320, 596, 160, 4, 17, "Index",
+      CellTags->"SymmetrizeSlots"]},
+  "SymmetrizePattern"->{
+    Cell[16483, 602, 166, 4, 17, "Index",
+      CellTags->"SymmetrizePattern"]},
+  "DeclareTensorSymmetries"->{
+    Cell[16652, 608, 184, 4, 17, "Index",
+      CellTags->"DeclareTensorSymmetries"]},
+  "DeclarePatternSymmetries"->{
+    Cell[16839, 614, 187, 4, 17, "Index",
+      CellTags->"DeclarePatternSymmetries"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"MasterIndexHeading", 17802, 642},
+  {"Tensor", 17902, 645},
+  {"NestedTensor", 18057, 650},
+  {"UnnestTensor", 18151, 653},
+  {"SetTensorValues", 18248, 656},
+  {"SetTensorValueRules", 18352, 659},
+  {"TensorValueRules", 18457, 662},
+  {"ClearTensorValues", 18560, 665},
+  {"DeclareZeroTensor", 18665, 668},
+  {"NonzeroValueRules", 18770, 671},
+  {"SelectedTensorRules", 18877, 674},
+  {"DefineTensorShortcuts", 18988, 677},
+  {"ClearTensorShortcuts", 19100, 680},
+  {"Void", 19195, 683},
+  {"Cov", 19273, 686},
+  {"BaseIndices", 19423, 691},
+  {"DeclareBaseIndices", 19523, 694},
+  {"NDim", 19616, 697},
+  {"BaseIndexQ", 19701, 700},
+  {"MetricSimplify", 19796, 703},
+  {"RawIndex", 19889, 706},
+  {"SymbolicIndexQ", 19982, 709},
+  {"ExtractFreeIndices", 20085, 712},
+  {"RaiseIndex", 20184, 715},
+  {"LowerIndex", 20275, 718},
+  {"ReplaceIndex", 20368, 721},
+  {"IndexFlavors", 20463, 724},
+  {"DeclareIndexFlavor", 20564, 727},
+  {"ClearIndexFlavor", 20669, 730},
+  {"ToFlavor", 20764, 733},
+  {"IndexFlavorQ", 20855, 736},
+  {"GetIndexFlavor", 20952, 739},
+  {"UseCoordinates", 21051, 742},
+  {"CoordinatesToTensors", 21156, 745},
+  {"ArrayExpansion", 21261, 748},
+  {"SumExpansion", 21358, 751},
+  {"EinsteinSum", 21452, 754},
+  {"EinsteinArray", 21547, 757},
+  {"EinsteinArgument", 21647, 760},
+  {"PartialSum", 21744, 763},
+  {"PartialArray", 21837, 766},
+  {"IndexChange", 21931, 769},
+  {"UpDownSwap", 22023, 772},
+  {"Symmetric", 22113, 775},
+  {"AntiSymmetric", 22206, 778},
+  {"DummySimplify", 22303, 781},
+  {"SimplifyTensorSum", 22404, 784},
+  {"PatternReplaceIndex", 22511, 787},
+  {"MapLevelParts", 22614, 790},
+  {"MapLevelPatterns", 22714, 793},
+  {"ParseTermIndices", 22817, 796},
+  {"PartialD", 22912, 799},
+  {"ExpandPartialD", 23006, 802},
+  {"NondependentPartialD", 23112, 805},
+  {"CovariantD", 23214, 808},
+  {"ExpandCovariantD", 23312, 811},
+  {"TotalD", 23406, 814},
+  {"ExpandTotalD", 23496, 817},
+  {"AbsoluteD", 23589, 820},
+  {"ExpandAbsoluteD", 23685, 823},
+  {"LieD", 23776, 826},
+  {"ExpandLieD", 23862, 829},
+  {"SetMetricValues", 23959, 832},
+  {"SetMetricValueRules", 24065, 835},
+  {"CalculateChristoffelu", 24177, 838},
+  {"CalculateChristoffeld", 24291, 841},
+  {"SetChristoffelValues", 24404, 844},
+  {"SetChristoffelValueRules", 24520, 847},
+  {"BasisDotProductRules", 24636, 850},
+  {"ReverseBasisDotProductRules", 24755, 853},
+  {"EvaluateDotProducts", 24873, 856},
+  {"CircleEvalRule", 24978, 859},
+  {"ConstructDirectProduct", 25086, 862},
+  {"UsePartialDChainRule", 25200, 865},
+  {"UseTotalDChainRule", 25310, 868},
+  {"ContractArray", 25413, 871},
+  {"ToArrayValues", 25511, 874},
+  {"ContractKroneckers", 25614, 877},
+  {"EvaluateSlots", 25717, 880},
+  {"FullKroneckerExpand", 25821, 883},
+  {"GenerateBasisTensors", 25932, 886},
+  {"KroneckerAbsorb", 26039, 889},
+  {"PermutationPseudotensor", 26149, 892},
+  {"PermutationSymbolRule", 26265, 895},
+  {"LeviCivitaDefinition3D", 26380, 898},
+  {"LinearBreakout", 26488, 901},
+  {"PartialKroneckerExpand", 26596, 904},
+  {"PushOnto", 26698, 907},
+  {"SymmetrizeSlots", 26793, 910},
+  {"SymmetrizePattern", 26897, 913},
+  {"DeclareTensorSymmetries", 27009, 916},
+  {"DeclarePatternSymmetries", 27128, 919}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1754, 51, 53, 0, 126, "Chapter"],
+Cell[1810, 53, 75, 1, 42, "IndexSection",
+  CellTags->"MasterIndexHeading"],
+
+Cell[CellGroupData[{
+Cell[1910, 58, 33, 0, 42, "IndexSection"],
+
+Cell[CellGroupData[{
+Cell[1968, 62, 133, 4, 17, "Index",
+  CellTags->"Tensor"],
+Cell[2104, 68, 151, 4, 17, "Index",
+  CellTags->"NestedTensor"],
+Cell[2258, 74, 151, 4, 17, "Index",
+  CellTags->"UnnestTensor"],
+Cell[2412, 80, 143, 4, 17, "Index",
+  CellTags->"Tensor"],
+Cell[2558, 86, 160, 4, 17, "Index",
+  CellTags->"SetTensorValues"],
+Cell[2721, 92, 172, 4, 17, "Index",
+  CellTags->"SetTensorValueRules"],
+Cell[2896, 98, 163, 4, 17, "Index",
+  CellTags->"TensorValueRules"],
+Cell[3062, 104, 166, 4, 17, "Index",
+  CellTags->"ClearTensorValues"],
+Cell[3231, 110, 166, 4, 17, "Index",
+  CellTags->"DeclareZeroTensor"],
+Cell[3400, 116, 166, 4, 17, "Index",
+  CellTags->"NonzeroValueRules"],
+Cell[3569, 122, 172, 4, 17, "Index",
+  CellTags->"SelectedTensorRules"],
+Cell[3744, 128, 178, 4, 17, "Index",
+  CellTags->"DefineTensorShortcuts"],
+Cell[3925, 134, 175, 4, 17, "Index",
+  CellTags->"ClearTensorShortcuts"],
+Cell[4103, 140, 127, 4, 17, "Index",
+  CellTags->"Void"],
+Cell[4233, 146, 124, 4, 17, "Index",
+  CellTags->"Cov"],
+Cell[4360, 152, 124, 4, 17, "Index",
+  CellTags->"Cov"],
+Cell[4487, 158, 148, 4, 17, "Index",
+  CellTags->"BaseIndices"],
+Cell[4638, 164, 169, 4, 17, "Index",
+  CellTags->"DeclareBaseIndices"],
+Cell[4810, 170, 127, 4, 17, "Index",
+  CellTags->"NDim"],
+Cell[4940, 176, 145, 4, 17, "Index",
+  CellTags->"BaseIndexQ"],
+Cell[5088, 182, 157, 4, 17, "Index",
+  CellTags->"MetricSimplify"],
+Cell[5248, 188, 139, 4, 17, "Index",
+  CellTags->"RawIndex"],
+Cell[5390, 194, 157, 4, 17, "Index",
+  CellTags->"SymbolicIndexQ"],
+Cell[5550, 200, 169, 4, 17, "Index",
+  CellTags->"ExtractFreeIndices"],
+Cell[5722, 206, 145, 4, 17, "Index",
+  CellTags->"RaiseIndex"],
+Cell[5870, 212, 145, 4, 17, "Index",
+  CellTags->"LowerIndex"],
+Cell[6018, 218, 151, 4, 17, "Index",
+  CellTags->"ReplaceIndex"],
+Cell[6172, 224, 151, 4, 17, "Index",
+  CellTags->"IndexFlavors"],
+Cell[6326, 230, 169, 4, 17, "Index",
+  CellTags->"DeclareIndexFlavor"],
+Cell[6498, 236, 163, 4, 17, "Index",
+  CellTags->"ClearIndexFlavor"],
+Cell[6664, 242, 139, 4, 17, "Index",
+  CellTags->"ToFlavor"],
+Cell[6806, 248, 151, 4, 17, "Index",
+  CellTags->"IndexFlavorQ"],
+Cell[6960, 254, 157, 4, 17, "Index",
+  CellTags->"GetIndexFlavor"],
+Cell[7120, 260, 157, 4, 17, "Index",
+  CellTags->"UseCoordinates"],
+Cell[7280, 266, 175, 4, 17, "Index",
+  CellTags->"CoordinatesToTensors"],
+Cell[7458, 272, 157, 4, 17, "Index",
+  CellTags->"ArrayExpansion"],
+Cell[7618, 278, 151, 4, 17, "Index",
+  CellTags->"SumExpansion"],
+Cell[7772, 284, 148, 4, 17, "Index",
+  CellTags->"EinsteinSum"],
+Cell[7923, 290, 154, 4, 17, "Index",
+  CellTags->"EinsteinArray"],
+Cell[8080, 296, 163, 4, 17, "Index",
+  CellTags->"EinsteinArgument"],
+Cell[8246, 302, 145, 4, 17, "Index",
+  CellTags->"PartialSum"],
+Cell[8394, 308, 151, 4, 17, "Index",
+  CellTags->"PartialArray"],
+Cell[8548, 314, 148, 4, 17, "Index",
+  CellTags->"IndexChange"],
+Cell[8699, 320, 145, 4, 17, "Index",
+  CellTags->"UpDownSwap"],
+Cell[8847, 326, 142, 4, 17, "Index",
+  CellTags->"Symmetric"],
+Cell[8992, 332, 154, 4, 17, "Index",
+  CellTags->"AntiSymmetric"],
+Cell[9149, 338, 154, 4, 17, "Index",
+  CellTags->"DummySimplify"],
+Cell[9306, 344, 166, 4, 17, "Index",
+  CellTags->"SimplifyTensorSum"],
+Cell[9475, 350, 172, 4, 17, "Index",
+  CellTags->"PatternReplaceIndex"],
+Cell[9650, 356, 154, 4, 17, "Index",
+  CellTags->"MapLevelParts"],
+Cell[9807, 362, 163, 4, 17, "Index",
+  CellTags->"MapLevelPatterns"],
+Cell[9973, 368, 163, 4, 17, "Index",
+  CellTags->"ParseTermIndices"],
+Cell[10139, 374, 139, 4, 17, "Index",
+  CellTags->"PartialD"],
+Cell[10281, 380, 157, 4, 17, "Index",
+  CellTags->"ExpandPartialD"],
+Cell[10441, 386, 175, 4, 17, "Index",
+  CellTags->"NondependentPartialD"],
+Cell[10619, 392, 145, 4, 17, "Index",
+  CellTags->"CovariantD"],
+Cell[10767, 398, 163, 4, 17, "Index",
+  CellTags->"ExpandCovariantD"],
+Cell[10933, 404, 133, 4, 17, "Index",
+  CellTags->"TotalD"],
+Cell[11069, 410, 151, 4, 17, "Index",
+  CellTags->"ExpandTotalD"],
+Cell[11223, 416, 142, 4, 17, "Index",
+  CellTags->"AbsoluteD"],
+Cell[11368, 422, 160, 4, 17, "Index",
+  CellTags->"ExpandAbsoluteD"],
+Cell[11531, 428, 127, 4, 17, "Index",
+  CellTags->"LieD"],
+Cell[11661, 434, 145, 4, 17, "Index",
+  CellTags->"ExpandLieD"],
+Cell[11809, 440, 160, 4, 17, "Index",
+  CellTags->"SetMetricValues"],
+Cell[11972, 446, 172, 4, 17, "Index",
+  CellTags->"SetMetricValueRules"],
+Cell[12147, 452, 178, 4, 17, "Index",
+  CellTags->"CalculateChristoffelu"],
+Cell[12328, 458, 178, 4, 17, "Index",
+  CellTags->"CalculateChristoffeld"],
+Cell[12509, 464, 175, 4, 17, "Index",
+  CellTags->"SetChristoffelValues"],
+Cell[12687, 470, 187, 4, 17, "Index",
+  CellTags->"SetChristoffelValueRules"],
+Cell[12877, 476, 175, 4, 17, "Index",
+  CellTags->"BasisDotProductRules"],
+Cell[13055, 482, 196, 4, 17, "Index",
+  CellTags->"ReverseBasisDotProductRules"],
+Cell[13254, 488, 172, 4, 17, "Index",
+  CellTags->"EvaluateDotProducts"],
+Cell[13429, 494, 157, 4, 17, "Index",
+  CellTags->"CircleEvalRule"],
+Cell[13589, 500, 181, 4, 17, "Index",
+  CellTags->"ConstructDirectProduct"],
+Cell[13773, 506, 175, 4, 17, "Index",
+  CellTags->"UsePartialDChainRule"],
+Cell[13951, 512, 169, 4, 17, "Index",
+  CellTags->"UseTotalDChainRule"],
+Cell[14123, 518, 154, 4, 17, "Index",
+  CellTags->"ContractArray"],
+Cell[14280, 524, 154, 4, 17, "Index",
+  CellTags->"ToArrayValues"],
+Cell[14437, 530, 169, 4, 17, "Index",
+  CellTags->"ContractKroneckers"],
+Cell[14609, 536, 154, 4, 17, "Index",
+  CellTags->"EvaluateSlots"],
+Cell[14766, 542, 172, 4, 17, "Index",
+  CellTags->"FullKroneckerExpand"],
+Cell[14941, 548, 175, 4, 17, "Index",
+  CellTags->"GenerateBasisTensors"],
+Cell[15119, 554, 160, 4, 17, "Index",
+  CellTags->"KroneckerAbsorb"],
+Cell[15282, 560, 184, 4, 17, "Index",
+  CellTags->"PermutationPseudotensor"],
+Cell[15469, 566, 178, 4, 17, "Index",
+  CellTags->"PermutationSymbolRule"],
+Cell[15650, 572, 181, 4, 17, "Index",
+  CellTags->"LeviCivitaDefinition3D"],
+Cell[15834, 578, 157, 4, 17, "Index",
+  CellTags->"LinearBreakout"],
+Cell[15994, 584, 181, 4, 17, "Index",
+  CellTags->"PartialKroneckerExpand"],
+Cell[16178, 590, 139, 4, 17, "Index",
+  CellTags->"PushOnto"],
+Cell[16320, 596, 160, 4, 17, "Index",
+  CellTags->"SymmetrizeSlots"],
+Cell[16483, 602, 166, 4, 17, "Index",
+  CellTags->"SymmetrizePattern"],
+Cell[16652, 608, 184, 4, 17, "Index",
+  CellTags->"DeclareTensorSymmetries"],
+Cell[16839, 614, 187, 4, 17, "Index",
+  CellTags->"DeclarePatternSymmetries"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

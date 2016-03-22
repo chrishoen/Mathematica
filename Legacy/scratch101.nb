@@ -1,0 +1,197 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      5478,        188]
+NotebookOptionsPosition[      4218,        142]
+NotebookOutlinePosition[      4890,        165]
+CellTagsIndexPosition[      4847,        162]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["f", "Text",
+ CellChangeTimes->{3.592932178822768*^9}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+
+support\
+\>", "Subtitle"],
+
+Cell[BoxData[{
+ RowBox[{"ClearAll", ";"}], "\[IndentingNewLine]", 
+ RowBox[{"ClearCache", ";"}]}], "Input",
+ CellChangeTimes->{{3.592916706354596*^9, 3.592916707134598*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+
+content
+\
+\>", "Subtitle"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  StyleBox[
+   RowBox[{"Term1", " ", "=", " ", 
+    RowBox[{
+     RowBox[{"t", "^", "2"}], " ", "+", " ", "p"}]}],
+   FontFamily->"Courier New",
+   FontSize->16]}]], "Input",
+ CellChangeTimes->{{3.5919243699935613`*^9, 3.5919243909755974`*^9}, {
+   3.5919244343592734`*^9, 3.5919244370268784`*^9}, {3.591924507429801*^9, 
+   3.5919245272574353`*^9}, 3.5919245989239607`*^9, {3.5929165605567417`*^9, 
+   3.5929165679355545`*^9}, {3.592917183190591*^9, 3.592917185546195*^9}, 
+   3.5929172699423423`*^9}],
+
+Cell[BoxData[
+ RowBox[{"p", "+", 
+  SuperscriptBox["t", "2"]}]], "Output",
+ CellChangeTimes->{
+  3.59292599329729*^9, 3.5929318810648904`*^9, {3.5979631585985537`*^9, 
+   3.5979631980354223`*^9}}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{
+    RowBox[{"F1", "[", "t_", "]"}], " ", ":=", " ", "Term1"}],
+   FontFamily->"Courier New",
+   FontSize->16], "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.592914732241666*^9, 3.5929147803833494`*^9}, {
+   3.5929148177298145`*^9, 3.5929148313018384`*^9}, {3.5929148801455235`*^9, 
+   3.5929148807071247`*^9}, {3.592914971187282*^9, 3.592915058251034*^9}, {
+   3.592915089092288*^9, 3.5929150893418884`*^9}, {3.592916378442024*^9, 
+   3.592916427831711*^9}, {3.592916578949174*^9, 3.5929166619413185`*^9}, {
+   3.592916986477448*^9, 3.5929170132002945`*^9}, {3.5929170615571785`*^9, 
+   3.592917067375989*^9}, {3.592917140384116*^9, 3.592917195358612*^9}, 
+   3.5929174442158833`*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  StyleBox[
+   RowBox[{
+    RowBox[{"F1", "[", "0", "]"}], "\[IndentingNewLine]"}],
+   FontFamily->"Courier New",
+   FontSize->16]}]], "Input",
+ CellChangeTimes->{{3.5929150939438963`*^9, 3.5929151032571125`*^9}, {
+  3.592916429859714*^9, 3.592916430171715*^9}}],
+
+Cell[BoxData[
+ RowBox[{"p", "+", 
+  SuperscriptBox["t", "2"]}]], "Output",
+ CellChangeTimes->{
+  3.59292599331289*^9, 3.5929318810804906`*^9, {3.597963158614154*^9, 
+   3.5979631980666227`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"N", "[", 
+    RowBox[{"Pi", ",", " ", "20"}], "]"}], "\[IndentingNewLine]", 
+   RowBox[{"N", "[", 
+    RowBox[{
+     RowBox[{"Exp", "[", "1", "]"}], ",", " ", "20"}], "]"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.592932643943348*^9, 3.592932647110153*^9}, {
+  3.5979631561649494`*^9, 3.5979631651037655`*^9}}],
+
+Cell[BoxData["3.1415926535897932384626433832795028841971693993751058202853`20.\
+"], "Output",
+ CellChangeTimes->{{3.597963158629754*^9, 3.5979631980666227`*^9}}],
+
+Cell[BoxData["2.718281828459045235360287468777832451509386078439169619308`20.\
+"], "Output",
+ CellChangeTimes->{{3.597963158629754*^9, 3.597963198082223*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SetPrecision", "[", 
+   RowBox[{
+    RowBox[{"AP1", "=", "12.23"}], ",", " ", "20"}], "]"}], 
+  "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.597963169409373*^9, 3.5979631924974127`*^9}}],
+
+Cell[BoxData["12.23000000000000042632564145606011152267`20."], "Output",
+ CellChangeTimes->{{3.5979631815617943`*^9, 3.597963198082223*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1272, 873},
+WindowMargins->{{223, Automatic}, {48, Automatic}},
+PrintingCopies->1,
+PrintingPageRange->{Automatic, Automatic},
+FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[StyleDefinitions -> "Default.nb"]], 
+   Cell[
+    StyleData["Text"], FontSize -> 16]}, Visible -> False, FrontEndVersion -> 
+  "8.0 for Microsoft Windows (64-bit) (February 23, 2011)", StyleDefinitions -> 
+  "PrivateStylesheetFormatting.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 59, 1, 33, "Text"],
+Cell[CellGroupData[{
+Cell[641, 25, 36, 3, 77, "Subtitle"],
+Cell[680, 30, 173, 3, 57, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[890, 38, 37, 4, 105, "Subtitle"],
+Cell[CellGroupData[{
+Cell[952, 46, 549, 12, 57, "Input"],
+Cell[1504, 60, 196, 5, 33, "Output"]
+}, Open  ]],
+Cell[1715, 68, 743, 14, 57, "Input"],
+Cell[CellGroupData[{
+Cell[2483, 86, 309, 8, 80, "Input"],
+Cell[2795, 96, 194, 5, 33, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3026, 106, 426, 10, 126, "Input"],
+Cell[3455, 118, 161, 2, 33, "Output"],
+Cell[3619, 122, 158, 2, 33, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3814, 129, 233, 6, 57, "Input"],
+Cell[4050, 137, 140, 1, 33, "Output"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

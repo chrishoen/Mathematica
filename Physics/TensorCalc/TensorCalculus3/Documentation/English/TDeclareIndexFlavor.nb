@@ -1,0 +1,258 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      5366,        186]*)
+(*NotebookOutlinePosition[      6352,        220]*)
+(*  CellTagsIndexPosition[      6278,        214]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["DeclareIndexFlavor", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["DeclareIndexFlavor",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        RowBox[{
+          RowBox[{
+            StyleBox["{",
+              "MR"], 
+            StyleBox[
+              RowBox[{"flavorname", ",", "flavorform"}],
+              "TI"], 
+            StyleBox["}",
+              "TI"]}], 
+          StyleBox["...",
+            "TI"]}], 
+        StyleBox["]",
+          "MR"]}]]],
+  "will add the index flavors to the IndexFlavors list and establish the \
+Format for displaying indices with the given flavor name."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["\<\
+Index flavors are used to distinguish various coordinate systems or reference \
+frames.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "Flavored indices are stored internally as ",
+  Cell[BoxData[
+      RowBox[{"flavorname", "[", "index", "]"}]]],
+  " but formatted on output according to flavorform."
+}], "MathCaption"],
+
+Cell["\<\
+flavorname can be any symbol used to identify a coordinate system or frame, \
+for example, red, blue, bar, rocket, lab.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "flavorform can be a either an RGBColor or a suitable ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " \"annotated name\". Tensorial automatically loads the ",
+  Cell[BoxData["Graphics`Colors`"]],
+  " package so flavorforms like Red, Blue etc., can be used and the indices \
+will be formatted in the corresponding colors. "
+}], "MathCaption"],
+
+Cell[TextData[{
+  "An annotated name is one of the objects listed in Section 3.10.2 \"Names \
+of Symbols and Mathematical Objects\" in The ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " Book. Suitable flavorforms might be SuperPlus, SuperMinus, SuperStar, \
+SuperDagger, OverBar, OverTilde, OverHat."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "See ",
+  Cell[BoxData["ToFlavor"]],
+  " for examples of using flavored indices."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["IndexFlavors",
+    ButtonData:>{"IndexFlavors"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["ClearIndexFlavor",
+    ButtonData:>{"ClearIndexFlavor"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["ToFlavor",
+    ButtonData:>{"ToFlavor"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["IndexFlavorQ",
+    ButtonData:>{"IndexFlavorQ"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples  ", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["The following gives the current set of of index flavors.", "Text"],
+
+Cell[BoxData[{
+    \(oldflavors = IndexFlavors; \), "\n", 
+    \(ClearIndexFlavor[oldflavors]; \)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell["This declares new index flavors.", "Text"],
+
+Cell[BoxData[{
+    \(DeclareIndexFlavor[{red, Red}, {rocket, 
+        SuperStar}]; \), "\[IndentingNewLine]", 
+    \(IndexFlavors // StandardForm\)}], "Input",
+  CellLabel->"In[4]:="],
+
+Cell["\<\
+Flavored indices are then displayed with the designated forms.\
+\>", "Text"],
+
+Cell[BoxData[
+    \({Tensor[x, {red[i]}, {Void}], 
+      Tensor[x, {rocket[i]}, {Void}]}\)], "Input",
+  CellLabel->"In[6]:="],
+
+Cell["This resets to the original flavors.", "Text"],
+
+Cell[BoxData[{
+    \(ClearIndexFlavor[IndexFlavors]; \), "\n", 
+    \(DeclareIndexFlavor /@ oldflavors; \), "\n", 
+    \(Clear[oldflavors]\)}], "Input",
+  CellLabel->"In[7]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{665, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 65, 1, 31, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1844, 56, 668, 24, 49, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 6107, 205}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 65, 1, 31, "ObjectName",
+  CellTags->"Function?"],
+Cell[1844, 56, 668, 24, 49, "Usage",
+  CellTags->"Function?"],
+Cell[2515, 82, 118, 3, 31, "MathCaption"],
+Cell[2636, 87, 203, 5, 31, "MathCaption"],
+Cell[2842, 94, 150, 3, 31, "MathCaption"],
+Cell[2995, 99, 370, 8, 65, "MathCaption"],
+Cell[3368, 109, 331, 7, 65, "MathCaption"],
+Cell[3702, 118, 118, 4, 31, "MathCaption"],
+Cell[3823, 124, 456, 18, 31, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[4304, 146, 36, 0, 40, "ExampleSection"],
+Cell[4343, 148, 96, 2, 29, "Input"],
+Cell[4442, 152, 72, 0, 25, "Text"],
+Cell[4517, 154, 133, 3, 49, "Input"],
+Cell[4653, 159, 48, 0, 25, "Text"],
+Cell[4704, 161, 183, 4, 49, "Input"],
+Cell[4890, 167, 86, 2, 25, "Text"],
+Cell[4979, 171, 125, 3, 29, "Input"],
+Cell[5107, 176, 52, 0, 25, "Text"],
+Cell[5162, 178, 176, 4, 69, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

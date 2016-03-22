@@ -1,0 +1,1071 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     27191,        876]*)
+(*NotebookOutlinePosition[     27948,        901]*)
+(*  CellTagsIndexPosition[     27904,        897]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Tensorial Basics", "Title"],
+
+Cell["\<\
+This notebook is a quick introduction to entering and working with tensors \
+within the Tensorial application.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell["Entering Tensors with Tensor Shortcuts", "Section"],
+
+Cell["\<\
+The easiest method by far for entering tensors is to create shortcuts with \
+DefineTensorShortcuts. The tensor shortcuts are designated by appending a \
+series of u's and d's to the basic tensor label. The u's and d's designate \
+whether the corresponding slot in the tensor is an up index or a down index. \
+DefineTensorShortcuts will define all of the shortcuts for a given order of a \
+tensor. Thus for a second order tensor, T, we can define all the shortcuts \
+with...\
+\>", "Text"],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[T, 2]\)], "Input"],
+
+Cell["\<\
+We can now enter T with the first index up and the second index down by...\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Tud[i, j]\)], "Input"],
+
+Cell["Here are all the 2nd order forms of the tensor.", "Text"],
+
+Cell[BoxData[
+    \({Tuu[i, j], Tud[i, j], Tdu[i, j], Tdd[i, j]}\)], "Input"],
+
+Cell[TextData[{
+  "The tensor label used in establishing shortcuts, ",
+  Cell[BoxData["T"]],
+  " above, must be a symbol. There may be a few cases where one might wish to \
+use an expression for the label. This can be done by using the full Tensor \
+expression for entry. But for the great majority of applications tensor \
+labels will be Symbols.  Similarly, we can establish shortcuts for a metric \
+tensor by..."
+}], "Text"],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[g, 2]\)], "Input"],
+
+Cell["\<\
+We can then, for example,  lower an index using the following shortcut \
+expression.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(gdd[i, k] Tud[k, j]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g]\)}], "Input"],
+
+Cell[TextData[{
+  "In Tensorial, there are no special tensor labels. A metric tensor does not \
+have to have the label ",
+  Cell[BoxData[
+      \(g\)]],
+  " and ",
+  Cell[BoxData[
+      \(g\)]],
+  " does not have to represent a metric tensor. Rather, any routine that uses \
+special properties of some kind of tensor, such as the metric tensor, will be \
+fed the label of tensors in the expression that are assumed to be that type \
+of tensor. Thus ",
+  Cell[BoxData[
+      \(MetricSimplify[g]\)]],
+  " instructs Tensorial to simplify an expression assuming that any second \
+order tensors with the label ",
+  Cell[BoxData[
+      \(g\)]],
+  " represent metric tensors. One could just as well have used ",
+  Cell[BoxData[
+      \(h\)]],
+  " or ",
+  Cell[BoxData[
+      \(\[Eta]\)]],
+  " to represent metric tensors. Any special properties associated with \
+tensors are incorporated in the routines that do the manipulations and not in \
+the particular labels of the tensors. This philosophy keeps Tensorial as an \
+open system that does not force any particular naming convention on the \
+user."
+}], "Text"],
+
+Cell[TextData[{
+  "Although there is probably not much harm in having unused tensor shortcuts \
+around, they can be cleared with ",
+  Cell[BoxData["ClearTensorShortcuts"]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(ClearTensorShortcuts[T, 2]\), "\n", 
+    \(ClearTensorShortcuts[g, 2]\)}], "Input"],
+
+Cell["The shortcuts now no longer work.", "Text"],
+
+Cell[BoxData[
+    \(Tud[i, j]\)], "Input"],
+
+Cell["\<\
+It also does no harm to redefine shortcuts that are already defined. It is \
+possible to define or clear multiple shortcuts of the same order at once.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[{S, T}, 2]\)], "Input"],
+
+Cell[BoxData[
+    \({Suu[i, j], Tdd[\[Alpha], \[Beta]]}\)], "Input"],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[{S, T}, 2]\)], "Input"],
+
+Cell["\<\
+You can even define or clear multiple shortcuts of different orders in one \
+statement.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[{x, 1}, {{\[Eta], S}, 2}]\)], "Input"],
+
+Cell[TextData[{
+  "Here we do a metric simplification using ",
+  Cell[BoxData["\[Eta]"]],
+  " as a metric tensor."
+}], "Text"],
+
+Cell[BoxData[{
+    \(\[Eta]dd[i, m] Sud[m, n] xu[n]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[\[Eta]]\)}], "Input"],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[{x, 1}, {{\[Eta], S}, 2}]\)], "Input"],
+
+Cell[TextData[{
+  "Tensorial uses the term ",
+  StyleBox["tensor",
+    FontSlant->"Italic"],
+  " rather loosely. What we are really dealing with is ",
+  StyleBox["indexed objects",
+    FontSlant->"Italic"],
+  ", only some of which are true tensors. Objects such as transformation \
+matrices, coordinates, or Christoffel symbols are not true tensors, yet we \
+use them in our expressions and do various index manipulations on them. \
+Rather than use the more awkward term ",
+  Cell[BoxData[
+      \(IndexedObject\)]],
+  " we decided to stay with the name ",
+  Cell[BoxData[
+      \(Tensor\)]],
+  ". It is up to the user to use the routines correctly and write proper \
+tensor equations."
+}], "Text"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Declaring the Base Indices", "Section"],
+
+Cell[TextData[{
+  "Tensor calculus is built on an underlying linear space that has a \
+dimension, ",
+  Cell[BoxData[
+      \(NDim\)]],
+  ", and a set of base indices, ",
+  Cell[BoxData[
+      \(BaseIndices\)]],
+  ". When Tensorial is first loaded they are set to a 3-dimensional space \
+with indices ",
+  Cell[BoxData[
+      \({1, 2, 3}\)]],
+  ". The following displays their current values..."
+}], "Text"],
+
+Cell[BoxData[
+    \({NDim, BaseIndices}\)], "Input"],
+
+Cell[TextData[{
+  Cell[BoxData[
+      \(NDim\)]],
+  " is automatically set from the length of the ",
+  Cell[BoxData[
+      \(BaseIndices\)]],
+  " list. Anytime we do a sum, or expand into an array on the free indices it \
+is done over the base indices."
+}], "Text"],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[x, 1]\)], "Input"],
+
+Cell[TextData[{
+  "Here we expand a vector into its components using ",
+  Cell[BoxData[
+      RowBox[{"EinsteinArray", "[", "]"}]]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(xu[i]\), "\[IndentingNewLine]", 
+    \(% // EinsteinArray[]\)}], "Input"],
+
+Cell[TextData[{
+  "Here we perform a sum on a pair of up/down indices using ",
+  Cell[BoxData[
+      RowBox[{"EinsteinSum", "[", "]"}]]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(xu[i] xd[i]\), "\[IndentingNewLine]", 
+    \(% // EinsteinSum[]\)}], "Input"],
+
+Cell["\<\
+The set of base indices can be changed at anytime and can be any set of \
+integers or symbols. For example, if we are working in relativity we may wish \
+to use the set...\
+\>", "Text"],
+
+Cell[BoxData[
+    \(DeclareBaseIndices[{0, 1, 2, 3}]\)], "Input"],
+
+Cell["Then, the above expansions will be...", "Text"],
+
+Cell[BoxData[{
+    \(xu[i]\), "\n", 
+    \(% // EinsteinArray[]\), "\n", 
+    \(xu[i] xd[i]\), "\n", 
+    \(% // EinsteinSum[]\)}], "Input"],
+
+Cell["Or we may prefer to use symbols instead of integers.", "Text"],
+
+Cell[BoxData[
+    \(DeclareBaseIndices[{t, x, y, z}]\)], "Input"],
+
+Cell[BoxData[{
+    \(xu[i]\), "\n", 
+    \(% // EinsteinArray[]\), "\n", 
+    \(xu[i] xd[i]\), "\n", 
+    \(% // EinsteinSum[]\)}], "Input"],
+
+Cell["Resetting to the default value...", "Text"],
+
+Cell[BoxData[
+    \(DeclareBaseIndices[{1, 2, 3}]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Setting and Using Tensor Values", "Section"],
+
+Cell["We define a tensor shortcut...", "Text"],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[T, 2]\)], "Input"],
+
+Cell[TextData[{
+  "...and then expand the tensor into it components. ",
+  Cell[BoxData[
+      \(EinsteinArray[]\)]],
+  " automatically expands a tensor expression into an array on the free \
+indices."
+}], "Text"],
+
+Cell[BoxData[{
+    \(Tdd[i, j]\), "\[IndentingNewLine]", 
+    \(% // EinsteinArray[]\)}], "Input"],
+
+Cell["\<\
+You can also assign values, numeric or symbolic, to tensors with \
+SetTensorValues or SetTensorValueRules. Let's set values for the down \
+components of the tensor T defined above.\
+\>", "Text"],
+
+Cell[BoxData[{
+    RowBox[{
+      RowBox[{"TValues", "=", 
+        RowBox[{"(", GridBox[{
+              {"1", "0", "3"},
+              {"4", "5", "0"},
+              {"7", "0", "9"}
+              }], ")"}]}], ";"}], "\[IndentingNewLine]", \(SetTensorValues[
+      Tdd[i, j], TValues]\)}], "Input"],
+
+Cell[TextData[{
+  "The tensor shortcut can be used in specifying the tensor for which we are \
+setting the values. The full Tensor expression could also have been used. The \
+tensor levels are filled in the ",
+  StyleBox["sort",
+    FontWeight->"Bold"],
+  " order of the indices used. It is generally best to fill the slots in \
+increasing slot order, which means that the index symbols should be in sort \
+order in the shortcut.  The values are stored in the UpValues for the tensor \
+label, ",
+  Cell[BoxData["T"]],
+  "."
+}], "Text"],
+
+Cell[BoxData[
+    \(UpValues[T]\)], "Input"],
+
+Cell[TextData[{
+  "Now, when we expand ",
+  Cell[BoxData["T"]],
+  " to its components, the tensor values will automatically be substituted."
+}], "Text"],
+
+Cell[BoxData[{
+    \(Tdd[i, j]\), "\[IndentingNewLine]", 
+    \(% // EinsteinArray[]\)}], "Input"],
+
+Cell[TextData[{
+  "If we set the values and reverse the order of ",
+  Cell[BoxData[
+      \(i\)]],
+  " and ",
+  Cell[BoxData[
+      \(j\)]],
+  " in the statement, then we would obtain the transpose of the ",
+  Cell[BoxData[
+      \(TValues\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(SetTensorValues[Tdd[j, i], TValues]\), "\n", 
+    \(Tdd[i, j]\), "\n", 
+    \(% // EinsteinArray[]\)}], "Input"],
+
+Cell["\<\
+Only the values for the tensor with down indices have been stored. Values for \
+other forms of the tensor would have to be explicitly calculated and set.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Tuu[i, j]\), "\[IndentingNewLine]", 
+    \(% // EinsteinArray[]\)}], "Input"],
+
+Cell[TextData[{
+  "Often, we would prefer that the tensor values not be automatically \
+substituted, but only substituted in a controlled manner. To do that, we can \
+instead define TensorValueRules for ",
+  Cell[BoxData["T"]],
+  "."
+}], "Text"],
+
+Cell[BoxData[
+    \(SetTensorValueRules[Tdd[i, j], TValues]\)], "Input"],
+
+Cell["\<\
+This automatically removes the UpValues for that form of the tensor...\
+\>", "Text"],
+
+Cell[BoxData[
+    \(UpValues[T]\)], "Input"],
+
+Cell["...and creates substitution rules, stored in...", "Text"],
+
+Cell[BoxData[
+    \(TensorValueRules[T]\)], "Input"],
+
+Cell["It now takes one extra step to obtain the component values.", "Text"],
+
+Cell[BoxData[{
+    \(Tdd[i, j]\), "\[IndentingNewLine]", 
+    \(% // EinsteinArray[]\), "\[IndentingNewLine]", 
+    \(% /. TensorValueRules[T]\)}], "Input"],
+
+Cell[TextData[{
+  Cell[BoxData[
+      \(TensorValueRules[T,  ... ]\)]],
+  " can contain several different tensor labels for which rules have been \
+defined. If now SetTensorValues is used when there are already existing \
+substitution rules, the substitution rules are removed for that particular \
+form of the tensor."
+}], "Text"],
+
+Cell[BoxData[
+    \(SetTensorValues[Tdd[i, j], TValues]\)], "Input"],
+
+Cell["\<\
+The rules have now been removed. Definitions will never give rules a chance \
+to be used, so it would never be worthwhile having both.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(TensorValueRules[T]\)], "Input"],
+
+Cell[BoxData[
+    \(UpValues[T]\)], "Input"],
+
+Cell["\<\
+The substitution rules or the value definitions, whichever exist, can be \
+removed with ClearTensorValues.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(ClearTensorValues[Tdd[i, j]]\)], "Input"],
+
+Cell[BoxData[
+    \(UpValues[T]\)], "Input"],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[T, 2]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Using Index Flavors", "Section"],
+
+Cell[TextData[{
+  "Rather than using different tensor labels to indicate different coordinate \
+systems or reference frames, Tensorial uses ",
+  StyleBox["flavored indices",
+    FontWeight->"Bold"],
+  ". Flavored indices are either colored or use annotated names. An annotated \
+name is one of the objects listed in Section 3.10.2 , \"Names of Symbols and \
+Mathematical Objects\", in The ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " Book. Suitable names might be SuperPlus, SuperMinus, SuperStar, \
+SuperDagger, OverBar, OverTilde, OverHat."
+}], "Text"],
+
+Cell[TextData[{
+  "A tensor, ",
+  Cell[BoxData[
+      \(T\)]],
+  ", is the same object no matter what coordinate system is used to express \
+it. Therefore it shouldn't change its name, just because we have changed \
+coordinate systems. Instead, the coordinate system is expressed by the flavor \
+of the index. This is the system that is used in Misner, Thorne & Wheeler, ",
+  StyleBox["Gravitation",
+    FontSlant->"Italic"],
+  ". \"The bars, primes, and hats [on the indices] distinguish one coordinate \
+system from another; by putting them on the indices rather than on the x's, \
+we simplify later notation.\" (p9).  J. Foster and J.D. Nightingale in ",
+  StyleBox["A Short Course in General Relativity",
+    FontSlant->"Italic"],
+  " write: \"Placing the prime on the [index] rather than the kernel letter u \
+may seem perverse, but it is part of the ",
+  StyleBox["kernel-index method",
+    FontSlant->"Italic"],
+  " initiated by Schouten and his coworkers.\"  (Schouten, J.A. (1954) ",
+  StyleBox["Ricci-Calculus",
+    FontSlant->"Italic"],
+  ", 2nd ed., Springer, Berlin.) B. F. Schutz uses the same notation in ",
+  StyleBox["A First Course in General Relativity",
+    FontSlant->"Italic"],
+  " (p37). The system is widely used in modern texts."
+}], "Text"],
+
+Cell[TextData[{
+  "Before index flavors are used, they must be declared. Each index flavor \
+has a ",
+  StyleBox["flavorname",
+    FontSlant->"Italic"],
+  " and a ",
+  StyleBox["flavorform",
+    FontSlant->"Italic"],
+  ". The flavorform will either be an ",
+  Cell[BoxData[
+      \(RGBColor\)]],
+  " or an annotated name. When the flavorname is declared, Tensorial \
+establishes the corresponding Format statements for the display of the \
+flavored index. If a flavorname is cleared, the corresponding format \
+statement is also cleared."
+}], "Text"],
+
+Cell["\<\
+So let's declare some index flavors and tensor shortcuts and look at some \
+examples.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(DefineTensorShortcuts[{{x, y}, 1}, {{g, T, \[CapitalLambda]}, 
+        2}]\), "\[IndentingNewLine]", 
+    \(DeclareIndexFlavor[{red, Red}, {green, CinnabarGreen}, {rocket, 
+        SuperDagger}]\)}], "Input"],
+
+Cell["The flavors are then stored in...", "Text"],
+
+Cell[BoxData[
+    \(IndexFlavors // StandardForm\)], "Input"],
+
+Cell["\<\
+Here is a tensor expression and little calculation done with plain indices.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(yd[i] \[Equal] gdd[i, j] Tud[j, k] xu[k]\), "\[IndentingNewLine]", 
+    \(\(% // MetricSimplify[g]\) // EinsteinSum[]\), "\[IndentingNewLine]", 
+    \(\(% // EinsteinArray[]\) // TableForm\)}], "Input"],
+
+Cell[TextData[{
+  "This is the same calculation done in the red coordinate system. ",
+  Cell[BoxData[
+      \(ToFlavor[red]\)]],
+  " converts all plain indices to red indices."
+}], "Text"],
+
+Cell[BoxData[{
+    \(yd[i] \[Equal] gdd[i, j] Tud[j, k] xu[k] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(\(% // MetricSimplify[g]\) // EinsteinSum[]\), "\[IndentingNewLine]", 
+    \(\(% // EinsteinArray[]\) // TableForm\)}], "Input"],
+
+Cell[TextData[{
+  "Notice that, when expanding, the flavor carries onto the base indices. We \
+can convert from one flavor to another by using the to, from version of ",
+  Cell[BoxData[
+      \(ToFlavor\)]],
+  ". First we convert plain to red, and then we convert red to rocket and \
+then from rocket to green and then from green to plain. ",
+  Cell[BoxData[
+      \(Identity\)]],
+  " is used to designate plain indices."
+}], "Text"],
+
+Cell[BoxData[{
+    \(yd[i] \[Equal] gdd[i, j] Tud[j, k] xu[k] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // ToFlavor[rocket, red]\), "\[IndentingNewLine]", 
+    \(% // ToFlavor[green, rocket]\), "\[IndentingNewLine]", 
+    \(% // ToFlavor[Identity, green]\)}], "Input"],
+
+Cell[TextData[{
+  Cell[BoxData[
+      \(ToFlavor\)]],
+  " checks that the flavor is one that is currently declared."
+}], "Text"],
+
+Cell[BoxData[
+    \(xu[i] // ToFlavor[blue]\)], "Input"],
+
+Cell[TextData[{
+  "It is possible to enter the flavor directly in the expression without \
+using ",
+  Cell[BoxData["ToFlavor"]],
+  ". But then, no checking is performed and invalid expressions can be \
+obtained."
+}], "Text"],
+
+Cell[BoxData[
+    \({xu[red@i], xu[blue@i]}\)], "Input"],
+
+Cell[TextData[{
+  "Nevertheless it may sometimes be convenient to directly enter the flavor \
+and sometimes it is necessary.  Suppose the coordinates in the red frame are \
+linearly related to the coordinates in the plain frame by a matrix ",
+  Cell[BoxData["\[CapitalLambda]"]],
+  ". We couldn't use ",
+  Cell[BoxData["ToFlavor"]],
+  " on the ",
+  Cell[BoxData["\[CapitalLambda]"]],
+  " matrix because, as a transformation matrix between two coordinate \
+systems, it has mixed flavors on the indices.  Since we have mixed flavor \
+expressions and equations we must directly enter the flavor."
+}], "Text"],
+
+Cell[BoxData[{
+    RowBox[{
+      RowBox[{"mat", "=", 
+        RowBox[{"(", GridBox[{
+              {"1", "0", "1"},
+              {"0", "1", "1"},
+              {"2", "1", "0"}
+              }], ")"}]}], 
+      ";"}], "\[IndentingNewLine]", \(SetTensorValueRules[\[CapitalLambda]ud[
+        red@i, j], 
+      mat]\), "\[IndentingNewLine]", \(SetTensorValueRules[\[CapitalLambda]ud[
+        i, red@j], Inverse[mat]]\)}], "Input"],
+
+Cell["\<\
+We can then write the new coordinates in terms of the old as...\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(xu[red@i] == \[CapitalLambda]ud[red@i, j] 
+        xu[j]\), "\[IndentingNewLine]", 
+    \(\(\(% // EinsteinSum[]\) // EinsteinArray[]\) // 
+      TableForm\), "\[IndentingNewLine]", 
+    \(% /. TensorValueRules[\[CapitalLambda]] // 
+      TableForm\), "\[IndentingNewLine]", 
+    \(Last /@ %\), "\[IndentingNewLine]", 
+    \(SetTensorValueRules[xu[red@i], %]\)}], "Input"],
+
+Cell["\<\
+Now if we do the reverse transformation we should end up with the original \
+values.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\[CapitalLambda]ud[i, red@j] xu[red@j]\), "\[IndentingNewLine]", 
+    \(\(\(% // EinsteinSum[]\) // EinsteinArray[]\) // 
+      TableForm\), "\[IndentingNewLine]", 
+    \(% /. TensorValueRules[\[CapitalLambda], x] // Expand\)}], "Input"],
+
+Cell[TextData[{
+  "We couldn't use ",
+  Cell[BoxData["ToFlavor"]],
+  " on the ",
+  Cell[BoxData["\[CapitalLambda]"]],
+  " matrix because, as a transformation matrix between two coordinate \
+systems, it has mixed flavors on the indices. "
+}], "Text"],
+
+Cell["\<\
+Index flavors can be cleared individually or they can be cleared all at once \
+by using the statement below.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\(ClearTensorValues /@ {xu[red@i], \[CapitalLambda]ud[red@i, 
+            j], \[CapitalLambda]ud[i, red@j]};\)\), "\[IndentingNewLine]", 
+    \(ClearIndexFlavor[IndexFlavors]\), "\[IndentingNewLine]", 
+    \(ClearTensorShortcuts[{{x, y}, 1}, {{g, T, \[CapitalLambda]}, 
+        2}]\)}], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Kronecker Deltas", "Section"],
+
+Cell[TextData[{
+  "Kronecker deltas follow the same general principles as everything else in \
+Tensorial. There is no special label for Kroneckers, just special routines \
+that manipulate them, and Kroneckers use the same scheme of having an index \
+and a ",
+  Cell[BoxData[
+      \(Void\)]],
+  " in each slot. This is different than many texts that put indices above \
+and below each other in Kroneckers. Generalized Kroneckers can do this \
+because they are always even ordered and have the same number of up and down \
+indices. Nevertheless, we don't do that because it would mean all kinds of \
+special processing and special shortcuts for Kroneckers. We prefer to treat \
+all indexed objects in a uniform manner."
+}], "Text"],
+
+Cell[TextData[{
+  "Therefore one defines shortcuts, gives values to, and uses Kroneckers just \
+like any other tensor. Although one would generally use the label ",
+  Cell[BoxData[
+      \(\[Delta]\)]],
+  " for Kroneckers, you could use another label, and you could even have \
+several kinds of Kroneckers in play."
+}], "Text"],
+
+Cell[BoxData[{
+    \(DefineTensorShortcuts[{x, 1}, {{\[Delta], \[Kappa]}, 
+        2}, {{\[Delta], \[Kappa]}, 4}]\), "\[IndentingNewLine]", 
+    \(DeclareIndexFlavor[{red, Red}]\)}], "Input"],
+
+Cell["We can contract generalized Kroneckers...", "Text"],
+
+Cell[BoxData[{
+    \(\[Delta]uudd[i, j, i, k]\), "\[IndentingNewLine]", 
+    \(% // ContractKroneckers[\[Delta]]\)}], "Input"],
+
+Cell[TextData[{
+  "Tensorial knew that the object was a Kronecker because we fed the label ",
+  Cell[BoxData[
+      \(\[Delta]\)]],
+  " to the ",
+  Cell[BoxData[
+      \(ContractKronecker\)]],
+  " routine."
+}], "Text"],
+
+Cell[TextData[{
+  "We can expand generalized Kroneckers into simple Kroneckers. Here we use \
+",
+  Cell[BoxData[
+      \(\[Kappa]\)]],
+  " as the label for the Kroneckers."
+}], "Text"],
+
+Cell[BoxData[{
+    \(\[Kappa]uudd[i, j, m, n]\), "\[IndentingNewLine]", 
+    \(% // FullKroneckerExpand[\[Kappa]]\)}], "Input"],
+
+Cell[TextData[{
+  "We can use Kroneckers as index replacement operators with ",
+  Cell[BoxData[
+      \(KroneckerAbsorb\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(xu[i] \[Delta]ud[j, i] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // KroneckerAbsorb[\[Delta]]\)}], "Input"],
+
+Cell["\<\
+Like any other indexed object, Kroneckers do not have values until you give \
+them values.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(SetTensorValueRules[\[Delta]ud[i, j], IdentityMatrix[3]]\)], "Input"],
+
+Cell[BoxData[{
+    \(\[Delta]ud[i, j]\), "\[IndentingNewLine]", 
+    \(% // EinsteinArray[]\), "\[IndentingNewLine]", 
+    \(% /. TensorValueRules[\[Delta]]\)}], "Input"],
+
+Cell[TextData[{
+  "There is trick that can be used to evaluate the basic Kroneckers without \
+storing any values. ",
+  Cell[BoxData[
+      \(MetricSimplify\)]],
+  " treats up/down metric tensors as Kroneckers and automatically simplifies \
+when they contain base value indices. So just use ",
+  Cell[BoxData[
+      \(MetricSimplify\)]],
+  " with ",
+  Cell[BoxData[
+      \(\[Delta]\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(\[Delta]ud[i, j]\), "\[IndentingNewLine]", 
+    \(% // EinsteinArray[]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[\[Delta]]\)}], "Input"],
+
+Cell[BoxData[{
+    \(ClearTensorValues[\[Delta]ud[i, j]]\), "\n", 
+    \(ClearTensorShortcuts[{x, 1}, {{\[Delta], \[Kappa]}, 
+        2}, {{\[Delta], \[Kappa]}, 4}]\), "\[IndentingNewLine]", 
+    \(ClearIndexFlavor[red]\)}], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Internal Representation of Tensors", "Section"],
+
+Cell[BoxData[{
+    \(DefineTensorShortcuts[{x, 1}, {T, 2}]\), "\[IndentingNewLine]", 
+    \(DeclareIndexFlavor[{red, Red}, {rocket, SuperDagger}]\)}], "Input"],
+
+Cell[TextData[{
+  "We can obtain the internal representation of tensor by using ",
+  Cell[BoxData["InputForm"]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(xu[i]\), "\[IndentingNewLine]", 
+    \(% // InputForm\)}], "Input"],
+
+Cell[BoxData[{
+    \(Tud[i, j]\), "\[IndentingNewLine]", 
+    \(% // InputForm\)}], "Input"],
+
+Cell[TextData[{
+  "One could type tensors in using the ",
+  Cell[BoxData["InputForm"]],
+  " if one wishes. Of course, shortcuts will generally be far easier. But \
+there may be a few special cases where one wants an indexed expression. \
+Suppose we want to write the components of a cross product in 3-dimensional \
+space."
+}], "Text"],
+
+Cell[BoxData[{
+    \(Tensor[u\[Cross]v, {i}, {Void}]\), "\[IndentingNewLine]", 
+    \(% // EinsteinArray[]\)}], "Input"],
+
+Cell["\<\
+We couldn't enter that with a shortcut because shortcuts demand symbols as \
+the label.\
+\>", "Text"],
+
+Cell["\<\
+Index flavors are represented by wrapping the index in the flavor name.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Tud[i, j] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // InputForm\)}], "Input"],
+
+Cell[BoxData[{
+    \(Tud[i, j] // ToFlavor[rocket]\), "\[IndentingNewLine]", 
+    \(% // InputForm\)}], "Input"],
+
+Cell[TextData[{
+  "Because tensor expressions are formatted on output into forms that are not \
+meaningful internally, output expressions cannot be copied and pasted. One \
+can, of course, copy and paste input cell expressions. Cutting and pasting is \
+not a great way to do calculations in any case. An alternative is to save \
+intermediate expressions under some name such as ",
+  Cell[BoxData["step1"]],
+  ", and then take parts of that expression."
+}], "Text"],
+
+Cell["\<\
+We are working on code that would allow indexed entry of tensors, with \
+tabbing between indices, and copying and pasting of output. However, it is \
+delicate, version sensitive and perhaps a little risky, so we decided to stay \
+with simple formatted output.\
+\>", "Text"],
+
+Cell["\<\
+Another consequence of using formatted output expressions and TraditionalForm \
+is that the underlying output cell expressions are quite long. This means \
+that a notebook with a lot of tensor output can take a lot of storage space. \
+Users may wish to use the Kernel\\Delete All Output menu item before saving \
+or transmitting notebooks.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(ClearTensorShortcuts[{x, 1}, {T, 2}]\), "\[IndentingNewLine]", 
+    \(ClearIndexFlavor[IndexFlavors]\)}], "Input"]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 941}},
+WindowSize->{806, 706},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+Magnification->1,
+StyleDefinitions -> "TensorialStyle.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 33, 0, 76, "Title"],
+Cell[1812, 55, 134, 3, 34, "Text"],
+Cell[1949, 60, 72, 1, 46, "Input"],
+
+Cell[CellGroupData[{
+Cell[2046, 65, 57, 0, 61, "Section"],
+Cell[2106, 67, 497, 8, 94, "Text"],
+Cell[2606, 77, 60, 1, 46, "Input"],
+Cell[2669, 80, 98, 2, 34, "Text"],
+Cell[2770, 84, 42, 1, 46, "Input"],
+Cell[2815, 87, 63, 0, 34, "Text"],
+Cell[2881, 89, 77, 1, 46, "Input"],
+Cell[2961, 92, 427, 8, 74, "Text"],
+Cell[3391, 102, 60, 1, 46, "Input"],
+Cell[3454, 105, 108, 3, 34, "Text"],
+Cell[3565, 110, 110, 2, 66, "Input"],
+Cell[3678, 114, 1106, 29, 154, "Text"],
+Cell[4787, 145, 190, 5, 54, "Text"],
+Cell[4980, 152, 104, 2, 66, "Input"],
+Cell[5087, 156, 49, 0, 34, "Text"],
+Cell[5139, 158, 42, 1, 46, "Input"],
+Cell[5184, 161, 174, 3, 54, "Text"],
+Cell[5361, 166, 65, 1, 46, "Input"],
+Cell[5429, 169, 68, 1, 46, "Input"],
+Cell[5500, 172, 64, 1, 46, "Input"],
+Cell[5567, 175, 111, 3, 34, "Text"],
+Cell[5681, 180, 80, 1, 46, "Input"],
+Cell[5764, 183, 126, 4, 34, "Text"],
+Cell[5893, 189, 126, 2, 66, "Input"],
+Cell[6022, 193, 79, 1, 46, "Input"],
+Cell[6104, 196, 698, 18, 94, "Text"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[6839, 219, 45, 0, 41, "Section"],
+Cell[6887, 221, 406, 13, 74, "Text"],
+Cell[7296, 236, 52, 1, 46, "Input"],
+Cell[7351, 239, 265, 8, 54, "Text"],
+Cell[7619, 249, 60, 1, 46, "Input"],
+Cell[7682, 252, 150, 5, 34, "Text"],
+Cell[7835, 259, 94, 2, 66, "Input"],
+Cell[7932, 263, 155, 5, 34, "Text"],
+Cell[8090, 270, 98, 2, 66, "Input"],
+Cell[8191, 274, 195, 4, 54, "Text"],
+Cell[8389, 280, 65, 1, 46, "Input"],
+Cell[8457, 283, 53, 0, 34, "Text"],
+Cell[8513, 285, 140, 4, 106, "Input"],
+Cell[8656, 291, 68, 0, 34, "Text"],
+Cell[8727, 293, 65, 1, 46, "Input"],
+Cell[8795, 296, 140, 4, 106, "Input"],
+Cell[8938, 302, 49, 0, 34, "Text"],
+Cell[8990, 304, 62, 1, 46, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[9089, 310, 50, 0, 41, "Section"],
+Cell[9142, 312, 46, 0, 34, "Text"],
+Cell[9191, 314, 60, 1, 46, "Input"],
+Cell[9254, 317, 212, 6, 54, "Text"],
+Cell[9469, 325, 98, 2, 66, "Input"],
+Cell[9570, 329, 204, 4, 54, "Text"],
+Cell[9777, 335, 297, 8, 96, "Input"],
+Cell[10077, 345, 535, 12, 95, "Text"],
+Cell[10615, 359, 44, 1, 46, "Input"],
+Cell[10662, 362, 152, 4, 34, "Text"],
+Cell[10817, 368, 98, 2, 66, "Input"],
+Cell[10918, 372, 262, 11, 34, "Text"],
+Cell[11183, 385, 133, 3, 86, "Input"],
+Cell[11319, 390, 177, 3, 54, "Text"],
+Cell[11499, 395, 98, 2, 66, "Input"],
+Cell[11600, 399, 245, 6, 54, "Text"],
+Cell[11848, 407, 72, 1, 46, "Input"],
+Cell[11923, 410, 94, 2, 34, "Text"],
+Cell[12020, 414, 44, 1, 46, "Input"],
+Cell[12067, 417, 63, 0, 34, "Text"],
+Cell[12133, 419, 52, 1, 46, "Input"],
+Cell[12188, 422, 75, 0, 34, "Text"],
+Cell[12266, 424, 156, 3, 86, "Input"],
+Cell[12425, 429, 331, 7, 74, "Text"],
+Cell[12759, 438, 68, 1, 46, "Input"],
+Cell[12830, 441, 158, 3, 54, "Text"],
+Cell[12991, 446, 52, 1, 46, "Input"],
+Cell[13046, 449, 44, 1, 46, "Input"],
+Cell[13093, 452, 130, 3, 34, "Text"],
+Cell[13226, 457, 61, 1, 46, "Input"],
+Cell[13290, 460, 44, 1, 46, "Input"],
+Cell[13337, 463, 59, 1, 46, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[13433, 469, 38, 0, 41, "Section"],
+Cell[13474, 471, 568, 12, 96, "Text"],
+Cell[14045, 485, 1266, 26, 174, "Text"],
+Cell[15314, 513, 550, 15, 74, "Text"],
+Cell[15867, 530, 109, 3, 34, "Text"],
+Cell[15979, 535, 229, 4, 66, "Input"],
+Cell[16211, 541, 49, 0, 34, "Text"],
+Cell[16263, 543, 61, 1, 46, "Input"],
+Cell[16327, 546, 99, 2, 34, "Text"],
+Cell[16429, 550, 223, 3, 86, "Input"],
+Cell[16655, 555, 188, 5, 34, "Text"],
+Cell[16846, 562, 247, 4, 86, "Input"],
+Cell[17096, 568, 433, 10, 74, "Text"],
+Cell[17532, 580, 285, 5, 106, "Input"],
+Cell[17820, 587, 128, 4, 34, "Text"],
+Cell[17951, 593, 56, 1, 46, "Input"],
+Cell[18010, 596, 224, 6, 54, "Text"],
+Cell[18237, 604, 56, 1, 46, "Input"],
+Cell[18296, 607, 605, 12, 94, "Text"],
+Cell[18904, 621, 429, 11, 116, "Input"],
+Cell[19336, 634, 87, 2, 34, "Text"],
+Cell[19426, 638, 393, 8, 126, "Input"],
+Cell[19822, 648, 108, 3, 34, "Text"],
+Cell[19933, 653, 258, 4, 86, "Input"],
+Cell[20194, 659, 249, 7, 54, "Text"],
+Cell[20446, 668, 132, 3, 34, "Text"],
+Cell[20581, 673, 316, 5, 86, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[20934, 683, 35, 0, 41, "Section"],
+Cell[20972, 685, 730, 13, 134, "Text"],
+Cell[21705, 700, 327, 7, 54, "Text"],
+Cell[22035, 709, 191, 3, 66, "Input"],
+Cell[22229, 714, 57, 0, 34, "Text"],
+Cell[22289, 716, 126, 2, 66, "Input"],
+Cell[22418, 720, 218, 8, 34, "Text"],
+Cell[22639, 730, 184, 6, 34, "Text"],
+Cell[22826, 738, 127, 2, 66, "Input"],
+Cell[22956, 742, 142, 5, 34, "Text"],
+Cell[23101, 749, 138, 2, 66, "Input"],
+Cell[23242, 753, 114, 3, 34, "Text"],
+Cell[23359, 758, 89, 1, 46, "Input"],
+Cell[23451, 761, 170, 3, 86, "Input"],
+Cell[23624, 766, 404, 13, 74, "Text"],
+Cell[24031, 781, 168, 3, 86, "Input"],
+Cell[24202, 786, 233, 4, 86, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[24472, 795, 53, 0, 41, "Section"],
+Cell[24528, 797, 159, 2, 66, "Input"],
+Cell[24690, 801, 130, 4, 34, "Text"],
+Cell[24823, 807, 88, 2, 66, "Input"],
+Cell[24914, 811, 92, 2, 66, "Input"],
+Cell[25009, 815, 335, 7, 74, "Text"],
+Cell[25347, 824, 120, 2, 66, "Input"],
+Cell[25470, 828, 111, 3, 34, "Text"],
+Cell[25584, 833, 95, 2, 34, "Text"],
+Cell[25682, 837, 109, 2, 66, "Input"],
+Cell[25794, 841, 112, 2, 66, "Input"],
+Cell[25909, 845, 464, 8, 94, "Text"],
+Cell[26376, 855, 283, 5, 54, "Text"],
+Cell[26662, 862, 363, 6, 74, "Text"],
+Cell[27028, 870, 135, 2, 66, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

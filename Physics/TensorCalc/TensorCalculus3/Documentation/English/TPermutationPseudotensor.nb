@@ -1,0 +1,179 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      3262,        116]*)
+(*NotebookOutlinePosition[      4248,        150]*)
+(*  CellTagsIndexPosition[      4174,        144]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["PermutationPseudotensor", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["PermutationPseudotensor",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["n",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will generate the array of values that correspond to the completely \
+antisymmetric n-dimensional tensor."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["\<\
+ The Levi-Civita tensor may be constructed using the \
+PermutationPseudotensor\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["FullKroneckerExpand",
+    ButtonData:>{"FullKroneckerExpand"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["PartialKroneckerExpand",
+    ButtonData:>{"PartialKroneckerExpand"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["ContractKroneckers",
+    ButtonData:>{"ContractKroneckers"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples  ", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[50]:="],
+
+Cell["Here is the 3-dimensional permutation tensor.", "Text"],
+
+Cell[BoxData[
+    \(PermutationPseudotensor[3]\)], "Input",
+  CellLabel->"In[51]:="],
+
+Cell["Here is the 4-dimensional permutation tensor.", "Text"],
+
+Cell[BoxData[
+    \(PermutationPseudotensor[4]\)], "Input",
+  CellLabel->"In[52]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{674, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 70, 1, 31, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1849, 56, 407, 15, 49, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 4003, 135}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 70, 1, 31, "ObjectName",
+  CellTags->"Function?"],
+Cell[1849, 56, 407, 15, 49, "Usage",
+  CellTags->"Function?"],
+Cell[2259, 73, 109, 3, 31, "MathCaption"],
+Cell[2371, 78, 400, 14, 31, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[2796, 96, 36, 0, 40, "ExampleSection"],
+Cell[2835, 98, 97, 2, 29, "Input"],
+Cell[2935, 102, 61, 0, 25, "Text"],
+Cell[2999, 104, 84, 2, 29, "Input"],
+Cell[3086, 108, 61, 0, 25, "Text"],
+Cell[3150, 110, 84, 2, 29, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

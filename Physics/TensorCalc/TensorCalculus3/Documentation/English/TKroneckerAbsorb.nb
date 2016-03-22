@@ -1,0 +1,391 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      9324,        298]*)
+(*NotebookOutlinePosition[     10311,        332]*)
+(*  CellTagsIndexPosition[     10236,        326]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["KroneckerAbsorb", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox["KroneckerAbsorb",
+            "MR"], 
+          StyleBox["[",
+            "MR"], 
+          StyleBox["\[Delta]",
+            "TI"], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will perform all replacement operations of first order mixed tensors with \
+labels \[Delta], assumed to be Kronecker deltas."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["\<\
+ In Tensorial all Kronecker symbols must have one Void in each slot just like \
+all other indexed objects. Many texts use indices in both the up and down \
+positions, taking advantage of the fact that Kroneckers must be even order \
+with equal number of up and down indices.\
+\>", "MathCaption"],
+
+Cell["\<\
+Labels other that \[Delta] can be used to represent the Kronecker.\
+\>", "MathCaption"],
+
+Cell["\<\
+KroneckerAbsorb will effective reach into any expressions that \
+ParseTermIndices will reach into.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["FullKroneckerExpand",
+    ButtonData:>{"FullKroneckerExpand"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["PartialKroneckerExpand",
+    ButtonData:>{"PartialKroneckerExpand"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["ContractKroneckers",
+    ButtonData:>{"ContractKroneckers"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["MapLevelParts",
+    ButtonData:>{"MapLevelParts"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[48]:="],
+
+Cell["Save the settings and declare base indices and flavors.", "Text"],
+
+Cell[BoxData[{
+    \(\(oldindices = BaseIndices;\)\), "\n", 
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(DeclareBaseIndices[{1, 2, 3}]\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ {{red, Red}, {rocket, 
+            SuperStar}};\)\)}], "Input",
+  CellLabel->"In[49]:="],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[{{x, y}, 1}, {{\[Delta], \[Kappa], S}, 
+        2}]\)], "Input",
+  CellLabel->"In[54]:="],
+
+Cell[BoxData[{
+    \(\[Delta]ud[i, r] \[Delta]ud[r, j]\), "\[IndentingNewLine]", 
+    \(% // KroneckerAbsorb[\[Delta]]\)}], "Input",
+  CellLabel->"In[55]:="],
+
+Cell[BoxData[{
+    \(\[Delta]ud[i, r] \[Delta]ud[r, j] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // KroneckerAbsorb[\[Delta]]\)}], "Input",
+  CellLabel->"In[57]:="],
+
+Cell[BoxData[{
+    \(\[Delta]ud[i, r] \[Delta]ud[r, s] \[Delta]ud[s, 
+        j]\), "\[IndentingNewLine]", 
+    \(% // KroneckerAbsorb[\[Delta]]\)}], "Input",
+  CellLabel->"In[59]:="],
+
+Cell[BoxData[{
+    \(xu[j] \[Delta]ud[r, j]\), "\[IndentingNewLine]", 
+    \(% // KroneckerAbsorb[\[Delta]]\)}], "Input",
+  CellLabel->"In[61]:="],
+
+Cell[BoxData[{
+    \(\[Delta]ud[j, r] Sud[k, j]\), "\[IndentingNewLine]", 
+    \(% // KroneckerAbsorb[\[Delta]]\)}], "Input",
+  CellLabel->"In[63]:="],
+
+Cell["\<\
+KroneckerAbsorb will work on mixed flavor tensors, but the flavors must \
+match.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \({\[Delta]ud[red@j, red@r] Sud[k, red@j], \[Delta]ud[j, r] 
+        Sud[k, red@j], \[Delta]ud[j, r] 
+        Sud[r, red@j]}\), "\[IndentingNewLine]", 
+    \(% // KroneckerAbsorb[\[Delta]]\)}], "Input",
+  CellLabel->"In[65]:="],
+
+Cell[BoxData[{
+    \(\[Delta]ud[j, r] Sud[k, Cov[j]] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // KroneckerAbsorb[\[Delta]]\)}], "Input",
+  CellLabel->"In[67]:="],
+
+Cell["\<\
+The Kronecker can be represented by a label other than \[Delta].\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\[Kappa]ud[j, r] Sud[k, j] // 
+      ToFlavor[rocket]\), "\[IndentingNewLine]", 
+    \(% // KroneckerAbsorb[\[Kappa]]\)}], "Input",
+  CellLabel->"In[69]:="],
+
+Cell["\<\
+We can even mix two different versions of Kronecker in an expression and then \
+absorb them selectively...\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\[Delta]ud[m, i] \[Kappa]ud[n, j] Suu[i, j] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // KroneckerAbsorb[\[Delta]]\), "\[IndentingNewLine]", 
+    \(% // KroneckerAbsorb[\[Kappa]]\)}], "Input",
+  CellLabel->"In[71]:="],
+
+Cell["Kronecker absorption with derivative expressions.", "Text"],
+
+Cell[BoxData[{
+    \(\[Delta]ud[j, r] {Sud[k, Dif[j]], Sud[k, Cov[j]]} // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // KroneckerAbsorb[\[Delta]]\)}], "Input",
+  CellLabel->"In[74]:="],
+
+Cell[BoxData[{
+    \(TotalD[xu[j], t] \[Delta]ud[r, j]\), "\[IndentingNewLine]", 
+    \(% // KroneckerAbsorb[\[Delta]]\)}], "Input",
+  CellLabel->"In[76]:="],
+
+Cell[BoxData[{
+    \(\[Delta]du[i, \[Nu]] \[Delta]ud[
+        k, \[Mu]] \(PartialD[{x, \[Delta], g, \[CapitalGamma]}]\)[Sud[i, j], 
+        xu[k]]\), "\[IndentingNewLine]", 
+    \(% // KroneckerAbsorb[\[Delta]]\)}], "Input",
+  CellLabel->"In[78]:="],
+
+Cell["And with dot products and CircleTimes Expressions", "Text"],
+
+Cell[BoxData[{
+    \(\[Delta]ud[r, 
+        i] {a\ xu[j] . xu[i], \((Sin[\[Theta]] + Cos[\[Theta]])\) 
+          xu[j]\[CircleTimes]xu[i]}\), "\[IndentingNewLine]", 
+    \(% // KroneckerAbsorb[\[Delta]]\)}], "Input",
+  CellLabel->"In[80]:="],
+
+Cell["\<\
+If we expand before fully simplifying, we have to give the Kronecker values. \
+This is a case where we might want to use Values instead of Rules. But \
+students might want to see the steps. With Rules...\
+\>", "Text"],
+
+Cell[BoxData[
+    \(SetTensorValueRules[\[Kappa]ud[i, j] // ToFlavor[red], \ 
+      IdentityMatrix[NDim]]\)], "Input",
+  CellLabel->"In[82]:="],
+
+Cell[BoxData[{
+    \(\[Delta]ud[m, i] \[Kappa]ud[n, j] Suu[i, j] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // KroneckerAbsorb[\[Delta]]\), "\[IndentingNewLine]", 
+    \(\(\(% // EinsteinSum[]\) // EinsteinArray[]\) // 
+      MatrixForm\), "\[IndentingNewLine]", 
+    \(% /. TensorValueRules[\[Kappa]] // MatrixForm\)}], "Input",
+  CellLabel->"In[83]:="],
+
+Cell["With Values...", "Text"],
+
+Cell[BoxData[
+    \(SetTensorValues[\[Kappa]ud[i, j] // ToFlavor[red], \ 
+      IdentityMatrix[NDim]]\)], "Input",
+  CellLabel->"In[87]:="],
+
+Cell[BoxData[{
+    \(\[Delta]ud[m, i] \[Kappa]ud[n, j] Suu[i, j] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // KroneckerAbsorb[\[Delta]]\), "\[IndentingNewLine]", 
+    \(\(\(% // EinsteinSum[]\) // EinsteinArray[]\) // MatrixForm\)}], "Input",\
+
+  CellLabel->"In[88]:="],
+
+Cell["A more complicated expression.", "Text"],
+
+Cell[BoxData[{
+    \(Exp[
+      1/2 \((\((xu[a] + yu[a])\) 
+              Suu[i, s] \[Delta]ud[r, i] + \((xu[a] + yu[a])\) 
+              Suu[s, j] \[Delta]ud[r, j])\)]\), "\[IndentingNewLine]", 
+    \(% // KroneckerAbsorb[\[Delta]]\)}], "Input",
+  CellLabel->"In[91]:="],
+
+Cell["Restore the initial state...", "Text"],
+
+Cell[BoxData[{
+    \(ClearTensorValues[\[Kappa]ud[i, j] // ToFlavor[red]]\), "\n", 
+    \(ClearTensorShortcuts[{x, 1}, {{\[Delta], \[Kappa], S}, 2}]\)}], "Input",\
+
+  CellLabel->"In[93]:="],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[oldindices]\), "\[IndentingNewLine]", 
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(Clear[oldindices, oldflavors]\)}], "Input",
+  CellLabel->"In[95]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 941}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{674, 474},
+WindowMargins->{{4, Automatic}, {Automatic, 5}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 62, 1, 41, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1841, 56, 583, 22, 50, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 10065, 317}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 62, 1, 41, "ObjectName",
+  CellTags->"Function?"],
+Cell[1841, 56, 583, 22, 50, "Usage",
+  CellTags->"Function?"],
+Cell[2427, 80, 305, 5, 75, "MathCaption"],
+Cell[2735, 87, 97, 2, 41, "MathCaption"],
+Cell[2835, 91, 129, 3, 41, "MathCaption"],
+Cell[2967, 96, 504, 18, 41, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[3496, 118, 34, 0, 39, "ExampleSection"],
+Cell[3533, 120, 97, 2, 29, "Input"],
+Cell[3633, 124, 71, 0, 25, "Text"],
+Cell[3707, 126, 358, 7, 109, "Input"],
+Cell[4068, 135, 131, 3, 29, "Input"],
+Cell[4202, 140, 157, 3, 49, "Input"],
+Cell[4362, 145, 181, 4, 49, "Input"],
+Cell[4546, 151, 183, 4, 49, "Input"],
+Cell[4732, 157, 146, 3, 49, "Input"],
+Cell[4881, 162, 150, 3, 49, "Input"],
+Cell[5034, 167, 104, 3, 25, "Text"],
+Cell[5141, 172, 246, 5, 69, "Input"],
+Cell[5390, 179, 179, 4, 49, "Input"],
+Cell[5572, 185, 88, 2, 25, "Text"],
+Cell[5663, 189, 177, 4, 49, "Input"],
+Cell[5843, 195, 130, 3, 25, "Text"],
+Cell[5976, 200, 255, 5, 69, "Input"],
+Cell[6234, 207, 65, 0, 25, "Text"],
+Cell[6302, 209, 197, 4, 49, "Input"],
+Cell[6502, 215, 157, 3, 49, "Input"],
+Cell[6662, 220, 249, 5, 49, "Input"],
+Cell[6914, 227, 65, 0, 25, "Text"],
+Cell[6982, 229, 241, 5, 49, "Input"],
+Cell[7226, 236, 227, 4, 42, "Text"],
+Cell[7456, 242, 143, 3, 29, "Input"],
+Cell[7602, 247, 370, 7, 89, "Input"],
+Cell[7975, 256, 30, 0, 25, "Text"],
+Cell[8008, 258, 139, 3, 29, "Input"],
+Cell[8150, 263, 286, 6, 69, "Input"],
+Cell[8439, 271, 46, 0, 25, "Text"],
+Cell[8488, 273, 271, 6, 49, "Input"],
+Cell[8762, 281, 44, 0, 25, "Text"],
+Cell[8809, 283, 189, 4, 49, "Input"],
+Cell[9001, 289, 295, 5, 89, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

@@ -1,0 +1,531 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.1'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     18263,        458]*)
+(*NotebookOutlinePosition[     18969,        482]*)
+(*  CellTagsIndexPosition[     18925,        478]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+
+support\
+\>", "Subtitle"],
+
+Cell[BoxData[
+    \(\(\(\[IndentingNewLine]\)\(\(ClearAll;\)\[IndentingNewLine]
+    Needs["\<TensorCalculus3`Tensorial`\>"]\[IndentingNewLine]\
+\[IndentingNewLine]
+    DeclareBaseIndices[{0, 1, 2, 3}]\[IndentingNewLine]
+    DeclareIndexFlavor[{red, Red}, {green, CinnabarGreen}]\[IndentingNewLine]
+    DefineTensorShortcuts[G, 2]\[IndentingNewLine]
+    SetTensorValues[Gdd[i, j], 
+      DiagonalMatrix[{1, \(-1\), \(-1\), \(-1\)}]]\[IndentingNewLine]
+    SetTensorValues[Gdd[i, j] // ToFlavor[red], 
+      DiagonalMatrix[{1, \(-1\), \(-1\), \(-1\)}]]\[IndentingNewLine]
+    SetTensorValues[Guu[i, j], 
+      DiagonalMatrix[{1, \(-1\), \(-1\), \(-1\)}]]\[IndentingNewLine]
+    SetTensorValues[Guu[i, j] // ToFlavor[red], 
+      DiagonalMatrix[{1, \(-1\), \(-1\), \(-1\)}]]\[IndentingNewLine]\
+\[IndentingNewLine]
+    DefineTensorShortcuts[{X, 1}, {Y, 1}, {T, 2}]\)\)\)], "Input"],
+
+Cell[BoxData[""], "Input"],
+
+Cell[BoxData[{\(ClearAll[LorentzMatrixRules];\), "\[IndentingNewLine]", 
+    RowBox[{\(LorentzMatrixRules::usage = "\<LorentzMatrixRules[L, newflavor, \
+oldflavor][\[Beta], \[Phi], \[Theta]] will generate and store the component \
+rules of the Lorentz transformation matrix to a frame moving with the \
+velocity \[Beta] in the spherical direction \[Phi] (angle from xy-plane) and \
+\[Theta] (rotation from x axis about z axis). The components will be stored \
+under the label L with the upper index in the newflavor and the lower index \
+in the restflavor. Identity can be used as the flavor for plain indices. The \
+values are stored as TensorValueRules[L]. The inverse values are also stored.
+    x -> [\[Beta],0,0],y -> [\[Beta],0,\[Pi]/2],z -> [\[Beta],\[Pi]/2,0],\>";\
+\), "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+    RowBox[{\(\(LorentzMatrixRules[L_, newflavor_, 
+          oldflavor_:  Identity]\)[\[Beta]_ /; 
+          If[NumericQ[\[Beta]], Abs[\[Beta]] < 1, 
+            True], \[Phi]_, \[Theta]_]\), ":=", "\[IndentingNewLine]", 
+      RowBox[{"Module", "[", "\[IndentingNewLine]", 
+        RowBox[{\({\[Gamma] = 1/\@\(1 - \[Beta]\^2\), \[IndentingNewLine]n1, 
+            n2, n3, \[Alpha], \[Gamma]1, matrix}\), ",", 
+          "\[IndentingNewLine]", 
+          
+          RowBox[{\(DefineTensorShortcuts[L, 2]\), ";", 
+            "\[IndentingNewLine]", \({n1, n2, 
+                n3} = {Cos[\[Phi]] Cos[\[Theta]], Cos[\[Phi]] Sin[\[Theta]], 
+                Sin[\[Phi]]}\), ";", 
+            "\[IndentingNewLine]", \(\[Gamma]1 = \[Gamma] - 1\), ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"matrix", "=", 
+              RowBox[{"(", GridBox[{
+                    {
+                      "\[Gamma]", \(\(-\[Alpha]\)\ \[Gamma]\ n1\), \(\(-\
+\[Alpha]\)\ \[Gamma]\ n2\), \(\(-\[Alpha]\)\ \[Gamma]\ n3\)},
+                    {\(\(-\[Alpha]\)\ \[Gamma]\ n1\), \(1 + \[Gamma]1\ n1\ n1\
+\), \(\[Gamma]1\ n1\ n2\), \(\[Gamma]1\ n1\ n3\)},
+                    {\(\(-\[Alpha]\)\ \[Gamma]\ n2\), \(\[Gamma]1\ n2\ n1\), \
+\(1 + \[Gamma]1\ n2\ n2\), \(\[Gamma]1\ n2\ n3\)},
+                    {\(\(-\[Alpha]\)\ \[Gamma]\ n3\), \(\[Gamma]1\ n3\ n1\), \
+\(\[Gamma]1\ n3\ n2\), \(1 + \[Gamma]1\ n3\ n3\)}
+                    }], ")"}]}], ";", 
+            "\[IndentingNewLine]", \(SetTensorValueRules[
+              Lud[newflavor@i, oldflavor@j], \ 
+              matrix /. \[Alpha] \[Rule] \[Beta]]\), ";", 
+            "\[IndentingNewLine]", \(SetTensorValueRules[
+              Lud[oldflavor@i, newflavor@j], \ 
+              matrix /. \[Alpha] \[Rule] \(-\[Beta]\)]\), ";"}]}], 
+        "\[IndentingNewLine]", "]"}]}]}], "Input"],
+
+Cell[BoxData[{\(ClearAll[LorentzMatrixValues];\), "\[IndentingNewLine]", 
+    RowBox[{\(LorentzMatrixValues::usage = "\<LorentzMatrixValues[L, \
+newflavor, oldflavor][\[Beta], \[Phi], \[Theta]] will generate and store the \
+component values of the Lorentz transformation matrix to a frame moving with \
+the velocity \[Beta] in the spherical direction \[Phi] (angle from xy-plane) \
+and \[Theta] (rotation from x axis about z axis). The components will be \
+stored under the label L with the upper index in the newflavor and the lower \
+index in the restflavor. Identity can be used as the flavor for plain \
+indices. The values are stored as TensorValueRules[L]. The inverse values are \
+also stored.\>";\), "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+    RowBox[{\(\(LorentzMatrixValues[L_, newflavor_, 
+          oldflavor_:  Identity]\)[\[Beta]_ /; 
+          If[NumericQ[\[Beta]], Abs[\[Beta]] < 1, 
+            True], \[Phi]_, \[Theta]_]\), ":=", "\[IndentingNewLine]", 
+      RowBox[{"Module", "[", "\[IndentingNewLine]", 
+        RowBox[{\({\[Gamma] = 1/\@\(1 - \[Beta]\^2\), \[IndentingNewLine]n1, 
+            n2, n3, \[Alpha], \[Gamma]1, matrix}\), ",", 
+          "\[IndentingNewLine]", 
+          
+          RowBox[{\(DefineTensorShortcuts[L, 2]\), ";", 
+            "\[IndentingNewLine]", \({n1, n2, 
+                n3} = {Cos[\[Phi]] Cos[\[Theta]], Cos[\[Phi]] Sin[\[Theta]], 
+                Sin[\[Phi]]}\), ";", 
+            "\[IndentingNewLine]", \(\[Gamma]1 = \[Gamma] - 1\), ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"matrix", "=", 
+              RowBox[{"(", GridBox[{
+                    {
+                      "\[Gamma]", \(\(-\[Alpha]\)\ \[Gamma]\ n1\), \(\(-\
+\[Alpha]\)\ \[Gamma]\ n2\), \(\(-\[Alpha]\)\ \[Gamma]\ n3\)},
+                    {\(\(-\[Alpha]\)\ \[Gamma]\ n1\), \(1 + \[Gamma]1\ n1\ n1\
+\), \(\[Gamma]1\ n1\ n2\), \(\[Gamma]1\ n1\ n3\)},
+                    {\(\(-\[Alpha]\)\ \[Gamma]\ n2\), \(\[Gamma]1\ n2\ n1\), \
+\(1 + \[Gamma]1\ n2\ n2\), \(\[Gamma]1\ n2\ n3\)},
+                    {\(\(-\[Alpha]\)\ \[Gamma]\ n3\), \(\[Gamma]1\ n3\ n1\), \
+\(\[Gamma]1\ n3\ n2\), \(1 + \[Gamma]1\ n3\ n3\)}
+                    }], ")"}]}], ";", 
+            "\[IndentingNewLine]", \(SetTensorValues[
+              Lud[newflavor@i, oldflavor@j], \ 
+              matrix /. \[Alpha] \[Rule] \[Beta]]\), ";", 
+            "\[IndentingNewLine]", \(SetTensorValues[
+              Lud[oldflavor@i, newflavor@j], \ 
+              matrix /. \[Alpha] \[Rule] \(-\[Beta]\)]\), ";"}]}], 
+        "\[IndentingNewLine]", "]"}]}]}], "Input"],
+
+Cell[BoxData[{
+    \(DefineTensorShortcuts[{X, 1}, {Y, 1}, {L, 
+        2}]\), "\[IndentingNewLine]", 
+    \(\(LorentzMatrixValues[L, red]\)[\[Beta], \[Pi]/2, 
+      0]\[IndentingNewLine]\[IndentingNewLine]\[IndentingNewLine]\), "\
+\[IndentingNewLine]", 
+    \(\)}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+
+content
+\
+\>", "Subtitle"],
+
+Cell[BoxData[{
+    \(DefineTensorShortcuts[{F, 2}]\), "\[IndentingNewLine]", 
+    \(\(Ea = {E1, E2, E3};\)\), "\[IndentingNewLine]", 
+    \(\(Ba = {B1, B2, B3};\)\), "\[IndentingNewLine]", 
+    \(\(Ea = {1, 0, 0};\)\), "\[IndentingNewLine]", 
+    \(\(Ba = {2\ Cos[t], 2\ Sin[t], 0};\)\), "\[IndentingNewLine]", 
+    \(\)}], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(FuuValues = {{0, \(-Ea[\([1]\)]\), \(-Ea[\([2]\)]\), \
+\(-Ea[\([3]\)]\)}, {Ea[\([1]\)], 0, \(-Ba[\([3]\)]\), 
+            Ba[\([2]\)]}, {Ea[\([2]\)], Ba[\([3]\)], 
+            0, \(-Ba[\([1]\)]\)}, {Ea[\([3]\)], \(-Ba[\([2]\)]\), 
+            Ba[\([1]\)], 0}};\)\), "\[IndentingNewLine]", 
+    \(SetTensorValues[Fuu[i, j], FuuValues]\), "\[IndentingNewLine]", 
+    \(\(Fuu[i, j] // ToArrayValues[]\) // 
+      MatrixForm\), "\[IndentingNewLine]", 
+    \(Lud[red@i, m] Lud[red@j, n] Fuu[m, n]\), "\[IndentingNewLine]", 
+    \(\(FReduuValues = 
+        Lud[red@i, m] Lud[red@j, n] Fuu[m, n] // 
+          ToArrayValues[];\)\), "\[IndentingNewLine]", 
+    \(SetTensorValues[Fuu[red@i, red@j], 
+      FReduuValues]\), "\[IndentingNewLine]", 
+    \(\(Fuu[red@i, red@j] // ToArrayValues[]\) // 
+      MatrixForm\), "\[IndentingNewLine]", 
+    \(\)}], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      StyleBox[
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", GridBox[{
+                {"0", \(-1\), "0", "0"},
+                {"1", "0", "0", \(2\ Sin[t]\)},
+                {"0", "0", "0", \(\(-2\)\ Cos[t]\)},
+                {"0", \(\(-2\)\ Sin[t]\), \(2\ Cos[t]\), "0"}
+                },
+              RowSpacings->1,
+              ColumnSpacings->1,
+              ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]],
+        FontFamily->"Courier",
+        FontSize->16],
+      (StyleForm[ #, FontSize -> 16, FontFamily -> "Courier"]&)]], "Output"],
+
+Cell[BoxData[
+    TagBox[
+      StyleBox[
+        RowBox[{
+          InterpretationBox[
+            SubsuperscriptBox["F", 
+              InterpretationBox[
+                RowBox[{
+                  TagBox[
+                    StyleBox["m",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)], 
+                  "\[InvisibleSpace]", 
+                  TagBox[
+                    StyleBox["n",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)]}],
+                SequenceForm[ 
+                  StyleForm[ m, ShowContents -> False], 
+                  StyleForm[ n, ShowContents -> False]],
+                Editable->False], 
+              InterpretationBox[\(m\[InvisibleSpace]n\),
+                SequenceForm[ m, n],
+                Editable->False]],
+            Subsuperscript[ F, 
+              SequenceForm[ 
+                StyleForm[ m, ShowContents -> False], 
+                StyleForm[ n, ShowContents -> False]], 
+              SequenceForm[ m, n]],
+            Editable->False], " ", 
+          InterpretationBox[
+            SubsuperscriptBox["L", 
+              InterpretationBox[
+                RowBox[{
+                  TagBox[
+                    StyleBox[
+                      TagBox[
+                        StyleBox["i",
+                          FontColor->RGBColor[1, 0, 0]],
+                        (StyleForm[ #, FontColor -> RGBColor[ 1, 0, 0]]&)],
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)], 
+                  "\[InvisibleSpace]", "m"}],
+                SequenceForm[ 
+                  StyleForm[ 
+                    red[ i], ShowContents -> False], m],
+                Editable->False], 
+              InterpretationBox[
+                RowBox[{
+                  TagBox[
+                    StyleBox["i",
+                      FontColor->RGBColor[1, 0, 0]],
+                    (StyleForm[ #, FontColor -> RGBColor[ 1, 0, 0]]&)], 
+                  "\[InvisibleSpace]", 
+                  TagBox[
+                    StyleBox["m",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)]}],
+                SequenceForm[ 
+                  red[ i], 
+                  StyleForm[ m, ShowContents -> False]],
+                Editable->False]],
+            Subsuperscript[ L, 
+              SequenceForm[ 
+                StyleForm[ 
+                  red[ i], ShowContents -> False], m], 
+              SequenceForm[ 
+                red[ i], 
+                StyleForm[ m, ShowContents -> False]]],
+            Editable->False], " ", 
+          InterpretationBox[
+            SubsuperscriptBox["L", 
+              InterpretationBox[
+                RowBox[{
+                  TagBox[
+                    StyleBox[
+                      TagBox[
+                        StyleBox["j",
+                          FontColor->RGBColor[1, 0, 0]],
+                        (StyleForm[ #, FontColor -> RGBColor[ 1, 0, 0]]&)],
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)], 
+                  "\[InvisibleSpace]", "n"}],
+                SequenceForm[ 
+                  StyleForm[ 
+                    red[ j], ShowContents -> False], n],
+                Editable->False], 
+              InterpretationBox[
+                RowBox[{
+                  TagBox[
+                    StyleBox["j",
+                      FontColor->RGBColor[1, 0, 0]],
+                    (StyleForm[ #, FontColor -> RGBColor[ 1, 0, 0]]&)], 
+                  "\[InvisibleSpace]", 
+                  TagBox[
+                    StyleBox["n",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)]}],
+                SequenceForm[ 
+                  red[ j], 
+                  StyleForm[ n, ShowContents -> False]],
+                Editable->False]],
+            Subsuperscript[ L, 
+              SequenceForm[ 
+                StyleForm[ 
+                  red[ j], ShowContents -> False], n], 
+              SequenceForm[ 
+                red[ j], 
+                StyleForm[ n, ShowContents -> False]]],
+            Editable->False]}],
+        FontFamily->"Courier",
+        FontSize->16],
+      (StyleForm[ #, FontSize -> 16, FontFamily -> "Courier"]&)]], "Output"],
+
+Cell[BoxData[
+    TagBox[
+      StyleBox[
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", GridBox[{
+                {
+                  "0", \(\(-\(1\/\@\(1 - \[Beta]\^2\)\)\) + \(2\ \[Beta]\ \
+Sin[t]\)\/\@\(1 - \[Beta]\^2\)\), \(-\(\(2\ \[Beta]\ Cos[
+                            t]\)\/\@\(1 - \[Beta]\^2\)\)\), "0"},
+                {\(1\/\@\(1 - \[Beta]\^2\) - \(2\ \[Beta]\ Sin[t]\)\/\@\(1 - \
+\[Beta]\^2\)\), "0", 
+                  "0", \(\(-\(\[Beta]\/\@\(1 - \[Beta]\^2\)\)\) + \(2\ Sin[t]\
+\)\/\@\(1 - \[Beta]\^2\)\)},
+                {\(\(2\ \[Beta]\ Cos[t]\)\/\@\(1 - \[Beta]\^2\)\), "0", 
+                  "0", \(-\(\(2\ Cos[t]\)\/\@\(1 - \[Beta]\^2\)\)\)},
+                {
+                  "0", \(\[Beta]\/\@\(1 - \[Beta]\^2\) - \(2\ Sin[t]\)\/\@\(1 \
+- \[Beta]\^2\)\), \(\(2\ Cos[t]\)\/\@\(1 - \[Beta]\^2\)\), "0"}
+                },
+              RowSpacings->1,
+              ColumnSpacings->1,
+              ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]],
+        FontFamily->"Courier",
+        FontSize->16],
+      (StyleForm[ #, FontSize -> 16, FontFamily -> "Courier"]&)]], "Output"]
+}, Open  ]],
+
+Cell[BoxData[""], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(Eb = {Fuu[red@1, red@0], Fuu[red@2, red@0], 
+          Fuu[red@3, red@0]};\)\), "\[IndentingNewLine]", 
+    \(\(Bb = {Fuu[red@3, red@2], Fuu[red@1, red@3], 
+          Fuu[red@2, red@1]};\)\), "\[IndentingNewLine]", 
+    \(Simplify[Eb] // MatrixForm\), "\[IndentingNewLine]", 
+    \(Simplify[Bb] // 
+      MatrixForm\[IndentingNewLine]\), "\[IndentingNewLine]", 
+    \(\)}], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      StyleBox[
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", 
+            TagBox[GridBox[{
+                  {\(\(1 - 2\ \[Beta]\ Sin[t]\)\/\@\(1 - \[Beta]\^2\)\)},
+                  {\(\(2\ \[Beta]\ Cos[t]\)\/\@\(1 - \[Beta]\^2\)\)},
+                  {"0"}
+                  },
+                RowSpacings->1,
+                ColumnAlignments->{Left}],
+              Column], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]],
+        FontFamily->"Courier",
+        FontSize->16],
+      (StyleForm[ #, FontSize -> 16, FontFamily -> "Courier"]&)]], "Output"],
+
+Cell[BoxData[
+    TagBox[
+      StyleBox[
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", 
+            TagBox[GridBox[{
+                  {\(\(2\ Cos[t]\)\/\@\(1 - \[Beta]\^2\)\)},
+                  {\(-\(\(\[Beta] - 2\ Sin[t]\)\/\@\(1 - \[Beta]\^2\)\)\)},
+                  {"0"}
+                  },
+                RowSpacings->1,
+                ColumnAlignments->{Left}],
+              Column], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]],
+        FontFamily->"Courier",
+        FontSize->16],
+      (StyleForm[ #, FontSize -> 16, FontFamily -> "Courier"]&)]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(term1\  = \ 
+      1 - 2\ \[Beta]\ Sin[t] \[Equal] \ 2\ \[Beta]\ Cos[t]\)], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      StyleBox[\(1 - 2\ \[Beta]\ Sin[t] \[Equal] 2\ \[Beta]\ Cos[t]\),
+        FontFamily->"Courier",
+        FontSize->16],
+      (StyleForm[ #, FontSize -> 16, FontFamily -> "Courier"]&)]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Solve[term1, \[Beta]]\)], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      StyleBox[\({{\[Beta] \[Rule] 1\/\(2\ \((Cos[t] + Sin[t])\)\)}}\),
+        FontFamily->"Courier",
+        FontSize->16],
+      (StyleForm[ #, FontSize -> 16, FontFamily -> "Courier"]&)]], "Output"]
+}, Open  ]]
+}, Open  ]]
+},
+FrontEndVersion->"5.1 for Microsoft Windows",
+ScreenRectangle->{{0, 1173}, {0, 979}},
+WindowSize->{1013, 537},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrintingCopies->1,
+PrintingPageRange->{Automatic, Automatic}
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 36, 3, 80, "Subtitle"],
+Cell[1815, 58, 878, 16, 270, "Input"],
+Cell[2696, 76, 26, 0, 30, "Input"],
+Cell[2725, 78, 2659, 44, 473, "Input"],
+Cell[5387, 124, 2582, 43, 453, "Input"],
+Cell[7972, 169, 275, 6, 130, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[8284, 180, 37, 4, 109, "Subtitle"],
+Cell[8324, 186, 332, 6, 130, "Input"],
+
+Cell[CellGroupData[{
+Cell[8681, 196, 876, 17, 190, "Input"],
+Cell[9560, 215, 655, 17, 103, "Output"],
+Cell[10218, 234, 4398, 112, 35, "Output"],
+Cell[14619, 348, 1183, 26, 169, "Output"]
+}, Open  ]],
+Cell[15817, 377, 26, 0, 30, "Input"],
+
+Cell[CellGroupData[{
+Cell[15868, 381, 405, 8, 130, "Input"],
+Cell[16276, 391, 635, 17, 115, "Output"],
+Cell[16914, 410, 628, 17, 115, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[17579, 432, 104, 2, 30, "Input"],
+Cell[17686, 436, 227, 5, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[17950, 446, 54, 1, 30, "Input"],
+Cell[18007, 449, 228, 5, 50, "Output"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

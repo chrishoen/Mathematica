@@ -1,0 +1,292 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      6400,        215]*)
+(*NotebookOutlinePosition[      7386,        249]*)
+(*  CellTagsIndexPosition[      7312,        243]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["CoordinatesToTensors", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox["CoordinateToTensors",
+            "MR"], 
+          StyleBox["[",
+            "MR"], 
+          
+          StyleBox[\({r, \[Theta], \[Phi] ... }, coord : x, 
+            flavor : Identity\),
+            "TI"], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will convert the coordinate symbols in the expression to the \
+corresponding indexed tensors."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["\<\
+The optional arguments coord and flavor give the coordinate label and index \
+flavor to use. Their default values are x and plain.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "The number of symbols must match ",
+  Cell[BoxData["NDim"]],
+  ", the length of BaseIndices."
+}], "MathCaption"],
+
+Cell["\<\
+The first symbol will be converted to a tensor with the first base index and \
+the last symbol will be converted to a tensor with the last base index.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["UseCoordinates",
+    ButtonData:>{"UseCoordinates"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["DeclareBaseIndices",
+    ButtonData:>{"DeclareBaseIndices"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SetMetricValues",
+    ButtonData:>{"SetMetricValues"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SetChristoffelValues",
+    ButtonData:>{"SetChristoffelValues"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["Save settings", "Text"],
+
+Cell[BoxData[{
+    \(\(oldindices = BaseIndices;\)\), "\n", 
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(DeclareBaseIndices[{1, 2, 3}]\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ {{red, Red}};\)\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[{{x, y}, 1}, {{g}, 2}]\)], "Input",
+  CellLabel->"In[7]:="],
+
+Cell[TextData[{
+  Cell[BoxData["CoordinatesToTensors"]],
+  " is the inverse of ",
+  Cell[BoxData["UseCoordinates"]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(xu[i]\), "\[IndentingNewLine]", 
+    \(% // EinsteinArray[]\), "\[IndentingNewLine]", 
+    \(% // UseCoordinates[{x, y, z}]\), "\[IndentingNewLine]", 
+    \(% // CoordinatesToTensors[{x, y, z}]\)}], "Input",
+  CellLabel->"In[8]:="],
+
+Cell["\<\
+For flavored indices, and for coordinate symbols other than x, we have to \
+include the optional arguments.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(yu[i] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // EinsteinArray[]\), "\[IndentingNewLine]", 
+    \(% // UseCoordinates[{x, y, z}, y, red]\), "\[IndentingNewLine]", 
+    \(% // CoordinatesToTensors[{x, y, z}, y, red]\)}], "Input",
+  CellLabel->"In[12]:="],
+
+Cell[TextData[{
+  Cell[BoxData["CoordinatesToTensors"]],
+  " is useful when setting the metric tensor, which must be in terms of \
+tensor values. Let's set the Schwarzschild spacetime metric."
+}], "Text"],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[{0, 1, 2, 3}]\), "\[IndentingNewLine]", 
+    \(metric = 
+      DiagonalMatrix[{\(-\((1 - 2  M/r)\)\), 1/\((1 - 2  M/r)\), r\^2, \ 
+          r\^2\ Sin[\[Theta]]\^2}]\)}], "Input",
+  CellLabel->"In[16]:="],
+
+Cell["\<\
+We can then convert to the form required for calculating Christoffel symbols.\
+\
+\>", "Text"],
+
+Cell[BoxData[
+    \(tmetric = 
+      metric // CoordinatesToTensors[{t, r, \[Theta], \[Phi]}]\)], "Input",
+  CellLabel->"In[18]:="],
+
+Cell[TextData[{
+  "We can then calculate the up Christoffel symbols and use ",
+  Cell[BoxData["UseCoordinates"]],
+  " to get back to the coordinate symbols."
+}], "Text"],
+
+Cell[BoxData[{
+    \(CalculateChristoffelu[xu[i], tmetric]\), "\[IndentingNewLine]", 
+    \(% // UseCoordinates[{t, r, \[Theta], \[Phi]}]\)}], "Input",
+  CellLabel->"In[19]:="],
+
+Cell["Restore settings", "Text"],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[{{x, y}, 1}, {{g}, 2}]\)], "Input",
+  CellLabel->"In[21]:="],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[oldindices]\), "\[IndentingNewLine]", 
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(Clear[oldindices, oldflavors]\)}], "Input",
+  CellLabel->"In[22]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{713, 515},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 67, 1, 31, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1846, 56, 630, 24, 49, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 7141, 234}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 67, 1, 31, "ObjectName",
+  CellTags->"Function?"],
+Cell[1846, 56, 630, 24, 49, "Usage",
+  CellTags->"Function?"],
+Cell[2479, 82, 161, 3, 31, "MathCaption"],
+Cell[2643, 87, 131, 4, 31, "MathCaption"],
+Cell[2777, 93, 181, 3, 48, "MathCaption"],
+Cell[2961, 98, 494, 18, 31, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[3480, 120, 34, 0, 40, "ExampleSection"],
+Cell[3517, 122, 96, 2, 29, "Input"],
+Cell[3616, 126, 29, 0, 25, "Text"],
+Cell[3648, 128, 323, 6, 109, "Input"],
+Cell[3974, 136, 101, 2, 29, "Input"],
+Cell[4078, 140, 134, 5, 25, "Text"],
+Cell[4215, 147, 252, 5, 89, "Input"],
+Cell[4470, 154, 131, 3, 25, "Text"],
+Cell[4604, 159, 286, 5, 89, "Input"],
+Cell[4893, 166, 204, 4, 42, "Text"],
+Cell[5100, 172, 244, 5, 50, "Input"],
+Cell[5347, 179, 103, 3, 25, "Text"],
+Cell[5453, 184, 131, 3, 29, "Input"],
+Cell[5587, 189, 169, 4, 25, "Text"],
+Cell[5759, 195, 176, 3, 49, "Input"],
+Cell[5938, 200, 32, 0, 25, "Text"],
+Cell[5973, 202, 101, 2, 29, "Input"],
+Cell[6077, 206, 295, 5, 89, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

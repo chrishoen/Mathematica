@@ -1,0 +1,209 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      4171,        141]*)
+(*NotebookOutlinePosition[      5178,        176]*)
+(*  CellTagsIndexPosition[      5104,        170]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["SymbolicIndexQ", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["SymbolicIndexQ",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["index",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  "returns True if index is a Symbol or if index is ",
+  Cell[BoxData[
+      \(flavor[i_Symbol]\)]],
+  " where flavor is a currently active index flavor."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  Cell[BoxData["SymbolicIndexQ"]],
+  " is principally a service routine for programming other routines."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["BaseIndices",
+    ButtonData:>{"BaseIndices"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["IndexFlavors",
+    ButtonData:>{"IndexFlavors"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["RawIndex",
+    ButtonData:>{"RawIndex"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples  ", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["Save the settings and declare base indices and flavors.", "Text"],
+
+Cell[BoxData[{
+    \(\(oldindices = BaseIndices;\)\), "\n", 
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(DeclareBaseIndices[{1, 2, 3}]\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ {{red, Red}, {rocket, 
+            SuperStar}};\)\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell["The following are symbolic indices...", "Text"],
+
+Cell[BoxData[{
+    \({i, red@i, rocket@j}\), "\[IndentingNewLine]", 
+    \(SymbolicIndexQ /@ %\)}], "Input",
+  CellLabel->"In[7]:="],
+
+Cell["The following are not symbolic indices...", "Text"],
+
+Cell[BoxData[{
+    \({1, red@2, rocket@2, Dif[k], Cov[red@k], 
+      Cov[rocket@k]}\), "\[IndentingNewLine]", 
+    \(SymbolicIndexQ /@ %\)}], "Input",
+  CellLabel->"In[9]:="],
+
+Cell["Restore the initial values...", "Text"],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[oldindices]\), "\[IndentingNewLine]", 
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(Clear[oldindices, oldflavors]\)}], "Input",
+  CellLabel->"In[11]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{665, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 61, 1, 31, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1840, 56, 446, 17, 49, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 4933, 161}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 61, 1, 31, "ObjectName",
+  CellTags->"Function?"],
+Cell[1840, 56, 446, 17, 49, "Usage",
+  CellTags->"Function?"],
+Cell[2289, 75, 139, 3, 31, "MathCaption"],
+Cell[2431, 80, 344, 14, 31, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[2800, 98, 36, 0, 40, "ExampleSection"],
+Cell[2839, 100, 96, 2, 29, "Input"],
+Cell[2938, 104, 71, 0, 25, "Text"],
+Cell[3012, 106, 357, 7, 109, "Input"],
+Cell[3372, 115, 53, 0, 25, "Text"],
+Cell[3428, 117, 132, 3, 49, "Input"],
+Cell[3563, 122, 57, 0, 25, "Text"],
+Cell[3623, 124, 174, 4, 49, "Input"],
+Cell[3800, 130, 45, 0, 25, "Text"],
+Cell[3848, 132, 295, 5, 89, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

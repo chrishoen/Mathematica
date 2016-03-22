@@ -1,0 +1,224 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      4559,        155]*)
+(*NotebookOutlinePosition[      5545,        189]*)
+(*  CellTagsIndexPosition[      5471,        183]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["ConstructDirectProduct", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["ConstructDirectProduct",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will convert a direct product of tensor slot expressions to an expression \
+with a single set of slots."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  " The direct product is constructed using ",
+  Cell[BoxData[
+      \(CircleTimes\)]],
+  "."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["EvaluateSlots",
+    ButtonData:>{"EvaluateSlots"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["CircleEvalRule",
+    ButtonData:>{"CircleEvalRule"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["The following is a simple construction of a direct product.", "Text"],
+
+Cell[BoxData[{
+    \(S[w, x]\[CircleTimes]T[y, z]\), "\[IndentingNewLine]", 
+    \(% // ConstructDirectProduct\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell["\<\
+In the following, the direct product is constructed from two dyads and then \
+evaluated.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\((a\[CircleTimes]b)\)[w, x]\[CircleTimes]\((c\[CircleTimes]d)\)[y, 
+        z]\), "\[IndentingNewLine]", 
+    \(% // ConstructDirectProduct\), "\[IndentingNewLine]", 
+    \(% /. CircleEvalRule\)}], "Input",
+  CellLabel->"In[4]:="],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[{{u, v, x, y, e}, 1}, {g, 2}]\)], "Input",
+  CellLabel->"In[7]:="],
+
+Cell["\<\
+The following is constructed from two 1-forms on vectors and then \
+evaluated.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\((ud[m] eu[m])\)[xu[i] ed[i]]\[CircleTimes]\((vd[n] eu[n])\)[
+        yu[j] ed[j]]\), "\[IndentingNewLine]", 
+    \(% // ConstructDirectProduct\), "\[IndentingNewLine]", 
+    \(% // EvaluateSlots[e, g]\), "\[IndentingNewLine]", 
+    \(\(% // EinsteinSum[]\) // Factor\)}], "Input",
+  CellLabel->"In[8]:="],
+
+Cell["\<\
+This does the expansion before the direct product is constructed.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\((ud[m] eu[m])\)[xu[i] ed[i]]\[CircleTimes]\((vd[n] eu[n])\)[
+        yu[j] ed[j]]\), "\[IndentingNewLine]", 
+    \(% /. \ a_\ b_\  \[RuleDelayed] \(EinsteinSum[]\)[
+          a\ b]\), "\[IndentingNewLine]", 
+    \(% // ConstructDirectProduct\), "\[IndentingNewLine]", 
+    \(\(% // EvaluateSlots[e, g]\) // Factor\)}], "Input",
+  CellLabel->"In[12]:="],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[{{u, v, x, y, e}, 1}, {g, 2}]\)], "Input",
+  CellLabel->"In[16]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{674, 478},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 69, 1, 31, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1848, 56, 407, 15, 49, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 5300, 174}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 69, 1, 31, "ObjectName",
+  CellTags->"Function?"],
+Cell[1848, 56, 407, 15, 49, "Usage",
+  CellTags->"Function?"],
+Cell[2258, 73, 128, 5, 31, "MathCaption"],
+Cell[2389, 80, 258, 10, 31, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[2672, 94, 34, 0, 40, "ExampleSection"],
+Cell[2709, 96, 96, 2, 29, "Input"],
+Cell[2808, 100, 75, 0, 25, "Text"],
+Cell[2886, 102, 148, 3, 49, "Input"],
+Cell[3037, 107, 112, 3, 25, "Text"],
+Cell[3152, 112, 252, 5, 69, "Input"],
+Cell[3407, 119, 108, 2, 29, "Input"],
+Cell[3518, 123, 102, 3, 25, "Text"],
+Cell[3623, 128, 327, 6, 89, "Input"],
+Cell[3953, 136, 89, 2, 25, "Text"],
+Cell[4045, 140, 375, 7, 89, "Input"],
+Cell[4423, 149, 108, 2, 29, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

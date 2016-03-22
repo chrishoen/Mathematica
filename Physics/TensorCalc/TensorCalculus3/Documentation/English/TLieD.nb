@@ -1,0 +1,293 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      5971,        214]*)
+(*NotebookOutlinePosition[      6978,        249]*)
+(*  CellTagsIndexPosition[      6904,        243]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["LieD", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["LieD",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox[\(tensor, V\),
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " represents the Lie derivative of the tensor with respect to the vector \
+field ",
+  Cell[BoxData[
+      \(V\)]],
+  ".\n\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["LieD",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox[\(tensor, {U, V,  ... }\),
+          "TI"], "]"}]]],
+  " represents the Lie derivative with respect to the list of vector fields."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  " The Lie derivative is ambiguous until it is expanded to partial \
+derivatives with ",
+  Cell[BoxData["ExpandLieD"]],
+  ", which provides the coordinates."
+}], "MathCaption"],
+
+Cell[" U, V, etc. are tensor labels.", "MathCaption"],
+
+Cell[TextData[{
+  " LieD is by default left unformatted, which means it displays as ",
+  Cell[BoxData[
+      \(LieD\)]],
+  ". It could be changed, for example, to ",
+  Cell[BoxData[
+      \(\[ScriptCapitalL]\)]],
+  " (script capital L) by using ",
+  Cell[BoxData[
+      \(SetDerivativeSymbols\)]],
+  "."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "See also:  ",
+  ButtonBox["ExpandLieD",
+    ButtonData:>{"ExpandLieD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SetDerivativeSymbols",
+    ButtonData:>{"SetDerivativeSymbols"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["AbsoluteD",
+    ButtonData:>{"AbsoluteD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["CovariantD",
+    ButtonData:>{"CovariantD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["PartialD",
+    ButtonData:>{"PartialD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["TotalD",
+    ButtonData:>{"TotalD"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["Save the settings.", "Text"],
+
+Cell[BoxData[{
+    \(\(oldindices = BaseIndices;\)\), "\[IndentingNewLine]", 
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(DeclareIndexFlavor[{red, Red}]\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[{{S, T, V}, 1}, {W, 2}]\)], "Input",
+  CellLabel->"In[6]:="],
+
+Cell["LieD is by default left unformatted.", "Text"],
+
+Cell[BoxData[{
+    \(Td[i]\), "\[IndentingNewLine]", 
+    \(LieD[%, V]\), "\[IndentingNewLine]", 
+    \(% // FullForm\)}], "Input",
+  CellLabel->"In[7]:="],
+
+Cell["\<\
+LieD obeys the usual derivative rules. A symbol is considered constant.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(a\ Su[i] + 3\ Tu[i]\), "\[IndentingNewLine]", 
+    \(LieD[%, V]\)}], "Input",
+  CellLabel->"In[10]:="],
+
+Cell[BoxData[{
+    \(a\ Tu[i]\ Wud[j, i]\), "\[IndentingNewLine]", 
+    \(LieD[%, V]\)}], "Input",
+  CellLabel->"In[12]:="],
+
+Cell["The Lie derivative of a scalar is also defined.", "Text"],
+
+Cell[BoxData[{
+    \(a\ Tensor[\[Phi]]\), "\[IndentingNewLine]", 
+    \(LieD[%, V]\)}], "Input",
+  CellLabel->"In[14]:="],
+
+Cell["Higher order derivatives are supported.", "Text"],
+
+Cell[BoxData[{
+    \(Tensor[\[Phi]] Tensor[\[Psi]]\), "\[IndentingNewLine]", 
+    \(LieD[%, {V, V}]\)}], "Input",
+  CellLabel->"In[16]:="],
+
+Cell["Nothing special has to be done for flavored expressions.", "Text"],
+
+Cell[BoxData[{
+    \(Tensor[\[Phi]] Wud[i, j] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(LieD[%, {V, V}]\)}], "Input",
+  CellLabel->"In[18]:="],
+
+Cell["Restore the settings.", "Text"],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[{{S, T, V}, 1}, {W, 2}]\)], "Input",
+  CellLabel->"In[20]:="],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[oldindices]\), "\[IndentingNewLine]", 
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(Clear[oldindices, oldflavors]\)}], "Input",
+  CellLabel->"In[21]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{613, 470},
+WindowMargins->{{2, Automatic}, {Automatic, 5}},
+ShowSelection->True,
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 51, 1, 31, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1830, 56, 696, 27, 55, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 6733, 234}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 51, 1, 31, "ObjectName",
+  CellTags->"Function?"],
+Cell[1830, 56, 696, 27, 55, "Usage",
+  CellTags->"Function?"],
+Cell[2529, 85, 193, 5, 48, "MathCaption"],
+Cell[2725, 92, 53, 0, 31, "MathCaption"],
+Cell[2781, 94, 322, 11, 48, "MathCaption"],
+Cell[3106, 107, 643, 26, 48, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[3774, 137, 34, 0, 40, "ExampleSection"],
+Cell[3811, 139, 96, 2, 29, "Input"],
+Cell[3910, 143, 34, 0, 25, "Text"],
+Cell[3947, 145, 268, 5, 89, "Input"],
+Cell[4218, 152, 102, 2, 29, "Input"],
+Cell[4323, 156, 52, 0, 25, "Text"],
+Cell[4378, 158, 155, 4, 69, "Input"],
+Cell[4536, 164, 95, 2, 25, "Text"],
+Cell[4634, 168, 123, 3, 49, "Input"],
+Cell[4760, 173, 123, 3, 49, "Input"],
+Cell[4886, 178, 63, 0, 25, "Text"],
+Cell[4952, 180, 121, 3, 49, "Input"],
+Cell[5076, 185, 55, 0, 25, "Text"],
+Cell[5134, 187, 138, 3, 49, "Input"],
+Cell[5275, 192, 72, 0, 25, "Text"],
+Cell[5350, 194, 150, 3, 49, "Input"],
+Cell[5503, 199, 37, 0, 25, "Text"],
+Cell[5543, 201, 102, 2, 29, "Input"],
+Cell[5648, 205, 295, 5, 89, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

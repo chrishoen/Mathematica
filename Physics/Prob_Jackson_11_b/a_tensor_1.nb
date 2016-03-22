@@ -1,0 +1,532 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.1'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     17302,        480]*)
+(*NotebookOutlinePosition[     18008,        504]*)
+(*  CellTagsIndexPosition[     17964,        500]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[BoxData[{
+    \(\(ClearAll;\)\), "\[IndentingNewLine]", 
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\), "\[IndentingNewLine]", 
+    \(DeclareBaseIndices[{0, 1, 2, 3}]\), "\[IndentingNewLine]", 
+    \(\)}], "Input"],
+
+Cell[BoxData[{
+    \(DefineTensorShortcuts[{T, g}, 2]\), "\[IndentingNewLine]", 
+    \(DefineTensorShortcuts[{x, y}, 1]\), "\[IndentingNewLine]", 
+    \(\)}], "Input"],
+
+Cell[BoxData[""], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(gdd[i, k] Tud[k, j]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g]\)}], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      StyleBox[
+        RowBox[{
+          InterpretationBox[
+            SubsuperscriptBox["g", 
+              InterpretationBox[\(i\[InvisibleSpace]k\),
+                SequenceForm[ i, k],
+                Editable->False], 
+              InterpretationBox[
+                RowBox[{
+                  TagBox[
+                    StyleBox["i",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)], 
+                  "\[InvisibleSpace]", 
+                  TagBox[
+                    StyleBox["k",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)]}],
+                SequenceForm[ 
+                  StyleForm[ i, ShowContents -> False], 
+                  StyleForm[ k, ShowContents -> False]],
+                Editable->False]],
+            Subsuperscript[ g, 
+              SequenceForm[ i, k], 
+              SequenceForm[ 
+                StyleForm[ i, ShowContents -> False], 
+                StyleForm[ k, ShowContents -> False]]],
+            Editable->False], " ", 
+          InterpretationBox[
+            SubsuperscriptBox["T", 
+              InterpretationBox[
+                RowBox[{
+                  TagBox[
+                    StyleBox["k",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)], 
+                  "\[InvisibleSpace]", "j"}],
+                SequenceForm[ 
+                  StyleForm[ k, ShowContents -> False], j],
+                Editable->False], 
+              InterpretationBox[
+                RowBox[{"k", "\[InvisibleSpace]", 
+                  TagBox[
+                    StyleBox["j",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)]}],
+                SequenceForm[ k, 
+                  StyleForm[ j, ShowContents -> False]],
+                Editable->False]],
+            Subsuperscript[ T, 
+              SequenceForm[ 
+                StyleForm[ k, ShowContents -> False], j], 
+              SequenceForm[ k, 
+                StyleForm[ j, ShowContents -> False]]],
+            Editable->False]}],
+        FontFamily->"Courier",
+        FontSize->16],
+      (StyleForm[ #, FontSize -> 16, FontFamily -> "Courier"]&)]], "Output"],
+
+Cell[BoxData[
+    TagBox[
+      StyleBox[
+        InterpretationBox[
+          SubsuperscriptBox["T", 
+            InterpretationBox[\(i\[InvisibleSpace]j\),
+              SequenceForm[ i, j],
+              Editable->False], 
+            InterpretationBox[
+              RowBox[{
+                TagBox[
+                  StyleBox["i",
+                    ShowContents->False],
+                  (StyleForm[ #, ShowContents -> False]&)], 
+                "\[InvisibleSpace]", 
+                TagBox[
+                  StyleBox["j",
+                    ShowContents->False],
+                  (StyleForm[ #, ShowContents -> False]&)]}],
+              SequenceForm[ 
+                StyleForm[ i, ShowContents -> False], 
+                StyleForm[ j, ShowContents -> False]],
+              Editable->False]],
+          Subsuperscript[ T, 
+            SequenceForm[ i, j], 
+            SequenceForm[ 
+              StyleForm[ i, ShowContents -> False], 
+              StyleForm[ j, ShowContents -> False]]],
+          Editable->False],
+        FontFamily->"Courier",
+        FontSize->16],
+      (StyleForm[ #, FontSize -> 16, FontFamily -> "Courier"]&)]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(xu[i]\), "\n", 
+    \(% // EinsteinArray[]\), "\n", 
+    \(xu[i] xd[i]\), "\n", 
+    \(% // EinsteinSum[]\)}], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      StyleBox[
+        InterpretationBox[
+          SubsuperscriptBox["x", 
+            InterpretationBox[
+              TagBox[
+                StyleBox["i",
+                  ShowContents->False],
+                (StyleForm[ #, ShowContents -> False]&)],
+              SequenceForm[ 
+                StyleForm[ i, ShowContents -> False]],
+              Editable->False], 
+            InterpretationBox["i",
+              SequenceForm[ i],
+              Editable->False]],
+          Subsuperscript[ x, 
+            SequenceForm[ 
+              StyleForm[ i, ShowContents -> False]], 
+            SequenceForm[ i]],
+          Editable->False],
+        FontFamily->"Courier",
+        FontSize->16],
+      (StyleForm[ #, FontSize -> 16, FontFamily -> "Courier"]&)]], "Output"],
+
+Cell[BoxData[
+    TagBox[
+      StyleBox[
+        RowBox[{"{", 
+          RowBox[{
+            InterpretationBox[
+              SubsuperscriptBox["x", 
+                InterpretationBox[
+                  TagBox[
+                    StyleBox["0",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)],
+                  SequenceForm[ 
+                    StyleForm[ 0, ShowContents -> False]],
+                  Editable->False], 
+                InterpretationBox["0",
+                  SequenceForm[ 0],
+                  Editable->False]],
+              Subsuperscript[ x, 
+                SequenceForm[ 
+                  StyleForm[ 0, ShowContents -> False]], 
+                SequenceForm[ 0]],
+              Editable->False], ",", 
+            InterpretationBox[
+              SubsuperscriptBox["x", 
+                InterpretationBox[
+                  TagBox[
+                    StyleBox["1",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)],
+                  SequenceForm[ 
+                    StyleForm[ 1, ShowContents -> False]],
+                  Editable->False], 
+                InterpretationBox["1",
+                  SequenceForm[ 1],
+                  Editable->False]],
+              Subsuperscript[ x, 
+                SequenceForm[ 
+                  StyleForm[ 1, ShowContents -> False]], 
+                SequenceForm[ 1]],
+              Editable->False], ",", 
+            InterpretationBox[
+              SubsuperscriptBox["x", 
+                InterpretationBox[
+                  TagBox[
+                    StyleBox["2",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)],
+                  SequenceForm[ 
+                    StyleForm[ 2, ShowContents -> False]],
+                  Editable->False], 
+                InterpretationBox["2",
+                  SequenceForm[ 2],
+                  Editable->False]],
+              Subsuperscript[ x, 
+                SequenceForm[ 
+                  StyleForm[ 2, ShowContents -> False]], 
+                SequenceForm[ 2]],
+              Editable->False], ",", 
+            InterpretationBox[
+              SubsuperscriptBox["x", 
+                InterpretationBox[
+                  TagBox[
+                    StyleBox["3",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)],
+                  SequenceForm[ 
+                    StyleForm[ 3, ShowContents -> False]],
+                  Editable->False], 
+                InterpretationBox["3",
+                  SequenceForm[ 3],
+                  Editable->False]],
+              Subsuperscript[ x, 
+                SequenceForm[ 
+                  StyleForm[ 3, ShowContents -> False]], 
+                SequenceForm[ 3]],
+              Editable->False]}], "}"}],
+        FontFamily->"Courier",
+        FontSize->16],
+      (StyleForm[ #, FontSize -> 16, FontFamily -> "Courier"]&)]], "Output"],
+
+Cell[BoxData[
+    TagBox[
+      StyleBox[
+        RowBox[{
+          InterpretationBox[
+            SubsuperscriptBox["x", 
+              InterpretationBox[
+                TagBox[
+                  StyleBox["i",
+                    ShowContents->False],
+                  (StyleForm[ #, ShowContents -> False]&)],
+                SequenceForm[ 
+                  StyleForm[ i, ShowContents -> False]],
+                Editable->False], 
+              InterpretationBox["i",
+                SequenceForm[ i],
+                Editable->False]],
+            Subsuperscript[ x, 
+              SequenceForm[ 
+                StyleForm[ i, ShowContents -> False]], 
+              SequenceForm[ i]],
+            Editable->False], " ", 
+          InterpretationBox[
+            SubsuperscriptBox["x", 
+              InterpretationBox["i",
+                SequenceForm[ i],
+                Editable->False], 
+              InterpretationBox[
+                TagBox[
+                  StyleBox["i",
+                    ShowContents->False],
+                  (StyleForm[ #, ShowContents -> False]&)],
+                SequenceForm[ 
+                  StyleForm[ i, ShowContents -> False]],
+                Editable->False]],
+            Subsuperscript[ x, 
+              SequenceForm[ i], 
+              SequenceForm[ 
+                StyleForm[ i, ShowContents -> False]]],
+            Editable->False]}],
+        FontFamily->"Courier",
+        FontSize->16],
+      (StyleForm[ #, FontSize -> 16, FontFamily -> "Courier"]&)]], "Output"],
+
+Cell[BoxData[
+    TagBox[
+      StyleBox[
+        RowBox[{
+          RowBox[{
+            InterpretationBox[
+              SubsuperscriptBox["x", 
+                InterpretationBox[
+                  TagBox[
+                    StyleBox["0",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)],
+                  SequenceForm[ 
+                    StyleForm[ 0, ShowContents -> False]],
+                  Editable->False], 
+                InterpretationBox["0",
+                  SequenceForm[ 0],
+                  Editable->False]],
+              Subsuperscript[ x, 
+                SequenceForm[ 
+                  StyleForm[ 0, ShowContents -> False]], 
+                SequenceForm[ 0]],
+              Editable->False], " ", 
+            InterpretationBox[
+              SubsuperscriptBox["x", 
+                InterpretationBox["0",
+                  SequenceForm[ 0],
+                  Editable->False], 
+                InterpretationBox[
+                  TagBox[
+                    StyleBox["0",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)],
+                  SequenceForm[ 
+                    StyleForm[ 0, ShowContents -> False]],
+                  Editable->False]],
+              Subsuperscript[ x, 
+                SequenceForm[ 0], 
+                SequenceForm[ 
+                  StyleForm[ 0, ShowContents -> False]]],
+              Editable->False]}], "+", 
+          RowBox[{
+            InterpretationBox[
+              SubsuperscriptBox["x", 
+                InterpretationBox[
+                  TagBox[
+                    StyleBox["1",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)],
+                  SequenceForm[ 
+                    StyleForm[ 1, ShowContents -> False]],
+                  Editable->False], 
+                InterpretationBox["1",
+                  SequenceForm[ 1],
+                  Editable->False]],
+              Subsuperscript[ x, 
+                SequenceForm[ 
+                  StyleForm[ 1, ShowContents -> False]], 
+                SequenceForm[ 1]],
+              Editable->False], " ", 
+            InterpretationBox[
+              SubsuperscriptBox["x", 
+                InterpretationBox["1",
+                  SequenceForm[ 1],
+                  Editable->False], 
+                InterpretationBox[
+                  TagBox[
+                    StyleBox["1",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)],
+                  SequenceForm[ 
+                    StyleForm[ 1, ShowContents -> False]],
+                  Editable->False]],
+              Subsuperscript[ x, 
+                SequenceForm[ 1], 
+                SequenceForm[ 
+                  StyleForm[ 1, ShowContents -> False]]],
+              Editable->False]}], "+", 
+          RowBox[{
+            InterpretationBox[
+              SubsuperscriptBox["x", 
+                InterpretationBox[
+                  TagBox[
+                    StyleBox["2",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)],
+                  SequenceForm[ 
+                    StyleForm[ 2, ShowContents -> False]],
+                  Editable->False], 
+                InterpretationBox["2",
+                  SequenceForm[ 2],
+                  Editable->False]],
+              Subsuperscript[ x, 
+                SequenceForm[ 
+                  StyleForm[ 2, ShowContents -> False]], 
+                SequenceForm[ 2]],
+              Editable->False], " ", 
+            InterpretationBox[
+              SubsuperscriptBox["x", 
+                InterpretationBox["2",
+                  SequenceForm[ 2],
+                  Editable->False], 
+                InterpretationBox[
+                  TagBox[
+                    StyleBox["2",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)],
+                  SequenceForm[ 
+                    StyleForm[ 2, ShowContents -> False]],
+                  Editable->False]],
+              Subsuperscript[ x, 
+                SequenceForm[ 2], 
+                SequenceForm[ 
+                  StyleForm[ 2, ShowContents -> False]]],
+              Editable->False]}], "+", 
+          RowBox[{
+            InterpretationBox[
+              SubsuperscriptBox["x", 
+                InterpretationBox[
+                  TagBox[
+                    StyleBox["3",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)],
+                  SequenceForm[ 
+                    StyleForm[ 3, ShowContents -> False]],
+                  Editable->False], 
+                InterpretationBox["3",
+                  SequenceForm[ 3],
+                  Editable->False]],
+              Subsuperscript[ x, 
+                SequenceForm[ 
+                  StyleForm[ 3, ShowContents -> False]], 
+                SequenceForm[ 3]],
+              Editable->False], " ", 
+            InterpretationBox[
+              SubsuperscriptBox["x", 
+                InterpretationBox["3",
+                  SequenceForm[ 3],
+                  Editable->False], 
+                InterpretationBox[
+                  TagBox[
+                    StyleBox["3",
+                      ShowContents->False],
+                    (StyleForm[ #, ShowContents -> False]&)],
+                  SequenceForm[ 
+                    StyleForm[ 3, ShowContents -> False]],
+                  Editable->False]],
+              Subsuperscript[ x, 
+                SequenceForm[ 3], 
+                SequenceForm[ 
+                  StyleForm[ 3, ShowContents -> False]]],
+              Editable->False]}]}],
+        FontFamily->"Courier",
+        FontSize->16],
+      (StyleForm[ #, FontSize -> 16, FontFamily -> "Courier"]&)]], "Output"]
+}, Open  ]]
+},
+FrontEndVersion->"5.1 for Microsoft Windows",
+ScreenRectangle->{{0, 1173}, {0, 979}},
+WindowSize->{1013, 537},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrintingCopies->1,
+PrintingPageRange->{Automatic, Automatic}
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1754, 51, 221, 4, 90, "Input"],
+Cell[1978, 57, 167, 3, 70, "Input"],
+Cell[2148, 62, 26, 0, 30, "Input"],
+
+Cell[CellGroupData[{
+Cell[2199, 66, 110, 2, 50, "Input"],
+Cell[2312, 70, 2320, 59, 35, "Output"],
+Cell[4635, 131, 1165, 31, 35, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[5837, 167, 140, 4, 90, "Input"],
+Cell[5980, 173, 801, 23, 32, "Output"],
+Cell[6784, 198, 3044, 79, 32, "Output"],
+Cell[9831, 279, 1527, 42, 32, "Output"],
+Cell[11361, 323, 5925, 154, 32, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

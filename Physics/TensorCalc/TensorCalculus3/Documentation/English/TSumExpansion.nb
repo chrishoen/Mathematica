@@ -1,0 +1,361 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      7807,        273]*)
+(*NotebookOutlinePosition[      8794,        307]*)
+(*  CellTagsIndexPosition[      8720,        301]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["SumExpansion", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox["SumExpansion",
+            "MR"], 
+          StyleBox["[",
+            "MR"], 
+          StyleBox[\(i, j,  ... , base : BaseIndices\),
+            "TI"], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "MR"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will sum on the indices i, j,..., in the expression. The range of the sum \
+is over the base list, which has the default value of BaseIndices.\n\
+\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox["SumExpansion",
+            "MR"], 
+          StyleBox["[",
+            "MR"], 
+          RowBox[{
+            RowBox[{
+              StyleBox["{",
+                "MR"], 
+              StyleBox[\(i, j,  ... \),
+                "TI"], 
+              StyleBox["}",
+                "TI"]}], 
+            StyleBox[",",
+              "TI"], 
+            StyleBox[\(base : BaseIndices\),
+              "TI"]}], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "MR"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " may also be used."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["\<\
+ The summation indices must carry their flavors. base indices are not \
+flavored.\
+\>", "MathCaption"],
+
+Cell["\<\
+ The expansion will be done on individual terms, terms in sums, on both sides \
+of an equation, and over arrays.\
+\>", "MathCaption"],
+
+Cell["\<\
+ Otherwise SumExpansion expands the entire expression it is applied to. \
+Sometimes you may wish to Map it to more specific subexpressions.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  " ",
+  Cell[BoxData["EinsteinSum"]],
+  ", which automatically expands on repeated up/down indices, will usually be \
+more convenient to use."
+}], "MathCaption"],
+
+Cell["\<\
+No tensor label may be the same as one of the expansion indices, otherwise \
+incorrect results will be obtained. If this unlikely case should occur you \
+can reindex to avoid the problem.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["ArrayExpansion",
+    ButtonData:>{"ArrayExpansion"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["EinsteinSum",
+    ButtonData:>{"EinsteinSum"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["EinsteinArray",
+    ButtonData:>{"EinsteinArray"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["Save the settings and declare base indices and flavors.", "Text"],
+
+Cell[BoxData[{
+    \(\(oldindices = BaseIndices;\)\), "\n", 
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(DeclareBaseIndices[{1, 2, 3}]\), "\[IndentingNewLine]", 
+    \(DeclareIndexFlavor[{red, Red}]\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[{{x, y}, 1}, {{S, T}, 2}]\)], "Input",
+  CellLabel->"In[7]:="],
+
+Cell[BoxData[{
+    \(xu[i] yd[i]\), "\[IndentingNewLine]", 
+    \(% // SumExpansion[i]\)}], "Input",
+  CellLabel->"In[8]:="],
+
+Cell["SumExpansion does not check for proper index notation.", "Text"],
+
+Cell[BoxData[{
+    \(xu[i] yu[i]\), "\[IndentingNewLine]", 
+    \(% // SumExpansion[i]\)}], "Input",
+  CellLabel->"In[10]:="],
+
+Cell["\<\
+The expansion will not occur unless the summation index carries the matching \
+flavor.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(xu[i] yd[i] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // SumExpansion[i]\)}], "Input",
+  CellLabel->"In[12]:="],
+
+Cell[BoxData[{
+    \(xu[i] yd[i] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // SumExpansion[red@i]\)}], "Input",
+  CellLabel->"In[14]:="],
+
+Cell["\<\
+A partial expansion can be done over a subset of the base indices. The base \
+subset is never flavored.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(xu[i] yd[i] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // SumExpansion[red@i, {1, 3}]\)}], "Input",
+  CellLabel->"In[16]:="],
+
+Cell["\<\
+An error occurs if the base specification is not a subset of BaseIndices.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(xu[i] yd[i] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // SumExpansion[red@i, {1, 4}]\)}], "Input",
+  CellLabel->"In[18]:="],
+
+Cell["Only the specified indices are expanded.", "Text"],
+
+Cell[BoxData[{
+    \(xu[i] yd[i] + xu[j] yd[j]\), "\[IndentingNewLine]", 
+    \(% // SumExpansion[j]\)}], "Input",
+  CellLabel->"In[20]:="],
+
+Cell["It operates on sums on both sides of an equation...", "Text"],
+
+Cell[BoxData[{
+    \(xu[i] xd[i] + Sud[i, j] xu[j] \[Equal] 
+      yu[i] yd[i] + Tud[i, j] yu[j]\), "\[IndentingNewLine]", 
+    \(% // SumExpansion[i, j]\)}], "Input",
+  CellLabel->"In[22]:="],
+
+Cell["\<\
+SumExpansion operates on dot product expressions and CircleTimes expressions.\
+\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(xu[i] . yd[i]\), "\[IndentingNewLine]", 
+    \(% // SumExpansion[i]\)}], "Input",
+  CellLabel->"In[24]:="],
+
+Cell[BoxData[{
+    \(xu[i]\[CircleTimes]yd[i]\), "\[IndentingNewLine]", 
+    \(% // SumExpansion[i]\)}], "Input",
+  CellLabel->"In[26]:="],
+
+Cell["It also operates over arrays.", "Text"],
+
+Cell[BoxData[{
+    \({{xu[i] yd[i]}, {xd[i] yu[i]}}\), "\[IndentingNewLine]", 
+    \(% // SumExpansion[i]\)}], "Input",
+  CellLabel->"In[28]:="],
+
+Cell["Restore the initial values...", "Text"],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[{{x, y}, 1}, {{S, T}, 2}]\)], "Input",
+  CellLabel->"In[30]:="],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[oldindices]\), "\[IndentingNewLine]", 
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(Clear[oldindices, oldflavors]\)}], "Input",
+  CellLabel->"In[31]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 941}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{665, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 59, 1, 41, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1838, 56, 1318, 51, 73, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 8548, 292}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 59, 1, 41, "ObjectName",
+  CellTags->"Function?"],
+Cell[1838, 56, 1318, 51, 73, "Usage",
+  CellTags->"Function?"],
+Cell[3159, 109, 112, 3, 41, "MathCaption"],
+Cell[3274, 114, 143, 3, 41, "MathCaption"],
+Cell[3420, 119, 170, 3, 58, "MathCaption"],
+Cell[3593, 124, 178, 5, 41, "MathCaption"],
+Cell[3774, 131, 218, 4, 58, "MathCaption"],
+Cell[3995, 137, 358, 14, 41, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[4378, 155, 34, 0, 39, "ExampleSection"],
+Cell[4415, 157, 96, 2, 29, "Input"],
+Cell[4514, 161, 71, 0, 25, "Text"],
+Cell[4588, 163, 314, 6, 109, "Input"],
+Cell[4905, 171, 104, 2, 29, "Input"],
+Cell[5012, 175, 124, 3, 49, "Input"],
+Cell[5139, 180, 70, 0, 25, "Text"],
+Cell[5212, 182, 125, 3, 49, "Input"],
+Cell[5340, 187, 110, 3, 25, "Text"],
+Cell[5453, 192, 142, 3, 49, "Input"],
+Cell[5598, 197, 146, 3, 49, "Input"],
+Cell[5747, 202, 127, 3, 25, "Text"],
+Cell[5877, 207, 154, 3, 49, "Input"],
+Cell[6034, 212, 97, 2, 25, "Text"],
+Cell[6134, 216, 154, 3, 49, "Input"],
+Cell[6291, 221, 56, 0, 25, "Text"],
+Cell[6350, 223, 139, 3, 49, "Input"],
+Cell[6492, 228, 67, 0, 25, "Text"],
+Cell[6562, 230, 192, 4, 49, "Input"],
+Cell[6757, 236, 103, 3, 25, "Text"],
+Cell[6863, 241, 127, 3, 49, "Input"],
+Cell[6993, 246, 138, 3, 49, "Input"],
+Cell[7134, 251, 45, 0, 25, "Text"],
+Cell[7182, 253, 144, 3, 49, "Input"],
+Cell[7329, 258, 45, 0, 25, "Text"],
+Cell[7377, 260, 104, 2, 29, "Input"],
+Cell[7484, 264, 295, 5, 89, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

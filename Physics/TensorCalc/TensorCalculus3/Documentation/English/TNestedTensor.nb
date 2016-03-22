@@ -1,0 +1,253 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.1'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      5413,        184]*)
+(*NotebookOutlinePosition[      6399,        218]*)
+(*  CellTagsIndexPosition[      6325,        212]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["NestedTensor", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox[
+          RowBox[{"Nested", 
+            StyleBox["Tensor",
+              "MR"]}]], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " generates ",
+  Cell[BoxData[
+      \(\(\(Tensor[Tensor[expr], {}, {}]\)\(.\)\)\)]]
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["\<\
+NestedTensor can be used to create unexpanded derivative expressions of expr, \
+which can leter be expanded with UnnestTensor.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "NestedTensor expressions can be parsed by ",
+  Cell[BoxData[
+      \(ParseTermIndices\)]],
+  " provided they are free of Plus expressions."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "Partial derivatives of nested tensors can be expanded to coordinates using \
+",
+  Cell[BoxData[
+      \(ExpandPartialD\)]],
+  " but the same cannot be done for covariant derivatives using ",
+  Cell[BoxData[
+      \(ExpandCovariantD\)]],
+  "."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["UnnestTensor",
+    ButtonData:>{"UnnestTensor"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["Tensor",
+    ButtonData:>{"Tensor"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Example  ", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[{u, 1}]\)], "Input",
+  CellLabel->"In[2]:="],
+
+Cell["\<\
+Sometimes in presenting a derivation we don't want all derivatives to be \
+immediately expanded. We can prevent this by initially enclosing an \
+expression in NestedTensor.
+Verify that...\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Implies[uu[\[Nu]] ud[\[Nu]] \[Equal] 1, 
+      CovariantD[uu[\[Nu]], \[Mu]] ud[\[Nu]] \[Equal] 0]\)], "Input",
+  CellLabel->"In[3]:="],
+
+Cell[BoxData[{
+    \(NestedTensor[uu[\[Nu]] ud[\[Nu]]] \[Equal] 1\), "\[IndentingNewLine]", 
+    \(Print["\<Covariant derivative of both sides\>"]\), \
+"\[IndentingNewLine]", 
+    \(\(CovariantD[#, \ \[Mu]] &\) /@ %%\), "\[IndentingNewLine]", 
+    \(Print["\<Expand derivative by using UnnestTensor\>"]\), "\
+\[IndentingNewLine]", 
+    \(%% // UnnestTensor\), "\[IndentingNewLine]", 
+    \(Print["\<Do an up down swap of \[Nu] index in the first term and \
+simplify\>"]\), "\[IndentingNewLine]", 
+    \(MapAt[UpDownSwap[\[Nu]], %%, {1, 1}]\), "\[IndentingNewLine]", 
+    \(\(\(#/2 &\) /@ % // FrameBox\) // DisplayForm\)}], "Input",
+  CellLabel->"In[4]:="],
+
+Cell[TextData[{
+  Cell[BoxData[
+      \(ParseTermIndices\)]],
+  " will work on nested tensors provided they contain no Plus expressions. \
+Then operations such as ",
+  Cell[BoxData[
+      \(EinsteinSum\)]],
+  " or ",
+  Cell[BoxData[
+      \(EinsteinArray\)]],
+  " can be used."
+}], "Text"],
+
+Cell[BoxData[{
+    \(NestedTensor[ud[a] uu[a]]\), "\[IndentingNewLine]", 
+    \(PartialD[%, b]\), "\[IndentingNewLine]", 
+    \(step1 = % // 
+        ExpandPartialD[{x, \[Delta], 
+            g, \[CapitalGamma]}]\), "\[IndentingNewLine]", 
+    \(% // EinsteinSum[]\), "\[IndentingNewLine]", 
+    \(% // EinsteinArray[]\)}], "Input",
+  CellLabel->"In[12]:="],
+
+Cell["\<\
+As above, partial derivatives of nested expressions can be expanded to \
+coordinates but the same cannot be done for covariant derivatives because \
+those routines must know the form of the tensor expression.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[{u, 1}]\)], "Input",
+  CellLabel->"In[17]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"5.1 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 941}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{665, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 59, 1, 41, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1838, 56, 427, 18, 33, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 6154, 203}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 59, 1, 41, "ObjectName",
+  CellTags->"Function?"],
+Cell[1838, 56, 427, 18, 33, "Usage",
+  CellTags->"Function?"],
+Cell[2268, 76, 157, 3, 58, "MathCaption"],
+Cell[2428, 81, 177, 5, 41, "MathCaption"],
+Cell[2608, 88, 280, 9, 58, "MathCaption"],
+Cell[2891, 99, 240, 10, 41, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[3156, 113, 35, 0, 39, "ExampleSection"],
+Cell[3194, 115, 96, 2, 29, "Input"],
+Cell[3293, 119, 86, 2, 29, "Input"],
+Cell[3382, 123, 211, 5, 67, "Text"],
+Cell[3596, 130, 154, 3, 29, "Input"],
+Cell[3753, 135, 656, 12, 169, "Input"],
+Cell[4412, 149, 289, 11, 42, "Text"],
+Cell[4704, 162, 357, 8, 109, "Input"],
+Cell[5064, 172, 232, 4, 42, "Text"],
+Cell[5299, 178, 86, 2, 29, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

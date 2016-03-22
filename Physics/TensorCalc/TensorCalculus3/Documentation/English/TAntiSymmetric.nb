@@ -1,0 +1,278 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.1'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      5654,        202]*)
+(*NotebookOutlinePosition[      6641,        236]*)
+(*  CellTagsIndexPosition[      6567,        230]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["AntiSymmetric", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox[
+            RowBox[{"Anti", 
+              StyleBox["Symmetric",
+                "MR"]}]], 
+          StyleBox["[",
+            "MR"], 
+          StyleBox["indices",
+            "TI"], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " calculates the antisymmetric tensor expression associated with expr for \
+the list of indices.",
+  "\n\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox[
+            RowBox[{"Anti", 
+              StyleBox["Symmetric",
+                "MR"]}]], 
+          StyleBox["[",
+            "MR"], 
+          StyleBox[\({indices1}, {indicies2} ... \),
+            "TI"], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " uses multiple sets of symmetric indices."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["The indices operated on must be all up or all down.", "MathCaption"],
+
+Cell["The indices in the command must carry the flavor.", "MathCaption"],
+
+Cell["\<\
+AntiSymmetric is automatically mapped over arrays, equations and sums.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["Symmetric",
+    ButtonData:>{"Symmetric"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["IndexChange",
+    ButtonData:>{"IndexChange"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SymmetrizeSlots",
+    ButtonData:>{"SymmetrizeSlots"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SymmetrizePattern",
+    ButtonData:>{"SymmetrizePattern"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples  ", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["Save old settings and declare a flavor...", "Text"],
+
+Cell[BoxData[{
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(DeclareIndexFlavor[{red, Red}]\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[{{T, S}, 2}, {T, 3}]\)], "Input",
+  CellLabel->"In[5]:="],
+
+Cell[BoxData[{
+    \(Tuu[i, j]\), "\[IndentingNewLine]", 
+    \(% // AntiSymmetric[{i, j}]\)}], "Input",
+  CellLabel->"In[6]:="],
+
+Cell[TextData[{
+  "The indices in ",
+  Cell[BoxData["AntiSymmetric"]],
+  " must carry the flavor."
+}], "Text"],
+
+Cell[BoxData[{
+    \(Tuu[i, j] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // AntiSymmetric[red /@ {i, j}]\)}], "Input",
+  CellLabel->"In[8]:="],
+
+Cell["AntiSymmetric will not work on mixed indices.", "Text"],
+
+Cell[BoxData[{
+    \(Tudd[i, j, k]\), "\[IndentingNewLine]", 
+    \(% // AntiSymmetric[{i, j, k}]\)}], "Input",
+  CellLabel->"In[10]:="],
+
+Cell["Antisymmetrization also works for higher order tensors.", "Text"],
+
+Cell[BoxData[{
+    \(Tddd[i, j, k] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // AntiSymmetric[red /@ {i, j, k}]\)}], "Input",
+  CellLabel->"In[12]:="],
+
+Cell[BoxData[{
+    \(Tdd[i, j] Sdd[m, n]\), "\[IndentingNewLine]", 
+    \(% // AntiSymmetric[{i, m}, {j, n}]\)}], "Input",
+  CellLabel->"In[14]:="],
+
+Cell["Also, see the examples in Symmetric.", "Text"],
+
+Cell["Restore the settings.", "Text"],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[{T, 2}, {T, 3}]\)], "Input",
+  CellLabel->"In[16]:="],
+
+Cell[BoxData[{
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(Clear[oldflavors]\)}], "Input",
+  CellLabel->"In[17]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"5.1 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 941}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{669, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 60, 1, 41, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1839, 56, 1131, 45, 73, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 6395, 221}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 60, 1, 41, "ObjectName",
+  CellTags->"Function?"],
+Cell[1839, 56, 1131, 45, 73, "Usage",
+  CellTags->"Function?"],
+Cell[2973, 103, 74, 0, 41, "MathCaption"],
+Cell[3050, 105, 72, 0, 41, "MathCaption"],
+Cell[3125, 107, 101, 2, 41, "MathCaption"],
+Cell[3229, 111, 464, 18, 41, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[3718, 133, 36, 0, 39, "ExampleSection"],
+Cell[3757, 135, 96, 2, 29, "Input"],
+Cell[3856, 139, 57, 0, 25, "Text"],
+Cell[3916, 141, 205, 4, 69, "Input"],
+Cell[4124, 147, 99, 2, 29, "Input"],
+Cell[4226, 151, 128, 3, 49, "Input"],
+Cell[4357, 156, 110, 4, 25, "Text"],
+Cell[4470, 162, 152, 3, 49, "Input"],
+Cell[4625, 167, 61, 0, 25, "Text"],
+Cell[4689, 169, 136, 3, 49, "Input"],
+Cell[4828, 174, 71, 0, 25, "Text"],
+Cell[4902, 176, 160, 3, 49, "Input"],
+Cell[5065, 181, 147, 3, 49, "Input"],
+Cell[5215, 186, 52, 0, 25, "Text"],
+Cell[5270, 188, 37, 0, 25, "Text"],
+Cell[5310, 190, 94, 2, 29, "Input"],
+Cell[5407, 194, 219, 4, 69, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

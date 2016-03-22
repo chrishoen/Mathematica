@@ -1,0 +1,444 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     10766,        348]*)
+(*NotebookOutlinePosition[     11753,        382]*)
+(*  CellTagsIndexPosition[     11678,        376]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["PatternReplaceIndex", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox["PatternReplaceIndex",
+            "MR"], 
+          StyleBox["[",
+            "MR"], 
+          StyleBox[\(newindexlist, pattern, checkdummies : True\),
+            "TI"], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will replace dummy indices in simple terms if the terms match the pattern \
+with named pattern indices."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["\<\
+The object is to change all matching expressions to ones with the same dummy \
+indices.\
+\>", "MathCaption"],
+
+Cell["\<\
+If the head of an expression is Plus, the routine is mapped onto the terms.\
+\>", "MathCaption"],
+
+Cell[" A simple term is a Tensor or a weighted product of tensors.", \
+"MathCaption"],
+
+Cell["\<\
+ The index flavors of a matching term must match the flavors of the new \
+indices.\
+\>", "MathCaption"],
+
+Cell["\<\
+ With the default value of checkdummies, the routine aborts if the pattern \
+indices are not dummy indices in the matching expression. This can be \
+overridden by setting the third optional argument to False. This can produce \
+incorrect results if not done with care but can be useful in writing simpler \
+patterns.\
+\>", "MathCaption"],
+
+Cell["\<\
+ IndexChange can be used to perform specific reindexing under the user's \
+control.  SimplifyTensorSum, sometimes used with MapLevelParts is another way \
+to simplify expressions.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  " The simplification routines are not high powered. They do not take into \
+account symmetries. See ",
+  Cell[BoxData[
+      \(SymmetrizeSlots\)]],
+  " to apply some symmetries."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["UpDownSwap",
+    ButtonData:>{"UpDownSwap"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["IndexChange",
+    ButtonData:>{"IndexChange"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SymmetrizeSlots",
+    ButtonData:>{"SymmetrizeSlots"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["NondependentPartialD",
+    ButtonData:>{"NondependentPartialD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SimplifyTensorSum",
+    ButtonData:>{"SimplifyTensorSum"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["MapLevelParts",
+    ButtonData:>{"MapLevelParts"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples  ", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["Save old settings and declare an index flavor.", "Text"],
+
+Cell[BoxData[{
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(DeclareIndexFlavor[{red, Red}]\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[{{A, G, b}, 1}, {{A, B, S}, 2}, {{a, F}, 3}, {F, 
+        4}]\)], "Input",
+  CellLabel->"In[5]:="],
+
+Cell["\<\
+The following expression is simplified by converting all terms to the same \
+set of dummy indices.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(a\ Fdduu[i, j, i, j] + b\ Fdduu[j, p, j, p] + 
+      c\ Fdduu[m, r, m, r]\), "\n", 
+    \(% // PatternReplaceIndex[{\[Mu], \[Nu]}, 
+        Fdduu[m_, n_, m_, n_]]\), "\[IndentingNewLine]", 
+    \(% // Factor\)}], "Input",
+  CellLabel->"In[6]:="],
+
+Cell[TextData[{
+  Cell[BoxData[
+      \(SimplifyTensorSum\)]],
+  " will also perform the simplification but with no direct control over the \
+choice of dummy index."
+}], "Text"],
+
+Cell[BoxData[{
+    \(a\ Fdduu[i, j, i, j] + b\ Fdduu[j, p, j, p] + 
+      c\ Fdduu[m, r, m, r]\), "\n", 
+    \(\(% // SimplifyTensorSum\) // Factor\)}], "Input",
+  CellLabel->"In[9]:="],
+
+Cell[TextData[{
+  Cell[BoxData[
+      \(SimplifyTensorSum\)]],
+  " doesn't simplify the following expression because it replaces dummy \
+indices in order of the factors and gets different results for the two \
+terms."
+}], "Text"],
+
+Cell[BoxData[{
+    \(a\ Buu[i, j] Gd[i] + 
+      b\ Buu[k, j] Gd[k] Aud[\[Alpha], \[Alpha]]\), "\[IndentingNewLine]", 
+    \(\(% // SimplifyTensorSum\) // Factor\)}], "Input",
+  CellLabel->"In[11]:="],
+
+Cell[TextData[{
+  "With ",
+  Cell[BoxData[
+      \(PatternReplaceIndex\)]],
+  " we can pick out the relevant factors in the two terms and the \
+simplification is performed."
+}], "Text"],
+
+Cell[BoxData[{
+    \(a\ Buu[i, j] Gd[i] + 
+      b\ Buu[k, j] Gd[k] Aud[\[Alpha], \[Alpha]]\), "\[IndentingNewLine]", 
+    \(\(% // PatternReplaceIndex[{\[Mu]}, Buu[i_, j] Gd[i_]]\) // 
+      Factor\)}], "Input",
+  CellLabel->"In[13]:="],
+
+Cell["\<\
+The routine does not replace tensor labels or symbols elsewhere.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(a\ Auu[A, j] Gd[A] + A\ Auu[k, j] Gd[k]\), "\[IndentingNewLine]", 
+    \(\(% // PatternReplaceIndex[{\[Mu]}, Auu[i_, j] Gd[i_]]\) // 
+      Factor\)}], "Input",
+  CellLabel->"In[15]:="],
+
+Cell["\<\
+The following does not work because the routine cannot check if the indices \
+in the pattern are dummies.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\((addd[r, s, t] + addd[s, r, t] + addd[s, t, r])\) bu[r] bu[s] bu[t] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(Expand[%] // 
+      PatternReplaceIndex[{\[Mu], \[Nu], \[Sigma]}, 
+        addd[r_, s_, t_]]\)}], "Input",
+  CellLabel->"In[17]:="],
+
+Cell["\<\
+But by setting the optional argument, checkdummies, to False we can suppress \
+the dummy checking. \
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\((addd[r, s, t] + addd[s, r, t] + addd[s, t, r])\) bu[r] bu[s] bu[t] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // PatternReplaceIndex[red /@ {\[Mu], \[Nu], \[Sigma]}, 
+        addd[a_, b_, c_], False]\)}], "Input",
+  CellLabel->"In[19]:="],
+
+Cell["\<\
+The order of index replacement is affected by the sort order of the named \
+indices in the pattern. The named indices are sorted and then matched with \
+the new index list.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\((addd[r, s, t] + addd[s, r, t] + addd[s, t, r])\) bu[r] bu[s] bu[t] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // PatternReplaceIndex[red /@ {\[Mu], \[Nu], \[Sigma]}, 
+        addd[c_, b_, a_], False]\)}], "Input",
+  CellLabel->"In[21]:="],
+
+Cell["If the flavors are not the same there is no match.", "Text"],
+
+Cell[BoxData[{
+    \(\((addd[r, s, t] + addd[s, r, t] + addd[s, t, r])\) \((bu[r] bu[s] 
+          bu[t])\)\), "\[IndentingNewLine]", 
+    \(% // PatternReplaceIndex[red /@ {\[Mu], \[Nu], \[Sigma]}, 
+        addd[t_, s_, r_], False]\)}], "Input",
+  CellLabel->"In[23]:="],
+
+Cell["\<\
+Non-pattern indices are only replaced if they have the correct flavor. So the \
+following would be incorrect and illustrates the danger of not checking dummy \
+indices.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\((addd[r, s, t] + addd[s, r, t] + addd[s, t, r] // 
+          ToFlavor[red])\) \((bu[r] bu[s] bu[t])\)\), "\[IndentingNewLine]", 
+    \(% // PatternReplaceIndex[red /@ {\[Mu], \[Nu], \[Sigma]}, 
+        addd[t_, s_, r_], False]\)}], "Input",
+  CellLabel->"In[25]:="],
+
+Cell[BoxData[{
+    \(a\ Auu[i, j] CovariantD[Gd[i], \[Nu]] + 
+      b\ Auu[k, j] CovariantD[Gd[k], \[Nu]]\), "\[IndentingNewLine]", 
+    \(\(% // 
+        PatternReplaceIndex[{\[Mu]}, Auu[i_, j] CovariantD[Gd[i_], \[Nu]]]\) // 
+      Factor\)}], "Input",
+  CellLabel->"In[27]:="],
+
+Cell["\<\
+The following does not work because the generated pattern is not a simple \
+term.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(a\ Auu[i, j] CovariantD[Gd[i], \[Nu]] + 
+      b\ Auu[k, j] CovariantD[Gd[k], \[Nu]]\), "\[IndentingNewLine]", 
+    \(% // ExpandCovariantD[{x, \[Delta], g, \[CapitalGamma]}, 
+        a]\), "\[IndentingNewLine]", 
+    \(% // PatternReplaceIndex[{\[Mu]}, 
+        Auu[i_, j] \((CovariantD[Gd[i_], \[Nu]] // 
+              ExpandCovariantD[{x, \[Delta], g, \[CapitalGamma]}, a])\), 
+        False]\)}], "Input",
+  CellLabel->"In[29]:="],
+
+Cell[TextData[{
+  "It could be simplified with ",
+  Cell[BoxData[
+      \(SimplifyTensorSum\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(a\ Auu[i, j] CovariantD[Gd[i], \[Nu]] + 
+      b\ Auu[k, j] CovariantD[Gd[k], \[Nu]]\), "\[IndentingNewLine]", 
+    \(% // ExpandCovariantD[{x, \[Delta], g, \[CapitalGamma]}, 
+        a]\), "\[IndentingNewLine]", 
+    \(\(% // SimplifyTensorSum\) // Simplify\), "\[IndentingNewLine]", 
+    \(MapAt[Minus, %, {{1}, {4}}]\)}], "Input",
+  CellLabel->"In[32]:="],
+
+Cell["Restore old settings...", "Text"],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[{{A, G, b}, 1}, {{A, B, S}, 2}, {{a, F}, 3}, {F, 
+        4}]\)], "Input",
+  CellLabel->"In[36]:="],
+
+Cell[BoxData[{
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(Clear[oldflavors]\)}], "Input",
+  CellLabel->"In[37]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 941}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{669, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 1}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 66, 1, 41, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1845, 56, 602, 22, 50, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 11507, 367}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 66, 1, 41, "ObjectName",
+  CellTags->"Function?"],
+Cell[1845, 56, 602, 22, 50, "Usage",
+  CellTags->"Function?"],
+Cell[2450, 80, 118, 3, 41, "MathCaption"],
+Cell[2571, 85, 106, 2, 41, "MathCaption"],
+Cell[2680, 89, 85, 1, 41, "MathCaption"],
+Cell[2768, 92, 113, 3, 41, "MathCaption"],
+Cell[2884, 97, 347, 6, 75, "MathCaption"],
+Cell[3234, 105, 210, 4, 58, "MathCaption"],
+Cell[3447, 111, 215, 6, 58, "MathCaption"],
+Cell[3665, 119, 688, 26, 58, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[4378, 149, 36, 0, 39, "ExampleSection"],
+Cell[4417, 151, 96, 2, 29, "Input"],
+Cell[4516, 155, 62, 0, 25, "Text"],
+Cell[4581, 157, 205, 4, 69, "Input"],
+Cell[4789, 163, 140, 3, 29, "Input"],
+Cell[4932, 168, 122, 3, 25, "Text"],
+Cell[5057, 173, 266, 6, 69, "Input"],
+Cell[5326, 181, 177, 5, 42, "Text"],
+Cell[5506, 188, 185, 4, 49, "Input"],
+Cell[5694, 194, 229, 6, 42, "Text"],
+Cell[5926, 202, 200, 4, 49, "Input"],
+Cell[6129, 208, 185, 6, 42, "Text"],
+Cell[6317, 216, 237, 5, 49, "Input"],
+Cell[6557, 223, 88, 2, 25, "Text"],
+Cell[6648, 227, 206, 4, 49, "Input"],
+Cell[6857, 233, 129, 3, 25, "Text"],
+Cell[6989, 238, 279, 6, 49, "Input"],
+Cell[7271, 246, 123, 3, 25, "Text"],
+Cell[7397, 251, 278, 5, 49, "Input"],
+Cell[7678, 258, 196, 4, 42, "Text"],
+Cell[7877, 264, 278, 5, 49, "Input"],
+Cell[8158, 271, 66, 0, 25, "Text"],
+Cell[8227, 273, 271, 5, 49, "Input"],
+Cell[8501, 280, 192, 4, 42, "Text"],
+Cell[8696, 286, 288, 5, 49, "Input"],
+Cell[8987, 293, 279, 6, 49, "Input"],
+Cell[9269, 301, 105, 3, 25, "Text"],
+Cell[9377, 306, 455, 9, 89, "Input"],
+Cell[9835, 317, 114, 5, 25, "Text"],
+Cell[9952, 324, 379, 7, 89, "Input"],
+Cell[10334, 333, 39, 0, 25, "Text"],
+Cell[10376, 335, 140, 3, 29, "Input"],
+Cell[10519, 340, 219, 4, 69, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

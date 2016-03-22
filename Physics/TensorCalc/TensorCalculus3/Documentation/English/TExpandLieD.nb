@@ -1,0 +1,394 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      9351,        306]*)
+(*NotebookOutlinePosition[     10360,        341]*)
+(*  CellTagsIndexPosition[     10285,        335]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["ExpandLieD", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox[
+            RowBox[{"Expand", 
+              StyleBox["LieD",
+                "MR"]}]], 
+          StyleBox["[",
+            "MR"], 
+          StyleBox[
+            RowBox[{
+              RowBox[{"{", 
+                RowBox[{
+                "x", ",", "\[Delta]", ",", "g", ",", "\[CapitalGamma]"}], 
+                "}"}], ",", "a"}],
+            "TI"], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will expand a first order Lie derivative of expr using coordinates x, \
+Kronecker \[Delta] and dummy index a.\n\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox[
+            RowBox[{"Expand", 
+              StyleBox["LieD",
+                "MR"]}]], 
+          StyleBox["[",
+            "MR"], 
+          StyleBox[
+            RowBox[{
+              RowBox[{"{", 
+                RowBox[{
+                "x", ",", "\[Delta]", ",", "g", ",", "\[CapitalGamma]"}], 
+                "}"}], ",", 
+              RowBox[{"{", 
+                RowBox[{"a", ",", "b", ",", "..."}], "}"}]}],
+            "TI"], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will expand higher order Lie derivatives using the list ",
+  Cell[BoxData[
+      RowBox[{"{", 
+        RowBox[{"a", ",", "b", ",", "c", ",", "..."}], "}"}]]],
+  " as dummy indices."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  " The Lie derivative is ambiguous until it is expanded to partial \
+derivatives with ",
+  Cell[BoxData["ExpandLieD"]],
+  ", which provides the coordinates."
+}], "MathCaption"],
+
+Cell[TextData[{
+  " A common set of tensor labels,",
+  Cell[BoxData[
+      RowBox[{" ", 
+        RowBox[{"{", 
+          RowBox[{"x", ",", "\[Delta]", ",", "g", ",", "\[CapitalGamma]"}], 
+          "}"}]}]]],
+  ", is used in all derivatives, even though every derivative does not used \
+every label. It will often be convenient to set a variable to the list that \
+you are using in your application."
+}], "MathCaption"],
+
+Cell["\<\
+ExpandLieD is automatically mapped over arrays, equations and sums.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "See also:  ",
+  ButtonBox["LieD",
+    ButtonData:>{"LieD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["AbsoluteD",
+    ButtonData:>{"AbsoluteD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["CovariantD",
+    ButtonData:>{"CovariantD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["PartialD",
+    ButtonData:>{"PartialD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["TotalD",
+    ButtonData:>{"TotalD"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["Save the settings.", "Text"],
+
+Cell[BoxData[{
+    \(\(oldindices = BaseIndices;\)\), "\[IndentingNewLine]", 
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(DeclareIndexFlavor[{red, Red}]\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell[BoxData[{
+    \(DefineTensorShortcuts[{{x, S, T, V, W}, 1}, {{\[Delta], S}, 
+        2}]\), "\[IndentingNewLine]", 
+    \(\(labs = {x, \[Delta], 
+          g, \[CapitalGamma]};\)\), "\[IndentingNewLine]", 
+    \(SetTensorValues[\[Delta]ud[i, j], IdentityMatrix[NDim]]\)}], "Input",
+  CellLabel->"In[6]:="],
+
+Cell["\<\
+The Lie derivative takes on specific meaning when it is expanded to the \
+partial derivative form.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Tu[i]\), "\[IndentingNewLine]", 
+    \(LieD[%, V]\), "\[IndentingNewLine]", 
+    \(% // ExpandLieD[labs, a]\)}], "Input",
+  CellLabel->"In[9]:="],
+
+Cell["Lie derivative of a scalar tensor...", "Text"],
+
+Cell[BoxData[{
+    \(Tensor[\[Phi]]\), "\[IndentingNewLine]", 
+    \(LieD[%, V]\), "\[IndentingNewLine]", 
+    \(% // ExpandLieD[labs, \[Mu]]\), "\[IndentingNewLine]", 
+    \(% // EinsteinSum[]\)}], "Input",
+  CellLabel->"In[12]:="],
+
+Cell["\<\
+With flavored expressions, the flavor should also be on the expansion \
+index.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Tu[i] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(LieD[%, V]\), "\[IndentingNewLine]", 
+    \(% // ExpandLieD[labs, red@\[Mu]]\)}], "Input",
+  CellLabel->"In[16]:="],
+
+Cell["\<\
+Higher order derivatives are also supported and require additional dummy \
+indices.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Tu[i] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(LieD[%, {V, V}]\), "\[IndentingNewLine]", 
+    \(% // ExpandLieD[labs, red /@ {\[Mu], \[Nu]}]\)}], "Input",
+  CellLabel->"In[19]:="],
+
+Cell["The Lie derivative of a product of two scalars.", "Text"],
+
+Cell[BoxData[{
+    \(Tensor[\[Phi]] Tensor[\[Psi]]\), "\[IndentingNewLine]", 
+    \(LieD[%, {V, V}]\), "\[IndentingNewLine]", 
+    \(% // ExpandLieD[labs, {a, b}]\)}], "Input",
+  CellLabel->"In[22]:="],
+
+Cell["\<\
+Lie derivative of a product of a scalar tensor and a 2nd order tensor with \
+respect to two different vector fields.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Tensor[\[Phi]] Sud[i, j] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(LieD[%, {V, W}]\), "\[IndentingNewLine]", 
+    \(% // ExpandLieD[labs, red /@ {\[Mu], \[Nu]}]\)}], "Input",
+  CellLabel->"In[25]:="],
+
+Cell["ExpandLieD maps over arrays, equations and sums.", "Text"],
+
+Cell[BoxData[{
+    \({LieD[Tensor[\[Phi]], V] + LieD[Tensor[\[Psi]], W] \[Equal] 0, 
+      LieD[a\ Tu[i], W] \[LessEqual] 0}\), "\[IndentingNewLine]", 
+    \(% // ExpandLieD[labs, \[Mu]]\)}], "Input",
+  CellLabel->"In[28]:="],
+
+Cell["An incorrect order of indices passes through unevaluated.", "Text"],
+
+Cell[BoxData[{
+    \(Tu[i] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(LieD[%, {V, V}]\), "\[IndentingNewLine]", 
+    \(% // ExpandLieD[labs, red@\[Mu]]\)}], "Input",
+  CellLabel->"In[30]:="],
+
+Cell["The expansion operates on the terms it matches.", "Text"],
+
+Cell[BoxData[
+    \(\(\(\ \)\(LieD[a\ Tu[i], {V, V}] + LieD[b\ Tu[i], V] // 
+      ToFlavor[red]\[IndentingNewLine]
+    % // ExpandLieD[labs, red@\[Mu]]\)\)\)], "Input",
+  CellLabel->"In[33]:="],
+
+Cell["\<\
+Products of sums will have to be expanded before ExpandLieD will operate.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\((LieD[Tu[i], V] + LieD[Tu[i], W])\) \((LieD[Tu[j], V] - 
+            LieD[Tu[j], W])\) \[Equal] Suu[i, j]\), "\[IndentingNewLine]", 
+    \(Print["\<ExpandLieD does not match without expansion\>"]\), "\
+\[IndentingNewLine]", 
+    \(%% // ExpandLieD[labs, {\[Alpha], \[Beta]}]\), "\[IndentingNewLine]", 
+    \(Print["\<But works after expansion\>"]\), "\[IndentingNewLine]", 
+    \(%% // ExpandAll\), "\[IndentingNewLine]", 
+    \(% // ExpandLieD[labs, {\[Alpha], \[Beta]}]\)}], "Input",
+  CellLabel->"In[35]:="],
+
+Cell["Restore the settings.", "Text"],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[{{x, S, T, V, W}, 1}, {{\[Delta], S}, 
+        2}]\)], "Input",
+  CellLabel->"In[41]:="],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[oldindices]\), "\[IndentingNewLine]", 
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(Clear[oldindices, oldflavors]\)}], "Input",
+  CellLabel->"In[42]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 941}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{688, 464},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 57, 1, 41, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1836, 56, 1683, 60, 90, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 10113, 326}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 57, 1, 41, "ObjectName",
+  CellTags->"Function?"],
+Cell[1836, 56, 1683, 60, 90, "Usage",
+  CellTags->"Function?"],
+Cell[3522, 118, 193, 5, 58, "MathCaption"],
+Cell[3718, 125, 419, 10, 58, "MathCaption"],
+Cell[4140, 137, 98, 2, 41, "MathCaption"],
+Cell[4241, 141, 513, 22, 41, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[4779, 167, 34, 0, 39, "ExampleSection"],
+Cell[4816, 169, 96, 2, 29, "Input"],
+Cell[4915, 173, 34, 0, 25, "Text"],
+Cell[4952, 175, 268, 5, 89, "Input"],
+Cell[5223, 182, 310, 6, 69, "Input"],
+Cell[5536, 190, 122, 3, 25, "Text"],
+Cell[5661, 195, 166, 4, 69, "Input"],
+Cell[5830, 201, 52, 0, 25, "Text"],
+Cell[5885, 203, 232, 5, 89, "Input"],
+Cell[6120, 210, 102, 3, 25, "Text"],
+Cell[6225, 215, 192, 4, 69, "Input"],
+Cell[6420, 221, 107, 3, 25, "Text"],
+Cell[6530, 226, 209, 4, 69, "Input"],
+Cell[6742, 232, 63, 0, 25, "Text"],
+Cell[6808, 234, 201, 4, 69, "Input"],
+Cell[7012, 240, 140, 3, 25, "Text"],
+Cell[7155, 245, 228, 4, 69, "Input"],
+Cell[7386, 251, 64, 0, 25, "Text"],
+Cell[7453, 253, 225, 4, 49, "Input"],
+Cell[7681, 259, 73, 0, 25, "Text"],
+Cell[7757, 261, 197, 4, 69, "Input"],
+Cell[7957, 267, 63, 0, 25, "Text"],
+Cell[8023, 269, 194, 4, 49, "Input"],
+Cell[8220, 275, 97, 2, 25, "Text"],
+Cell[8320, 279, 533, 9, 129, "Input"],
+Cell[8856, 290, 37, 0, 25, "Text"],
+Cell[8896, 292, 129, 3, 29, "Input"],
+Cell[9028, 297, 295, 5, 89, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

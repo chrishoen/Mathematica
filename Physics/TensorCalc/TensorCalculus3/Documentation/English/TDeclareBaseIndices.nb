@@ -1,0 +1,268 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      5330,        193]*)
+(*NotebookOutlinePosition[      6339,        228]*)
+(*  CellTagsIndexPosition[      6265,        222]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["DeclareBaseIndices", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["DeclareBaseIndices",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        RowBox[{
+          StyleBox["{",
+            "MR"], 
+          StyleBox[
+            RowBox[{"index", ".."}],
+            "TI"], 
+          StyleBox["}",
+            "TI"]}], 
+        StyleBox["]",
+          "MR"]}]]],
+  "declares the base indices for the underlying linear space."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["The indices should be integers or Symbols.", "MathCaption"],
+
+Cell[TextData[{
+  " The number of indices determines ",
+  Cell[BoxData[
+      \(NDim\)]],
+  ", the dimension of the underlying linear space."
+}], "MathCaption"],
+
+Cell[TextData[{
+  " The base indices are stored in ",
+  Cell[BoxData[
+      \(BaseIndices\)]],
+  "."
+}], "MathCaption"],
+
+Cell[TextData[{
+  " When Tensorial is loaded ",
+  Cell[BoxData["BaseIndices"]],
+  " is initialized to ",
+  Cell[BoxData[
+      RowBox[{"{", 
+        RowBox[{"1", ",", "2", ",", "3"}], "}"}]]],
+  "."
+}], "MathCaption"],
+
+Cell[TextData[{
+  " If you plan to switch between coordinate systems, say Cartesian ",
+  Cell[BoxData[
+      \({x, y, z}\)]],
+  " and spherical ",
+  Cell[BoxData[
+      \({\[Rho], \[Theta], \[Phi]}\)]],
+  ", it is better to use integers for the base indices with the flavor \
+indicating the coordinate system. If you picked the base indices to be ",
+  Cell[BoxData[
+      \({x, y, z}\)]],
+  " then even though you used a different flavor for spherical, the base \
+indices would still be, say, ",
+  Cell[BoxData[
+      RowBox[{"{", 
+        StyleBox[\(x, y, z\),
+          FontColor->RGBColor[1, 0, 0]], "}"}]]],
+  "."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["BaseIndices",
+    ButtonData:>{"BaseIndices"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["NDim",
+    ButtonData:>{"NDim"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["BaseIndexQ",
+    ButtonData:>{"BaseIndexQ"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples  ", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell[BoxData[
+    \(\(oldindices = BaseIndices;\)\)], "Input",
+  CellLabel->"In[2]:="],
+
+Cell["\<\
+The following statement is automatically evaluated when Tensorial is loaded \
+setting the default dimension and base indices for a tensor system.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[{1, 2, 3}]\), "\[IndentingNewLine]", 
+    \({NDim, BaseIndices}\)}], "Input",
+  CellLabel->"In[3]:="],
+
+Cell["The indices must have an Integer or Symbol head.", "Text"],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[{1, 2, f[x]}]\), "\[IndentingNewLine]", 
+    \({NDim, BaseIndices}\)}], "Input",
+  CellLabel->"In[5]:="],
+
+Cell["The indices do not have to start at 1.", "Text"],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[{0, 1, 2, 3}]\), "\[IndentingNewLine]", 
+    \({NDim, BaseIndices}\)}], "Input",
+  CellLabel->"In[7]:="],
+
+Cell["Symbols can be used", "Text"],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[{t, x, y, z}]\), "\[IndentingNewLine]", 
+    \({NDim, BaseIndices}\)}], "Input",
+  CellLabel->"In[9]:="],
+
+Cell["Restore the initial values...", "Text"],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[oldindices]\), "\[IndentingNewLine]", 
+    \({NDim, BaseIndices}\), "\[IndentingNewLine]", 
+    \(Clear[oldindices]\)}], "Input",
+  CellLabel->"In[11]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 941}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{665, 474},
+WindowMargins->{{-2, Automatic}, {Automatic, -1}},
+ShowSelection->True,
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 65, 1, 41, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1844, 56, 498, 20, 33, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 6094, 213}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 65, 1, 41, "ObjectName",
+  CellTags->"Function?"],
+Cell[1844, 56, 498, 20, 33, "Usage",
+  CellTags->"Function?"],
+Cell[2345, 78, 65, 0, 41, "MathCaption"],
+Cell[2413, 80, 160, 5, 41, "MathCaption"],
+Cell[2576, 87, 119, 5, 41, "MathCaption"],
+Cell[2698, 94, 217, 8, 41, "MathCaption"],
+Cell[2918, 104, 636, 18, 92, "MathCaption"],
+Cell[3557, 124, 332, 14, 41, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[3914, 142, 36, 0, 39, "ExampleSection"],
+Cell[3953, 144, 96, 2, 29, "Input"],
+Cell[4052, 148, 86, 2, 29, "Input"],
+Cell[4141, 152, 169, 3, 42, "Text"],
+Cell[4313, 157, 141, 3, 49, "Input"],
+Cell[4457, 162, 64, 0, 25, "Text"],
+Cell[4524, 164, 144, 3, 49, "Input"],
+Cell[4671, 169, 54, 0, 25, "Text"],
+Cell[4728, 171, 144, 3, 49, "Input"],
+Cell[4875, 176, 35, 0, 25, "Text"],
+Cell[4913, 178, 144, 3, 49, "Input"],
+Cell[5060, 183, 45, 0, 25, "Text"],
+Cell[5108, 185, 194, 4, 69, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

@@ -1,0 +1,331 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      7551,        246]*)
+(*NotebookOutlinePosition[      8537,        280]*)
+(*  CellTagsIndexPosition[      8463,        274]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["ContractKroneckers", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox["ContractKroneckers",
+            "MR"], 
+          StyleBox["[",
+            "MR"], 
+          StyleBox["\[Delta]",
+            "TI"], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will contract all tensors with label \[Delta], assumed to be generalized \
+Kroneckers, to give a numerical factor times a Kronecker on the free \
+indices."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["\<\
+ In Tensorial all Kronecker symbols must have one Void in each slot just like \
+all other indexed objects. Many texts use indices in both the up and down \
+positions, taking advantage of the fact that Kroneckers must be even order \
+with equal number of up and down indices.\
+\>", "MathCaption"],
+
+Cell["\<\
+Labels other that \[Delta] can be used to represent the Kronecker.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["FullKroneckerExpand",
+    ButtonData:>{"FullKroneckerExpand"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["PartialKroneckerExpand",
+    ButtonData:>{"PartialKroneckerExpand"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["KroneckerAbsorb",
+    ButtonData:>{"KroneckerAbsorb"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["Save the index flavor settings.", "Text"],
+
+Cell[BoxData[{
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(DeclareIndexFlavor[{red, Red}]\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell[BoxData[{
+    \(\(\(DefineTensorShortcuts[\[Delta], #] &\) /@ {2, 4, 
+          6};\)\), "\[IndentingNewLine]", 
+    \(DefineTensorShortcuts[\[Kappa], 6]\)}], "Input",
+  CellLabel->"In[5]:="],
+
+Cell["\<\
+The following examples contract on 3, 2, 1 and 0 indices. They might be \
+considered the \"standard form\" for generalized Kroneckers - all the up \
+indices in the first slots and all the down indices in the last slots.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\[Delta]uuuddd[i, j, k, i, j, k]\), "\[IndentingNewLine]", 
+    \(% // ContractKroneckers[\[Delta]]\)}], "Input",
+  CellLabel->"In[7]:="],
+
+Cell[BoxData[{
+    \(\[Delta]uuuddd[i, j, k, i, j, t]\), "\[IndentingNewLine]", 
+    \(% // ContractKroneckers[\[Delta]]\)}], "Input",
+  CellLabel->"In[9]:="],
+
+Cell[BoxData[{
+    \(\[Delta]uuuddd[i, j, k, i, s, t]\), "\[IndentingNewLine]", 
+    \(% // ContractKroneckers[\[Delta]]\)}], "Input",
+  CellLabel->"In[11]:="],
+
+Cell[BoxData[{
+    \(\[Delta]uuuddd[i, j, k, r, s, t]\), "\[IndentingNewLine]", 
+    \(% // ContractKroneckers[\[Delta]]\)}], "Input",
+  CellLabel->"In[13]:="],
+
+Cell["\<\
+A label other than \[Delta] can be used to represent the Kronecker.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\[Kappa]uuuddd[i, j, k, i, s, t]\), "\[IndentingNewLine]", 
+    \(% // ContractKroneckers[\[Kappa]]\)}], "Input",
+  CellLabel->"In[15]:="],
+
+Cell["\<\
+The following are nonstandard form Kroneckers. But they can always be \
+converted to standard form by a series of symmetrical up/down interchanges \
+always pushing up indices to the left.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\[Delta]duudud[i, i, s, s, k, k] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // ContractKroneckers[\[Delta]]\)}], "Input",
+  CellLabel->"In[17]:="],
+
+Cell[BoxData[{
+    \(\[Delta]duudud[i, i, s, s, k, t] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // ContractKroneckers[\[Delta]]\)}], "Input",
+  CellLabel->"In[19]:="],
+
+Cell[BoxData[{
+    \(\[Delta]duudud[i, i, j, s, k, t] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // ContractKroneckers[\[Delta]]\)}], "Input",
+  CellLabel->"In[21]:="],
+
+Cell[BoxData[{
+    \(\[Delta]duudud[r, i, j, s, k, t] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // ContractKroneckers[\[Delta]]\)}], "Input",
+  CellLabel->"In[23]:="],
+
+Cell["\<\
+The routine correctly handles permutations (up order different than down \
+order) of the dummy indices.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\[Delta]uuuddd[i, j, k, j, i, k] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // ContractKroneckers[\[Delta]]\)}], "Input",
+  CellLabel->"In[25]:="],
+
+Cell[BoxData[{
+    \(\[Delta]uuuddd[i, j, k, k, i, j] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // ContractKroneckers[\[Delta]]\)}], "Input",
+  CellLabel->"In[27]:="],
+
+Cell[BoxData[{
+    \(\[Delta]uuuddd[i, j, k, j, i, t] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // ContractKroneckers[\[Delta]]\)}], "Input",
+  CellLabel->"In[29]:="],
+
+Cell[BoxData[{
+    \(\[Delta]duudud[s, i, s, i, k, k] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // ContractKroneckers[\[Delta]]\)}], "Input",
+  CellLabel->"In[31]:="],
+
+Cell["The routine checks for unbalanced indices.", "Text"],
+
+Cell[BoxData[{
+    \(\[Delta]duuuud[r, i, j, s, k, t]\), "\[IndentingNewLine]", 
+    \(% // ContractKroneckers[\[Delta]]\)}], "Input",
+  CellLabel->"In[33]:="],
+
+Cell["Restore the initial values...", "Text"],
+
+Cell[BoxData[{
+    \(\(\(ClearTensorShortcuts[\[Delta], #] &\) /@ {2, 4, 6};\)\), "\n", 
+    \(ClearTensorShortcuts[\[Kappa], 6]\)}], "Input",
+  CellLabel->"In[35]:="],
+
+Cell[BoxData[{
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(Clear[oldflavors]\)}], "Input",
+  CellLabel->"In[37]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{674, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 65, 1, 31, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1844, 56, 616, 23, 49, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 8292, 265}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 65, 1, 31, "ObjectName",
+  CellTags->"Function?"],
+Cell[1844, 56, 616, 23, 49, "Usage",
+  CellTags->"Function?"],
+Cell[2463, 81, 305, 5, 65, "MathCaption"],
+Cell[2771, 88, 97, 2, 31, "MathCaption"],
+Cell[2871, 92, 394, 14, 31, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[3290, 110, 34, 0, 40, "ExampleSection"],
+Cell[3327, 112, 96, 2, 29, "Input"],
+Cell[3426, 116, 47, 0, 25, "Text"],
+Cell[3476, 118, 205, 4, 69, "Input"],
+Cell[3684, 124, 196, 4, 49, "Input"],
+Cell[3883, 130, 243, 4, 42, "Text"],
+Cell[4129, 136, 158, 3, 49, "Input"],
+Cell[4290, 141, 158, 3, 49, "Input"],
+Cell[4451, 146, 159, 3, 49, "Input"],
+Cell[4613, 151, 159, 3, 49, "Input"],
+Cell[4775, 156, 91, 2, 25, "Text"],
+Cell[4869, 160, 159, 3, 49, "Input"],
+Cell[5031, 165, 211, 4, 42, "Text"],
+Cell[5245, 171, 183, 4, 49, "Input"],
+Cell[5431, 177, 183, 4, 49, "Input"],
+Cell[5617, 183, 183, 4, 49, "Input"],
+Cell[5803, 189, 183, 4, 49, "Input"],
+Cell[5989, 195, 127, 3, 25, "Text"],
+Cell[6119, 200, 183, 4, 49, "Input"],
+Cell[6305, 206, 183, 4, 49, "Input"],
+Cell[6491, 212, 183, 4, 49, "Input"],
+Cell[6677, 218, 183, 4, 49, "Input"],
+Cell[6863, 224, 58, 0, 25, "Text"],
+Cell[6924, 226, 159, 3, 49, "Input"],
+Cell[7086, 231, 45, 0, 25, "Text"],
+Cell[7134, 233, 167, 3, 49, "Input"],
+Cell[7304, 238, 219, 4, 69, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

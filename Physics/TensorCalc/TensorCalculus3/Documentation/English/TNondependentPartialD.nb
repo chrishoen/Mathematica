@@ -1,0 +1,376 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      8565,        291]*)
+(*NotebookOutlinePosition[      9572,        326]*)
+(*  CellTagsIndexPosition[      9498,        320]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["NondependentPartialD", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox[
+            RowBox[{"Nondependent", 
+              StyleBox["PartialD",
+                "MR"]}]], 
+          StyleBox["[",
+            "MR"], 
+          StyleBox[\({lab1, lab2, \[Ellipsis]} \[Ellipsis]\),
+            "TI"], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will implement the assumption that Tensor labels, {lab1,lab2,...} are \
+nondependent so that a partial derivative of one with respect to another will \
+be zero."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["\<\
+ Multiple lists of nondependent Tensor labels may be provided.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["PartialD",
+    ButtonData:>{"PartialD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["ExpandPartialD",
+    ButtonData:>{"ExpandPartialD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["TotalD",
+    ButtonData:>{"TotalD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["CovariantD",
+    ButtonData:>{"CovariantD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["AbsoluteD",
+    ButtonData:>{"AbsoluteD"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell[BoxData[
+    \(\(oldbasis = BaseIndices;\)\)], "Input",
+  CellLabel->"In[2]:="],
+
+Cell[BoxData[{
+    \(DefineTensorShortcuts[{{x, y, z, f}, 1}, {{\[Eta], \[Delta]}, 
+        2}]\), "\[IndentingNewLine]", 
+    \(\(labs = {x, \[Delta], g, \[CapitalGamma]};\)\)}], "Input",
+  CellLabel->"In[3]:="],
+
+Cell["Here is an expression involving partial differentials.", "Text"],
+
+Cell[BoxData[
+    \(expr = \(PartialD[labs]\)[yu[i], 
+          Tensor /@ {\[Phi], \[Psi]}] + \(PartialD[labs]\)[xu[i], 
+          zu[j]] + \(PartialD[labs]\)[zu[i], xu[j]] + \(PartialD[labs]\)[
+          yu[i], xu[j]]\)], "Input",
+  CellLabel->"In[5]:="],
+
+Cell[TextData[{
+  "Here we specify that ",
+  Cell[BoxData[
+      \(y\)]],
+  " and ",
+  Cell[BoxData[
+      \(\[Phi]\)]],
+  " are independent. Notice that ",
+  Cell[BoxData[
+      \(y\)]],
+  " is still dependent on ",
+  Cell[BoxData[
+      \(x\)]],
+  " so that term is not zeroed."
+}], "Text"],
+
+Cell[BoxData[{
+    \(expr\), "\[IndentingNewLine]", 
+    \(% // NondependentPartialD[{y, \[Phi]}]\)}], "Input",
+  CellLabel->"In[6]:="],
+
+Cell[TextData[{
+  "Here we specify that ",
+  Cell[BoxData[
+      \(y\)]],
+  " is independent of ",
+  Cell[BoxData[
+      \(x\)]],
+  " but not of ",
+  Cell[BoxData[
+      \(\[Phi]\)]],
+  " or ",
+  Cell[BoxData[
+      \(\[Psi]\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(expr\), "\[IndentingNewLine]", 
+    \(% // NondependentPartialD[{y, x}]\)}], "Input",
+  CellLabel->"In[8]:="],
+
+Cell[TextData[{
+  "Here we specify that ",
+  Cell[BoxData[
+      \(x\)]],
+  " and ",
+  Cell[BoxData[
+      \(z\)]],
+  " are independent. Both partial derivatives are eliminated."
+}], "Text"],
+
+Cell[BoxData[{
+    \(expr\), "\[IndentingNewLine]", 
+    \(% // NondependentPartialD[{x, z}]\)}], "Input",
+  CellLabel->"In[10]:="],
+
+Cell["Here all the variables are independent...", "Text"],
+
+Cell[BoxData[{
+    \(expr\), "\[IndentingNewLine]", 
+    \(% // NondependentPartialD[{x, y, z, \[Phi], \[Psi]}]\)}], "Input",
+  CellLabel->"In[12]:="],
+
+Cell["\<\
+Sometimes we want derivatives of certain tensors to be zero. We illustrate \
+this by writing a routine that will derive the scalar Euler-Lagrange equation \
+from the Lagrangian for the Klein-Gordon equation.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[{0, 1, 2, 3}]\), "\[IndentingNewLine]", 
+    \(SetMetricValueRules[\[Eta], 
+      DiagonalMatrix[{\(-1\), 1, 1, 1}]]\), "\[IndentingNewLine]", 
+    \(\(labs = {x, \[Delta], \[Eta], \[CapitalGamma]};\)\)}], "Input",
+  CellLabel->"In[14]:="],
+
+Cell["The real Klein-Gordon Lagrangian is:", "Text"],
+
+Cell[BoxData[
+    \(RKGL = \[IndentingNewLine]1/2 \( PartialD[labs]\)[Tensor[\[Phi]], 
+            xu[\[Mu]]]*\(PartialD[labs]\)[Tensor[\[Phi]], 
+            xu[\[Nu]]] \[Eta]uu[\[Mu], \[Nu]] - 
+        m^2/2*Tensor[\[Phi]]^2\)], "Input",
+  CellLabel->"In[17]:="],
+
+Cell["Where m is a constant", "Text"],
+
+Cell[BoxData[
+    \(\(Attributes[m] = {Constant};\)\)], "Input",
+  CellLabel->"In[18]:="],
+
+Cell["But it is better to make a variable change", "Text"],
+
+Cell[BoxData[
+    \(RKGLmod\  = \ \[IndentingNewLine]RKGL /. \(PartialD[labs]\)[
+            Tensor[\[Phi]], \ xu[\[Nu]_]\ ] \[Rule] fd[\[Nu]]\)], "Input",
+  CellLabel->"In[19]:="],
+
+Cell[TextData[{
+  "We can then calculate the Euler-Lagrange equation by using the fact that \
+",
+  Cell[BoxData[
+      \({\[Eta], x}\)]],
+  " are independent and ",
+  Cell[BoxData[
+      \({\[Eta], f, \[Phi]}\)]],
+  " are independent."
+}], "Text"],
+
+Cell[BoxData[{
+    \(Print["\<Modified Lagrangian...\>"]\), "\[IndentingNewLine]", 
+    \(RKGLmod\), "\[IndentingNewLine]", 
+    \(Print["\<\[PartialD]x \[PartialD]f (L) - \[PartialD]\[Phi](L)\>"]\), "\
+\[IndentingNewLine]", 
+    \(\(PartialD[labs]\)[\(PartialD[{f, \[Delta], \[Eta], \[CapitalGamma]}]\)[
+          RKGLmod, fd[r]], 
+        xu[r]] - \(PartialD[{\[Phi], \[Delta], g, \[CapitalGamma]}]\)[
+        RKGLmod, Tensor[\[Phi]]]\), "\[IndentingNewLine]", 
+    \(Print["\<Eliminating nondependencies...\>"]\), "\[IndentingNewLine]", 
+    \(%% // 
+      NondependentPartialD[{\[Eta], x}, {\[Eta], 
+          f, \[Phi]}]\), "\[IndentingNewLine]", 
+    \(Print["\<Absorbing the Kronecker.\>"]\), "\[IndentingNewLine]", 
+    \(%% // KroneckerAbsorb[\[Delta]]\), "\[IndentingNewLine]", 
+    \(Print["\<Making the reverse substitution for the f's.\>"]\), "\
+\[IndentingNewLine]", 
+    \(%% /. 
+      fd[\[Nu]_] \[Rule] \(PartialD[labs]\)[Tensor[\[Phi]], \ 
+          xu[\[Nu]]]\), "\[IndentingNewLine]", 
+    \(Print["\<Simplifying by modifying the dummy indices and \
+expanding.\>"]\), "\[IndentingNewLine]", 
+    \(%% // SimplifyTensorSum\), "\[IndentingNewLine]", 
+    \(% // ToArrayValues[]\)}], "Input",
+  CellLabel->"In[20]:="],
+
+Cell["Restore settings.", "Text"],
+
+Cell[BoxData[{
+    \(\(ClearTensorValues /@ {\[Eta]dd[i, j], \[Eta]uu[i, 
+            j]};\)\), "\[IndentingNewLine]", 
+    \(ClearTensorShortcuts[{{x, y, z, f}, 1}, {{\[Eta], \[Delta]}, 
+        2}]\), "\[IndentingNewLine]", 
+    \(\(Attributes[m] = {};\)\)}], "Input",
+  CellLabel->"In[33]:="],
+
+Cell[BoxData[{
+    \(\(DeclareBaseIndices[oldbasis];\)\), "\[IndentingNewLine]", 
+    \(Clear[oldindices, labs, RKGL, RKGLmod]\)}], "Input",
+  CellLabel->"In[36]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{665, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 67, 1, 31, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1846, 56, 711, 25, 49, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 9327, 311}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 67, 1, 31, "ObjectName",
+  CellTags->"Function?"],
+Cell[1846, 56, 711, 25, 49, "Usage",
+  CellTags->"Function?"],
+Cell[2560, 83, 93, 2, 31, "MathCaption"],
+Cell[2656, 87, 532, 22, 31, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[3213, 113, 34, 0, 40, "ExampleSection"],
+Cell[3250, 115, 96, 2, 29, "Input"],
+Cell[3349, 119, 84, 2, 29, "Input"],
+Cell[3436, 123, 212, 4, 49, "Input"],
+Cell[3651, 129, 70, 0, 25, "Text"],
+Cell[3724, 131, 255, 5, 49, "Input"],
+Cell[3982, 138, 292, 14, 25, "Text"],
+Cell[4277, 154, 135, 3, 49, "Input"],
+Cell[4415, 159, 247, 14, 25, "Text"],
+Cell[4665, 175, 130, 3, 49, "Input"],
+Cell[4798, 180, 190, 8, 25, "Text"],
+Cell[4991, 190, 131, 3, 49, "Input"],
+Cell[5125, 195, 57, 0, 25, "Text"],
+Cell[5185, 197, 150, 3, 49, "Input"],
+Cell[5338, 202, 231, 4, 42, "Text"],
+Cell[5572, 208, 279, 5, 69, "Input"],
+Cell[5854, 215, 52, 0, 25, "Text"],
+Cell[5909, 217, 263, 5, 69, "Input"],
+Cell[6175, 224, 37, 0, 25, "Text"],
+Cell[6215, 226, 89, 2, 29, "Input"],
+Cell[6307, 230, 58, 0, 25, "Text"],
+Cell[6368, 232, 180, 3, 49, "Input"],
+Cell[6551, 237, 247, 9, 42, "Text"],
+Cell[6801, 248, 1234, 24, 289, "Input"],
+Cell[8038, 274, 33, 0, 25, "Text"],
+Cell[8074, 276, 295, 6, 69, "Input"],
+Cell[8372, 284, 165, 3, 49, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

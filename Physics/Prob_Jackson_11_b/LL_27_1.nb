@@ -1,0 +1,986 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.1'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     43111,        915]*)
+(*NotebookOutlinePosition[     43817,        939]*)
+(*  CellTagsIndexPosition[     43773,        935]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+
+support\
+\>", "Subtitle"],
+
+Cell[BoxData[
+    \(\(\(\[IndentingNewLine]\)\(\(ClearAll;\)\[IndentingNewLine]
+    Needs["\<TensorCalculus3`Tensorial`\>"]\[IndentingNewLine]\
+\[IndentingNewLine]
+    DeclareBaseIndices[{0, 1, 2, 3}]\[IndentingNewLine]
+    DeclareIndexFlavor[{red, Red}, {green, CinnabarGreen}]\[IndentingNewLine]
+    DefineTensorShortcuts[G, 2]\[IndentingNewLine]
+    SetTensorValues[Gdd[i, j], 
+      DiagonalMatrix[{1, \(-1\), \(-1\), \(-1\)}]]\[IndentingNewLine]
+    SetTensorValues[Gdd[i, j] // ToFlavor[red], 
+      DiagonalMatrix[{1, \(-1\), \(-1\), \(-1\)}]]\[IndentingNewLine]
+    SetTensorValues[Guu[i, j], 
+      DiagonalMatrix[{1, \(-1\), \(-1\), \(-1\)}]]\[IndentingNewLine]
+    SetTensorValues[Guu[i, j] // ToFlavor[red], 
+      DiagonalMatrix[{1, \(-1\), \(-1\), \(-1\)}]]\[IndentingNewLine]\
+\[IndentingNewLine]
+    DefineTensorShortcuts[{X, 1}, {Y, 1}, {T, 2}]\)\)\)], "Input"],
+
+Cell[BoxData[""], "Input"],
+
+Cell[BoxData[{\(ClearAll[LorentzMatrixRules];\), "\[IndentingNewLine]", 
+    RowBox[{\(LorentzMatrixRules::usage = "\<LorentzMatrixRules[L, newflavor, \
+oldflavor][\[Beta], \[Phi], \[Theta]] will generate and store the component \
+rules of the Lorentz transformation matrix to a frame moving with the \
+velocity \[Beta] in the spherical direction \[Phi] (angle from xy-plane) and \
+\[Theta] (rotation from x axis about z axis). The components will be stored \
+under the label L with the upper index in the newflavor and the lower index \
+in the restflavor. Identity can be used as the flavor for plain indices. The \
+values are stored as TensorValueRules[L]. The inverse values are also stored.\
+\>";\), "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+    RowBox[{\(\(LorentzMatrixRules[L_, newflavor_, 
+          oldflavor_:  Identity]\)[\[Beta]_ /; 
+          If[NumericQ[\[Beta]], Abs[\[Beta]] < 1, 
+            True], \[Phi]_, \[Theta]_]\), ":=", "\[IndentingNewLine]", 
+      RowBox[{"Module", "[", "\[IndentingNewLine]", 
+        RowBox[{\({\[Gamma] = 1/\@\(1 - \[Beta]\^2\), \[IndentingNewLine]n1, 
+            n2, n3, \[Alpha], \[Gamma]1, matrix}\), ",", 
+          "\[IndentingNewLine]", 
+          
+          RowBox[{\(DefineTensorShortcuts[L, 2]\), ";", 
+            "\[IndentingNewLine]", \({n1, n2, 
+                n3} = {Cos[\[Phi]] Cos[\[Theta]], Cos[\[Phi]] Sin[\[Theta]], 
+                Sin[\[Phi]]}\), ";", 
+            "\[IndentingNewLine]", \(\[Gamma]1 = \[Gamma] - 1\), ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"matrix", "=", 
+              RowBox[{"(", GridBox[{
+                    {
+                      "\[Gamma]", \(\(-\[Alpha]\)\ \[Gamma]\ n1\), \(\(-\
+\[Alpha]\)\ \[Gamma]\ n2\), \(\(-\[Alpha]\)\ \[Gamma]\ n3\)},
+                    {\(\(-\[Alpha]\)\ \[Gamma]\ n1\), \(1 + \[Gamma]1\ n1\ n1\
+\), \(\[Gamma]1\ n1\ n2\), \(\[Gamma]1\ n1\ n3\)},
+                    {\(\(-\[Alpha]\)\ \[Gamma]\ n2\), \(\[Gamma]1\ n2\ n1\), \
+\(1 + \[Gamma]1\ n2\ n2\), \(\[Gamma]1\ n2\ n3\)},
+                    {\(\(-\[Alpha]\)\ \[Gamma]\ n3\), \(\[Gamma]1\ n3\ n1\), \
+\(\[Gamma]1\ n3\ n2\), \(1 + \[Gamma]1\ n3\ n3\)}
+                    }], ")"}]}], ";", 
+            "\[IndentingNewLine]", \(SetTensorValueRules[
+              Lud[newflavor@i, oldflavor@j], \ 
+              matrix /. \[Alpha] \[Rule] \[Beta]]\), ";", 
+            "\[IndentingNewLine]", \(SetTensorValueRules[
+              Lud[oldflavor@i, newflavor@j], \ 
+              matrix /. \[Alpha] \[Rule] \(-\[Beta]\)]\), ";"}]}], 
+        "\[IndentingNewLine]", "]"}]}]}], "Input"],
+
+Cell[BoxData[{\(ClearAll[LorentzMatrixValues];\), "\[IndentingNewLine]", 
+    RowBox[{\(LorentzMatrixValues::usage = "\<LorentzMatrixValues[L, \
+newflavor, oldflavor][\[Beta], \[Phi], \[Theta]] will generate and store the \
+component values of the Lorentz transformation matrix to a frame moving with \
+the velocity \[Beta] in the spherical direction \[Phi] (angle from xy-plane) \
+and \[Theta] (rotation from x axis about z axis). The components will be \
+stored under the label L with the upper index in the newflavor and the lower \
+index in the restflavor. Identity can be used as the flavor for plain \
+indices. The values are stored as TensorValueRules[L]. The inverse values are \
+also stored.\>";\), "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+    RowBox[{\(\(LorentzMatrixValues[L_, newflavor_, 
+          oldflavor_:  Identity]\)[\[Beta]_ /; 
+          If[NumericQ[\[Beta]], Abs[\[Beta]] < 1, 
+            True], \[Phi]_, \[Theta]_]\), ":=", "\[IndentingNewLine]", 
+      RowBox[{"Module", "[", "\[IndentingNewLine]", 
+        RowBox[{\({\[Gamma] = 1/\@\(1 - \[Beta]\^2\), \[IndentingNewLine]n1, 
+            n2, n3, \[Alpha], \[Gamma]1, matrix}\), ",", 
+          "\[IndentingNewLine]", 
+          
+          RowBox[{\(DefineTensorShortcuts[L, 2]\), ";", 
+            "\[IndentingNewLine]", \({n1, n2, 
+                n3} = {Cos[\[Phi]] Cos[\[Theta]], Cos[\[Phi]] Sin[\[Theta]], 
+                Sin[\[Phi]]}\), ";", 
+            "\[IndentingNewLine]", \(\[Gamma]1 = \[Gamma] - 1\), ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"matrix", "=", 
+              RowBox[{"(", GridBox[{
+                    {
+                      "\[Gamma]", \(\(-\[Alpha]\)\ \[Gamma]\ n1\), \(\(-\
+\[Alpha]\)\ \[Gamma]\ n2\), \(\(-\[Alpha]\)\ \[Gamma]\ n3\)},
+                    {\(\(-\[Alpha]\)\ \[Gamma]\ n1\), \(1 + \[Gamma]1\ n1\ n1\
+\), \(\[Gamma]1\ n1\ n2\), \(\[Gamma]1\ n1\ n3\)},
+                    {\(\(-\[Alpha]\)\ \[Gamma]\ n2\), \(\[Gamma]1\ n2\ n1\), \
+\(1 + \[Gamma]1\ n2\ n2\), \(\[Gamma]1\ n2\ n3\)},
+                    {\(\(-\[Alpha]\)\ \[Gamma]\ n3\), \(\[Gamma]1\ n3\ n1\), \
+\(\[Gamma]1\ n3\ n2\), \(1 + \[Gamma]1\ n3\ n3\)}
+                    }], ")"}]}], ";", 
+            "\[IndentingNewLine]", \(SetTensorValues[
+              Lud[newflavor@i, oldflavor@j], \ 
+              matrix /. \[Alpha] \[Rule] \[Beta]]\), ";", 
+            "\[IndentingNewLine]", \(SetTensorValues[
+              Lud[oldflavor@i, newflavor@j], \ 
+              matrix /. \[Alpha] \[Rule] \(-\[Beta]\)]\), ";"}]}], 
+        "\[IndentingNewLine]", "]"}]}]}], "Input"],
+
+Cell[BoxData[{
+    \(DefineTensorShortcuts[{LEVI, 4}]\), "\[IndentingNewLine]", 
+    \(SetTensorValues[LEVIuuuu[i, j, m, n], 
+      PermutationPseudotensor[4]]\), "\[IndentingNewLine]", 
+    \(SetTensorValues[LEVIdddd[i, j, m, n], 
+      PermutationPseudotensor[4]]\), "\[IndentingNewLine]", 
+    \(\)}], "Input"],
+
+Cell[BoxData[{
+    \(DefineTensorShortcuts[{X, 1}, {Y, 1}, {L, 
+        2}]\), "\[IndentingNewLine]", 
+    \(\(\(\(LorentzMatrixValues[L, red]\)[\[Beta], 0, 
+      0]\)\(\[IndentingNewLine]\)\(\[IndentingNewLine]\)\(\[IndentingNewLine]\
+\)
+    \)\), "\[IndentingNewLine]", 
+    \(\)}], "Input"],
+
+Cell[BoxData[{
+    \(DefineTensorShortcuts[{F, 2}, {FD, 2}]\), "\[IndentingNewLine]", 
+    \(\(FuuValues = {{0, \(-E1\), \(-E2\), \(-E3\)}, {E1, 0, \(-B3\), 
+            B2}, {E2, B3, 0, \(-B1\)}, {E3, \(-B2\), B1, 
+            0}};\)\), "\[IndentingNewLine]", 
+    \(SetTensorValues[Fuu[i, j], FuuValues]\), "\[IndentingNewLine]", 
+    \(\(FddValues = 
+        Gdd[i, m] Gdd[j, n] Fuu[m, n] // 
+          ToArrayValues[];\)\), "\[IndentingNewLine]", 
+    \(SetTensorValues[Fdd[i, j], FddValues]\), "\[IndentingNewLine]", 
+    \(\(FDuuValues = \((1/2)\) LEVIuuuu[i, j, m, n] Fdd[m, n] // 
+          ToArrayValues[];\)\), "\[IndentingNewLine]", 
+    \(SetTensorValues[FDuu[i, j], FDuuValues]\), "\[IndentingNewLine]", 
+    \(\(FDddValues = 
+        Gdd[i, m] Gdd[j, n] FDuu[m, n] // ToArrayValues[];\)\), "\n", 
+    \(SetTensorValues[FDdd[i, j], FDddValues]\), "\n", 
+    \(\)}], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+
+content
+\
+\>", "Subtitle"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(Fuu[i, j] // ToArrayValues[]\) // 
+      MatrixForm\), "\[IndentingNewLine]", 
+    \(\(\(Fdd[i, j] // ToArrayValues[]\) // 
+        MatrixForm;\)\), "\[IndentingNewLine]", 
+    \(\(\(FDuu[i, j] // ToArrayValues[]\) // 
+        MatrixForm;\)\), "\[IndentingNewLine]", 
+    \(\(\(FDdd[i, j] // ToArrayValues[]\) // MatrixForm;\)\)}], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      StyleBox[
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", GridBox[{
+                {"0", \(-E1\), \(-E2\), \(-E3\)},
+                {"E1", "0", \(-B3\), "B2"},
+                {"E2", "B3", "0", \(-B1\)},
+                {"E3", \(-B2\), "B1", "0"}
+                },
+              RowSpacings->1,
+              ColumnSpacings->1,
+              ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]],
+        FontFamily->"Courier",
+        FontSize->16],
+      (StyleForm[ #, FontSize -> 16, FontFamily -> "Courier"]&)]], "Output"]
+}, Open  ]],
+
+Cell[BoxData[{
+    \(DefineTensorShortcuts[{{x}, 1}, {{\[Delta]}, 
+        2}]\[IndentingNewLine]\), "\[IndentingNewLine]", 
+    \(\(labs = {x, \[Delta], g, \[CapitalGamma]};\)\)}], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(PartialD[labs]\)[Fuu[i, k], xu[k]]\), "\[IndentingNewLine]", 
+    \(\(\(PartialD[labs]\)[Fuu[i, k], xu[k]] // ToArrayValues[]\) // 
+      MatrixForm\)}], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      StyleBox[
+        TagBox[
+          RowBox[{
+            SubscriptBox["\[PartialD]", 
+              InterpretationBox[
+                SubsuperscriptBox["x", 
+                  InterpretationBox[
+                    TagBox[
+                      StyleBox["k",
+                        ShowContents->False],
+                      (StyleForm[ #, ShowContents -> False]&)],
+                    SequenceForm[ 
+                      StyleForm[ k, ShowContents -> False]],
+                    Editable->False], 
+                  InterpretationBox["k",
+                    SequenceForm[ k],
+                    Editable->False]],
+                Subsuperscript[ x, 
+                  SequenceForm[ 
+                    StyleForm[ k, ShowContents -> False]], 
+                  SequenceForm[ k]],
+                Editable->False]], 
+            InterpretationBox[
+              SubsuperscriptBox["F", 
+                InterpretationBox[
+                  RowBox[{
+                    TagBox[
+                      StyleBox["i",
+                        ShowContents->False],
+                      (StyleForm[ #, ShowContents -> False]&)], 
+                    "\[InvisibleSpace]", 
+                    TagBox[
+                      StyleBox["k",
+                        ShowContents->False],
+                      (StyleForm[ #, ShowContents -> False]&)]}],
+                  SequenceForm[ 
+                    StyleForm[ i, ShowContents -> False], 
+                    StyleForm[ k, ShowContents -> False]],
+                  Editable->False], 
+                InterpretationBox[\(i\[InvisibleSpace]k\),
+                  SequenceForm[ i, k],
+                  Editable->False]],
+              Subsuperscript[ F, 
+                SequenceForm[ 
+                  StyleForm[ i, ShowContents -> False], 
+                  StyleForm[ k, ShowContents -> False]], 
+                SequenceForm[ i, k]],
+              Editable->False]}],
+          HoldForm],
+        FontFamily->"Courier",
+        FontSize->16],
+      (StyleForm[ #, FontSize -> 16, FontFamily -> "Courier"]&)]], "Output"],
+
+Cell[BoxData[
+    TagBox[
+      StyleBox[
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", 
+            TagBox[GridBox[{
+                  {
+                    RowBox[{
+                      RowBox[{"-", 
+                        TagBox[
+                          RowBox[{
+                            SubscriptBox["\[PartialD]", 
+                              InterpretationBox[
+                                SubsuperscriptBox["x", 
+                                  InterpretationBox[
+                                    TagBox[
+                                      StyleBox["1",
+                                        ShowContents->False],
+                                      (
+                                      StyleForm[ #, ShowContents -> False]&)],
+                                    
+                                    SequenceForm[ 
+                                      StyleForm[ 1, ShowContents -> False]],
+                                    Editable->False], 
+                                  InterpretationBox["1",
+                                    SequenceForm[ 1],
+                                    Editable->False]],
+                                Subsuperscript[ x, 
+                                  SequenceForm[ 
+                                    StyleForm[ 1, ShowContents -> False]], 
+                                  SequenceForm[ 1]],
+                                Editable->False]], "E1"}],
+                          HoldForm]}], "-", 
+                      TagBox[
+                        RowBox[{
+                          SubscriptBox["\[PartialD]", 
+                            InterpretationBox[
+                              SubsuperscriptBox["x", 
+                                InterpretationBox[
+                                  TagBox[
+                                    StyleBox["2",
+                                      ShowContents->False],
+                                    (StyleForm[ #, ShowContents -> False]&)],
+                                  SequenceForm[ 
+                                    StyleForm[ 2, ShowContents -> False]],
+                                  Editable->False], 
+                                InterpretationBox["2",
+                                  SequenceForm[ 2],
+                                  Editable->False]],
+                              Subsuperscript[ x, 
+                                SequenceForm[ 
+                                  StyleForm[ 2, ShowContents -> False]], 
+                                SequenceForm[ 2]],
+                              Editable->False]], "E2"}],
+                        HoldForm], "-", 
+                      TagBox[
+                        RowBox[{
+                          SubscriptBox["\[PartialD]", 
+                            InterpretationBox[
+                              SubsuperscriptBox["x", 
+                                InterpretationBox[
+                                  TagBox[
+                                    StyleBox["3",
+                                      ShowContents->False],
+                                    (StyleForm[ #, ShowContents -> False]&)],
+                                  SequenceForm[ 
+                                    StyleForm[ 3, ShowContents -> False]],
+                                  Editable->False], 
+                                InterpretationBox["3",
+                                  SequenceForm[ 3],
+                                  Editable->False]],
+                              Subsuperscript[ x, 
+                                SequenceForm[ 
+                                  StyleForm[ 3, ShowContents -> False]], 
+                                SequenceForm[ 3]],
+                              Editable->False]], "E3"}],
+                        HoldForm]}]},
+                  {
+                    RowBox[{
+                      TagBox[
+                        RowBox[{
+                          SubscriptBox["\[PartialD]", 
+                            InterpretationBox[
+                              SubsuperscriptBox["x", 
+                                InterpretationBox[
+                                  TagBox[
+                                    StyleBox["3",
+                                      ShowContents->False],
+                                    (StyleForm[ #, ShowContents -> False]&)],
+                                  SequenceForm[ 
+                                    StyleForm[ 3, ShowContents -> False]],
+                                  Editable->False], 
+                                InterpretationBox["3",
+                                  SequenceForm[ 3],
+                                  Editable->False]],
+                              Subsuperscript[ x, 
+                                SequenceForm[ 
+                                  StyleForm[ 3, ShowContents -> False]], 
+                                SequenceForm[ 3]],
+                              Editable->False]], "B2"}],
+                        HoldForm], "-", 
+                      TagBox[
+                        RowBox[{
+                          SubscriptBox["\[PartialD]", 
+                            InterpretationBox[
+                              SubsuperscriptBox["x", 
+                                InterpretationBox[
+                                  TagBox[
+                                    StyleBox["2",
+                                      ShowContents->False],
+                                    (StyleForm[ #, ShowContents -> False]&)],
+                                  SequenceForm[ 
+                                    StyleForm[ 2, ShowContents -> False]],
+                                  Editable->False], 
+                                InterpretationBox["2",
+                                  SequenceForm[ 2],
+                                  Editable->False]],
+                              Subsuperscript[ x, 
+                                SequenceForm[ 
+                                  StyleForm[ 2, ShowContents -> False]], 
+                                SequenceForm[ 2]],
+                              Editable->False]], "B3"}],
+                        HoldForm], "+", 
+                      TagBox[
+                        RowBox[{
+                          SubscriptBox["\[PartialD]", 
+                            InterpretationBox[
+                              SubsuperscriptBox["x", 
+                                InterpretationBox[
+                                  TagBox[
+                                    StyleBox["0",
+                                      ShowContents->False],
+                                    (StyleForm[ #, ShowContents -> False]&)],
+                                  SequenceForm[ 
+                                    StyleForm[ 0, ShowContents -> False]],
+                                  Editable->False], 
+                                InterpretationBox["0",
+                                  SequenceForm[ 0],
+                                  Editable->False]],
+                              Subsuperscript[ x, 
+                                SequenceForm[ 
+                                  StyleForm[ 0, ShowContents -> False]], 
+                                SequenceForm[ 0]],
+                              Editable->False]], "E1"}],
+                        HoldForm]}]},
+                  {
+                    RowBox[{
+                      RowBox[{"-", 
+                        TagBox[
+                          RowBox[{
+                            SubscriptBox["\[PartialD]", 
+                              InterpretationBox[
+                                SubsuperscriptBox["x", 
+                                  InterpretationBox[
+                                    TagBox[
+                                      StyleBox["3",
+                                        ShowContents->False],
+                                      (
+                                      StyleForm[ #, ShowContents -> False]&)],
+                                    
+                                    SequenceForm[ 
+                                      StyleForm[ 3, ShowContents -> False]],
+                                    Editable->False], 
+                                  InterpretationBox["3",
+                                    SequenceForm[ 3],
+                                    Editable->False]],
+                                Subsuperscript[ x, 
+                                  SequenceForm[ 
+                                    StyleForm[ 3, ShowContents -> False]], 
+                                  SequenceForm[ 3]],
+                                Editable->False]], "B1"}],
+                          HoldForm]}], "+", 
+                      TagBox[
+                        RowBox[{
+                          SubscriptBox["\[PartialD]", 
+                            InterpretationBox[
+                              SubsuperscriptBox["x", 
+                                InterpretationBox[
+                                  TagBox[
+                                    StyleBox["1",
+                                      ShowContents->False],
+                                    (StyleForm[ #, ShowContents -> False]&)],
+                                  SequenceForm[ 
+                                    StyleForm[ 1, ShowContents -> False]],
+                                  Editable->False], 
+                                InterpretationBox["1",
+                                  SequenceForm[ 1],
+                                  Editable->False]],
+                              Subsuperscript[ x, 
+                                SequenceForm[ 
+                                  StyleForm[ 1, ShowContents -> False]], 
+                                SequenceForm[ 1]],
+                              Editable->False]], "B3"}],
+                        HoldForm], "+", 
+                      TagBox[
+                        RowBox[{
+                          SubscriptBox["\[PartialD]", 
+                            InterpretationBox[
+                              SubsuperscriptBox["x", 
+                                InterpretationBox[
+                                  TagBox[
+                                    StyleBox["0",
+                                      ShowContents->False],
+                                    (StyleForm[ #, ShowContents -> False]&)],
+                                  SequenceForm[ 
+                                    StyleForm[ 0, ShowContents -> False]],
+                                  Editable->False], 
+                                InterpretationBox["0",
+                                  SequenceForm[ 0],
+                                  Editable->False]],
+                              Subsuperscript[ x, 
+                                SequenceForm[ 
+                                  StyleForm[ 0, ShowContents -> False]], 
+                                SequenceForm[ 0]],
+                              Editable->False]], "E2"}],
+                        HoldForm]}]},
+                  {
+                    RowBox[{
+                      TagBox[
+                        RowBox[{
+                          SubscriptBox["\[PartialD]", 
+                            InterpretationBox[
+                              SubsuperscriptBox["x", 
+                                InterpretationBox[
+                                  TagBox[
+                                    StyleBox["2",
+                                      ShowContents->False],
+                                    (StyleForm[ #, ShowContents -> False]&)],
+                                  SequenceForm[ 
+                                    StyleForm[ 2, ShowContents -> False]],
+                                  Editable->False], 
+                                InterpretationBox["2",
+                                  SequenceForm[ 2],
+                                  Editable->False]],
+                              Subsuperscript[ x, 
+                                SequenceForm[ 
+                                  StyleForm[ 2, ShowContents -> False]], 
+                                SequenceForm[ 2]],
+                              Editable->False]], "B1"}],
+                        HoldForm], "-", 
+                      TagBox[
+                        RowBox[{
+                          SubscriptBox["\[PartialD]", 
+                            InterpretationBox[
+                              SubsuperscriptBox["x", 
+                                InterpretationBox[
+                                  TagBox[
+                                    StyleBox["1",
+                                      ShowContents->False],
+                                    (StyleForm[ #, ShowContents -> False]&)],
+                                  SequenceForm[ 
+                                    StyleForm[ 1, ShowContents -> False]],
+                                  Editable->False], 
+                                InterpretationBox["1",
+                                  SequenceForm[ 1],
+                                  Editable->False]],
+                              Subsuperscript[ x, 
+                                SequenceForm[ 
+                                  StyleForm[ 1, ShowContents -> False]], 
+                                SequenceForm[ 1]],
+                              Editable->False]], "B2"}],
+                        HoldForm], "+", 
+                      TagBox[
+                        RowBox[{
+                          SubscriptBox["\[PartialD]", 
+                            InterpretationBox[
+                              SubsuperscriptBox["x", 
+                                InterpretationBox[
+                                  TagBox[
+                                    StyleBox["0",
+                                      ShowContents->False],
+                                    (StyleForm[ #, ShowContents -> False]&)],
+                                  SequenceForm[ 
+                                    StyleForm[ 0, ShowContents -> False]],
+                                  Editable->False], 
+                                InterpretationBox["0",
+                                  SequenceForm[ 0],
+                                  Editable->False]],
+                              Subsuperscript[ x, 
+                                SequenceForm[ 
+                                  StyleForm[ 0, ShowContents -> False]], 
+                                SequenceForm[ 0]],
+                              Editable->False]], "E3"}],
+                        HoldForm]}]}
+                  },
+                RowSpacings->1,
+                ColumnAlignments->{Left}],
+              Column], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]],
+        FontFamily->"Courier",
+        FontSize->16],
+      (StyleForm[ #, FontSize -> 16, FontFamily -> "Courier"]&)]], "Output"]
+}, Open  ]],
+
+Cell[BoxData[""], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(DefineTensorShortcuts[{J, 1}, {Q, 1}]\), "\[IndentingNewLine]", 
+    \(SetTensorValues[Ju[i], {\[Rho], J1, J2, J3}]\), "\[IndentingNewLine]", 
+    \(SetTensorValues[
+      Jd[i], {\[Rho], \(-J1\), \(-J2\), \(-J3\)}]\[IndentingNewLine]\
+\[IndentingNewLine]\), "\[IndentingNewLine]", 
+    \(QValues = \(\(PartialD[labs]\)[Fuu[i, k], xu[k]] - Ju[i] // 
+          ToArrayValues[]\) // MatrixForm\), "\[IndentingNewLine]", 
+    \(\)}], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      StyleBox[
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", 
+            TagBox[GridBox[{
+                  {
+                    RowBox[{\(-\[Rho]\), "-", 
+                      TagBox[
+                        RowBox[{
+                          SubscriptBox["\[PartialD]", 
+                            InterpretationBox[
+                              SubsuperscriptBox["x", 
+                                InterpretationBox[
+                                  TagBox[
+                                    StyleBox["1",
+                                      ShowContents->False],
+                                    (StyleForm[ #, ShowContents -> False]&)],
+                                  SequenceForm[ 
+                                    StyleForm[ 1, ShowContents -> False]],
+                                  Editable->False], 
+                                InterpretationBox["1",
+                                  SequenceForm[ 1],
+                                  Editable->False]],
+                              Subsuperscript[ x, 
+                                SequenceForm[ 
+                                  StyleForm[ 1, ShowContents -> False]], 
+                                SequenceForm[ 1]],
+                              Editable->False]], "E1"}],
+                        HoldForm], "-", 
+                      TagBox[
+                        RowBox[{
+                          SubscriptBox["\[PartialD]", 
+                            InterpretationBox[
+                              SubsuperscriptBox["x", 
+                                InterpretationBox[
+                                  TagBox[
+                                    StyleBox["2",
+                                      ShowContents->False],
+                                    (StyleForm[ #, ShowContents -> False]&)],
+                                  SequenceForm[ 
+                                    StyleForm[ 2, ShowContents -> False]],
+                                  Editable->False], 
+                                InterpretationBox["2",
+                                  SequenceForm[ 2],
+                                  Editable->False]],
+                              Subsuperscript[ x, 
+                                SequenceForm[ 
+                                  StyleForm[ 2, ShowContents -> False]], 
+                                SequenceForm[ 2]],
+                              Editable->False]], "E2"}],
+                        HoldForm], "-", 
+                      TagBox[
+                        RowBox[{
+                          SubscriptBox["\[PartialD]", 
+                            InterpretationBox[
+                              SubsuperscriptBox["x", 
+                                InterpretationBox[
+                                  TagBox[
+                                    StyleBox["3",
+                                      ShowContents->False],
+                                    (StyleForm[ #, ShowContents -> False]&)],
+                                  SequenceForm[ 
+                                    StyleForm[ 3, ShowContents -> False]],
+                                  Editable->False], 
+                                InterpretationBox["3",
+                                  SequenceForm[ 3],
+                                  Editable->False]],
+                              Subsuperscript[ x, 
+                                SequenceForm[ 
+                                  StyleForm[ 3, ShowContents -> False]], 
+                                SequenceForm[ 3]],
+                              Editable->False]], "E3"}],
+                        HoldForm]}]},
+                  {
+                    RowBox[{\(-J1\), "+", 
+                      TagBox[
+                        RowBox[{
+                          SubscriptBox["\[PartialD]", 
+                            InterpretationBox[
+                              SubsuperscriptBox["x", 
+                                InterpretationBox[
+                                  TagBox[
+                                    StyleBox["3",
+                                      ShowContents->False],
+                                    (StyleForm[ #, ShowContents -> False]&)],
+                                  SequenceForm[ 
+                                    StyleForm[ 3, ShowContents -> False]],
+                                  Editable->False], 
+                                InterpretationBox["3",
+                                  SequenceForm[ 3],
+                                  Editable->False]],
+                              Subsuperscript[ x, 
+                                SequenceForm[ 
+                                  StyleForm[ 3, ShowContents -> False]], 
+                                SequenceForm[ 3]],
+                              Editable->False]], "B2"}],
+                        HoldForm], "-", 
+                      TagBox[
+                        RowBox[{
+                          SubscriptBox["\[PartialD]", 
+                            InterpretationBox[
+                              SubsuperscriptBox["x", 
+                                InterpretationBox[
+                                  TagBox[
+                                    StyleBox["2",
+                                      ShowContents->False],
+                                    (StyleForm[ #, ShowContents -> False]&)],
+                                  SequenceForm[ 
+                                    StyleForm[ 2, ShowContents -> False]],
+                                  Editable->False], 
+                                InterpretationBox["2",
+                                  SequenceForm[ 2],
+                                  Editable->False]],
+                              Subsuperscript[ x, 
+                                SequenceForm[ 
+                                  StyleForm[ 2, ShowContents -> False]], 
+                                SequenceForm[ 2]],
+                              Editable->False]], "B3"}],
+                        HoldForm], "+", 
+                      TagBox[
+                        RowBox[{
+                          SubscriptBox["\[PartialD]", 
+                            InterpretationBox[
+                              SubsuperscriptBox["x", 
+                                InterpretationBox[
+                                  TagBox[
+                                    StyleBox["0",
+                                      ShowContents->False],
+                                    (StyleForm[ #, ShowContents -> False]&)],
+                                  SequenceForm[ 
+                                    StyleForm[ 0, ShowContents -> False]],
+                                  Editable->False], 
+                                InterpretationBox["0",
+                                  SequenceForm[ 0],
+                                  Editable->False]],
+                              Subsuperscript[ x, 
+                                SequenceForm[ 
+                                  StyleForm[ 0, ShowContents -> False]], 
+                                SequenceForm[ 0]],
+                              Editable->False]], "E1"}],
+                        HoldForm]}]},
+                  {
+                    RowBox[{\(-J2\), "-", 
+                      TagBox[
+                        RowBox[{
+                          SubscriptBox["\[PartialD]", 
+                            InterpretationBox[
+                              SubsuperscriptBox["x", 
+                                InterpretationBox[
+                                  TagBox[
+                                    StyleBox["3",
+                                      ShowContents->False],
+                                    (StyleForm[ #, ShowContents -> False]&)],
+                                  SequenceForm[ 
+                                    StyleForm[ 3, ShowContents -> False]],
+                                  Editable->False], 
+                                InterpretationBox["3",
+                                  SequenceForm[ 3],
+                                  Editable->False]],
+                              Subsuperscript[ x, 
+                                SequenceForm[ 
+                                  StyleForm[ 3, ShowContents -> False]], 
+                                SequenceForm[ 3]],
+                              Editable->False]], "B1"}],
+                        HoldForm], "+", 
+                      TagBox[
+                        RowBox[{
+                          SubscriptBox["\[PartialD]", 
+                            InterpretationBox[
+                              SubsuperscriptBox["x", 
+                                InterpretationBox[
+                                  TagBox[
+                                    StyleBox["1",
+                                      ShowContents->False],
+                                    (StyleForm[ #, ShowContents -> False]&)],
+                                  SequenceForm[ 
+                                    StyleForm[ 1, ShowContents -> False]],
+                                  Editable->False], 
+                                InterpretationBox["1",
+                                  SequenceForm[ 1],
+                                  Editable->False]],
+                              Subsuperscript[ x, 
+                                SequenceForm[ 
+                                  StyleForm[ 1, ShowContents -> False]], 
+                                SequenceForm[ 1]],
+                              Editable->False]], "B3"}],
+                        HoldForm], "+", 
+                      TagBox[
+                        RowBox[{
+                          SubscriptBox["\[PartialD]", 
+                            InterpretationBox[
+                              SubsuperscriptBox["x", 
+                                InterpretationBox[
+                                  TagBox[
+                                    StyleBox["0",
+                                      ShowContents->False],
+                                    (StyleForm[ #, ShowContents -> False]&)],
+                                  SequenceForm[ 
+                                    StyleForm[ 0, ShowContents -> False]],
+                                  Editable->False], 
+                                InterpretationBox["0",
+                                  SequenceForm[ 0],
+                                  Editable->False]],
+                              Subsuperscript[ x, 
+                                SequenceForm[ 
+                                  StyleForm[ 0, ShowContents -> False]], 
+                                SequenceForm[ 0]],
+                              Editable->False]], "E2"}],
+                        HoldForm]}]},
+                  {
+                    RowBox[{\(-J3\), "+", 
+                      TagBox[
+                        RowBox[{
+                          SubscriptBox["\[PartialD]", 
+                            InterpretationBox[
+                              SubsuperscriptBox["x", 
+                                InterpretationBox[
+                                  TagBox[
+                                    StyleBox["2",
+                                      ShowContents->False],
+                                    (StyleForm[ #, ShowContents -> False]&)],
+                                  SequenceForm[ 
+                                    StyleForm[ 2, ShowContents -> False]],
+                                  Editable->False], 
+                                InterpretationBox["2",
+                                  SequenceForm[ 2],
+                                  Editable->False]],
+                              Subsuperscript[ x, 
+                                SequenceForm[ 
+                                  StyleForm[ 2, ShowContents -> False]], 
+                                SequenceForm[ 2]],
+                              Editable->False]], "B1"}],
+                        HoldForm], "-", 
+                      TagBox[
+                        RowBox[{
+                          SubscriptBox["\[PartialD]", 
+                            InterpretationBox[
+                              SubsuperscriptBox["x", 
+                                InterpretationBox[
+                                  TagBox[
+                                    StyleBox["1",
+                                      ShowContents->False],
+                                    (StyleForm[ #, ShowContents -> False]&)],
+                                  SequenceForm[ 
+                                    StyleForm[ 1, ShowContents -> False]],
+                                  Editable->False], 
+                                InterpretationBox["1",
+                                  SequenceForm[ 1],
+                                  Editable->False]],
+                              Subsuperscript[ x, 
+                                SequenceForm[ 
+                                  StyleForm[ 1, ShowContents -> False]], 
+                                SequenceForm[ 1]],
+                              Editable->False]], "B2"}],
+                        HoldForm], "+", 
+                      TagBox[
+                        RowBox[{
+                          SubscriptBox["\[PartialD]", 
+                            InterpretationBox[
+                              SubsuperscriptBox["x", 
+                                InterpretationBox[
+                                  TagBox[
+                                    StyleBox["0",
+                                      ShowContents->False],
+                                    (StyleForm[ #, ShowContents -> False]&)],
+                                  SequenceForm[ 
+                                    StyleForm[ 0, ShowContents -> False]],
+                                  Editable->False], 
+                                InterpretationBox["0",
+                                  SequenceForm[ 0],
+                                  Editable->False]],
+                              Subsuperscript[ x, 
+                                SequenceForm[ 
+                                  StyleForm[ 0, ShowContents -> False]], 
+                                SequenceForm[ 0]],
+                              Editable->False]], "E3"}],
+                        HoldForm]}]}
+                  },
+                RowSpacings->1,
+                ColumnAlignments->{Left}],
+              Column], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]],
+        FontFamily->"Courier",
+        FontSize->16],
+      (StyleForm[ #, FontSize -> 16, FontFamily -> "Courier"]&)]], "Output"]
+}, Open  ]],
+
+Cell[BoxData[""], "Input"],
+
+Cell[BoxData[""], "Input"],
+
+Cell[BoxData[""], "Input"]
+}, Open  ]]
+},
+FrontEndVersion->"5.1 for Microsoft Windows",
+ScreenRectangle->{{0, 1173}, {0, 979}},
+WindowSize->{1013, 537},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrintingCopies->1,
+PrintingPageRange->{Automatic, Automatic}
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 36, 3, 80, "Subtitle"],
+Cell[1815, 58, 878, 16, 270, "Input"],
+Cell[2696, 76, 26, 0, 30, "Input"],
+Cell[2725, 78, 2585, 43, 453, "Input"],
+Cell[5313, 123, 2582, 43, 453, "Input"],
+Cell[7898, 168, 313, 6, 90, "Input"],
+Cell[8214, 176, 294, 7, 130, "Input"],
+Cell[8511, 185, 887, 16, 210, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[9435, 206, 37, 4, 111, "Subtitle"],
+
+Cell[CellGroupData[{
+Cell[9497, 214, 363, 7, 90, "Input"],
+Cell[9863, 223, 632, 17, 101, "Output"]
+}, Open  ]],
+Cell[10510, 243, 190, 3, 70, "Input"],
+
+Cell[CellGroupData[{
+Cell[10725, 250, 185, 3, 50, "Input"],
+Cell[10913, 255, 2107, 53, 36, "Output"],
+Cell[13023, 310, 14850, 292, 121, "Output"]
+}, Open  ]],
+Cell[27888, 605, 26, 0, 30, "Input"],
+
+Cell[CellGroupData[{
+Cell[27939, 609, 460, 8, 150, "Input"],
+Cell[28402, 619, 14594, 286, 121, "Output"]
+}, Open  ]],
+Cell[43011, 908, 26, 0, 30, "Input"],
+Cell[43040, 910, 26, 0, 30, "Input"],
+Cell[43069, 912, 26, 0, 30, "Input"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

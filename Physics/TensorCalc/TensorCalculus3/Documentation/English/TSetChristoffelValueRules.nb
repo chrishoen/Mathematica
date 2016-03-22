@@ -1,0 +1,338 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      7842,        256]*)
+(*NotebookOutlinePosition[      8828,        290]*)
+(*  CellTagsIndexPosition[      8754,        284]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["SetChristoffelValueRules", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["SetChristoffelValueRules",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox[\(xu[i], metricmatrix, \[CapitalGamma], 
+          simplification : Identity\),
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " calculates and stores substitution rules for the Christoffel values of ",
+  Cell[BoxData[
+      \(\[CapitalGamma]udd[i, j, k]\)]],
+  " and  ",
+  Cell[BoxData[
+      \(\[CapitalGamma]ddd[i, j, k]\)]],
+  "from the values of metricmatrix and the ",
+  Cell[BoxData[
+      \(xu[i]\)]],
+  " vector pattern."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "The flavor for the calculation is taken from the flavor of the i index in \
+",
+  Cell[BoxData[
+      \(xu[i]\)]],
+  ". The label of the coordinate vector is the label of the ",
+  Cell[BoxData[
+      \(xu[i]\)]],
+  " pattern. It doesn't have to be x."
+}], "MathCaption"],
+
+Cell["\<\
+Simplification is an optional argument that supplies a routine to simplify \
+the Christoffel symbols. By default no simplification is done.\
+\>", "MathCaption"],
+
+Cell["\<\
+Metricmatrix must must be in terms of the coordinate vectors and they must \
+also carry the intended flavor.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "The rules are stored in ",
+  Cell[BoxData[
+      RowBox[{"TensorValueRules", "[", "\[CapitalGamma]", "]"}]]],
+  "."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["CalculateChristoffelu",
+    ButtonData:>{"CalculateChristoffelu"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["CalculateChristoffeld",
+    ButtonData:>{"CalculateChristoffeld"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SetChristoffelValues",
+    ButtonData:>{"SetChristoffelValues"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["CoordinatesToTensors",
+    ButtonData:>{"CoordinatesToTensors"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["Save settings", "Text"],
+
+Cell[BoxData[{
+    \(\(oldindices = BaseIndices;\)\), "\n", 
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(DeclareBaseIndices[{0, 1, 2, 3}]\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor[{red, Red}];\)\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[{{x, y}, 
+        1}, {{\[CapitalGamma], \[CapitalLambda]}, 3}]\)], "Input",
+  CellLabel->"In[7]:="],
+
+Cell["\<\
+We will calculate and store the rules for the Christoffel symbols for the \
+Schwarzschild spacetime metric.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(metric = 
+      DiagonalMatrix[{\(-\((1 - 2  M/r)\)\), 1/\((1 - 2  M/r)\), 
+            r\^2, \(r\^2\) Sin[\[Theta]]\^2}] // 
+        CoordinatesToTensors[{t, r, \[Theta], \[Phi]}]\)], "Input",
+  CellLabel->"In[8]:="],
+
+Cell["\<\
+The following calculates and stores all the rules for the Christoffel \
+symbols.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(SetChristoffelValueRules[xu[i], \ metric, \ \[CapitalGamma]]\)], "Input",\
+
+  CellLabel->"In[9]:="],
+
+Cell["\<\
+The following command displays the rules for the nonzero Christoffel \
+symbols\
+\>", "Text"],
+
+Cell[BoxData[
+    \(\(NonzeroValueRules[\[CapitalGamma]] // 
+        UseCoordinates[{t, r, \[Theta], \[Phi]}]\) // TableForm\)], "Input",
+  CellLabel->"In[10]:="],
+
+Cell["\<\
+In the following we will calculate and store the Christoffel symbols for the \
+Robertson-Walker metric, but with a red flavor,using y for the coordinate \
+vector, using \[CapitalLambda] as the Christoffel label, and using symbols \
+for the base indices.This is just to illustrate that there are no sacred \
+labels in Tensorial.\
+\>", "Text"],
+
+Cell["\<\
+The Robertson-Walker metric is used in cosmology. It is defined by...\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[{t, r, \[Theta], \[Phi]}]\), "\[IndentingNewLine]", 
+    \(\(cmetric = 
+        DiagonalMatrix[{1, \(-R[t]\^2\) {1\/\(1 - k\ r\^2\), 
+                  r\^2, \(r\^2\) Sin[\[Theta]]\^2}} // 
+            Flatten];\)\), "\[IndentingNewLine]", 
+    \(metric = 
+      cmetric // CoordinatesToTensors[{t, r, \[Theta], \[Phi]}, y, 
+          red]\), "\[IndentingNewLine]", 
+    \(SetMetricValueRules[g, \ metric]\)}], "Input",
+  CellLabel->"In[11]:="],
+
+Cell["\<\
+For this case, in calculating the Christoffel elements, it is necessary to \
+Simplify the results. We also choose to do it without trigonometric \
+simplification.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(SetChristoffelValueRules[yu[red@i], \ metric, \[CapitalLambda], 
+      Simplify[#, Trig \[Rule] False] &]\)], "Input",
+  CellLabel->"In[15]:="],
+
+Cell["\<\
+The following code picks out just the nonzero, nonduplicate up Christoffel \
+symbols.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(\(Select[NonzeroValueRules[\[CapitalLambda]], 
+          MemberQ[{First[#]}, \[CapitalLambda]udd[_, j_, k_] /; 
+                OrderedQ[{j, k}]] &] // 
+        UseCoordinates[{t, r, \[Theta], \[Phi]}, y, red]\) // 
+      TableForm\)], "Input",
+  CellLabel->"In[16]:="],
+
+Cell["Restore settings", "Text"],
+
+Cell[BoxData[
+    \(\(ClearTensorValues /@ \(({\[CapitalGamma]udd[i, g, 
+              k], \[CapitalGamma]ddd[i, g, k], \[CapitalLambda]udd[i, g, k] // 
+              ToFlavor[red], \[CapitalLambda]ddd[i, g, k] // 
+              ToFlavor[red]})\);\)\)], "Input",
+  CellLabel->"In[17]:="],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[{{x, y}, 1}, {{\[CapitalGamma], \[CapitalLambda]}, 
+        3}]\)], "Input",
+  CellLabel->"In[18]:="],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[oldindices]\), "\[IndentingNewLine]", 
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(Clear[oldindices, oldflavors]\)}], "Input",
+  CellLabel->"In[19]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{660, 445},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 71, 1, 31, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1850, 56, 678, 24, 66, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 8583, 275}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 71, 1, 31, "ObjectName",
+  CellTags->"Function?"],
+Cell[1850, 56, 678, 24, 66, "Usage",
+  CellTags->"Function?"],
+Cell[2531, 82, 288, 9, 48, "MathCaption"],
+Cell[2822, 93, 170, 3, 48, "MathCaption"],
+Cell[2995, 98, 139, 3, 31, "MathCaption"],
+Cell[3137, 103, 153, 5, 31, "MathCaption"],
+Cell[3293, 110, 524, 18, 48, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[3842, 132, 34, 0, 40, "ExampleSection"],
+Cell[3879, 134, 96, 2, 29, "Input"],
+Cell[3978, 138, 29, 0, 25, "Text"],
+Cell[4010, 140, 322, 6, 109, "Input"],
+Cell[4335, 148, 142, 3, 29, "Input"],
+Cell[4480, 153, 131, 3, 25, "Text"],
+Cell[4614, 158, 237, 5, 50, "Input"],
+Cell[4854, 165, 104, 3, 25, "Text"],
+Cell[4961, 170, 119, 3, 29, "Input"],
+Cell[5083, 175, 102, 3, 25, "Text"],
+Cell[5188, 180, 162, 3, 29, "Input"],
+Cell[5353, 185, 351, 6, 59, "Text"],
+Cell[5707, 193, 93, 2, 25, "Text"],
+Cell[5803, 197, 484, 10, 103, "Input"],
+Cell[6290, 209, 186, 4, 42, "Text"],
+Cell[6479, 215, 163, 3, 29, "Input"],
+Cell[6645, 220, 109, 3, 25, "Text"],
+Cell[6757, 225, 289, 6, 69, "Input"],
+Cell[7049, 233, 32, 0, 25, "Text"],
+Cell[7084, 235, 287, 5, 49, "Input"],
+Cell[7374, 242, 142, 3, 29, "Input"],
+Cell[7519, 247, 295, 5, 89, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

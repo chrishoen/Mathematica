@@ -1,0 +1,133 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      4591,        124]
+NotebookOptionsPosition[      3769,         96]
+NotebookOutlinePosition[      4391,        117]
+CellTagsIndexPosition[      4348,        114]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{"ClearAll", ";"}], "\[IndentingNewLine]", 
+ RowBox[{"ClearCache", ";"}]}], "Input",
+ CellChangeTimes->{{3.5946434619708147`*^9, 3.5946434621268153`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"mL", " ", "=", " ", "0.01"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"mR", " ", "=", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{"4", " ", "+", " ", "mL", " ", "-", " ", 
+      RowBox[{"Sqrt", "[", 
+       RowBox[{
+        RowBox[{"8", "*", "mL"}], " ", "+", " ", 
+        RowBox[{"mL", "*", "mL"}]}], "]"}]}], ")"}], "/", "4"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"mA", " ", "=", " ", 
+   RowBox[{"1", " ", "-", " ", 
+    RowBox[{"mR", "*", "mR"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"mB", " ", "=", " ", 
+   RowBox[{
+    RowBox[{"2", "*", 
+     RowBox[{"(", 
+      RowBox[{"2", "-", "mA"}], ")"}]}], " ", "-", " ", 
+    RowBox[{"4", "*", 
+     RowBox[{"Sqrt", "[", 
+      RowBox[{"1", "-", "mA"}], "]"}]}]}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.594643584197028*^9, 3.5946435913418407`*^9}, 
+   3.5946438124878263`*^9, {3.5946438932335668`*^9, 3.5946438947155695`*^9}, {
+   3.5967963981222343`*^9, 3.5967964134258604`*^9}, {3.596796535511674*^9, 
+   3.5967965436548877`*^9}, {3.5972902037169833`*^9, 3.597290217866208*^9}, {
+   3.597290266070292*^9, 3.597290279127515*^9}, {3.597290478339862*^9, 
+   3.5972904898994827`*^9}, {3.597290535030361*^9, 3.5972906073832874`*^9}, {
+   3.597290692216235*^9, 3.597290750716337*^9}, {3.5972907820099916`*^9, 
+   3.59729083263208*^9}, {3.5972909664090557`*^9, 3.5972909671422567`*^9}, {
+   3.5973294299934387`*^9, 3.5973295499420476`*^9}, {3.597329609705752*^9, 
+   3.5973296128881574`*^9}, 3.5973296604682407`*^9, 3.597330217665141*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{"mA", "\[IndentingNewLine]", "mB", "\[IndentingNewLine]"}], \
+"Input",
+ CellChangeTimes->{{3.5946437398384995`*^9, 3.5946438088998203`*^9}, {
+   3.5946438975859747`*^9, 3.594643905307988*^9}, {3.595628582703966*^9, 
+   3.595628595587102*^9}, {3.5967965716881366`*^9, 3.596796646583867*^9}, 
+   3.5967966933995485`*^9, {3.5972902256974216`*^9, 3.5972903367228155`*^9}, {
+   3.5972906652125883`*^9, 3.597290667006591*^9}, {3.597329558132062*^9, 
+   3.597329585276109*^9}}],
+
+Cell[BoxData["0.13185099127330124`"], "Output",
+ CellChangeTimes->{
+  3.5973295869297123`*^9, {3.597329637271*^9, 3.5973296621374435`*^9}, 
+   3.5973302201611457`*^9, {3.5973302582408123`*^9, 3.5973302775068455`*^9}}],
+
+Cell[BoxData["0.009317451415095768`"], "Output",
+ CellChangeTimes->{
+  3.5973295869297123`*^9, {3.597329637271*^9, 3.5973296621374435`*^9}, 
+   3.5973302201611457`*^9, {3.5973302582408123`*^9, 3.5973302775068455`*^9}}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.597330253545204*^9, 3.5973302745272408`*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.5946438183066363`*^9, 3.5946438225342436`*^9}, {
+   3.5956286043237114`*^9, 3.5956286057788963`*^9}, 3.59679664815947*^9, {
+   3.597290344164028*^9, 3.597290345755231*^9}, {3.597290669362195*^9, 
+   3.597290673184202*^9}, 3.5973295665248766`*^9}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.5972904115249453`*^9, 3.5972904374677906`*^9}}]
+},
+WindowSize->{1272, 873},
+WindowMargins->{{223, Automatic}, {48, Automatic}},
+PrintingCopies->1,
+PrintingPageRange->{Automatic, Automatic},
+FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[StyleDefinitions -> "Default.nb"]]}, Visible -> False, 
+  FrontEndVersion -> "8.0 for Microsoft Windows (64-bit) (February 23, 2011)",
+   StyleDefinitions -> "PrivateStylesheetFormatting.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 177, 3, 57, "Input"],
+Cell[737, 25, 1572, 35, 103, "Input"],
+Cell[CellGroupData[{
+Cell[2334, 64, 484, 7, 80, "Input"],
+Cell[2821, 73, 217, 3, 33, "Output"],
+Cell[3041, 78, 218, 3, 33, "Output"]
+}, Open  ]],
+Cell[3274, 84, 94, 1, 33, InheritFromParent],
+Cell[3371, 87, 295, 4, 33, "Input"],
+Cell[3669, 93, 96, 1, 33, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

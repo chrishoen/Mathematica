@@ -1,0 +1,188 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      3670,        123]*)
+(*NotebookOutlinePosition[      4677,        158]*)
+(*  CellTagsIndexPosition[      4603,        152]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["BasisDotProductRules", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["BasisDotProductRules",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox[\(e, g\),
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " creates the rules that convert dot products of basis vectors to metric \
+tensors, using e as the base vector label and ",
+  Cell[BoxData[
+      \(g\)]],
+  " as the metric label.."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["The routine is used by EvaluateSlots. ", "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["EvaluateSlots",
+    ButtonData:>{"EvaluateSlots"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["ReverseBasisDotProductRules",
+    ButtonData:>{"ReverseBasisDotProductRules"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples  ", "ExampleSection"],
+
+Cell[BoxData[{
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\), "\n", 
+    \(DefineTensorShortcuts[{{u, v, e}, 1}, {g, 2}]\)}], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["We can just look at the rules produced...", "Text"],
+
+Cell[BoxData[
+    \(BasisDotProductRules[e, g] // Developer`ContextFreeForm\)], "Input",
+  CellLabel->"In[3]:="],
+
+Cell["Here is an example of its use.", "Text"],
+
+Cell[BoxData[{
+    \(u . v\), "\[IndentingNewLine]", 
+    \(% /. {u \[Rule] uu[i] ed[i], 
+        v \[Rule] vd[j] eu[j]}\), "\[IndentingNewLine]", 
+    \(% // \(LinearBreakout[Dot]\)[eu[_], ed[_]]\), "\[IndentingNewLine]", 
+    \(% /. BasisDotProductRules[e, g]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g]\), "\[IndentingNewLine]", 
+    \(% // EinsteinSum[]\)}], "Input",
+  CellLabel->"In[4]:="],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[{{u, v, g}, 1}, {g, 2}]\)], "Input",
+  CellLabel->"In[10]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{674, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 67, 1, 31, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1846, 56, 482, 18, 49, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 4432, 143}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 67, 1, 31, "ObjectName",
+  CellTags->"Function?"],
+Cell[1846, 56, 482, 18, 49, "Usage",
+  CellTags->"Function?"],
+Cell[2331, 76, 61, 0, 31, "MathCaption"],
+Cell[2395, 78, 284, 10, 31, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[2704, 92, 36, 0, 40, "ExampleSection"],
+Cell[2743, 94, 160, 3, 49, "Input"],
+Cell[2906, 99, 57, 0, 25, "Text"],
+Cell[2966, 101, 112, 2, 29, "Input"],
+Cell[3081, 105, 46, 0, 25, "Text"],
+Cell[3130, 107, 407, 8, 129, "Input"],
+Cell[3540, 117, 102, 2, 29, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

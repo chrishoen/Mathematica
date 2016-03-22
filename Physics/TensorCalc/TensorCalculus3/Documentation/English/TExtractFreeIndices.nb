@@ -1,0 +1,282 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      6039,        202]*)
+(*NotebookOutlinePosition[      7025,        236]*)
+(*  CellTagsIndexPosition[      6951,        230]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["ExtractFreeIndices", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["ExtractFreeIndices",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expression",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will return ",
+  Cell[BoxData[
+      RowBox[{"{", 
+        RowBox[{"upindices", ",", "downindices"}], "}"}]]],
+  " where each is a list of the free indices in the expression."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["\<\
+ The expression may be an equation, a sum of terms, or a single tensor \
+term.\
+\>", "MathCaption"],
+
+Cell["\<\
+ The routine may be used to check index balance in an equation or expression. \
+If the terms don't all have the same free indices an error message is \
+generated and False is returned.\
+\>", "MathCaption"],
+
+Cell["\<\
+ This routine is primarily used in programming other routines.\
+\>", "MathCaption"],
+
+Cell["\<\
+ Free indices are indices that appear only once in each term.\
+\>", "MathCaption"],
+
+Cell["\<\
+ upindices and downindices are each returned in the natural sort order.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["ParseTermIndices",
+    ButtonData:>{"ParseTermIndices"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["EinsteinArray",
+    ButtonData:>{"EinsteinArray"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples  ", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["Save the old settings.", "Text"],
+
+Cell[BoxData[{
+    \(\(oldindices = BaseIndices;\)\), "\n", 
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell[BoxData[{
+    \(\(DeclareBaseIndices[Range[3]];\)\), "\n", 
+    \(\(DeclareIndexFlavor /@ {{red, Red}, {rocket, 
+            SuperDagger}};\)\), "\n", 
+    \(DefineTensorShortcuts[{{x, y, F}, 1}, {{S, T}, 2}]\)}], "Input",
+  CellLabel->"In[5]:="],
+
+Cell["With an equation...", "Text"],
+
+Cell[BoxData[{
+    \(Sud[i, j] xu[j] yd[m] \[Equal] Tud[i, k] xu[k] yd[m] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // ExtractFreeIndices\)}], "Input",
+  CellLabel->"In[8]:="],
+
+Cell["With a sum...", "Text"],
+
+Cell[BoxData[{
+    \(Sud[i, j] xu[j] yd[m] - Tud[i, k] xu[k] yd[m] // 
+      ToFlavor[rocket]\), "\[IndentingNewLine]", 
+    \(% // ExtractFreeIndices\)}], "Input",
+  CellLabel->"In[10]:="],
+
+Cell["The following expressions are incorrect.", "Text"],
+
+Cell[BoxData[{
+    \(Sud[i, j] xu[j] yd[m] \[Equal] Tud[i, k] xu[k] yd[n] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // ExtractFreeIndices\)}], "Input",
+  CellLabel->"In[12]:="],
+
+Cell[BoxData[{
+    \(Sud[i, j] xu[j] yd[m] \[Equal] Tud[i, k] xu[k] yd[k] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // ExtractFreeIndices\)}], "Input",
+  CellLabel->"In[14]:="],
+
+Cell["Expressions involving differentiations.", "Text"],
+
+Cell[BoxData[{
+    \(Sud[i, j] xu[j] Tdd[\[Mu], Cov[m]] \[Equal] 
+        Tud[i, k] xu[k] Tdd[\[Mu], Cov[m]] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // ExtractFreeIndices\)}], "Input",
+  CellLabel->"In[16]:="],
+
+Cell[BoxData[{
+    \(Sud[i, j] xu[j] Tdd[\[Mu], Cov[m]] \[Equal] 
+        Tud[i, k] xu[k] Tdd[\[Mu], Cov[m]] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(ExpandCovariantD[{x, \[Delta], g, \[CapitalGamma]}, 
+        red@a] /@ %\), "\[IndentingNewLine]", 
+    \(% // ExtractFreeIndices\)}], "Input",
+  CellLabel->"In[18]:="],
+
+Cell[BoxData[{
+    \(Fu[i] \[Equal] m\ TotalD[xu[i], {t, t}]\), "\[IndentingNewLine]", 
+    \(% // ExtractFreeIndices\)}], "Input",
+  CellLabel->"In[21]:="],
+
+Cell["Restore the initial settings...", "Text"],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[{{x, y, F}, 1}, {{S, T}, 2}]\)], "Input",
+  CellLabel->"In[23]:="],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[oldindices]\), "\[IndentingNewLine]", 
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(Clear[oldindices, oldflavors]\)}], "Input",
+  CellLabel->"In[24]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{669, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 65, 1, 31, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1844, 56, 480, 18, 49, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 6780, 221}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 65, 1, 31, "ObjectName",
+  CellTags->"Function?"],
+Cell[1844, 56, 480, 18, 49, "Usage",
+  CellTags->"Function?"],
+Cell[2327, 76, 109, 3, 31, "MathCaption"],
+Cell[2439, 81, 215, 4, 48, "MathCaption"],
+Cell[2657, 87, 93, 2, 31, "MathCaption"],
+Cell[2753, 91, 92, 2, 31, "MathCaption"],
+Cell[2848, 95, 102, 2, 31, "MathCaption"],
+Cell[2953, 99, 262, 10, 31, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[3240, 113, 36, 0, 40, "ExampleSection"],
+Cell[3279, 115, 96, 2, 29, "Input"],
+Cell[3378, 119, 38, 0, 25, "Text"],
+Cell[3419, 121, 187, 4, 69, "Input"],
+Cell[3609, 127, 251, 5, 69, "Input"],
+Cell[3863, 134, 35, 0, 25, "Text"],
+Cell[3901, 136, 192, 4, 49, "Input"],
+Cell[4096, 142, 29, 0, 25, "Text"],
+Cell[4128, 144, 189, 4, 49, "Input"],
+Cell[4320, 150, 56, 0, 25, "Text"],
+Cell[4379, 152, 193, 4, 49, "Input"],
+Cell[4575, 158, 193, 4, 49, "Input"],
+Cell[4771, 164, 55, 0, 25, "Text"],
+Cell[4829, 166, 228, 5, 49, "Input"],
+Cell[5060, 173, 334, 7, 69, "Input"],
+Cell[5397, 182, 156, 3, 49, "Input"],
+Cell[5556, 187, 47, 0, 25, "Text"],
+Cell[5606, 189, 107, 2, 29, "Input"],
+Cell[5716, 193, 295, 5, 89, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

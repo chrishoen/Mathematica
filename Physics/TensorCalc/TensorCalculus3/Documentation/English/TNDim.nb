@@ -1,0 +1,202 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      3730,        136]*)
+(*NotebookOutlinePosition[      4715,        170]*)
+(*  CellTagsIndexPosition[      4641,        164]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["NDim", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData["NDim"]],
+  " gives the current dimension of the underlying linear space."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "NDim is set by ",
+  Cell[BoxData["DeclareBaseIndices"]],
+  ". It is the length of the ",
+  Cell[BoxData["BaseIndices"]],
+  " list."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "On loading, Tensorial automatically initializes the base indices to ",
+  Cell[BoxData[
+      RowBox[{"{", 
+        RowBox[{"1", ",", "2", ",", "3"}], "}"}]]],
+  " and so ",
+  Cell[BoxData[
+      RowBox[{"NDim", "\[Equal]", "3"}]]],
+  "."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["DeclareBaseIndices",
+    ButtonData:>{"DeclareBaseIndices"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["BaseIndices",
+    ButtonData:>{"BaseIndices"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["BaseIndexQ",
+    ButtonData:>{"BaseIndexQ"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples  ", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["\<\
+The following gives the current dimension and set of base indices...\
+\>", "Text"],
+
+Cell[BoxData[
+    \({NDim, oldindices = BaseIndices}\)], "Input",
+  CellLabel->"In[2]:="],
+
+Cell[TextData[{
+  "The following statement gives a new set of base indices and a new value \
+for ",
+  Cell[BoxData["NDim"]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[Range[0, 3]]\), "\[IndentingNewLine]", 
+    \({NDim, BaseIndices}\)}], "Input",
+  CellLabel->"In[3]:="],
+
+Cell["This resets to the original indices.", "Text"],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[oldindices]\), "\[IndentingNewLine]", 
+    \({NDim, BaseIndices}\), "\[IndentingNewLine]", 
+    \(Clear[oldindices]\)}], "Input",
+  CellLabel->"In[5]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{665, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 51, 1, 31, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1830, 56, 170, 5, 32, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 4471, 155}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 51, 1, 31, "ObjectName",
+  CellTags->"Function?"],
+Cell[1830, 56, 170, 5, 32, "Usage",
+  CellTags->"Function?"],
+Cell[2003, 63, 169, 6, 31, "MathCaption"],
+Cell[2175, 71, 275, 9, 31, "MathCaption"],
+Cell[2453, 82, 360, 14, 31, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[2838, 100, 36, 0, 40, "ExampleSection"],
+Cell[2877, 102, 96, 2, 29, "Input"],
+Cell[2976, 106, 92, 2, 25, "Text"],
+Cell[3071, 110, 89, 2, 29, "Input"],
+Cell[3163, 114, 142, 5, 25, "Text"],
+Cell[3308, 121, 143, 3, 49, "Input"],
+Cell[3454, 126, 52, 0, 25, "Text"],
+Cell[3509, 128, 193, 4, 69, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

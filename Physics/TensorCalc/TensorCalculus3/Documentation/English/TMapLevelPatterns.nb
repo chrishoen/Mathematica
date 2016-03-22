@@ -1,0 +1,298 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.1'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      7048,        226]*)
+(*NotebookOutlinePosition[      8034,        260]*)
+(*  CellTagsIndexPosition[      7960,        254]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["MapLevelPatterns", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox["MapLevelPatterns",
+            "MR"], 
+          StyleBox["[",
+            "MR"], 
+          StyleBox[\(function, {topposition, {pattern}}\),
+            "TI"], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will map the function onto the selected level positions that match the \
+pattern in an expression."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["\<\
+ The pattern is used to determine a set of levelpositions at topposition. The \
+function is applied to them as a group and they are replaced with a single \
+new expression. Other level parts are left unchanged.\
+\>", "MathCaption"],
+
+Cell["\<\
+MapLevelPatterns will often be a more convenient form of MapLevelParts.\
+\>", "MathCaption"],
+
+Cell["\<\
+ MapLevelPatterns is useful when you wish to apply SimplifyTensorSum to just \
+a selected set of terms in a sum. It is easier and more controlled to \
+simplify such sums when you are not dealing with disparate terms. It is also \
+useful in applying MetricSimplify or KroneckerAbsorb to a selected set of \
+factors in a term.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["SimplifyTensorSum",
+    ButtonData:>{"SimplifyTensorSum"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["UpDownSwap",
+    ButtonData:>{"UpDownSwap"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["IndexChange",
+    ButtonData:>{"IndexChange"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SymmetrizeSlots",
+    ButtonData:>{"SymmetrizeSlots"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["MetricSimplify",
+    ButtonData:>{"MetricSimplify"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["MapLevelParts",
+    ButtonData:>{"MapLevelParts"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples  ", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[{{\[Lambda], \[Kappa], x}, 1}, {g, 2}]\)], "Input",\
+
+  CellLabel->"In[2]:="],
+
+Cell[TextData[{
+  "The following is an example of using ",
+  Cell[BoxData[
+      \(MapLevelPatterns\)]],
+  ". This is the same example as in ",
+  Cell[BoxData[
+      \(MapLevelParts\)]],
+  "."
+}], "Text"],
+
+Cell["\<\
+For smooth functions the order of partial differentiation does not matter. It \
+does matter for covariant differentiation. In general order independence is \
+not true for covariant differentiation. For example, for a contravariant \
+vector field...\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Print["\<Covariant differentiation is not commutative\>"]\), "\
+\[IndentingNewLine]", 
+    \(CovariantD[\[Lambda]u[a], {b, c}] \[NotEqual] 
+      CovariantD[\[Lambda]u[a], {c, b}]\), "\[IndentingNewLine]", 
+    \(Print["\<Expand, rearrange and use symmetry on \[CapitalGamma]\>"]\), "\
+\[IndentingNewLine]", 
+    \(\(ExpandCovariantD[{x, \[Delta], g, \[CapitalGamma]}, {d, 
+            e}] /@ %%;\)\), "\[IndentingNewLine]", 
+    \(\(\(# - Part[%, 2] &\) /@ % // ExpandAll;\)\), "\[IndentingNewLine]", 
+    \(% // SymmetrizeSlots[\[CapitalGamma], 
+        3, {1, {2, 3}}]\), "\[IndentingNewLine]", 
+    \(Print["\<Use MapLevelPatterns to simplify the terms containing \
+\[Lambda] derivatives and factor\>"]\), "\[IndentingNewLine]", 
+    \(%% // 
+      MapLevelPatterns[
+        SimplifyTensorSum, \ {1, {a_. \ \(PartialD[_]\)[\[Lambda]u[_], 
+                xu[_]]}}]\), "\[IndentingNewLine]", 
+    \(MapAt[Factor, %, 1]\)}], "Input",
+  CellLabel->"In[3]:="],
+
+Cell["In general the term in brackets will not be zero.", "Text"],
+
+Cell[TextData[{
+  "Sometimes when using ",
+  Cell[BoxData[
+      \(MetricSimplify\)]],
+  ", or ",
+  Cell[BoxData[
+      \(KroneckerAbsorb\)]],
+  ", it is ambiguous as to which factors are to be operated on. In the \
+following the index on the ",
+  Cell[BoxData[
+      \(\[Kappa]\)]],
+  " vector is lowered."
+}], "Text"],
+
+Cell[BoxData[{
+    \(gdd[a, b] \[Kappa]u[a] \[Lambda]u[b]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g]\)}], "Input",
+  CellLabel->"In[12]:="],
+
+Cell[TextData[{
+  "If we wish to lower the ",
+  Cell[BoxData[
+      \(\[Lambda]\)]],
+  " index instead, we could pick out the relevant factors..."
+}], "Text"],
+
+Cell[BoxData[{
+    \(gdd[a, b] \[Kappa]u[a] \[Lambda]u[b]\), "\[IndentingNewLine]", 
+    \(% // MapLevelPatterns[
+        MetricSimplify[g], {{\ gdd[_, _] | \[Lambda]u[_]}}]\)}], "Input",
+  CellLabel->"In[14]:="],
+
+Cell["\<\
+If there are no matches in the topposition a warning message is issued and \
+the expression is returned unchanged. In this case topposition referred to \
+the wrong term. (TraditionalForm changes the display order of terms.) In \
+other cases the pattern may have been specified incorrectly.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(3 + gdd[a, b] \[Kappa]u[a] \[Lambda]u[b]\), "\[IndentingNewLine]", 
+    \(% // MapLevelPatterns[
+        MetricSimplify[g], {1, {\ gdd[_, _] | \[Lambda]u[_]}}]\)}], "Input",
+  CellLabel->"In[16]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"5.1 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 941}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{670, 627},
+WindowMargins->{{0, Automatic}, {Automatic, 1}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 63, 1, 41, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1842, 56, 586, 22, 50, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 7789, 245}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 63, 1, 41, "ObjectName",
+  CellTags->"Function?"],
+Cell[1842, 56, 586, 22, 50, "Usage",
+  CellTags->"Function?"],
+Cell[2431, 80, 241, 4, 58, "MathCaption"],
+Cell[2675, 86, 102, 2, 41, "MathCaption"],
+Cell[2780, 90, 355, 6, 75, "MathCaption"],
+Cell[3138, 98, 676, 26, 58, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[3839, 128, 36, 0, 39, "ExampleSection"],
+Cell[3878, 130, 96, 2, 29, "Input"],
+Cell[3977, 134, 119, 3, 29, "Input"],
+Cell[4099, 139, 204, 8, 25, "Text"],
+Cell[4306, 149, 272, 5, 42, "Text"],
+Cell[4581, 156, 980, 19, 209, "Input"],
+Cell[5564, 177, 65, 0, 25, "Text"],
+Cell[5632, 179, 319, 12, 42, "Text"],
+Cell[5954, 193, 152, 3, 49, "Input"],
+Cell[6109, 198, 158, 5, 25, "Text"],
+Cell[6270, 205, 212, 4, 49, "Input"],
+Cell[6485, 211, 313, 5, 59, "Text"],
+Cell[6801, 218, 219, 4, 49, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

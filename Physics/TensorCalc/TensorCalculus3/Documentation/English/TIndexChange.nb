@@ -1,0 +1,377 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.1'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      8341,        286]*)
+(*NotebookOutlinePosition[      9328,        320]*)
+(*  CellTagsIndexPosition[      9254,        314]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["IndexChange", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox["IndexChange",
+            "MR"], 
+          StyleBox["[",
+            "MR"], 
+          StyleBox[\({{r, i}, {s, j} ... }, sign : 1\),
+            "TI"], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will replace the first index in each pair list by the second index in the \
+pair list everywhere in the expression and multiply the expression by sign, \
+which has the default value of 1.\n\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox["IndexChange",
+            "MR"], 
+          StyleBox["[",
+            "MR"], 
+          StyleBox[\({r, i}, sign : 1\),
+            "TI"], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " may be used for a single index change."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["\<\
+ IndexChange can be used to perform specific reindexing under the user's \
+control\
+\>", "MathCaption"],
+
+Cell["\<\
+ IndexChange works only on symbolic indices and not base indices\
+\>", "MathCaption"],
+
+Cell["\<\
+Each tensor term is checked to see if it contains all the indices that are to \
+be replaced (the first indices in each pair). It it does not then no change \
+is made to that term. Expressions may have to be Expanded by the user to \
+bring all indices together in a term.\
+\>", "MathCaption"],
+
+Cell[" IndexChange requires the flavor on the indices.", "MathCaption"],
+
+Cell[" IndexChange usage has been modified from earlier versions.", \
+"MathCaption"],
+
+Cell["\<\
+ DummySimplify or SimplifyTensorSum will perform automatic reindexing in an \
+attempt to simplify tensor expressions.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["EinsteinSum",
+    ButtonData:>{"EinsteinSum"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SimplifyTensorSum",
+    ButtonData:>{"SimplifyTensorSum"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["DummySimplify",
+    ButtonData:>{"DummySimplify"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SymmetrizeSlots",
+    ButtonData:>{"SymmetrizeSlots"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples  ", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["Save old values and declare a flavor.", "Text"],
+
+Cell[BoxData[{
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(DeclareIndexFlavor[{red, Red}]\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[{{A, B, x}, 1}, {{A, B}, 2}, {A, 3}]\)], "Input",
+  CellLabel->"In[5]:="],
+
+Cell["\<\
+SimplifyTensorSum will usually perform the desired dummy index simplification \
+in expressions.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(expr1 = 
+      a\ Ad[j] Bu[j] + b\ Ad[m] Bu[m] + 
+        c\ Ad[i] Bu[i]\), "\[IndentingNewLine]", 
+    \(\(% // SimplifyTensorSum\) // Factor\)}], "Input",
+  CellLabel->"In[6]:="],
+
+Cell["\<\
+But we could also do it \"by hand\". We must write separate commands for each \
+term because no term contains two indices.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(expr1\), "\[IndentingNewLine]", 
+    \(\(\(% // IndexChange[{j, i}]\) // IndexChange[{m, i}]\) // 
+      Factor\)}], "Input",
+  CellLabel->"In[8]:="],
+
+Cell["\<\
+We could also write a sequence of index changes in the following manner.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(expr1\), "\[IndentingNewLine]", 
+    \(Fold[\(IndexChange[#2]\)[#1] &, %, {{j, i}, {m, i}}] // 
+      Factor\)}], "Input",
+  CellLabel->"In[10]:="],
+
+Cell["The index must carry the flavor.", "Text"],
+
+Cell[BoxData[{
+    \(expr1 // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(\(\(% // IndexChange[red /@ {j, i}]\) // IndexChange[red /@ {m, i}]\) // 
+      Factor\)}], "Input",
+  CellLabel->"In[12]:="],
+
+Cell["\<\
+The following modifies the second term. The first term does not contain both \
+i and j and so is left unmodified.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Au[i] Ad[i] + Buu[i, j] Bdd[i, j]\), "\[IndentingNewLine]", 
+    \(% // IndexChange[{{i, j}, {j, i}}]\)}], "Input",
+  CellLabel->"In[14]:="],
+
+Cell["\<\
+Here both terms contain i and j and so both terms are modified.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Auu[j, i] Add[j, i] + Buu[i, j] Bdd[i, j]\), "\[IndentingNewLine]", 
+    \(% // IndexChange[{{i, j}, {j, i}}]\)}], "Input",
+  CellLabel->"In[16]:="],
+
+Cell["\<\
+Here we implement an antisymmetry in a tensor expression by specifying the \
+sign as -1.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Add[i, j] Bdd[k, l]\), "\[IndentingNewLine]", 
+    \(% // IndexChange[{{j, k}, {k, j}}, \(-1\)]\)}], "Input",
+  CellLabel->"In[18]:="],
+
+Cell["\<\
+The use of a symbol in a tensor label or as a constant is distinguished from \
+its use in a tensor index. Only the index is changed.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(A\ Add[i, A] Bdd[B, l]\), "\[IndentingNewLine]", 
+    \(% // IndexChange[{{A, B}, {B, A}}, \(-1\)]\)}], "Input",
+  CellLabel->"In[20]:="],
+
+Cell["\<\
+The following commands substitute the second set of indices for the first set \
+of indices.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Auuu[i, j, k]\), "\[IndentingNewLine]", 
+    \(% // IndexChange[{{i, j, k}, {\[Mu], \[Nu], \[Lambda]}} // 
+          Transpose]\)}], "Input",
+  CellLabel->"In[22]:="],
+
+Cell["\<\
+Or we could rotate a set of indices with the following command.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Auuu[i, j, k]\), "\[IndentingNewLine]", 
+    \(% // IndexChange[{idxs = {i, j, k}, RotateLeft[idxs]} // 
+          Transpose]\)}], "Input",
+  CellLabel->"In[24]:="],
+
+Cell[BoxData[{
+    \(Au[a] \(PartialD[{x, \[Delta], g, \[CapitalGamma]}]\)[Bud[b, c], 
+        xu[a]]\), "\[IndentingNewLine]", 
+    \(% // IndexChange[{{a, b}, {b, a}}]\)}], "Input",
+  CellLabel->"In[26]:="],
+
+Cell["Restore settings", "Text"],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[{{A, B}, 1}, {{A, B}, 2}, {A, 3}]\)], "Input",
+  CellLabel->"In[28]:="],
+
+Cell[BoxData[{
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(Clear[expr1, oldflavors, idxs]\)}], "Input",
+  CellLabel->"In[29]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"5.1 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 941}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{669, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 58, 1, 41, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1837, 56, 1114, 41, 73, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 9082, 305}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 58, 1, 41, "ObjectName",
+  CellTags->"Function?"],
+Cell[1837, 56, 1114, 41, 73, "Usage",
+  CellTags->"Function?"],
+Cell[2954, 99, 113, 3, 41, "MathCaption"],
+Cell[3070, 104, 95, 2, 41, "MathCaption"],
+Cell[3168, 108, 301, 5, 75, "MathCaption"],
+Cell[3472, 115, 71, 0, 41, "MathCaption"],
+Cell[3546, 117, 84, 1, 41, "MathCaption"],
+Cell[3633, 120, 148, 3, 58, "MathCaption"],
+Cell[3784, 125, 472, 18, 41, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[4281, 147, 36, 0, 39, "ExampleSection"],
+Cell[4320, 149, 96, 2, 29, "Input"],
+Cell[4419, 153, 53, 0, 25, "Text"],
+Cell[4475, 155, 205, 4, 69, "Input"],
+Cell[4683, 161, 115, 2, 29, "Input"],
+Cell[4801, 165, 119, 3, 25, "Text"],
+Cell[4923, 170, 201, 5, 49, "Input"],
+Cell[5127, 177, 146, 3, 42, "Text"],
+Cell[5276, 182, 170, 4, 49, "Input"],
+Cell[5449, 188, 96, 2, 25, "Text"],
+Cell[5548, 192, 168, 4, 49, "Input"],
+Cell[5719, 198, 48, 0, 25, "Text"],
+Cell[5770, 200, 202, 4, 49, "Input"],
+Cell[5975, 206, 137, 3, 25, "Text"],
+Cell[6115, 211, 161, 3, 49, "Input"],
+Cell[6279, 216, 87, 2, 25, "Text"],
+Cell[6369, 220, 169, 3, 49, "Input"],
+Cell[6541, 225, 112, 3, 25, "Text"],
+Cell[6656, 230, 155, 3, 49, "Input"],
+Cell[6814, 235, 156, 3, 42, "Text"],
+Cell[6973, 240, 158, 3, 49, "Input"],
+Cell[7134, 245, 115, 3, 25, "Text"],
+Cell[7252, 250, 187, 4, 49, "Input"],
+Cell[7442, 256, 87, 2, 25, "Text"],
+Cell[7532, 260, 185, 4, 49, "Input"],
+Cell[7720, 266, 208, 4, 49, "Input"],
+Cell[7931, 272, 32, 0, 25, "Text"],
+Cell[7966, 274, 112, 2, 29, "Input"],
+Cell[8081, 278, 232, 4, 69, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

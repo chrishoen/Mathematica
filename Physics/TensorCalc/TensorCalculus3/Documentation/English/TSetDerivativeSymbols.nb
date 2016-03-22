@@ -1,0 +1,263 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      5681,        191]*)
+(*NotebookOutlinePosition[      6667,        225]*)
+(*  CellTagsIndexPosition[      6593,        219]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["SetDerivativeSymbols", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{"SetDerivativeSymbols", 
+        StyleBox["[",
+          "MR"], 
+        StyleBox[\({DifSym, CovSym, TDup, TDdown, ADup, ADdown, \ LDSym}\),
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " sets the characters used in unevaluated derivative displays."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["\<\
+This only affects the formatted output, not the internal representation.\
+\>", "MathCaption"],
+
+Cell["\<\
+DifSym is the character used to prefix a partial derivative index. Default: \
+\",\"
+CovSym is the character used to prefix a covariant derivative index. Default: \
+\";\" (semi-colon)
+TDup is the upper differentiation symbol in total derivatives. Default: \"\
+\[DifferentialD]\"
+TDdown is the lower differentiation symbol in total derivatives. Default: \"\
+\[DifferentialD]\"
+ADup is the upper differentiation symbol in absolute (intrinsic) derivatives. \
+Default: \"D\"
+ADdown is the lower differentiation symbol in absolute derivatives: Default: \
+\"d\"
+LDSym is the symbol for a Lie derivative: Default:\"\" Unformatted\
+\>", "MathCaption"],
+
+Cell["\<\
+The items must be Strings, generally single character Strings.\
+\>", "MathCaption"],
+
+Cell["\<\
+LieD will remain unformatted if specified with a null character, \"\".\
+\>", "MathCaption"],
+
+Cell[" The formatted derivative output cannot be copied or pasted.", \
+"MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["Dif",
+    ButtonData:>{"Dif"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["Cov",
+    ButtonData:>{"Cov"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["TotalD",
+    ButtonData:>{"TotalD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["LieD",
+    ButtonData:>{"LieD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["AbsoluteD",
+    ButtonData:>{"AbsoluteD"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples  ", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[{{S}, 1}]\)], "Input",
+  CellLabel->"In[2]:="],
+
+Cell["\<\
+Tensorial has the following default derivative output formatting for \
+differentiated indices, total derivatives and absolute derivatives.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(expr1 = {PartialD[Su[i], j], PartialD[Su[i], {j, k}], 
+        CovariantD[Su[i], j], CovariantD[Su[i], {j, k}], TotalD[Su[i], t], 
+        TotalD[Su[i], {t, t}], AbsoluteD[Su[i], t], AbsoluteD[Su[i], {t, t}], 
+        LieD[Su[i], V]}\)], "Input",
+  CellLabel->"In[3]:="],
+
+Cell["\<\
+These are some other possibilities. Some texts use | for a covariant \
+derivative index.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\(SetDerivativeSymbols[{"\<\[PartialD]\>", "\<|\>", "\<\[DifferentialD]\
+\>", "\<\[DifferentialD]\>", "\<\[Delta]\>", "\<\[Delta]\>", \
+"\<\[Sterling]\>"}];\)\), "\n", 
+    \(expr1\)}], "Input",
+  CellLabel->"In[4]:="],
+
+Cell[TextData[{
+  "A null character leaves ",
+  Cell[BoxData[
+      \(LieD\)]],
+  " unformatted."
+}], "Text"],
+
+Cell[BoxData[{
+    \(\(SetDerivativeSymbols[{"\<\[PartialD]\>", \
+"\<\[CapitalDifferentialD]\>", "\<d\>", "\<d\>", "\<\[Del]\>", "\<d\>", \
+"\<\>"}];\)\), "\n", 
+    \(expr1\)}], "Input",
+  CellLabel->"In[6]:="],
+
+Cell[BoxData[{
+    \(\(SetDerivativeSymbols[{"\<,\>", "\<|\>", "\<d\>", "\<d\>", "\<\
+\[CapitalDifferentialD]\>", "\<\[DifferentialD]\>", \
+"\<\[DoubleStruckCapitalL]\>"}];\)\), "\n", 
+    \(expr1\)}], "Input",
+  CellLabel->"In[8]:="],
+
+Cell[BoxData[{
+    \(\(SetDerivativeSymbols[{"\<,\>", "\<;\>", "\<\[DifferentialD]\>", "\<\
+\[DifferentialD]\>", "\<D\>", "\<d\>", "\<\>"}];\)\), "\n", 
+    \(ClearTensorShortcuts[{{S}, 1}]\), "\n", 
+    \(Clear[expr1]\)}], "Input",
+  CellLabel->"In[10]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{665, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 67, 1, 31, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1846, 56, 378, 12, 49, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 6422, 210}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 67, 1, 31, "ObjectName",
+  CellTags->"Function?"],
+Cell[1846, 56, 378, 12, 49, "Usage",
+  CellTags->"Function?"],
+Cell[2227, 70, 103, 2, 31, "MathCaption"],
+Cell[2333, 74, 652, 14, 181, "MathCaption"],
+Cell[2988, 90, 93, 2, 31, "MathCaption"],
+Cell[3084, 94, 101, 2, 31, "MathCaption"],
+Cell[3188, 98, 85, 1, 31, "MathCaption"],
+Cell[3276, 101, 488, 22, 31, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[3789, 127, 36, 0, 40, "ExampleSection"],
+Cell[3828, 129, 96, 2, 29, "Input"],
+Cell[3927, 133, 88, 2, 29, "Input"],
+Cell[4018, 137, 162, 3, 42, "Text"],
+Cell[4183, 142, 290, 5, 69, "Input"],
+Cell[4476, 149, 112, 3, 25, "Text"],
+Cell[4591, 154, 239, 5, 49, "Input"],
+Cell[4833, 161, 109, 5, 25, "Text"],
+Cell[4945, 168, 211, 5, 49, "Input"],
+Cell[5159, 175, 234, 5, 49, "Input"],
+Cell[5396, 182, 257, 5, 69, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

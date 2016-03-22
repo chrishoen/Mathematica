@@ -1,0 +1,289 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      6229,        214]*)
+(*NotebookOutlinePosition[      7237,        249]*)
+(*  CellTagsIndexPosition[      7163,        243]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["UsePartialDChainRule", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox[
+            RowBox[{"Use", 
+              StyleBox["PartialDChainRule",
+                "MR"]}]], 
+          StyleBox["[",
+            "MR"], 
+          StyleBox["coordtensor",
+            "TI"], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " expands partial derivatives over coordtensor using the chain rule.\n\
+\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox[
+            RowBox[{"Use", 
+              StyleBox["PartialDChainRule",
+                "MR"]}]], 
+          StyleBox["[",
+            "MR"], 
+          StyleBox[\(diffvar1, diffvar2\),
+            "TI"], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " expands single or multiple partial derivatives with repspect to diffvar2 \
+over diffvar1 using the chain rule."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["\<\
+ Replacements will only occur on partial derivatives in the expanded form.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["PartialD",
+    ButtonData:>{"PartialD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["ExpandPartialD",
+    ButtonData:>{"ExpandPartialD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["TotalD",
+    ButtonData:>{"TotalD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["UseTotalDChainRule",
+    ButtonData:>{"UseTotalDChainRule"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["Save settings.", "Text"],
+
+Cell[BoxData[{
+    \(\(oldindices = BaseIndices;\)\), "\[IndentingNewLine]", 
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(DeclareIndexFlavor[{red, Red}]\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell["Define the tensor shortcuts and derivative labels.", "Text"],
+
+Cell[BoxData[{
+    \(DefineTensorShortcuts[{{x, T}, 1}, {{S}, 2}]\), "\[IndentingNewLine]", 
+    \(\(labs = {x, \[Delta], g, \[CapitalGamma]};\)\)}], "Input",
+  CellLabel->"In[6]:="],
+
+Cell["\<\
+Here a partial derivative is expanded using the chain rule with respect to a \
+flavored coordinate system.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Tu[i]\), "\[IndentingNewLine]", 
+    \(\(PartialD[labs]\)[%, xu[j]]\), "\[IndentingNewLine]", 
+    \(% // UsePartialDChainRule[xu[red@a]]\)}], "Input",
+  CellLabel->"In[8]:="],
+
+Cell[TextData[{
+  "The command works on all expanded partial derivatives in the expression. \
+Use ",
+  Cell[BoxData[
+      \(MapAt\)]],
+  " to restrict to specific parts of an expression."
+}], "Text"],
+
+Cell[BoxData[{
+    \(Tu[i] Sdd[i, j]\), "\[IndentingNewLine]", 
+    \(\(PartialD[labs]\)[%, xu[k]]\), "\[IndentingNewLine]", 
+    \(% // UsePartialDChainRule[xu[red@a]]\)}], "Input",
+  CellLabel->"In[11]:="],
+
+Cell["\<\
+Using the chain rule with the same index flavor and coordinate simply returns \
+to the original expression.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Tu[i] Sdd[i, j]\), "\[IndentingNewLine]", 
+    \(\(PartialD[labs]\)[%, xu[k]]\), "\[IndentingNewLine]", 
+    \(% // UsePartialDChainRule[xu[a]]\), "\[IndentingNewLine]", 
+    \(% // KroneckerAbsorb[\[Delta]]\)}], "Input",
+  CellLabel->"In[14]:="],
+
+Cell["\<\
+Higher order derivatives can be expanded using the second form of the \
+command.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\(PartialD[labs]\)[
+      Sdd[i, j], {xu[a], xu[red@b]}]\), "\[IndentingNewLine]", 
+    \(% // UsePartialDChainRule[xu[c], xu[red@b]]\)}], "Input",
+  CellLabel->"In[18]:="],
+
+Cell["Restore settings.", "Text"],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[{{x, T}, 1}, {{S}, 2}]\)], "Input",
+  CellLabel->"In[20]:="],
+
+Cell[BoxData[{
+    \(\(DeclareBaseIndices[oldindices];\)\), "\[IndentingNewLine]", 
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor[oldflavors];\)\), "\[IndentingNewLine]", 
+    \(Clear[oldindices, oldflavors, labs]\)}], "Input",
+  CellLabel->"In[21]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{665, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 67, 1, 31, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1846, 56, 1177, 45, 72, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 6991, 234}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 67, 1, 31, "ObjectName",
+  CellTags->"Function?"],
+Cell[1846, 56, 1177, 45, 72, "Usage",
+  CellTags->"Function?"],
+Cell[3026, 103, 105, 2, 31, "MathCaption"],
+Cell[3134, 107, 452, 18, 31, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[3611, 129, 34, 0, 40, "ExampleSection"],
+Cell[3648, 131, 96, 2, 29, "Input"],
+Cell[3747, 135, 30, 0, 25, "Text"],
+Cell[3780, 137, 268, 5, 89, "Input"],
+Cell[4051, 144, 66, 0, 25, "Text"],
+Cell[4120, 146, 182, 3, 49, "Input"],
+Cell[4305, 151, 130, 3, 25, "Text"],
+Cell[4438, 156, 196, 4, 69, "Input"],
+Cell[4637, 162, 200, 6, 42, "Text"],
+Cell[4840, 170, 207, 4, 69, "Input"],
+Cell[5050, 176, 131, 3, 25, "Text"],
+Cell[5184, 181, 267, 5, 89, "Input"],
+Cell[5454, 188, 104, 3, 25, "Text"],
+Cell[5561, 193, 193, 4, 49, "Input"],
+Cell[5757, 199, 33, 0, 25, "Text"],
+Cell[5793, 201, 101, 2, 29, "Input"],
+Cell[5897, 205, 304, 5, 89, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

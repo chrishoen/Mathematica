@@ -1,0 +1,363 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      8606,        278]*)
+(*NotebookOutlinePosition[      9592,        312]*)
+(*  CellTagsIndexPosition[      9518,        306]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["SimplifyTensorSum", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["SimplifyTensorSum",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will check that all terms in a tensor sum have valid indices, that the \
+free indices are the same in all terms, and will simplify the sum by matching \
+dummy indices in all terms that have the same index structure."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["\<\
+ Terms which have the same tensor labels and index structure will be made the \
+same, but subparts of a term that are similar to other terms may not be the \
+same.\
+\>", "MathCaption"],
+
+Cell["\<\
+ Free indices are indices that appear only once in each term. They must be \
+the same in all terms. Dummy indices are indices that appear exactly once in \
+an up position and once in a down position. All other indices are bad.\
+\>", "MathCaption"],
+
+Cell["\<\
+ If the free indices do not match or there are bad indices in any terms, \
+error messages are given and the simplification is aborted.\
+\>", "MathCaption"],
+
+Cell["\<\
+ IndexChange can be used to perform specific reindexing under the user's \
+control.  DummySimplify sometimes works better and sometimes worse.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  " ",
+  Cell[BoxData[
+      \(DummySimplify\)]],
+  " is an alternative routine that sometimes works better."
+}], "MathCaption"],
+
+Cell[TextData[{
+  " The simplification routines are not high powered. They do not take into \
+account symmetries. See ",
+  Cell[BoxData[
+      \(SymmetrizeSlots\)]],
+  " to apply some symmetries."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["EinsteinSum",
+    ButtonData:>{"EinsteinSum"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["UpDownSwap",
+    ButtonData:>{"UpDownSwap"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["IndexChange",
+    ButtonData:>{"IndexChange"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SymmetrizeSlots",
+    ButtonData:>{"SymmetrizeSlots"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["NondependentPartialD",
+    ButtonData:>{"NondependentPartialD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["DummySimplify",
+    ButtonData:>{"DummySimplify"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["MapLevelParts",
+    ButtonData:>{"MapLevelParts"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples  ", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["Save old settings and declare an index flavor.", "Text"],
+
+Cell[BoxData[{
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(DeclareIndexFlavor[{red, Red}]\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[{{b, c, A, B, G}, 1}, {A, 2}, {{a, b, F}, 3}, {F, 
+        4}]\)], "Input",
+  CellLabel->"In[5]:="],
+
+Cell["\<\
+Terms with the same labels and index structure are made the same.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(c\ Ad[i] Bu[i] + a\ Ad[j] Bu[j] + 
+      b\ Ad[m] Bu[m]\), "\[IndentingNewLine]", 
+    \(% // SimplifyTensorSum\), "\[IndentingNewLine]", 
+    \(% // Simplify\)}], "Input",
+  CellLabel->"In[6]:="],
+
+Cell[BoxData[{
+    \(c\ Ad[i] Bu[i] + a\ Ad[j] Bu[j] + b\ Ad[m] Bu[m] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // SimplifyTensorSum\), "\[IndentingNewLine]", 
+    \(% // Simplify\)}], "Input",
+  CellLabel->"In[9]:="],
+
+Cell["This sum is bad because the free indices do not match.", "Text"],
+
+Cell[BoxData[{
+    \(a\ Auu[i, j] Gd[i] + b\ Auu[k, m] Gd[k]\), "\n", 
+    \(% // SimplifyTensorSum\)}], "Input",
+  CellLabel->"In[12]:="],
+
+Cell["\<\
+The second term of this sum contains a bad index. k is repeated 3 times.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(auud[i, k, j] budd[j, k, m] + 2  auud[i, j, k] budd[k, j, m] cu[k] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // SimplifyTensorSum\)}], "Input",
+  CellLabel->"In[14]:="],
+
+Cell[BoxData[{
+    \(a\ Fddu[i, j, i] + b\ Fddu[k, j, k] + c\ Fddu[m, j, m]\), "\n", 
+    \(\(% // SimplifyTensorSum\) // Simplify\)}], "Input",
+  CellLabel->"In[16]:="],
+
+Cell["DummySimplify does better on this example.", "Text"],
+
+Cell[BoxData[{
+    \(a\ Fdduu[i, j, i, j] + b\ Fdduu[j, p, j, p] + 
+      c\ Ad[i] Bu[i] Fdduu[m, r, m, r]\), "\[IndentingNewLine]", 
+    \(% // DummySimplify\), "\[IndentingNewLine]", 
+    \(% // Simplify\)}], "Input",
+  CellLabel->"In[18]:="],
+
+Cell[TextData[{
+  Cell[BoxData[
+      \(SimplifyTensorSum\)]],
+  " does not match the subpart of the third term to earlier terms. It can be \
+fixed by using ",
+  Cell[BoxData[
+      \(IndexChange\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(a\ Fdduu[i, j, i, j] + b\ Fdduu[j, p, j, p] + 
+        c\ Ad[i] Bu[i] Fdduu[m, r, m, r] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // SimplifyTensorSum\), "\[IndentingNewLine]", 
+    \(% // Simplify\), "\[IndentingNewLine]", 
+    \(MapAt[IndexChange[Map[red, {{i, m}, {j, i}, {p, j}}, {2}]], %, 
+      2]\), "\[IndentingNewLine]", 
+    \(% // Simplify\)}], "Input",
+  CellLabel->"In[21]:="],
+
+Cell[BoxData[{
+    \(\((addd[r, s, t] + addd[s, r, t] + addd[s, t, r])\) bu[r] bu[s] 
+      bu[t]\), "\[IndentingNewLine]", 
+    \(% // SimplifyTensorSum\)}], "Input",
+  CellLabel->"In[26]:="],
+
+Cell[TextData[{
+  "Here, the absolute derivative of a tensor product is taken. It expands to \
+14 terms. ",
+  Cell[BoxData[
+      \(SimplifyTensorSum\)]],
+  " reduces it to 12 terms. Total derivatives of the Christoffel symbol were \
+set to zero. The other terms do not combine because the dummy indices are not \
+in the same place."
+}], "Text"],
+
+Cell[BoxData[{
+    \(Tensor[G, {Void}, {k}] 
+      Tensor[F, {m}, {Void}]\), "\[IndentingNewLine]", 
+    \(expr1 = \((\(AbsoluteD[%, {t, t}] // 
+              ExpandAbsoluteD[{x, \[Delta], 
+                  g, \[CapitalGamma]}, {{a, b}, {c, d}}]\) // Expand)\) /. 
+        TotalD[Tensor[\[CapitalGamma], _, _], _] \[RuleDelayed] 
+          0\), "\[IndentingNewLine]", 
+    \(Length[expr1]\), "\[IndentingNewLine]", 
+    \(expr2 = expr1 // SimplifyTensorSum\), "\[IndentingNewLine]", 
+    \(Length[%]\)}], "Input",
+  CellLabel->"In[28]:="],
+
+Cell["Restore old settings...", "Text"],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[{{b, c, A, B, G}, 1}, {A, 2}, {{a, b, F}, 3}, {F, 
+        4}]\)], "Input",
+  CellLabel->"In[33]:="],
+
+Cell[BoxData[{
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(Clear[oldflavors]\)}], "Input",
+  CellLabel->"In[34]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 941}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{669, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 64, 1, 41, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1843, 56, 514, 16, 50, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 9347, 297}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 64, 1, 41, "ObjectName",
+  CellTags->"Function?"],
+Cell[1843, 56, 514, 16, 50, "Usage",
+  CellTags->"Function?"],
+Cell[2360, 74, 194, 4, 58, "MathCaption"],
+Cell[2557, 80, 257, 4, 58, "MathCaption"],
+Cell[2817, 86, 165, 3, 58, "MathCaption"],
+Cell[2985, 91, 173, 3, 58, "MathCaption"],
+Cell[3161, 96, 144, 5, 41, "MathCaption"],
+Cell[3308, 103, 215, 6, 58, "MathCaption"],
+Cell[3526, 111, 780, 30, 58, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[4331, 145, 36, 0, 39, "ExampleSection"],
+Cell[4370, 147, 96, 2, 29, "Input"],
+Cell[4469, 151, 62, 0, 25, "Text"],
+Cell[4534, 153, 205, 4, 69, "Input"],
+Cell[4742, 159, 141, 3, 29, "Input"],
+Cell[4886, 164, 89, 2, 25, "Text"],
+Cell[4978, 168, 217, 5, 69, "Input"],
+Cell[5198, 175, 234, 5, 69, "Input"],
+Cell[5435, 182, 70, 0, 25, "Text"],
+Cell[5508, 184, 138, 3, 49, "Input"],
+Cell[5649, 189, 96, 2, 25, "Text"],
+Cell[5748, 193, 206, 4, 49, "Input"],
+Cell[5957, 199, 169, 3, 49, "Input"],
+Cell[6129, 204, 58, 0, 25, "Text"],
+Cell[6190, 206, 244, 5, 69, "Input"],
+Cell[6437, 213, 218, 8, 42, "Text"],
+Cell[6658, 223, 427, 9, 129, "Input"],
+Cell[7088, 234, 192, 4, 49, "Input"],
+Cell[7283, 240, 345, 8, 59, "Text"],
+Cell[7631, 250, 539, 11, 149, "Input"],
+Cell[8173, 263, 39, 0, 25, "Text"],
+Cell[8215, 265, 141, 3, 29, "Input"],
+Cell[8359, 270, 219, 4, 69, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

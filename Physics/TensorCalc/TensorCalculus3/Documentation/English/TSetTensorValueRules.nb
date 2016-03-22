@@ -1,0 +1,490 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.0'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     11062,        382]*)
+(*NotebookOutlinePosition[     12125,        419]*)
+(*  CellTagsIndexPosition[     12050,        413]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["SetTensorValueRules", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["SetTensorValueRules",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox[\(Tensor[label, upindices, downindices], values, 
+          permissive : False\),
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  "will add substitution rules for the component values of the tensor to ",
+  Cell[BoxData[
+      \(TensorValueRules[label]\)]],
+  ".\n\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["SetTensorValueRules",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox[\(Tensor[label], value\),
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  "will create substitution rules for a scalar tensor"
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["\<\
+With the default value of permissive at False, the Dimensions of the values \
+tensor must all be equal and the same as NDim, the length of BaseIndices. \
+Setting permissive to True waives this rule.\
+\>", "MathCaption"],
+
+Cell["\<\
+The number of Dimensions of the values tensor must be greater than or equal \
+to the number of indices.\
+\>", "MathCaption"],
+
+Cell["\<\
+The order of components in values will correspond to the Sort order of the \
+raw indices in the tensor pattern, not necessarily their physical order in \
+the tensor. It will be good practice to usually make the sort order of the \
+pattern indices the same as the slot order, unless you are deliberately using \
+transposes. \
+\>", "MathCaption"],
+
+Cell["\<\
+Shortcuts can be used as the tensor pattern, but there are no shortcuts for \
+scalar tensors.\
+\>", "MathCaption"],
+
+Cell["\<\
+TensorValueRules are useful when you don't want automatic substitution of \
+component values.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["SetTensorValues",
+    ButtonData:>{"SetTensorValues"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["ClearTensorValues",
+    ButtonData:>{"ClearTensorValues"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["Tensor",
+    ButtonData:>{"Tensor"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["UseCoordinates",
+    ButtonData:>{"UseCoordinates"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["DeclareBaseIndices",
+    ButtonData:>{"DeclareBaseIndices"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples  ", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[42]:="],
+
+Cell["Save the settings and declare base indices and flavors.", "Text"],
+
+Cell[BoxData[{
+    \(\(oldindices = BaseIndices;\)\), "\n", 
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(DeclareBaseIndices[{1, 2, 3}]\), "\[IndentingNewLine]", 
+    \(DeclareIndexFlavor[{red, Red}]\)}], "Input",
+  CellLabel->"In[43]:="],
+
+Cell["We define some tensor shortcuts.", "Text"],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[{{v, g, e}, 1}, {h, 2}]\)], "Input",
+  CellLabel->"In[48]:="],
+
+Cell["Here is a tensor. It has no values.", "Text"],
+
+Cell[BoxData[{
+    \(vu[i]\), "\[IndentingNewLine]", 
+    \(% // EinsteinArray[]\)}], "Input",
+  CellLabel->"In[49]:="],
+
+Cell[TextData[{
+  "Now we create substitution rules for the values of the contravariant \
+components of ",
+  Cell[BoxData[
+      \(v\)]],
+  ". When the tensor is expanded the components are displayed without their \
+values. But the values can be substituted with ",
+  Cell[BoxData[
+      \(TensorValueRules[v]\)]]
+}], "Text"],
+
+Cell[BoxData[{
+    \(SetTensorValueRules[vu[i], {1, 2, 3}]\), "\[IndentingNewLine]", 
+    \(vu[i]\), "\[IndentingNewLine]", 
+    \(% // EinsteinArray[]\), "\[IndentingNewLine]", 
+    \(% /. TensorValueRules[v]\)}], "Input",
+  CellLabel->"In[51]:="],
+
+Cell["\<\
+Here, we look at the explicit rules. Only the contravariant components have \
+values.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(TensorValueRules[v]\)], "Input",
+  CellLabel->"In[55]:="],
+
+Cell["We can erase the values using ...", "Text"],
+
+Cell[BoxData[{
+    \(\(ClearTensorValues[vu[i]];\)\), "\[IndentingNewLine]", 
+    \(TensorValueRules[v]\)}], "Input",
+  CellLabel->"In[56]:="],
+
+Cell[TextData[{
+  "Here is an order 2 tensor, ",
+  Cell[BoxData[
+      \(h\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(hud[i, j]\), "\[IndentingNewLine]", 
+    \(% // EinsteinArray[]\)}], "Input",
+  CellLabel->"In[58]:="],
+
+Cell[TextData[{
+  "We will create substitution rules for the components of ",
+  Cell[BoxData[
+      \(h\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[
+    \(hvalues = Table[j - i, {i, 1, 3}, {j, 1, 3}]\)], "Input",
+  CellLabel->"In[60]:="],
+
+Cell[BoxData[{
+    \(SetTensorValueRules[hud[i, j], hvalues]\), "\[IndentingNewLine]", 
+    \(TensorValueRules[h]\), "\[IndentingNewLine]", 
+    \(hud[i, j]\), "\[IndentingNewLine]", 
+    \(% // EinsteinArray[]\), "\[IndentingNewLine]", 
+    \(% /. TensorValueRules[h]\)}], "Input",
+  CellLabel->"In[61]:="],
+
+Cell["\<\
+If we reverse the indices in the tensor when using SetTensorValueRules, then \
+we obtain the transposed values. You should only do this if you deliberately \
+want to put in the transposed values. Normally you should put the indices \
+into the slots in sort order.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(SetTensorValueRules[hud[j, i], hvalues]\), "\[IndentingNewLine]", 
+    \(TensorValueRules[h]\), "\[IndentingNewLine]", 
+    \(hud[i, j]\), "\[IndentingNewLine]", 
+    \(% // EinsteinArray[]\), "\[IndentingNewLine]", 
+    \(% /. TensorValueRules[h]\)}], "Input",
+  CellLabel->"In[66]:="],
+
+Cell[BoxData[{
+    \(ClearTensorValues[hud[i, j]]\), "\[IndentingNewLine]", 
+    \(TensorValueRules[h]\)}], "Input",
+  CellLabel->"In[71]:="],
+
+Cell[TextData[{
+  "We can also create rules that substitute arrays for tensor components. Let \
+",
+  Cell[BoxData[
+      SubscriptBox["g", 
+        StyleBox["i",
+          FontColor->RGBColor[1, 0, 0]]]]],
+  " be a set of basis vectors."
+}], "Text"],
+
+Cell[BoxData[{
+    RowBox[{"SetTensorValueRules", "[", 
+      RowBox[{\(gd[red@i]\), ",", 
+        RowBox[{"(", GridBox[{
+              {"1", "0", "3"},
+              {"0", "2", "1"},
+              {"2", "2", "3"}
+              }], ")"}]}], "]"}], "\[IndentingNewLine]", \(TensorValueRules[
+      g]\)}], "Input",
+  CellLabel->"In[73]:="],
+
+Cell[BoxData[{
+    \(ClearTensorValues[gd[red@i]]\), "\[IndentingNewLine]", 
+    \(TensorValueRules[g]\)}], "Input",
+  CellLabel->"In[75]:="],
+
+Cell["\<\
+Suppose we want to set tangent vectors in the 3D embedding space of the \
+following 2D manifold.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(\[Xi][u_, v_] := {u + v, u - v, 2  u\ v}\)], "Input",
+  CellLabel->"In[77]:="],
+
+Cell[TextData[{
+  "If we try to directly set 3D tensor values they don't set because the \
+dimensions must match ",
+  Cell[BoxData[
+      \(NDim\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[{u, v}]\), "\[IndentingNewLine]", 
+    \(SetTensorValueRules[
+      ed[i], {\[PartialD]\_u\ \[Xi][u, v], \[PartialD]\_v\ \[Xi][u, 
+            v]}]\)}], "Input",
+  CellLabel->"In[78]:="],
+
+Cell[BoxData[
+    \(TensorValueRules[e]\)], "Input",
+  CellLabel->"In[80]:="],
+
+Cell["\<\
+By setting the optional argument permissive to True the values can be set.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(SetTensorValueRules[
+      ed[i], {\[PartialD]\_u\ \[Xi][u, v], \[PartialD]\_v\ \[Xi][u, v]}, 
+      True]\)], "Input",
+  CellLabel->"In[81]:="],
+
+Cell[BoxData[
+    \(TensorValueRules[e]\)], "Input",
+  CellLabel->"In[82]:="],
+
+Cell[BoxData[{
+    \(ClearTensorValues[ed[i]]\), "\[IndentingNewLine]", 
+    \(DeclareBaseIndices[{1, 2, 3}]\)}], "Input",
+  CellLabel->"In[83]:="],
+
+Cell[TextData[{
+  "Rules can also be created for scalar tensors. (Note that ",
+  Cell[BoxData[
+      \(Tensor[\[Phi]]\)]],
+  " displays as just ",
+  Cell[BoxData[
+      \(\[Phi]\)]],
+  ".)"
+}], "Text"],
+
+Cell[BoxData[{
+    \(\(Clear[\[Phi]];\)\), "\[IndentingNewLine]", 
+    \(SetTensorValueRules[Tensor[\[Phi]], t\^2]\), "\[IndentingNewLine]", 
+    \(TensorValueRules[\[Phi]]\)}], "Input",
+  CellLabel->"In[85]:="],
+
+Cell[BoxData[{
+    \(Tensor[\[Phi]]\), "\[IndentingNewLine]", 
+    \(% /. TensorValueRules[\[Phi]]\)}], "Input",
+  CellLabel->"In[88]:="],
+
+Cell["The rules can be cleared with...", "Text"],
+
+Cell[BoxData[{
+    \(ClearTensorValues[Tensor[\[Phi]]]\), "\[IndentingNewLine]", 
+    \(TensorValueRules[\[Phi]]\)}], "Input",
+  CellLabel->"In[90]:="],
+
+Cell["\<\
+It is permissible to have the same symbol for the tensor label, a pattern \
+index, and as one of the values.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(SetTensorValueRules[vu[v], {v, 1, 2}]\), "\[IndentingNewLine]", 
+    \(TensorValueRules[v]\)}], "Input",
+  CellLabel->"In[92]:="],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[{{v, g}, 1}, {h, 2}]\)], "Input",
+  CellLabel->"In[96]:="],
+
+Cell["Restore the original state...", "Text"],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[oldindices]\), "\[IndentingNewLine]", 
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(Clear[oldindices, oldflavors, \[Xi]]\)}], "Input",
+  CellLabel->"In[97]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"5.0 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 941}},
+ScreenStyleEnvironment->"Working",
+PrintingStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{665, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+Magnification->1,
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 66, 1, 41, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1845, 56, 816, 29, 73, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 11879, 404}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 66, 1, 41, "ObjectName",
+  CellTags->"Function?"],
+Cell[1845, 56, 816, 29, 73, "Usage",
+  CellTags->"Function?"],
+Cell[2664, 87, 229, 4, 58, "MathCaption"],
+Cell[2896, 93, 134, 3, 41, "MathCaption"],
+Cell[3033, 98, 354, 6, 75, "MathCaption"],
+Cell[3390, 106, 124, 3, 41, "MathCaption"],
+Cell[3517, 111, 124, 3, 41, "MathCaption"],
+Cell[3644, 116, 578, 22, 41, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[4247, 142, 36, 0, 39, "ExampleSection"],
+Cell[4286, 144, 97, 2, 29, "Input"],
+Cell[4386, 148, 71, 0, 25, "Text"],
+Cell[4460, 150, 315, 6, 109, "Input"],
+Cell[4778, 158, 48, 0, 25, "Text"],
+Cell[4829, 160, 103, 2, 29, "Input"],
+Cell[4935, 164, 51, 0, 25, "Text"],
+Cell[4989, 166, 119, 3, 49, "Input"],
+Cell[5111, 171, 325, 9, 42, "Text"],
+Cell[5439, 182, 248, 5, 89, "Input"],
+Cell[5690, 189, 109, 3, 25, "Text"],
+Cell[5802, 194, 77, 2, 29, "Input"],
+Cell[5882, 198, 49, 0, 25, "Text"],
+Cell[5934, 200, 142, 3, 49, "Input"],
+Cell[6079, 205, 97, 5, 25, "Text"],
+Cell[6179, 212, 123, 3, 49, "Input"],
+Cell[6305, 217, 126, 5, 25, "Text"],
+Cell[6434, 224, 102, 2, 29, "Input"],
+Cell[6539, 228, 307, 6, 109, "Input"],
+Cell[6849, 236, 287, 5, 59, "Text"],
+Cell[7139, 243, 307, 6, 109, "Input"],
+Cell[7449, 251, 141, 3, 49, "Input"],
+Cell[7593, 256, 249, 8, 25, "Text"],
+Cell[7845, 266, 338, 9, 79, "Input"],
+Cell[8186, 277, 141, 3, 49, "Input"],
+Cell[8330, 282, 120, 3, 25, "Text"],
+Cell[8453, 287, 98, 2, 29, "Input"],
+Cell[8554, 291, 167, 6, 25, "Text"],
+Cell[8724, 299, 226, 5, 49, "Input"],
+Cell[8953, 306, 77, 2, 29, "Input"],
+Cell[9033, 310, 98, 2, 25, "Text"],
+Cell[9134, 314, 164, 4, 29, "Input"],
+Cell[9301, 320, 77, 2, 29, "Input"],
+Cell[9381, 324, 147, 3, 49, "Input"],
+Cell[9531, 329, 201, 8, 25, "Text"],
+Cell[9735, 339, 211, 4, 70, "Input"],
+Cell[9949, 345, 137, 3, 49, "Input"],
+Cell[10089, 350, 48, 0, 25, "Text"],
+Cell[10140, 352, 151, 3, 49, "Input"],
+Cell[10294, 357, 132, 3, 25, "Text"],
+Cell[10429, 362, 150, 3, 49, "Input"],
+Cell[10582, 367, 99, 2, 29, "Input"],
+Cell[10684, 371, 45, 0, 25, "Text"],
+Cell[10732, 373, 302, 5, 89, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

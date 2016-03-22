@@ -1,0 +1,449 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     11060,        355]*)
+(*NotebookOutlinePosition[     12070,        390]*)
+(*  CellTagsIndexPosition[     11995,        384]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["ExpandCovariantD", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox[
+            RowBox[{"Expand", 
+              StyleBox["CovariantD",
+                "MR"]}]], 
+          StyleBox["[",
+            "MR"], 
+          StyleBox[
+            RowBox[{
+              RowBox[{"{", 
+                RowBox[{
+                "x", ",", "\[Delta]", ",", "g", ",", "\[CapitalGamma]"}], 
+                "}"}], ",", "a"}],
+            "TI"], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will expand first order covariant derivatives of tensors using x as the \
+label for the coordinates, \[Delta] as the label for the Kronecker, g as the \
+label for the metric tensor and \[CapitalGamma] as the lavel for Christoffel \
+symbols. The introduced dummy index will be a.\n\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox[
+            RowBox[{"Expand", 
+              StyleBox["CovariantD",
+                "MR"]}]], 
+          StyleBox["[",
+            "MR"], 
+          StyleBox[
+            RowBox[{
+              RowBox[{"{", 
+                RowBox[{
+                "x", ",", "\[Delta]", ",", "g", ",", "\[CapitalGamma]"}], 
+                "}"}], ",", 
+              RowBox[{"{", 
+                RowBox[{"a", ",", "b", ",", "..."}], "}"}]}],
+            "TI"], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " expands higher order covariant derivatives using the list of dummy \
+indices."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["\<\
+ Unexpanded covariant derivatives are left in index form, with each covariant \
+index prefixed by a semi-colon.\
+\>", "MathCaption"],
+
+Cell["\<\
+The expansion is done for a 'coordinate basis' or holonomic system. in which \
+case the Christoffelu symbols, with the first index up, are the same as the \
+'connection coefficients'.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "When working in a notebook with a constant set of labels one can put ",
+  Cell[BoxData[
+      \(labs = {x, \[Delta], g, \[CapitalGamma]}\)]],
+  "and then use ",
+  Cell[BoxData[
+      \(\(ExpandCovariantD[labs, a]\)[expr]\)]],
+  " in the call, with similar usage for the other derivative routines."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["CovariantD",
+    ButtonData:>{"CovariantD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SetChristoffelValueRules",
+    ButtonData:>{"SetChristoffelValueRules"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["PartialD",
+    ButtonData:>{"PartialD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["AbsoluteD",
+    ButtonData:>{"AbsoluteD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["TotalD",
+    ButtonData:>{"TotalD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["Tensor",
+    ButtonData:>{"Tensor"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["Save the old settings.", "Text"],
+
+Cell[BoxData[{
+    \(\(oldindices = BaseIndices;\)\), "\[IndentingNewLine]", 
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(DeclareIndexFlavor[{red, Red}]\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell["Define standard labels and shortcuts.", "Text"],
+
+Cell[BoxData[{
+    \(\(labs = {x, \[Delta], 
+          g, \[CapitalGamma]};\)\), "\[IndentingNewLine]", 
+    \(DefineTensorShortcuts[{{x, y, S, T}, 1}, {{g, \[Delta], S, T}, 
+        2}, {{\[CapitalGamma], \[CapitalLambda]}, 3}]\)}], "Input",
+  CellLabel->"In[6]:="],
+
+Cell["\<\
+Here is a covariant derivative of a  second order tensor and its expansion in \
+terms of a partial derivatives and Christoffel symbols using the dummy index \
+a. There is a Christoffel correction term for each index.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Tuu[i, j]\), "\[IndentingNewLine]", 
+    \(CovariantD[%, k]\), "\[IndentingNewLine]", 
+    \(% // ExpandCovariantD[labs, a]\)}], "Input",
+  CellLabel->"In[8]:="],
+
+Cell["\<\
+With flavored expressions the intended flavor must also be on the covariant \
+dummy index.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Tud[i, j] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(CovariantD[%, red@k]\), "\[IndentingNewLine]", 
+    \(% // ExpandCovariantD[labs, red@a]\)}], "Input",
+  CellLabel->"In[11]:="],
+
+Cell["\<\
+A dummy index name must be supplied for each covariant differentiation.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Tuu[i, j] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(CovariantD[%, red /@ {m, n}]\), "\[IndentingNewLine]", 
+    \(% // ExpandCovariantD[labs, red /@ {a, b}]\)}], "Input",
+  CellLabel->"In[14]:="],
+
+Cell["\<\
+We could use different symbols for the coordinate and Christoffel symbols.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Tdd[i, j] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(CovariantD[%, red@k]\), "\[IndentingNewLine]", 
+    \(% // ExpandCovariantD[{y, \[Delta], g, \[CapitalLambda]}, 
+        red@a]\)}], "Input",
+  CellLabel->"In[17]:="],
+
+Cell[TextData[{
+  "If a tensor has no covariant derivative indices then ",
+  Cell[BoxData[
+      \(ExpandCovariantD\)]],
+  " does nothing. In the following, only the second term is expanded."
+}], "Text"],
+
+Cell[BoxData[{
+    \(2  Tud[i, j] + CovariantD[Tu[i], j]\), "\[IndentingNewLine]", 
+    \(% // ExpandCovariantD[labs, a]\)}], "Input",
+  CellLabel->"In[20]:="],
+
+Cell["\<\
+The following is an example of a calculation with covariant derivatives. We \
+set the metric for a spherical coordinate system and express it in terms of \
+coordinate vectors.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\(metric = 
+        DiagonalMatrix[{1, 
+            r\^2, \(r\^2\) Sin[\[Theta]]\^2}];\)\), "\[IndentingNewLine]", 
+    \(tmetric = 
+      metric // 
+        CoordinatesToTensors[{r, \[Theta], \[Phi]}]\), "\[IndentingNewLine]", \
+
+    \(SetMetricValueRules[g, tmetric]\)}], "Input",
+  CellLabel->"In[22]:="],
+
+Cell["We then calculate and set the Christoffel values...", "Text"],
+
+Cell[BoxData[
+    \(SetChristoffelValueRules[xu[i], tmetric, \ \[CapitalGamma]]\)], "Input",\
+
+  CellLabel->"In[25]:="],
+
+Cell["\<\
+The following displays the nonzero values of the Christoffel symbols.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(NonzeroValueRules[\[CapitalGamma]] // TableForm\)], "Input",
+  CellLabel->"In[26]:="],
+
+Cell["\<\
+We then
+1) Set the coordinate vectors to the coordinate variables via rules.
+2) Take the covariant derivative.
+3) Expand the covariant derivative in terms of Christoffel symbols and the \
+coordinate.
+4) Expand the expression into an array making all substitutions.
+5) Clear the rules for the coordinate vectors.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\(SetTensorValueRules[
+        xu[i], {r, \[Theta], \[Phi]}];\)\), "\[IndentingNewLine]", 
+    \(Tud[i, Cov[k]]\), "\[IndentingNewLine]", 
+    \(% // ExpandCovariantD[labs, a]\), "\[IndentingNewLine]", 
+    \(% // ToArrayValues[]\), "\[IndentingNewLine]", 
+    \(ClearTensorValues[xu[i]]\)}], "Input",
+  CellLabel->"In[27]:="],
+
+Cell["\<\
+That gives us the covariant derivative components of T in terms of the \
+contravariant T components.\
+\>", "Text"],
+
+Cell["A tensor times a covariant derivative.", "Text"],
+
+Cell[BoxData[{
+    \(Tdu[k, j] Sdd[k, Cov[m]]\), "\[IndentingNewLine]", 
+    \(% // ExpandCovariantD[labs, a]\)}], "Input",
+  CellLabel->"In[32]:="],
+
+Cell["\<\
+The covariant derivative of a product of tensors and a constant.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(2  \[Pi]\ q\ Sd[k] Tdu[j, k]\), "\[IndentingNewLine]", 
+    \(CovariantD[%, m]\), "\[IndentingNewLine]", 
+    \(% // ExpandCovariantD[labs, a]\)}], "Input",
+  CellLabel->"In[34]:="],
+
+Cell["\<\
+Now, let's try the well known identity about the covariant derivative of the \
+metric tensor, using the metric tensor and Christoffel symbols from above.\
+\>", "Text",
+  Background->None],
+
+Cell[BoxData[{
+    \(SetTensorValueRules[\[Delta]ud[i, j], 
+      IdentityMatrix[NDim]]\), "\[IndentingNewLine]", 
+    \(gdd[m, n]\), "\[IndentingNewLine]", 
+    \(CovariantD[%, i]\), "\[IndentingNewLine]", 
+    \(% // ExpandCovariantD[labs, a]\), "\[IndentingNewLine]", 
+    \(% // ToArrayValues[]\)}], "Input",
+  CellLabel->"In[37]:="],
+
+Cell["Restore settings.", "Text"],
+
+Cell[BoxData[{
+    \(\(ClearTensorValues /@ {gdd[i, j], 
+          guu[i, j], \[CapitalGamma]udd[i, j, k], \[CapitalGamma]ddd[i, j, 
+            k], \[Delta]ud[i, j]};\)\), "\[IndentingNewLine]", 
+    \(ClearTensorShortcuts[{{x, y, S, T}, 1}, {{g, \[Delta], S, T}, 
+        2}, {{\[CapitalGamma], \[CapitalLambda]}, 3}]\)}], "Input",
+  CellLabel->"In[42]:="],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[oldindices]\), "\[IndentingNewLine]", 
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(Clear[oldindices, oldflavors, labs]\)}], "Input",
+  CellLabel->"In[44]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{665, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 63, 1, 31, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1842, 56, 1761, 59, 106, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 11822, 375}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 63, 1, 31, "ObjectName",
+  CellTags->"Function?"],
+Cell[1842, 56, 1761, 59, 106, "Usage",
+  CellTags->"Function?"],
+Cell[3606, 117, 142, 3, 31, "MathCaption"],
+Cell[3751, 122, 214, 4, 48, "MathCaption"],
+Cell[3968, 128, 335, 8, 48, "MathCaption"],
+Cell[4306, 138, 642, 26, 31, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[4973, 168, 34, 0, 40, "ExampleSection"],
+Cell[5010, 170, 96, 2, 29, "Input"],
+Cell[5109, 174, 38, 0, 25, "Text"],
+Cell[5150, 176, 268, 5, 89, "Input"],
+Cell[5421, 183, 53, 0, 25, "Text"],
+Cell[5477, 185, 266, 5, 49, "Input"],
+Cell[5746, 192, 240, 4, 42, "Text"],
+Cell[5989, 198, 182, 4, 69, "Input"],
+Cell[6174, 204, 114, 3, 25, "Text"],
+Cell[6291, 209, 208, 4, 69, "Input"],
+Cell[6502, 215, 95, 2, 25, "Text"],
+Cell[6600, 219, 224, 4, 69, "Input"],
+Cell[6827, 225, 98, 2, 25, "Text"],
+Cell[6928, 229, 247, 5, 69, "Input"],
+Cell[7178, 236, 203, 5, 42, "Text"],
+Cell[7384, 243, 159, 3, 49, "Input"],
+Cell[7546, 248, 199, 4, 42, "Text"],
+Cell[7748, 254, 328, 9, 70, "Input"],
+Cell[8079, 265, 67, 0, 25, "Text"],
+Cell[8149, 267, 119, 3, 29, "Input"],
+Cell[8271, 272, 93, 2, 25, "Text"],
+Cell[8367, 276, 105, 2, 29, "Input"],
+Cell[8475, 280, 335, 8, 150, "Text"],
+Cell[8813, 290, 347, 7, 109, "Input"],
+Cell[9163, 299, 124, 3, 25, "Text"],
+Cell[9290, 304, 54, 0, 25, "Text"],
+Cell[9347, 306, 148, 3, 49, "Input"],
+Cell[9498, 311, 88, 2, 25, "Text"],
+Cell[9589, 315, 202, 4, 69, "Input"],
+Cell[9794, 321, 197, 4, 42, "Text"],
+Cell[9994, 327, 337, 7, 109, "Input"],
+Cell[10334, 336, 33, 0, 25, "Text"],
+Cell[10370, 338, 358, 6, 49, "Input"],
+Cell[10731, 346, 301, 5, 89, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

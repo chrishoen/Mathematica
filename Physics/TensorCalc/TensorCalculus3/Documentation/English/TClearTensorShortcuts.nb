@@ -1,0 +1,226 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      4383,        158]*)
+(*NotebookOutlinePosition[      5391,        193]*)
+(*  CellTagsIndexPosition[      5317,        187]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["ClearTensorShortcuts", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["ClearTensorShortcuts",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox[\(label, order\),
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  "will clear all tensor shortcuts established by ",
+  Cell[BoxData[
+      \(DefineTensorShortcute[label, order]\)]],
+  ".\n\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["ClearTensorShortcuts",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox[\({u, v, w,  ... }, order\),
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  "will clear a series of tensor shortcuts of the same order.\n\
+\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["ClearTensorShortcuts",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox[\({{u, v, w,  ... }, order} .. \),
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  "will clear a number of tensors of different orders."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["DefineTensorShortcuts",
+    ButtonData:>{"DefineTensorShortcuts"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["ClearTensorValues",
+    ButtonData:>{"ClearTensorValues"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SetTensorValueRules",
+    ButtonData:>{"SetTensorValueRules"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SetTensorValues",
+    ButtonData:>{"SetTensorValues"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples  ", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["This defines all the shortcuts for a second order tensor R.", "Text"],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[R, 2]\)], "Input",
+  CellLabel->"In[2]:="],
+
+Cell[BoxData[
+    \(\(#[i, j] &\) /@ {Ruu, Rud, Rdu, Rdd}\)], "Input",
+  CellLabel->"In[3]:="],
+
+Cell["The definitions are stored under the shortcut names.", "Text"],
+
+Cell[BoxData[
+    \(\(Information /@ {Ruu, Rud, Rdu, Rdd};\)\)], "Input",
+  CellLabel->"In[4]:="],
+
+Cell["This clears the definitions.", "Text"],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[R, 2]\)], "Input",
+  CellLabel->"In[5]:="],
+
+Cell[BoxData[
+    \(\(#[i, j] &\) /@ {Ruu, Rud, Rdu, Rdd}\)], "Input",
+  CellLabel->"In[6]:="],
+
+Cell[BoxData[
+    \(\(Information /@ {Ruu, Rud, Rdu, Rdd};\)\)], "Input",
+  CellLabel->"In[7]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{665, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 67, 1, 31, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1846, 56, 1079, 40, 95, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 5145, 178}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 67, 1, 31, "ObjectName",
+  CellTags->"Function?"],
+Cell[1846, 56, 1079, 40, 95, "Usage",
+  CellTags->"Function?"],
+Cell[2928, 98, 504, 18, 48, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[3457, 120, 36, 0, 40, "ExampleSection"],
+Cell[3496, 122, 96, 2, 29, "Input"],
+Cell[3595, 126, 75, 0, 25, "Text"],
+Cell[3673, 128, 84, 2, 29, "Input"],
+Cell[3760, 132, 94, 2, 29, "Input"],
+Cell[3857, 136, 68, 0, 25, "Text"],
+Cell[3928, 138, 97, 2, 29, "Input"],
+Cell[4028, 142, 44, 0, 25, "Text"],
+Cell[4075, 144, 83, 2, 29, "Input"],
+Cell[4161, 148, 94, 2, 29, "Input"],
+Cell[4258, 152, 97, 2, 29, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

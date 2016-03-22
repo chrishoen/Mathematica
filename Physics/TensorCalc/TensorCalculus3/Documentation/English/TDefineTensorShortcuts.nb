@@ -1,0 +1,382 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      8644,        292]*)
+(*NotebookOutlinePosition[      9652,        327]*)
+(*  CellTagsIndexPosition[      9578,        321]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["DefineTensorShortcuts", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["DefineTensorShortcuts",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox[\(label, order\),
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  "will define tensor shortcuts for all up/down configurations of a tensor \
+with the given label and order.\n\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["DefineTensorShortcuts",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox[\({u, v, w,  ... }, order\),
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  "will define tensor shortcuts for a number of labels.\n\[FilledSmallSquare] \
+",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["DefineTensorShortcuts",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox[\({{u, v, w,  ... }, order} .. \),
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  "will define a number of tensors of different orders."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell["\<\
+The shortcut names are derived by appending u's and d's to the label, in the \
+order of the tensor slots.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  " If the tensor label is ",
+  Cell[BoxData[
+      \(T\)]],
+  " and the order is 2, then the shortcut names will be ",
+  Cell[BoxData[
+      \({Tuu, Tud, Tdu, Tdd}\)]],
+  ". ",
+  Cell[BoxData[
+      \(Tdu[i, j]\)]],
+  " will be the shortcut for ",
+  Cell[BoxData[
+      \(Tensor[T, {Void, j}, {i, Void}]\)]],
+  "."
+}], "MathCaption"],
+
+Cell["\<\
+In the shortcut the indices are specified in the physical order they appear \
+in the tensor slots.\
+\>", "MathCaption"],
+
+Cell["Tensor shortcuts affect only the input of tensors.", "MathCaption"],
+
+Cell["\<\
+You can also write your own direct shortcut definitions, say for a \
+combination of tensors or for a high order tensor in which you don't want all \
+the combinations of up/down indices.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["ClearTensorShortcuts",
+    ButtonData:>{"ClearTensorShortcuts"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["ClearTensorValues",
+    ButtonData:>{"ClearTensorValues"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SetTensorValueRules",
+    ButtonData:>{"SetTensorValueRules"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SetTensorValues",
+    ButtonData:>{"SetTensorValues"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples  ", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell[BoxData[{
+    \(\(oldindices = BaseIndices;\)\), "\n", 
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(DeclareBaseIndices[{1, 2}]\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ {{red, Red}, {rocket, 
+            SuperStar}};\)\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell["\<\
+This defines all the shortcuts for a coordinate object,  the metric tensor \
+and a second order tensor R.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\(DefineTensorShortcuts[x, 1];\)\), "\[IndentingNewLine]", 
+    \(DefineTensorShortcuts[{g, R}, 2]\)}], "Input",
+  CellLabel->"In[7]:="],
+
+Cell["We can now use the shortcuts instead of the longer form.", "Text"],
+
+Cell[BoxData[
+    \({gdd[i, j], guu[i, j], Rud[i, j], xu[k], xd[k]}\)], "Input",
+  CellLabel->"In[9]:="],
+
+Cell["\<\
+We can obtain a different flavor for the indices by using ToFlavor.\
+\>", "Text"],
+
+Cell[BoxData[
+    \({gdd[i, j], guu[i, j], Rud[i, j], xu[k], xd[k]} // 
+      ToFlavor[red]\)], "Input",
+  CellLabel->"In[10]:="],
+
+Cell["This clears the tensor shortcuts.", "Text"],
+
+Cell[BoxData[{
+    \(\(ClearTensorShortcuts[x, 1];\)\), "\[IndentingNewLine]", 
+    \(ClearTensorShortcuts[{g, R}, 2]\)}], "Input",
+  CellLabel->"In[11]:="],
+
+Cell["They are no longer effective.", "Text"],
+
+Cell[BoxData[
+    \({gdd[i, j], guu[i, j], Rud[i, j], xu[k], xd[k]}\)], "Input",
+  CellLabel->"In[13]:="],
+
+Cell["\<\
+Multiple shortcuts of different orders can be defined in one statement. The \
+following reestablishes the definitions.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(DefineTensorShortcuts[{x, 1}, {{g, R}, 2}]\), "\[IndentingNewLine]", 
+    \({gdd[i, j], guu[i, j], Rud[i, j], xu[k], xd[k]} // 
+      ToFlavor[rocket]\)}], "Input",
+  CellLabel->"In[14]:="],
+
+Cell["\<\
+It is then easy to enter expressions and perform manipulations. Here are \
+various examples using tensor shortcuts.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(gdd[i, j] xu[j] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g]\), "\[IndentingNewLine]", 
+    \(\((guu[i, j] // ToFlavor[red])\) %\), "\[IndentingNewLine]", 
+    \(% // MetricSimplify[g]\)}], "Input",
+  CellLabel->"In[16]:="],
+
+Cell[TextData[{
+  "This defines shortcuts for a vector, ",
+  Cell[BoxData[
+      \(v\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[v, 1]\)], "Input",
+  CellLabel->"In[20]:="],
+
+Cell[BoxData[{
+    \(vu[j]\), "\[IndentingNewLine]", 
+    \(% // EinsteinArray[]\)}], "Input",
+  CellLabel->"In[21]:="],
+
+Cell["\<\
+Let R represent a rotation tensor that will operate on vectors. We have \
+already defined the shortcuts. We define values for conversion from a black \
+frame to a red frame.\
+\>", "Text"],
+
+Cell[BoxData[
+    RowBox[{"SetTensorValueRules", "[", 
+      RowBox[{\(Rud[red@i, j]\), ",", 
+        RowBox[{"(", GridBox[{
+              {\(Cos[\[Theta]]\), \(-Sin[\[Theta]]\)},
+              {\(Sin[\[Theta]]\), \(Cos[\[Theta]]\)}
+              }], ")"}]}], "]"}]], "Input",
+  CellLabel->"In[23]:="],
+
+Cell[BoxData[
+    \(TensorValueRules[R]\)], "Input",
+  CellLabel->"In[24]:="],
+
+Cell["\<\
+Notice that the indices in the shortcut fill the tensor slots in order. We \
+can now write our transformation equations, expand them and substitute the \
+values of the rotation matrix.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(vu[red@i] == Rud[red@i, j] vu[j]\), "\[IndentingNewLine]", 
+    \(% // EinsteinSum[]\), "\[IndentingNewLine]", 
+    \(\(% // EinsteinArray[]\) // TableForm\), "\[IndentingNewLine]", 
+    \(% /. TensorValueRules[R] // TableForm\)}], "Input",
+  CellLabel->"In[25]:="],
+
+Cell[BoxData[{
+    \(ClearTensorValues[Rud[red@i, j]]\), "\[IndentingNewLine]", 
+    \(ClearTensorShortcuts[{{x, v}, 1}, {{g, R}, 2}]\)}], "Input",
+  CellLabel->"In[29]:="],
+
+Cell["Restore the original state.", "Text"],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[oldindices]\), "\[IndentingNewLine]", 
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(Clear[oldindices, oldflavors]\)}], "Input",
+  CellLabel->"In[31]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{665, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 68, 1, 33, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1847, 56, 1063, 38, 95, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 9406, 312}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 68, 1, 33, "ObjectName",
+  CellTags->"Function?"],
+Cell[1847, 56, 1063, 38, 95, "Usage",
+  CellTags->"Function?"],
+Cell[2913, 96, 136, 3, 31, "MathCaption"],
+Cell[3052, 101, 350, 14, 48, "MathCaption"],
+Cell[3405, 117, 129, 3, 31, "MathCaption"],
+Cell[3537, 122, 73, 0, 31, "MathCaption"],
+Cell[3613, 124, 216, 4, 48, "MathCaption"],
+Cell[3832, 130, 502, 18, 31, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[4359, 152, 36, 0, 40, "ExampleSection"],
+Cell[4398, 154, 96, 2, 29, "Input"],
+Cell[4497, 158, 354, 7, 109, "Input"],
+Cell[4854, 167, 129, 3, 25, "Text"],
+Cell[4986, 172, 157, 3, 49, "Input"],
+Cell[5146, 177, 72, 0, 25, "Text"],
+Cell[5221, 179, 104, 2, 29, "Input"],
+Cell[5328, 183, 91, 2, 25, "Text"],
+Cell[5422, 187, 129, 3, 29, "Input"],
+Cell[5554, 192, 49, 0, 25, "Text"],
+Cell[5606, 194, 156, 3, 49, "Input"],
+Cell[5765, 199, 45, 0, 25, "Text"],
+Cell[5813, 201, 105, 2, 29, "Input"],
+Cell[5921, 205, 142, 3, 25, "Text"],
+Cell[6066, 210, 210, 4, 49, "Input"],
+Cell[6279, 216, 139, 3, 25, "Text"],
+Cell[6421, 221, 272, 5, 89, "Input"],
+Cell[6696, 228, 107, 5, 25, "Text"],
+Cell[6806, 235, 85, 2, 29, "Input"],
+Cell[6894, 239, 119, 3, 49, "Input"],
+Cell[7016, 244, 197, 4, 42, "Text"],
+Cell[7216, 250, 301, 7, 40, "Input"],
+Cell[7520, 259, 77, 2, 29, "Input"],
+Cell[7600, 263, 208, 4, 42, "Text"],
+Cell[7811, 269, 286, 5, 89, "Input"],
+Cell[8100, 276, 172, 3, 49, "Input"],
+Cell[8275, 281, 43, 0, 25, "Text"],
+Cell[8321, 283, 295, 5, 89, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

@@ -1,0 +1,290 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      7908,        229]*)
+(*NotebookOutlinePosition[      8592,        252]*)
+(*  CellTagsIndexPosition[      8548,        248]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Maxwell Equations in the Schwarzchild Space", "Title"],
+
+Cell["\<\
+Renan Cabrera
+cabrera@hotvoice.com\
+\>", "Subtitle"],
+
+Cell[CellGroupData[{
+
+Cell["Initializations", "Section"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input"],
+
+Cell[TextData[{
+  "We set base indices for relativity, and define tensor shortcuts for the \
+coordinates ",
+  Cell[BoxData[
+      \(x\)]],
+  ", the 4-current ",
+  Cell[BoxData[
+      \(J\)]],
+  ", the electric field ",
+  Cell[BoxData[
+      \(\[Xi]\)]],
+  ", the metric tensor ",
+  Cell[BoxData[
+      \(g\)]],
+  ", the Maxwell tensor ",
+  Cell[BoxData[
+      \(F\)]],
+  ", the Kronecker ",
+  Cell[BoxData[
+      \(\[Delta]\)]],
+  ", and the Christoffel symbols ",
+  Cell[BoxData[
+      \(\[CapitalGamma]\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[{0, 1, 2, 3}]\), "\[IndentingNewLine]", 
+    \(\(labs = {x, \[Delta], 
+          g, \[CapitalGamma]};\)\), "\[IndentingNewLine]", 
+    \(DefineTensorShortcuts[{{x, J, \[Xi]}, 1}, {{g, F, \[Delta]}, 
+        2}, {\[CapitalGamma], 3}]\), "\[IndentingNewLine]", 
+    \(SetTensorValues[\[Delta]ud[i, j], IdentityMatrix[NDim]]\)}], "Input"],
+
+Cell["\<\
+The metric tensor of this space is given by the components of the following \
+matrix:\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\(Attributes[M] = {Constant};\)\), "\[IndentingNewLine]", 
+    \(cmetric = 
+      DiagonalMatrix[{\(-\((1 - 2  M/r)\)\), 1\/\((1 - 2  M/r)\), 
+          r\^2, \(r\^2\) Sin[\[Theta]]\^2}]\), "\[IndentingNewLine]", 
+    \(metric = 
+      cmetric // CoordinatesToTensors[{t, r, \[Theta], \[Phi]}]\)}], "Input"],
+
+Cell["\<\
+Setting the values to the metric tensor and Christoffel symbol.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(SetMetricValues[g, metric]\), "\[IndentingNewLine]", 
+    \(SetChristoffelValues[xu[i], \ metric, \ \[CapitalGamma]]\)}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Non Homogeneous Maxwell Equations", "Section"],
+
+Cell["\<\
+The following closed cell contains the Tensorial code to derive the equation \
+for the radial electric field in the Schwarzchild metric. Select the cell and \
+evaluate to obtain the derivation. (Select the cell and use Alt C R C to see \
+the code.)\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\(ClearTensorValues[xu[i]];\)\), "\[IndentingNewLine]", 
+    \(Print["\<The Maxwell electromagnetic tensor\>"]\), \
+"\[IndentingNewLine]", 
+    \(Fuu[\[Mu], \[Nu]]\), "\[IndentingNewLine]", 
+    \(Print["\<The nonhomogeneous Maxwell equations.\>"]\), "\
+\[IndentingNewLine]", 
+    \(CovariantD[%%, \[Nu]] == Ju[\[Mu]]\), "\[IndentingNewLine]", 
+    \(Print["\<Expanding the lhs in terms of Christoffel symbols.\>"]\), "\
+\[IndentingNewLine]", 
+    \(MapAt[ExpandCovariantD[labs, a], %%, 1]\), "\[IndentingNewLine]", 
+    \(Print["\<Expanding to the array values.\>"]\), "\[IndentingNewLine]", 
+    \(ToArrayValues[] /@ %%\), "\[IndentingNewLine]", 
+    \(Print["\<Eliminating angular components.\>"]\), "\[IndentingNewLine]", 
+    \(%% /. {Fuu[2 | 3, _] \[Rule] 0, 
+        Fuu[_, 2 | 3] \[Rule] 0}\), "\[IndentingNewLine]", 
+    \(\(Print["\<First two equations\>"];\)\), "\[IndentingNewLine]", 
+    \(\(Take[#, 2] &\) /@ %%\), "\[IndentingNewLine]", 
+    \(Print["\<Setting partial derivatives with respect to time and real \
+current to zero\>"]\), "\[IndentingNewLine]", 
+    \(%% //. {\(PartialD[_]\)[_, xu[0]] \[Rule] 0, 
+        Ju[1] \[Rule] 0}\), "\[IndentingNewLine]", 
+    \(Print["\<Symmetrizing the slots of F\>"]\), "\[IndentingNewLine]", 
+    \(%% // 
+      SymmetrizeSlots[F, 2, {{\(-1\), {1, 2}}}]\), "\[IndentingNewLine]", 
+    \(Print["\<Substituting coordinate values and threading the \
+equations.\>"]\), "\[IndentingNewLine]", 
+    \(SetTensorValueRules[
+      xu[i], {t, r, \[Theta], \[Phi]}]\), "\[IndentingNewLine]", 
+    \(%%% /. TensorValueRules[x] // Thread\), "\[IndentingNewLine]", 
+    \(Print["\<Second equation involves only diagonal components of F, which \
+are zero.\>"]\), "\[IndentingNewLine]", 
+    \(%% /. Fuu[i_, i_] \[Rule] 0\), "\[IndentingNewLine]", 
+    \(First[%]\)}], "Input",
+  CellOpen->False],
+
+Cell["We obtain a single equation for the radial electric field.", "Text"],
+
+Cell["\<\
+This result can be obtained by a second method. Taking the Divergence of the \
+electric field \[Xi], and applying similar conditions.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\[Xi]u[i]\), "\[IndentingNewLine]", 
+    \(CovariantD[%, i] == Ju[0]\), "\[IndentingNewLine]", 
+    \(MapAt[ExpandCovariantD[labs, a], %, 1]\), "\[IndentingNewLine]", 
+    \(\((\(% // EinsteinSum[]\) // 
+          EinsteinArray[])\) /. {\(PartialD[_]\)[_, xu[0 | 2 | 3]] \[Rule] 
+          0, \[Xi]u[2 | 3] \[Rule] 0}\), "\[IndentingNewLine]", 
+    \(% /. TensorValueRules[x]\)}], "Input"],
+
+Cell[TextData[{
+  "Where we obtain the same equation provided that  ",
+  Cell[BoxData[
+      FormBox[
+        SubsuperscriptBox["\[Xi]", 
+          InterpretationBox[
+            TagBox[
+              StyleBox["1",
+                ShowContents->False],
+              (StyleForm[ #, ShowContents -> False]&)],
+            SequenceForm[ 
+              StyleForm[ 1, ShowContents -> False]],
+            Editable->False], 
+          InterpretationBox["1",
+            SequenceForm[ 1],
+            Editable->False]], TraditionalForm]]],
+  "= ",
+  Cell[BoxData[
+      FormBox[
+        SubsuperscriptBox["F", 
+          InterpretationBox[
+            RowBox[{
+              TagBox[
+                StyleBox["0",
+                  ShowContents->False],
+                (StyleForm[ #, ShowContents -> False]&)], "\[InvisibleSpace]",
+               
+              TagBox[
+                StyleBox["1",
+                  ShowContents->False],
+                (StyleForm[ #, ShowContents -> False]&)]}],
+            SequenceForm[ 
+              StyleForm[ 0, ShowContents -> False], 
+              StyleForm[ 1, ShowContents -> False]],
+            Editable->False], 
+          InterpretationBox[\(0\[InvisibleSpace]1\),
+            SequenceForm[ 0, 1],
+            Editable->False]], TraditionalForm]]],
+  ", which is according the definition of the Maxwell tensor."
+}], "Text"]
+}, Open  ]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+WindowSize->{696, 488},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+StyleDefinitions -> "TensorialStyle.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 60, 0, 131, "Title"],
+Cell[1839, 55, 62, 3, 74, "Subtitle"],
+
+Cell[CellGroupData[{
+Cell[1926, 62, 34, 0, 61, "Section"],
+Cell[1963, 64, 72, 1, 46, "Input"],
+Cell[2038, 67, 527, 24, 54, "Text"],
+Cell[2568, 93, 375, 6, 106, "Input"],
+Cell[2946, 101, 109, 3, 34, "Text"],
+Cell[3058, 106, 328, 6, 102, "Input"],
+Cell[3389, 114, 87, 2, 34, "Text"],
+Cell[3479, 118, 151, 2, 66, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3667, 125, 52, 0, 61, "Section"],
+Cell[3722, 127, 272, 5, 74, "Text"],
+Cell[3997, 134, 1861, 34, 19, "Input",
+  CellOpen->False],
+Cell[5861, 170, 74, 0, 34, "Text"],
+Cell[5938, 172, 157, 3, 54, "Text"],
+Cell[6098, 177, 410, 7, 146, "Input"],
+Cell[6511, 186, 1369, 39, 54, "Text"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

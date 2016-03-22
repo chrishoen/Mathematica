@@ -1,0 +1,276 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.1'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      5468,        201]*)
+(*NotebookOutlinePosition[      6475,        236]*)
+(*  CellTagsIndexPosition[      6401,        230]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["DeclareTensorSymmetries", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["DeclareTensorSymmetries",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox[\(label, order, symmetries\),
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will store the symmetry specifications as DownValues of ",
+  Cell[BoxData[
+      \(\(\(TensorSymmetries\)\(.\)\)\)]]
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  " The symmetries are given by a list of symmetry specifications, ",
+  Cell[BoxData[
+      \({symm1, symm2,  ... }\)]],
+  "."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "Each symmetry specification is of the form ",
+  Cell[BoxData[
+      \({\(-1\) | 1, {n1, n2,  ... }}\)]],
+  " where ",
+  Cell[BoxData[
+      \(\(-1\)\)]],
+  " is used for antisymmetry and 1 for symmetry. n1, n2 etc., are the slot \
+numbers involved in the symmetry."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "The tensor symmetries may be applied by using ",
+  Cell[BoxData[
+      \(SymmetrizeSlots[]\)]],
+  " on an expression."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["SymmetrizeSlots",
+    ButtonData:>{"SymmetrizeSlots"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["DeclarePatternSymmetries",
+    ButtonData:>{"DeclarePatternSymmetries"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["Symmetric",
+    ButtonData:>{"Symmetric"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["AntiSymmetric",
+    ButtonData:>{"AntiSymmetric"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["IndexChange",
+    ButtonData:>{"IndexChange"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples  ", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[{T, 2}, {\[Omega], 3}]\)], "Input",
+  CellLabel->"In[2]:="],
+
+Cell[TextData[{
+  "The following statements define ",
+  Cell[BoxData[
+      \(T\)]],
+  " as a symmetric tensor and ",
+  Cell[BoxData[
+      \(\[Omega]\)]],
+  " as antisymmetric in the first two slots."
+}], "Text"],
+
+Cell[BoxData[{
+    \(\(DeclareTensorSymmetries[T, 
+        2, {1, {1, 2}}];\)\), "\[IndentingNewLine]", 
+    \(\(DeclareTensorSymmetries[\[Omega], 3, {\(-1\), {1, 2}}];\)\)}], "Input",\
+
+  CellLabel->"In[3]:="],
+
+Cell["The stored definitions can be retrieved by", "Text"],
+
+Cell[BoxData[
+    \(DownValues[TensorSymmetries]\)], "Input",
+  CellLabel->"In[5]:="],
+
+Cell[TextData[{
+  "or by asking for information on ",
+  Cell[BoxData[
+      \(TensorSymmetries\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[
+    \(?? TensorSymmetries\)], "Input",
+  CellLabel->"In[6]:="],
+
+Cell["\<\
+We can then use these symmetries to order or simplify various expressions \
+without having to specify the symmetries each time.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\[Omega]udd[a, a, b] Tuu[b, c]\), "\[IndentingNewLine]", 
+    \(% // SymmetrizeSlots[]\)}], "Input",
+  CellLabel->"In[7]:="],
+
+Cell[BoxData[{
+    \(\[Omega]udd[a, b, a] Tuu[c, b]\), "\[IndentingNewLine]", 
+    \(% // SymmetrizeSlots[]\)}], "Input",
+  CellLabel->"In[9]:="],
+
+Cell[BoxData[{
+    \(\[Omega]udd[b, a, b] Tuu[c, a]\), "\[IndentingNewLine]", 
+    \(% // SymmetrizeSlots[]\)}], "Input",
+  CellLabel->"In[11]:="],
+
+Cell[BoxData[{
+    \(\[Omega]dud[a, b, b] Tuu[c, a] + \[Omega]udd[b, a, b] 
+        Tuu[c, a]\), "\[IndentingNewLine]", 
+    \(% // SymmetrizeSlots[]\)}], "Input",
+  CellLabel->"In[13]:="],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[{T, 2}, {\[Omega], 3}]\)], "Input",
+  CellLabel->"In[15]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"5.1 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 941}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{674, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 70, 1, 41, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1849, 56, 442, 16, 48, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 6230, 221}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 70, 1, 41, "ObjectName",
+  CellTags->"Function?"],
+Cell[1849, 56, 442, 16, 48, "Usage",
+  CellTags->"Function?"],
+Cell[2294, 74, 161, 5, 41, "MathCaption"],
+Cell[2458, 81, 303, 9, 58, "MathCaption"],
+Cell[2764, 92, 156, 5, 41, "MathCaption"],
+Cell[2923, 99, 582, 22, 41, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[3530, 125, 36, 0, 39, "ExampleSection"],
+Cell[3569, 127, 96, 2, 29, "Input"],
+Cell[3668, 131, 101, 2, 29, "Input"],
+Cell[3772, 135, 213, 8, 25, "Text"],
+Cell[3988, 145, 210, 5, 49, "Input"],
+Cell[4201, 152, 58, 0, 25, "Text"],
+Cell[4262, 154, 85, 2, 29, "Input"],
+Cell[4350, 158, 117, 5, 25, "Text"],
+Cell[4470, 165, 76, 2, 29, "Input"],
+Cell[4549, 169, 151, 3, 42, "Text"],
+Cell[4703, 174, 145, 3, 49, "Input"],
+Cell[4851, 179, 145, 3, 49, "Input"],
+Cell[4999, 184, 146, 3, 49, "Input"],
+Cell[5148, 189, 188, 4, 49, "Input"],
+Cell[5339, 195, 101, 2, 29, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

@@ -1,0 +1,263 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      5401,        188]*)
+(*NotebookOutlinePosition[      6386,        222]*)
+(*  CellTagsIndexPosition[      6312,        216]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["CircleEvalRule", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      StyleBox["CircleEvalRule",
+        "MR"]]],
+  " evaluates direct products using CircleTimes on sets of arguments."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell[" CircleEvalRule is used by EvaluateSlots", "MathCaption"],
+
+Cell[TextData[{
+  "It performs transformations such as ",
+  Cell[BoxData[
+      \(\((v1\[CircleTimes]v2\[CircleTimes]v3\[CircleTimes]v4)\)[w1, , 
+              w3, ]\[DoubleLongRightArrow]v2\[CircleTimes]v4\ v1 . w1\ v3 . 
+          w3\)]],
+  "."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "The CircleTimes expression may be replaced by a single Tensor, but it \
+can't be replaced by a single symbol because then the rule might apply where \
+it is not wanted. Instead, use ",
+  Cell[BoxData[
+      \(CircleTimes[symbol]\)]],
+  "."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["EvaluateSlots",
+    ButtonData:>{"EvaluateSlots"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["LinearBreakout",
+    ButtonData:>{"LinearBreakout"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["BasisDotProductRules",
+    ButtonData:>{"BasisDotProductRules"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["PushOnto",
+    ButtonData:>{"PushOnto"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples", "ExampleSection"],
+
+Cell[BoxData[{
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\), "\n", 
+    \(DefineTensorShortcuts[{u, v, x, y, g}, 1]\)}], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["\<\
+The following is the simplest example. Here the head is a tensor.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\(gd[i]\)[gu[j]]\), "\[IndentingNewLine]", 
+    \(% /. CircleEvalRule\)}], "Input",
+  CellLabel->"In[3]:="],
+
+Cell["\<\
+In the following the round parentheses are necessary. This is a complete \
+evaluation to a scalar.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\((u\[CircleTimes]v\[CircleTimes]w)\)[x, y, 
+      z]\), "\[IndentingNewLine]", 
+    \(% /. CircleEvalRule\)}], "Input",
+  CellLabel->"In[5]:="],
+
+Cell["\<\
+Null slots are not evaluated so the following returns a second order \
+tensor.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\((u\[CircleTimes]v\[CircleTimes]w)\)[\(,\)\(,\)\(z\)]\), "\
+\[IndentingNewLine]", 
+    \(% /. CircleEvalRule\)}], "Input",
+  CellLabel->"In[7]:="],
+
+Cell["\<\
+The following will not evaluate because it is too common an expression.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(v[z]\), "\[IndentingNewLine]", 
+    \(% /. CircleEvalRule\)}], "Input",
+  CellLabel->"In[9]:="],
+
+Cell["It can instead be entered this way...", "Text"],
+
+Cell[BoxData[{
+    \(\(CircleTimes[v]\)[z]\), "\[IndentingNewLine]", 
+    \(% /. CircleEvalRule\)}], "Input",
+  CellLabel->"In[11]:="],
+
+Cell["\<\
+CircleEvalRule does not do any further evaluation. EvaluateSlots fully \
+evaluates.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\((u\[CircleTimes]v)\)[x, y]\), "\[IndentingNewLine]", 
+    \(% /. {u \[Rule] ud[i] gu[i], v \[Rule] vd[i] gu[i], 
+        x \[Rule] xu[j] gd[j], 
+        y \[Rule] yu[j] gd[j]}\), "\[IndentingNewLine]", 
+    \(% /. CircleEvalRule\)}], "Input",
+  CellLabel->"In[13]:="],
+
+Cell[BoxData[{
+    \(\((u\[CircleTimes]v)\)[x, y]\), "\[IndentingNewLine]", 
+    \(% /. {u \[Rule] ud[i] gu[i], v \[Rule] vd[j] gu[j], 
+        x \[Rule] xu[m] gd[m], 
+        y \[Rule] yu[n] gd[n]}\), "\[IndentingNewLine]", 
+    \(% // EvaluateSlots[g, \[Delta]]\)}], "Input",
+  CellLabel->"In[16]:="],
+
+Cell[BoxData[
+    \(ClearTensorShortcuts[{u, v, x, y, g}, 1]\)], "Input",
+  CellLabel->"In[19]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{674, 474},
+WindowMargins->{{1, Automatic}, {Automatic, 4}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 61, 1, 31, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1840, 56, 217, 7, 32, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 6142, 207}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 61, 1, 31, "ObjectName",
+  CellTags->"Function?"],
+Cell[1840, 56, 217, 7, 32, "Usage",
+  CellTags->"Function?"],
+Cell[2060, 65, 63, 0, 31, "MathCaption"],
+Cell[2126, 67, 265, 7, 31, "MathCaption"],
+Cell[2394, 76, 277, 7, 48, "MathCaption"],
+Cell[2674, 85, 470, 18, 31, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[3169, 107, 34, 0, 40, "ExampleSection"],
+Cell[3206, 109, 156, 3, 49, "Input"],
+Cell[3365, 114, 89, 2, 25, "Text"],
+Cell[3457, 118, 128, 3, 49, "Input"],
+Cell[3588, 123, 122, 3, 25, "Text"],
+Cell[3713, 128, 165, 4, 49, "Input"],
+Cell[3881, 134, 102, 3, 25, "Text"],
+Cell[3986, 139, 168, 4, 49, "Input"],
+Cell[4157, 145, 95, 2, 25, "Text"],
+Cell[4255, 149, 116, 3, 49, "Input"],
+Cell[4374, 154, 53, 0, 25, "Text"],
+Cell[4430, 156, 134, 3, 49, "Input"],
+Cell[4567, 161, 107, 3, 25, "Text"],
+Cell[4677, 166, 290, 6, 69, "Input"],
+Cell[4970, 174, 302, 6, 69, "Input"],
+Cell[5275, 182, 98, 2, 29, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

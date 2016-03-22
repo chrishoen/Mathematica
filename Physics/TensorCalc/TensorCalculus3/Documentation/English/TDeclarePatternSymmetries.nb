@@ -1,0 +1,332 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.1'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      7883,        255]*)
+(*NotebookOutlinePosition[      8890,        290]*)
+(*  CellTagsIndexPosition[      8816,        284]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["DeclarePatternSymmetries", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["DeclarePatternSymmetries",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox[\(pattern, symmetries\),
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will store the pattern symmetry specification in PatternSymmetries.\n\
+\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["DeclarePatternSymmetries",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        RowBox[{
+          RowBox[{
+            StyleBox["{",
+              "MR"], 
+            StyleBox[\(pattern, symmetries\),
+              "TI"], 
+            StyleBox["}",
+              "TI"]}], 
+          StyleBox["...",
+            "TI"]}], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will store multiple pattern symmetries."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  " The symmetries are given by a list of symmetry specifications, ",
+  Cell[BoxData[
+      \({symm1, symm2,  ... }\)]],
+  "."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "Each symmetry specification is of the form ",
+  Cell[BoxData[
+      \({\(-1\) | 1, {a, b,  ... }}\)]],
+  " where ",
+  Cell[BoxData[
+      \(\(-1\)\)]],
+  " is used for antisymmetry and 1 for symmetry. a, b, etc., are the are the \
+index pattern names in the pattern."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "It is also possible to specify equal length groups of indices that can be \
+interchanged without internal reordering. This would be done in the form ",
+  Cell[BoxData[
+      \({\(-1\) | 1, {{a, b}, {c, d},  ... }}\)]],
+  ". "
+}], "MathCaption"],
+
+Cell[TextData[{
+  "The pattern symmetries may be applied by using ",
+  Cell[BoxData[
+      \(SymmetrizePattern[]\)]],
+  " on an expression."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["SymmetrizePattern",
+    ButtonData:>{"SymmetrizePattern"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SymmetrizeSlots",
+    ButtonData:>{"SymmetrizeSlots"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["DeclareTensorSymmetries",
+    ButtonData:>{"DeclareTensorSymmetries"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["Symmetric",
+    ButtonData:>{"Symmetric"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["AntiSymmetric",
+    ButtonData:>{"AntiSymmetric"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["IndexChange",
+    ButtonData:>{"IndexChange"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples  ", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell[BoxData[{
+    \(\(oldindices = BaseIndices;\)\), "\n", 
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(oldsymmetries = PatternSymmetries;\)\), "\[IndentingNewLine]", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(\(PatternSymmetries = {};\)\), "\[IndentingNewLine]", 
+    \(DefineTensorShortcuts[{{e}, 1}, {{S, T}, 3}, {R, 
+        4}]\), "\[IndentingNewLine]", 
+    \(DeclareIndexFlavor[{red, Red}]\), "\[IndentingNewLine]", 
+    \(\(labs = {x, \[Delta], g, \[CapitalGamma]};\)\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell[TextData[{
+  "The current pattern symmetries are stored in ",
+  Cell[BoxData[
+      \(PatternSymmetries\)]],
+  ", which is initially empty. "
+}], "Text"],
+
+Cell[BoxData[
+    \(PatternSymmetries\)], "Input",
+  CellLabel->"In[10]:="],
+
+Cell["\<\
+The following declares that the dot product on basis vector is symmetric.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(DeclarePatternSymmetries[
+      ed[a_] . ed[b_], {{1, {a, b}}}]\), "\[IndentingNewLine]", 
+    \(PatternSymmetries\)}], "Input",
+  CellLabel->"In[11]:="],
+
+Cell[TextData[{
+  "This will now be automatically applied to an expression with ",
+  Cell[BoxData[
+      \(SymmetrizePattern[]\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(1/2 \((ed[i] . ed[j] + ed[j] . ed[i])\)\), "\[IndentingNewLine]", 
+    \(% // SymmetrizePattern[]\)}], "Input",
+  CellLabel->"In[13]:="],
+
+Cell["Multiple patterns can be declared at once...", "Text"],
+
+Cell[BoxData[{
+    \(DeclarePatternSymmetries[{Suud[a_, b_, d_] 
+          Tudd[c_, e_, 
+            f_], {{1, {a, b, c}}, {1, {d, e, 
+              f}}}}, \[IndentingNewLine]{\(PartialD[labs]\)[Suud[a_, b_, d_], 
+              xu[_]] Tudd[c_, e_, f_] | \(PartialD[labs]\)[Tudd[c_, e_, f_], 
+              xu[_]] Suud[a_, b_, d_], {{1, {a, b, c}}, {1, {d, e, 
+              f}}}}, \[IndentingNewLine]{ed[a_] . 
+          ed[b_], {{1, {a, b}}}}, \[IndentingNewLine]{Rdddd[a_, b_, c_, 
+          d_], \ {{1, {{a, b}, {c, d}}}}}]\), "\[IndentingNewLine]", 
+    \(PatternSymmetries\)}], "Input",
+  CellLabel->"In[15]:="],
+
+Cell["and all applied with the same command.", "Text"],
+
+Cell[BoxData[{
+    \({Suud[a, b, d] Tudd[c, e, f] + Suud[b, a, d] Tudd[c, f, e], 
+      1/2 \((ed[i] . ed[j] + ed[j] . ed[i])\), \(PartialD[labs]\)[
+        Suud[\[Alpha], \[Beta], \[Delta]] 
+            Tudd[\[Gamma], \[Epsilon], \[Phi]] + 
+          Suud[\[Beta], \[Alpha], \[Delta]] 
+            Tudd[\[Gamma], \[Phi], \[Epsilon]], xu[a]], 
+      Rdddd[\[Gamma], \[Delta], \[Alpha], \[Beta]] + 
+        Rdddd[\[Alpha], \[Beta], \[Gamma], \[Delta]]}\), \
+"\[IndentingNewLine]", 
+    \(% // SymmetrizePattern[]\)}], "Input",
+  CellLabel->"In[17]:="],
+
+Cell[BoxData[{
+    \(\((Suud[a, b, d] Tudd[c, e, f] + Suud[b, a, d] Tudd[c, f, e])\) 
+        1/2 \((ed[i] . ed[j] + ed[j] . ed[i])\) // 
+      Expand\), "\[IndentingNewLine]", 
+    \(% // SymmetrizePattern[]\)}], "Input",
+  CellLabel->"In[19]:="],
+
+Cell["Restore the original state.", "Text"],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[oldindices]\), "\[IndentingNewLine]", 
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(\(PatternSymmetries = oldsymmetries;\)\), "\[IndentingNewLine]", 
+    \(Clear[oldindices, oldflavors, oldsymmetries]\)}], "Input",
+  CellLabel->"In[21]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"5.1 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 941}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{674, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 71, 1, 41, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1850, 56, 888, 34, 73, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 8645, 275}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 71, 1, 41, "ObjectName",
+  CellTags->"Function?"],
+Cell[1850, 56, 888, 34, 73, "Usage",
+  CellTags->"Function?"],
+Cell[2741, 92, 161, 5, 41, "MathCaption"],
+Cell[2905, 99, 305, 9, 58, "MathCaption"],
+Cell[3213, 110, 263, 6, 58, "MathCaption"],
+Cell[3479, 118, 159, 5, 41, "MathCaption"],
+Cell[3641, 125, 692, 26, 58, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[4358, 155, 36, 0, 39, "ExampleSection"],
+Cell[4397, 157, 96, 2, 29, "Input"],
+Cell[4496, 161, 558, 10, 169, "Input"],
+Cell[5057, 173, 158, 5, 25, "Text"],
+Cell[5218, 180, 75, 2, 29, "Input"],
+Cell[5296, 184, 97, 2, 25, "Text"],
+Cell[5396, 188, 174, 4, 49, "Input"],
+Cell[5573, 194, 149, 5, 25, "Text"],
+Cell[5725, 201, 157, 3, 49, "Input"],
+Cell[5885, 206, 60, 0, 25, "Text"],
+Cell[5948, 208, 616, 11, 169, "Input"],
+Cell[6567, 221, 54, 0, 25, "Text"],
+Cell[6624, 223, 550, 11, 109, "Input"],
+Cell[7177, 236, 247, 5, 69, "Input"],
+Cell[7427, 243, 43, 0, 25, "Text"],
+Cell[7473, 245, 382, 6, 109, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

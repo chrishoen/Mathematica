@@ -1,0 +1,521 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.1'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     14106,        421]*)
+(*NotebookOutlinePosition[     15121,        456]*)
+(*  CellTagsIndexPosition[     15046,        450]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["SymmetrizePattern", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox["SymmetrizePattern",
+            "MR"], 
+          StyleBox["[",
+            "MR"], 
+          StyleBox[\(patternl, symmetries\),
+            "TI"], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will permute the (anti)symmetric indices in all terms matching the \
+pattern such that they are ordered according fo the pattern and the specified \
+symmetries.\n\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox[\(SymmetrizePattern[]\),
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will use the symmetries defined by ",
+  Cell[BoxData[
+      \(DeclarePatternSymmetries\)]],
+  "."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  " The symmetries are given by a list of symmetry specifications, ",
+  Cell[BoxData[
+      \({symm1, symm2,  ... }\)]],
+  "."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "Each symmetry specification is of the form ",
+  Cell[BoxData[
+      \({\(-1\) | 1, {a, b,  ... }}\)]],
+  " where ",
+  Cell[BoxData[
+      \(\(-1\)\)]],
+  " is used for antisymmetry and 1 for symmetry. a, b, etc., are the are the \
+index pattern names in the pattern."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "It is also possible to specify equal length groups of indices that can be \
+interchanged without internal reordering. This would be done in the form ",
+  Cell[BoxData[
+      \({\(-1\) | 1, {{a, b}, {c, d},  ... }}\)]],
+  ". "
+}], "MathCaption"],
+
+Cell["\<\
+The order of the named indices in the symmetry specifications does not matter \
+- they are sorted. But the placement of the named indices in the pattern does \
+matter and determines the canonical form.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "By putting indices in standard order with multiple terms, ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " will perform simplifications."
+}], "MathCaption"],
+
+Cell["\<\
+SymmetrizeSlots works on individual tensors by slot position. \
+SymmetrizePatterns will work on more complex terms involving multiple \
+tensors, derivatives, CircleTimes or Dot. The essential requirement is that \
+the pattern must describe a term that ParseTermIndices will parse.\
+\>", "MathCaption"],
+
+Cell["\<\
+The symmetry routines in Tensorial are much more general than the round and \
+square bracket notation sometimes used in texts because it allows grouping of \
+indices and it also allows nonadjacent indices to be associated. \
+\>", "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["DeclarePatternSymmetries",
+    ButtonData:>{"DeclarePatternSymmetries"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SymmetrizeSlots",
+    ButtonData:>{"SymmetrizeSlots"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["Symmetric",
+    ButtonData:>{"Symmetric"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["AntiSymmetric",
+    ButtonData:>{"AntiSymmetric"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["IndexChange",
+    ButtonData:>{"IndexChange"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples  ", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell[BoxData[{
+    \(\(oldindices = BaseIndices;\)\), "\n", 
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(DefineTensorShortcuts[{{x, \[Omega], e}, 1}, {{S, T, g, \[Omega]}, 
+        2}, {{S, T, \[Omega]}, 3}, {R, 4}, {R, 6}]\), "\[IndentingNewLine]", 
+    \(DeclareIndexFlavor[{red, Red}]\), "\[IndentingNewLine]", 
+    \(\(labs = {x, \[Delta], g, \[CapitalGamma]};\)\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell["\<\
+Here we have symmetries that span several tensors.  The upper and lower \
+indices are each symmetric. The two terms are put in the same index form and \
+combined. In these examples the pattern is usually shown as the first line.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Suud[a_, b_, d_] Tudd[c_, e_, f_]\), "\[IndentingNewLine]", 
+    \(Suud[a, b, d] Tudd[c, e, f] + 
+      Suud[b, a, d] Tudd[c, f, e]\), "\[IndentingNewLine]", 
+    \(% // SymmetrizePattern[%%, {{1, {a, b, c}}, {1, {d, e, 
+              f}}}]\)}], "Input",
+  CellLabel->"In[8]:="],
+
+Cell["\<\
+The color in the expression does not have to be in the pattern.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Suud[a_, b_, d_] Tudd[c_, e_, f_]\), "\[IndentingNewLine]", 
+    \(Suud[a, b, d] Tudd[c, e, f] + Suud[b, a, d] Tudd[c, f, e] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // SymmetrizePattern[%%, {{1, {a, b, c}}, {1, {d, e, 
+              f}}}]\)}], "Input",
+  CellLabel->"In[11]:="],
+
+Cell[BoxData[{
+    \(Suud[red@a_, red@b_, red@d_] 
+      Tudd[red@c_, red@e_, red@f_]\), "\[IndentingNewLine]", 
+    \(Suud[a, b, d] Tudd[c, e, f] + Suud[b, a, d] Tudd[c, f, e] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // SymmetrizePattern[%%, {{1, {a, b, c}}, {1, {d, e, 
+              f}}}]\)}], "Input",
+  CellLabel->"In[14]:="],
+
+Cell[TextData[{
+  "If the bottom indices are antisymmetric the two terms will cancel. The \
+antisymmetry is indicated by the ",
+  Cell[BoxData[
+      \(\(-1\)\)]],
+  " in the second group of indices."
+}], "Text"],
+
+Cell[TextData[{
+  "In the following case the bottom indices are defined to be antisymmetric. \
+The antisymmetry is indicated by the ",
+  Cell[BoxData[
+      \(\(-1\)\)]],
+  " in the second group of indices. The two terms cancel if the number of \
+transpositions to canonical sort order is odd."
+}], "Text"],
+
+Cell[BoxData[{
+    \(Suud[a_, b_, d_] Tudd[c_, e_, f_]\), "\[IndentingNewLine]", 
+    \(Suud[a, b, d] Tudd[c, e, f] + 
+      Suud[b, a, d] Tudd[c, f, e]\), "\[IndentingNewLine]", 
+    \(% // SymmetrizePattern[%%, {{1, {a, b, c}}, {\(-1\), {d, e, 
+              f}}}]\)}], "Input",
+  CellLabel->"In[17]:="],
+
+Cell["\<\
+The pattern index names do not have to be the same as the index names in the \
+actual expression.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Suud[a_, b_, d_] Tudd[c_, e_, f_]\), "\[IndentingNewLine]", 
+    \(Suud[\[Alpha], \[Beta], \[Delta]] Tudd[\[Gamma], \[Epsilon], \[Phi]] + 
+      Suud[\[Beta], \[Alpha], \[Delta]] 
+        Tudd[\[Gamma], \[Phi], \[Epsilon]]\), "\[IndentingNewLine]", 
+    \(% // SymmetrizePattern[%%, {{1, {a, b, c}}, {1, {d, e, 
+              f}}}]\)}], "Input",
+  CellLabel->"In[20]:="],
+
+Cell[TextData[{
+  "The canonical form is determined by the placement of the pattern names in \
+the pattern. Here the order of the upper indices is reversed. In this case \
+only two of the upper indices are included in the symmetry. Since ",
+  Cell[BoxData[
+      \({c, b}\)]],
+  " are in reverse sort order, so are ",
+  Cell[BoxData[
+      \({\[Beta], \[Alpha]}\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(Suud[c_, b_, d_] Tudd[_, e_, f_]\), "\[IndentingNewLine]", 
+    \(Suud[\[Alpha], \[Beta], \[Delta]] Tudd[\[Gamma], \[Epsilon], \[Phi]] + 
+      Suud[\[Beta], \[Alpha], \[Delta]] 
+        Tudd[\[Gamma], \[Phi], \[Epsilon]]\), "\[IndentingNewLine]", 
+    \(% // SymmetrizePattern[%%, {{1, {b, c}}, {1, {d, e, f}}}]\)}], "Input",
+  CellLabel->"In[23]:="],
+
+Cell["\<\
+Covariant and partial derivatives must be indicated in the pattern.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Suud[a_, b_, Cov[d_]] Tudd[c_, e_, f_]\), "\[IndentingNewLine]", 
+    \(Suud[\[Alpha], \[Beta], Cov[\[Delta]]] 
+        Tudd[\[Gamma], \[Epsilon], \[Phi]] + 
+      Suud[\[Beta], \[Alpha], Cov[\[Delta]]] 
+        Tudd[\[Gamma], \[Phi], \[Epsilon]]\), "\[IndentingNewLine]", 
+    \(% // SymmetrizePattern[%%, {{1, {a, b, c}}, {\(-1\), {d, e, 
+              f}}}]\)}], "Input",
+  CellLabel->"In[26]:="],
+
+Cell["\<\
+Here is a case with an expanded partial derivative. We need two patterns to \
+reflect the symmetries in all of the terms.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\(PartialD[labs]\)[Suud[a_, b_, d_], xu[_]] 
+        Tudd[c_, e_, f_] | \(PartialD[labs]\)[Tudd[c_, e_, f_], xu[_]] 
+        Suud[a_, b_, d_]\), "\[IndentingNewLine]", 
+    \(Suud[\[Alpha], \[Beta], \[Delta]] Tudd[\[Gamma], \[Epsilon], \[Phi]] + 
+        Suud[\[Beta], \[Alpha], \[Delta]] Tudd[\[Gamma], \[Phi], \[Epsilon]] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(\(PartialD[labs]\)[%, xu[red@a]]\), "\[IndentingNewLine]", 
+    \(% // SymmetrizePattern[%%%, {{1, {a, b, c}}, {1, {d, e, 
+              f}}}]\)}], "Input",
+  CellLabel->"In[29]:="],
+
+Cell["CircleTimes and Dot products can also be processed.", "Text"],
+
+Cell[BoxData[{
+    \(1/2 \((ed[i] . ed[j] + ed[j] . ed[i])\)\), "\[IndentingNewLine]", 
+    \(% // SymmetrizePattern[ed[a_] . ed[b_], {{1, {a, b}}}]\)}], "Input",
+  CellLabel->"In[33]:="],
+
+Cell["\<\
+The Riemann tensor has a symmetry that allows the interchange of the first \
+two indices with the last two. We specify this by enclosing each group in \
+brackets.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Rdddd[\[Gamma], \[Delta], \[Alpha], \[Beta]] + 
+      Rdddd[\[Alpha], \[Beta], \[Gamma], \[Delta]]\), "\[IndentingNewLine]", 
+    \(% // SymmetrizePattern[
+        Rdddd[a_, b_, c_, d_], \ {{1, {{a, b}, {c, d}}}}]\)}], "Input",
+  CellLabel->"In[35]:="],
+
+Cell["\<\
+There is no internal sorting of the groups. That could be specified with \
+additional symmetries.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Rdddd[\[Gamma], \[Delta], \[Beta], \[Alpha]] + 
+      Rdddd[\[Beta], \[Alpha], \[Gamma], \[Delta]]\), "\[IndentingNewLine]", 
+    \(% // SymmetrizePattern[
+        Rdddd[a_, b_, c_, 
+          d_], \ {{1, {{a, b}, {c, d}}}}]\), "\[IndentingNewLine]", 
+    \(% // SymmetrizePattern[
+        Rdddd[a_, b_, _, _], {{\(-1\), {a, b}}}]\)}], "Input",
+  CellLabel->"In[37]:="],
+
+Cell["\<\
+The following hypothetical tensor has 3 antisymmetric groups of 2 indices \
+each. The second term has an odd number of transpositions and enters with a \
+negative sign.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Rdddddd[a, b, c, d, e, f] + Rdddddd[c, d, a, b, e, f] + 
+      Rdddddd[c, d, e, f, a, b]\), "\[IndentingNewLine]", 
+    \(% // SymmetrizePattern[
+        Rdddddd[a_, b_, c_, d_, e_, 
+          f_], \ {{\(-1\), {{a, b}, {c, d}, {e, f}}}}]\)}], "Input",
+  CellLabel->"In[40]:="],
+
+Cell["It would enter with a positive sign if we had no grouping.", "Text"],
+
+Cell[BoxData[{
+    \(Rdddddd[a, b, c, d, e, f] + Rdddddd[c, d, a, b, e, f] + 
+      Rdddddd[c, d, e, f, a, b]\), "\[IndentingNewLine]", 
+    \(% // SymmetrizePattern[
+        Rdddddd[a_, b_, c_, d_, e_, 
+          f_], \ {{\(-1\), {a, b, c, d, e, f}}}]\)}], "Input",
+  CellLabel->"In[42]:="],
+
+Cell["\<\
+In the following case we have a regular symmetry for the upper indices and a \
+grouping symmetry for the lower indices.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Ruudddd[a, b, c, d, e, f] + Ruudddd[b, a, c, d, e, f] + 
+        Ruudddd[a, b, e, f, c, d] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // SymmetrizePattern[
+        Ruudddd[a_, b_, c_, d_, e_, 
+          f_], \ {{1, {{c, d}, {e, f}}}, {1, {a, b}}}]\)}], "Input",
+  CellLabel->"In[44]:="],
+
+Cell["\<\
+In the following case the second term is rearranged by groups but does not \
+combine with the other terms because there is no rearrangement within the \
+groups.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Ruudddd[a, b, c, d, e, f] + Ruudddd[b, a, c, d, e, f] + 
+        Ruudddd[a, b, e, f, d, c] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // SymmetrizePattern[
+        Ruudddd[a_, b_, c_, d_, e_, 
+          f_], \ {{1, {{c, d}, {e, f}}}, {1, {a, b}}}]\)}], "Input",
+  CellLabel->"In[46]:="],
+
+Cell[TextData[{
+  "See the examples in ",
+  Cell[BoxData[
+      \(DeclarePatternSymmetries\)]],
+  " for examples using ",
+  Cell[BoxData[
+      \(SymmetrizePattern[]\)]],
+  "."
+}], "Text"],
+
+Cell["Restore the original state.", "Text"],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[oldindices]\), "\[IndentingNewLine]", 
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(Clear[oldindices, oldflavors]\)}], "Input",
+  CellLabel->"In[48]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"5.1 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 941}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->"EditBar",
+WindowSize->{674, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 64, 1, 41, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1843, 56, 978, 37, 73, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 14875, 441}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 64, 1, 41, "ObjectName",
+  CellTags->"Function?"],
+Cell[1843, 56, 978, 37, 73, "Usage",
+  CellTags->"Function?"],
+Cell[2824, 95, 161, 5, 41, "MathCaption"],
+Cell[2988, 102, 305, 9, 58, "MathCaption"],
+Cell[3296, 113, 263, 6, 58, "MathCaption"],
+Cell[3562, 121, 232, 4, 58, "MathCaption"],
+Cell[3797, 127, 185, 5, 41, "MathCaption"],
+Cell[3985, 134, 311, 5, 75, "MathCaption"],
+Cell[4299, 141, 254, 4, 58, "MathCaption"],
+Cell[4556, 147, 582, 22, 41, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[5163, 173, 36, 0, 39, "ExampleSection"],
+Cell[5202, 175, 96, 2, 29, "Input"],
+Cell[5301, 179, 482, 8, 149, "Input"],
+Cell[5786, 189, 252, 4, 42, "Text"],
+Cell[6041, 195, 299, 6, 69, "Input"],
+Cell[6343, 203, 87, 2, 25, "Text"],
+Cell[6433, 207, 317, 6, 69, "Input"],
+Cell[6753, 215, 348, 7, 69, "Input"],
+Cell[7104, 224, 212, 6, 42, "Text"],
+Cell[7319, 232, 306, 7, 42, "Text"],
+Cell[7628, 241, 305, 6, 69, "Input"],
+Cell[7936, 249, 121, 3, 25, "Text"],
+Cell[8060, 254, 391, 7, 69, "Input"],
+Cell[8454, 263, 384, 10, 59, "Text"],
+Cell[8841, 275, 372, 6, 69, "Input"],
+Cell[9216, 283, 91, 2, 25, "Text"],
+Cell[9310, 287, 420, 8, 69, "Input"],
+Cell[9733, 297, 145, 3, 25, "Text"],
+Cell[9881, 302, 583, 10, 109, "Input"],
+Cell[10467, 314, 67, 0, 25, "Text"],
+Cell[10537, 316, 187, 3, 49, "Input"],
+Cell[10727, 321, 186, 4, 42, "Text"],
+Cell[10916, 327, 273, 5, 49, "Input"],
+Cell[11192, 334, 121, 3, 25, "Text"],
+Cell[11316, 339, 390, 8, 69, "Input"],
+Cell[11709, 349, 192, 4, 42, "Text"],
+Cell[11904, 355, 297, 6, 69, "Input"],
+Cell[12204, 363, 74, 0, 25, "Text"],
+Cell[12281, 365, 291, 6, 49, "Input"],
+Cell[12575, 373, 143, 3, 25, "Text"],
+Cell[12721, 378, 316, 6, 89, "Input"],
+Cell[13040, 386, 184, 4, 42, "Text"],
+Cell[13227, 392, 316, 6, 89, "Input"],
+Cell[13546, 400, 188, 8, 25, "Text"],
+Cell[13737, 410, 43, 0, 25, "Text"],
+Cell[13783, 412, 295, 5, 89, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

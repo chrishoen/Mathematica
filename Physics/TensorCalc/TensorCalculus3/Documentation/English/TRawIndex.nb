@@ -1,0 +1,225 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      4576,        155]*)
+(*NotebookOutlinePosition[      5583,        190]*)
+(*  CellTagsIndexPosition[      5509,        184]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["RawIndex", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        StyleBox["RawIndex",
+          "MR"], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["index",
+          "TI"], 
+        StyleBox["]",
+          "MR"]}]]],
+  "will extract the raw index from a flavored and/or differentiated index."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{"{", 
+          RowBox[{"i", ",", 
+            RowBox[{"red", "[", "i", "]"}], ",", 
+            RowBox[{"rocket", "[", "i", "]"}], ",", 
+            RowBox[{"Cov", "[", "i", "]"}], ",", 
+            RowBox[{"Cov", "[", 
+              RowBox[{"red", "[", "i", "]"}]}]}]}], "}"}]]],
+  " all have the raw index i."
+}], "MathCaption"],
+
+Cell["\<\
+If the raw index is not a Symbol,  Integer or flavored Symbol or Integer an \
+error message is issued.\
+\>", "MathCaption"],
+
+Cell[TextData[{
+  Cell[BoxData["RawIndex"]],
+  " is principally a service routine for programming other routines."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["BaseIndices",
+    ButtonData:>{"BaseIndices"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["IndexFlavors",
+    ButtonData:>{"IndexFlavors"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["Tensor",
+    ButtonData:>{"Tensor"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples  ", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["Save the settings and declare base indices and flavors.", "Text"],
+
+Cell[BoxData[{
+    \(\(oldindices = BaseIndices;\)\), "\n", 
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(DeclareBaseIndices[{1, 2, 3}]\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ {{red, Red}, {rocket, 
+            SuperStar}};\)\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell["Here are some indices and the corresponding raw indices.", "Text"],
+
+Cell[BoxData[{
+    \({i, 1, red@i, red@1, rocket@j, Cov[k], Cov[red@k], 
+      Cov[rocket@k]}\), "\[IndentingNewLine]", 
+    \(RawIndex /@ %\)}], "Input",
+  CellLabel->"In[7]:="],
+
+Cell["The following does not have a proper raw index.", "Text"],
+
+Cell[BoxData[
+    \(RawIndex[Cov[f[i]]]\)], "Input",
+  CellLabel->"In[9]:="],
+
+Cell["Restore the initial values...", "Text"],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[oldindices]\), "\[IndentingNewLine]", 
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(Clear[oldindices, oldflavors]\)}], "Input",
+  CellLabel->"In[10]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{665, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 55, 1, 31, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1834, 56, 361, 14, 32, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 5338, 175}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 55, 1, 31, "ObjectName",
+  CellTags->"Function?"],
+Cell[1834, 56, 361, 14, 32, "Usage",
+  CellTags->"Function?"],
+Cell[2198, 72, 394, 11, 31, "MathCaption"],
+Cell[2595, 85, 133, 3, 31, "MathCaption"],
+Cell[2731, 90, 133, 3, 31, "MathCaption"],
+Cell[2867, 95, 340, 14, 31, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[3232, 113, 36, 0, 40, "ExampleSection"],
+Cell[3271, 115, 96, 2, 29, "Input"],
+Cell[3370, 119, 71, 0, 25, "Text"],
+Cell[3444, 121, 357, 7, 109, "Input"],
+Cell[3804, 130, 72, 0, 25, "Text"],
+Cell[3879, 132, 178, 4, 49, "Input"],
+Cell[4060, 138, 63, 0, 25, "Text"],
+Cell[4126, 140, 76, 2, 29, "Input"],
+Cell[4205, 144, 45, 0, 25, "Text"],
+Cell[4253, 146, 295, 5, 89, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

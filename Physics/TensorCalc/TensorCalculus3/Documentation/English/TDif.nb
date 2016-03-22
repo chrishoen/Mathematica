@@ -1,0 +1,171 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      3088,        109]*)
+(*NotebookOutlinePosition[      4073,        143]*)
+(*  CellTagsIndexPosition[      3999,        137]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Dif", "ObjectName",
+  CellTags->"Function?"],
+
+Cell["\<\
+\[FilledSmallSquare] Dif is used to designate the partial derivative of an \
+index.\
+\>", "Usage",
+  CellTags->"Function?"],
+
+Cell["Each partial index derivative is specified separately.", "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["Tensor",
+    ButtonData:>{"Tensor"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["Cov",
+    ButtonData:>{"Cov"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["PartialD",
+    ButtonData:>{"PartialD"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["SetDerivativeSymbols",
+    ButtonData:>{"SetDerivativeSymbols"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["DefineTensorShortcuts",
+    ButtonData:>{"DefineTensorShortcuts"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples  ", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell[BoxData[
+    \(Tensor[T, {i, j, Void}, {Void, Void, Dif[k]}]\)], "Input",
+  CellLabel->"In[2]:="],
+
+Cell["Each covariant derivative index is indicated separately.", "Text"],
+
+Cell[BoxData[
+    \(Tensor[T, {i, j, Void, Void}, {Void, Void, Dif[m], Dif[n]}]\)], "Input",\
+
+  CellLabel->"In[3]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{665, 474},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 50, 1, 31, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1829, 56, 133, 4, 32, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 3829, 128}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 50, 1, 31, "ObjectName",
+  CellTags->"Function?"],
+Cell[1829, 56, 133, 4, 32, "Usage",
+  CellTags->"Function?"],
+Cell[1965, 62, 77, 0, 31, "MathCaption"],
+Cell[2045, 64, 554, 22, 31, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[2624, 90, 36, 0, 40, "ExampleSection"],
+Cell[2663, 92, 96, 2, 29, "Input"],
+Cell[2762, 96, 102, 2, 29, "Input"],
+Cell[2867, 100, 72, 0, 25, "Text"],
+Cell[2942, 102, 118, 3, 29, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

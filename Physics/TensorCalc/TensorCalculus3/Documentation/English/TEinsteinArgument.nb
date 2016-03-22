@@ -1,0 +1,377 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.1'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     10234,        296]*)
+(*NotebookOutlinePosition[     11242,        331]*)
+(*  CellTagsIndexPosition[     11167,        325]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["EinsteinArgument", "ObjectName",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox["EinsteinArgument",
+            "MR"], 
+          StyleBox["[",
+            "MR"], 
+          StyleBox["x",
+            "TI"], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "MR"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will expand coordinate tensors with the label x when used as a single \
+argument of functions.\n\[FilledSmallSquare] ",
+  Cell[BoxData[
+      RowBox[{
+        RowBox[{
+          StyleBox["EinsteinArgument",
+            "MR"], 
+          StyleBox["[",
+            "MR"], 
+          StyleBox[\(x, f\),
+            "TI"], 
+          StyleBox["]",
+            "MR"]}], 
+        StyleBox["[",
+          "MR"], 
+        StyleBox["expr",
+          "MR"], 
+        StyleBox["]",
+          "MR"]}]]],
+  " will expand only on function heads f."
+}], "Usage",
+  CellTags->"Function?"],
+
+Cell[TextData[{
+  "EinsteinArgument and various features of Tensorial allow calculation with \
+functional notations such as ",
+  Cell[BoxData[
+      \(f[xu[a]]\)]],
+  " and various expressions that are used in textbooks. However, it may often \
+be easier to set tensor values and put the expressions in the tensor values."
+}], "MathCaption"],
+
+Cell[TextData[{
+  "See also: ",
+  ButtonBox["EinsteinArray",
+    ButtonData:>{"EinsteinArray"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["EinsteinSum",
+    ButtonData:>{"EinsteinSum"},
+    ButtonStyle->"AddOnsLink"],
+  ", ",
+  ButtonBox["ArrayExpansion",
+    ButtonData:>{"ArrayExpansion"},
+    ButtonStyle->"AddOnsLink"],
+  "."
+}], "MathCaption"],
+
+Cell[CellGroupData[{
+
+Cell["Examples", "ExampleSection"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input",
+  CellLabel->"In[1]:="],
+
+Cell["Save the settings and declare base indices and flavors.", "Text"],
+
+Cell[BoxData[{
+    \(\(oldindices = BaseIndices;\)\), "\n", 
+    \(\(oldflavors = IndexFlavors;\)\), "\n", 
+    \(\(ClearIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(DeclareBaseIndices[{1, 2, 3}]\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ {{red, Red}};\)\)}], "Input",
+  CellLabel->"In[2]:="],
+
+Cell[BoxData[{
+    \(DefineTensorShortcuts[{{x}, 1}, {\[Delta], 
+        2}]\), "\[IndentingNewLine]", 
+    \(DeclareBaseIndices[{1, 2, 3}]\), "\[IndentingNewLine]", 
+    \(SetTensorValues[\[Delta]ud[i, j], 
+      IdentityMatrix[NDim]]\), "\[IndentingNewLine]", 
+    \(SetTensorValues[\[Delta]ud[i, j] // ToFlavor[red], 
+      IdentityMatrix[NDim]]\), "\[IndentingNewLine]", 
+    \(\(labs = {x, \[Delta], g, \[CapitalGamma]};\)\)}], "Input",
+  CellLabel->"In[7]:="],
+
+Cell["\<\
+Define a function f of three coordinates. Leave another function g undefined.\
+\
+\>", "Text"],
+
+Cell[BoxData[
+    \(f[x_, y_, z_] := x\ y + \(y\^2\) z\)], "Input",
+  CellLabel->"In[12]:="],
+
+Cell["Following conventional usage we can write...", "Text"],
+
+Cell[BoxData[{
+    \(Print["\<A function of coordinates\>"]\), "\[IndentingNewLine]", 
+    \(g[xu[red@a]]\), "\[IndentingNewLine]", 
+    \(Print["\<Expanded using EinsteinArgument\>"]\), "\[IndentingNewLine]", 
+    \(%% // EinsteinArgument[x]\), "\[IndentingNewLine]", 
+    \(Print["\<Changing g to the defined function f automatically evaluates \
+to the expression\>"]\), "\[IndentingNewLine]", 
+    \(%% /. g \[Rule] f\)}], "Input",
+  CellLabel->"In[13]:="],
+
+Cell["\<\
+We can take partial derivatives of functions with coordinate arguments if we \
+use the expanded form with respect to a coordinate.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Print["\<A function of coordinates\>"]\), "\[IndentingNewLine]", 
+    \(g[xu[a]]\), "\[IndentingNewLine]", 
+    \(Print["\<Partial derivative with respect to a coordinate\>"]\), "\
+\[IndentingNewLine]", 
+    \(\(PartialD[labs]\)[%%, xu[b]]\), "\[IndentingNewLine]", 
+    \(Print["\<Expanding the arguments causes evaluation\>"]\), "\
+\[IndentingNewLine]", 
+    \(%% // EinsteinArgument[x]\), "\[IndentingNewLine]", 
+    \(Print["\<Substituting the defined function and expanding the \
+array\>"]\), "\[IndentingNewLine]", 
+    \(%% /. g \[Rule] f\), "\[IndentingNewLine]", 
+    \(% // EinsteinArray[]\)}], "Input",
+  CellLabel->"In[19]:="],
+
+Cell["\<\
+To use other derivative constructions it will be necessary to use a \
+NestedTensor to control evaluation.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Print["\<Total derivative of a function of the coordinates\>"]\), "\
+\[IndentingNewLine]", 
+    \(TotalD[NestedTensor@g[xu[a]], t]\), "\[IndentingNewLine]", 
+    \(Print["\<Expand the arguments and the total derivative in terms of \
+coordinates\>"]\), "\[IndentingNewLine]", 
+    \(\(%% // EinsteinArgument[x];\)\), "\[IndentingNewLine]", 
+    \(% // ExpandTotalD[labs, b]\), "\[IndentingNewLine]", 
+    \(Print["\<Do an Einstein sum and substitute the defined function f for g\
+\>"]\), "\[IndentingNewLine]", 
+    \(%% // EinsteinSum[]\), "\[IndentingNewLine]", 
+    \(% /. g \[Rule] f\), "\[IndentingNewLine]", 
+    \(Print["\<Unnest the tensor for final evaluation\>"]\), "\
+\[IndentingNewLine]", 
+    \(%% // UnnestTensor\)}], "Input",
+  CellLabel->"In[28]:="],
+
+Cell["\<\
+For a coordinate transformation let black coordinates be Cartesian \
+coordinates and let the red coordinates be spherical coordinates. Define \
+rules for the coordinate functions.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(coordinatefunctions = 
+      Thread[\(ToArrayValues[]\)[
+            xu[i]] \[Rule] {Function[{r, \[Theta], \[Phi]}, 
+              r\ Sin[\[Theta]] Cos[\[Phi]]], 
+            Function[{r, \[Theta], \[Phi]}, r\ Sin[\[Theta]] Sin[\[Phi]]], 
+            Function[{r, \[Theta], \[Phi]}, r\ Cos[\[Theta]]]}]\)], "Input",
+  CellLabel->"In[38]:="],
+
+Cell[BoxData[{
+    \(Print["\<Cartesian coordinates (black) as functions of spherical \
+coordinates (red}\>"]\), "\[IndentingNewLine]", 
+    \(\(xu[a]\)[xu[red@b]]\), "\[IndentingNewLine]", 
+    \(Print["\<Expand the arguments and expand to an array\>"]\), "\
+\[IndentingNewLine]", 
+    \(%% // EinsteinArgument[x]\), "\[IndentingNewLine]", 
+    \(% // EinsteinArray[]\), "\[IndentingNewLine]", 
+    \(Print["\<Substitute the coordinate functions and use coordinate symbols\
+\>"]\), "\[IndentingNewLine]", 
+    \(%% /. coordinatefunctions\), "\[IndentingNewLine]", 
+    \(% // UseCoordinates[{r, \[Theta], \[Phi]}, x, red]\)}], "Input",
+  CellLabel->"In[39]:="],
+
+Cell["\<\
+The following calculates the Jacobian matrix of the transformation equations.\
+\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(Print["\<Take the partial derivatives of the coordinate \
+functions\>"]\), "\[IndentingNewLine]", 
+    \(\(xu[a]\)[xu[red@c]]\), "\[IndentingNewLine]", 
+    \(\(PartialD[labs]\)[%, xu[red@b]]\), "\[IndentingNewLine]", 
+    \(Print["\<Expand to an array and expand the arguments\>"]\), "\
+\[IndentingNewLine]", 
+    \(%% // ToArrayValues[]\), "\[IndentingNewLine]", 
+    \(% // EinsteinArgument[x]\), "\[IndentingNewLine]", 
+    \(Print["\<Substitute the coordinate functions and use coordinate symbols\
+\>"]\), "\[IndentingNewLine]", 
+    \(%% /. coordinatefunctions\), "\[IndentingNewLine]", 
+    \(% // UseCoordinates[{r, \[Theta], \[Phi]}, x, red]\)}], "Input",
+  CellLabel->"In[47]:="],
+
+Cell["\<\
+However, it is easier to perform the calculation by setting tensor values.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(SetTensorValueRules[
+      xu[a], {r\ Sin[\[Theta]] Cos[\[Phi]], r\ Sin[\[Theta]] Sin[\[Phi]], 
+        r\ Cos[\[Theta]]}]\), "\n", 
+    \(SetTensorValueRules[xu[red@a], {r, \[Theta], \[Phi]}]\), "\n", 
+    \(\(PartialD[labs]\)[xu[a], xu[red@b]]\), "\n", 
+    \(% // EinsteinArray[]\), "\n", 
+    \(% // ToArrayValues[]\), "\n", 
+    \(ClearTensorValues[{xu[a], xu[red@a]}]\)}], "Input",
+  CellLabel->"In[56]:="],
+
+Cell["Restore the initial values...", "Text"],
+
+Cell[BoxData[{
+    \(ClearTensorValues[{\[Delta]ud[i, j], \[Delta]ud[i, j] // 
+          ToFlavor[red]}]\), "\[IndentingNewLine]", 
+    \(ClearTensorShortcuts[{{x}, 1}, {\[Delta], 2}]\)}], "Input",
+  CellLabel->"In[62]:="],
+
+Cell[BoxData[{
+    \(DeclareBaseIndices[oldindices]\), "\[IndentingNewLine]", 
+    \(\(ClearIndexFlavor /@ IndexFlavors;\)\), "\[IndentingNewLine]", 
+    \(\(DeclareIndexFlavor /@ oldflavors;\)\), "\[IndentingNewLine]", 
+    \(Clear[oldindices, oldflavors, coordinatefunctions]\)}], "Input",
+  CellLabel->"In[64]:="]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"5.1 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 941}},
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{719, 429},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+ShowSelection->True,
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+StyleDefinitions -> "HelpBrowser.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{
+  "Function?"->{
+    Cell[1776, 53, 63, 1, 41, "ObjectName",
+      CellTags->"Function?"],
+    Cell[1842, 56, 986, 40, 56, "Usage",
+      CellTags->"Function?"]}
+  }
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{
+  {"Function?", 10996, 316}
+  }
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 63, 1, 41, "ObjectName",
+  CellTags->"Function?"],
+Cell[1842, 56, 986, 40, 56, "Usage",
+  CellTags->"Function?"],
+Cell[2831, 98, 341, 7, 75, "MathCaption"],
+Cell[3175, 107, 358, 14, 41, "MathCaption"],
+
+Cell[CellGroupData[{
+Cell[3558, 125, 34, 0, 39, "ExampleSection"],
+Cell[3595, 127, 96, 2, 29, "Input"],
+Cell[3694, 131, 71, 0, 25, "Text"],
+Cell[3768, 133, 323, 6, 109, "Input"],
+Cell[4094, 141, 465, 9, 109, "Input"],
+Cell[4562, 152, 103, 3, 25, "Text"],
+Cell[4668, 157, 92, 2, 29, "Input"],
+Cell[4763, 161, 60, 0, 25, "Text"],
+Cell[4826, 163, 459, 8, 149, "Input"],
+Cell[5288, 173, 154, 3, 25, "Text"],
+Cell[5445, 178, 659, 13, 189, "Input"],
+Cell[6107, 193, 129, 3, 25, "Text"],
+Cell[6239, 198, 785, 15, 209, "Input"],
+Cell[7027, 215, 203, 4, 42, "Text"],
+Cell[7233, 221, 361, 7, 69, "Input"],
+Cell[7597, 230, 661, 12, 169, "Input"],
+Cell[8261, 244, 103, 3, 25, "Text"],
+Cell[8367, 249, 710, 13, 189, "Input"],
+Cell[9080, 264, 98, 2, 25, "Text"],
+Cell[9181, 268, 433, 9, 129, "Input"],
+Cell[9617, 279, 45, 0, 25, "Text"],
+Cell[9665, 281, 222, 4, 49, "Input"],
+Cell[9890, 287, 316, 5, 89, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+
