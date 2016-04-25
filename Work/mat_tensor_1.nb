@@ -1,0 +1,310 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     10005,        301]
+NotebookOptionsPosition[      8596,        250]
+NotebookOutlinePosition[      9260,        273]
+CellTagsIndexPosition[      9217,        270]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["", "Text",
+ CellChangeTimes->{
+  3.592932178822768*^9, {3.6568890249369783`*^9, 3.6568890256857796`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"ClearAll", ";"}], "\[IndentingNewLine]", 
+ RowBox[{"ClearCache", ";"}]}], "Input",
+ CellChangeTimes->{{3.592916706354596*^9, 3.592916707134598*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"$Assumptions", " ", "=", " ", 
+     RowBox[{"M1", " ", "\[Element]", " ", 
+      RowBox[{"Arrays", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"2", ",", "2"}], "}"}], ",", "Reals"}], "]"}]}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"TensorDimensions", "[", "M1", "]"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.5919243699935613`*^9, 3.5919243909755974`*^9}, {
+   3.5919244343592734`*^9, 3.5919244370268784`*^9}, {3.591924507429801*^9, 
+   3.5919245272574353`*^9}, 3.5919245989239607`*^9, {3.5929165605567417`*^9, 
+   3.5929165679355545`*^9}, {3.592917183190591*^9, 3.592917185546195*^9}, 
+   3.5929172699423423`*^9, {3.6568890370269995`*^9, 3.6568890645766473`*^9}, 
+   3.656889320261093*^9, {3.657232655891845*^9, 3.6572327474640045`*^9}, 
+   3.6572327953404884`*^9, 3.6572328341377563`*^9, {3.657233560381422*^9, 
+   3.657233592891879*^9}, {3.6572384179564257`*^9, 3.657238442978869*^9}, {
+   3.6702543113469715`*^9, 3.670254356977051*^9}, {3.670254392732313*^9, 
+   3.6702544337603846`*^9}, {3.6702544894368815`*^9, 3.670254489608482*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"2", ",", "2"}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.59292599329729*^9, 3.5929318810648904`*^9, {3.5979631585985537`*^9, 
+   3.5979631980354223`*^9}, 3.6568890769318686`*^9, 3.656889121563547*^9, 
+   3.656889178597246*^9, 3.6568893242079*^9, 3.6568893816628003`*^9, 
+   3.6568895507046947`*^9, {3.6568895832775517`*^9, 3.656889654897277*^9}, 
+   3.6568897892291107`*^9, {3.6568898247347727`*^9, 3.656889847791613*^9}, {
+   3.656890424446618*^9, 3.656890460357881*^9}, 3.656890796242067*^9, 
+   3.6568908384869404`*^9, 3.656980715459366*^9, 3.656980752649831*^9, 
+   3.6569812139270353`*^9, {3.656981248746296*^9, 3.6569812658907256`*^9}, {
+   3.656982221439192*^9, 3.656982241188826*^9}, {3.657232775310054*^9, 
+   3.6572327976180925`*^9}, 3.6572328360877595`*^9, 3.657233566605833*^9, 
+   3.657233598788689*^9, {3.6572336497227783`*^9, 3.657233681702834*^9}, {
+   3.6572337429017406`*^9, 3.657233750686154*^9}, 3.6572384502484818`*^9, {
+   3.657238492259355*^9, 3.6572384987801666`*^9}, {3.657238548450653*^9, 
+   3.657238620117178*^9}, 3.670254404650734*^9, 3.6702544361783886`*^9, {
+   3.670254480591666*^9, 3.670254494850091*^9}, {3.670254525597745*^9, 
+   3.6702545348017607`*^9}, 3.670254650725563*^9, {3.6702547679310675`*^9, 
+   3.670254797758319*^9}, {3.670254854355218*^9, 3.6702548980976944`*^9}, 
+   3.6702549360213604`*^9, 3.670255151379736*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"M2", " ", "=", " ", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"m11", ",", "m12"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"m21", ",", "m22"}], "}"}]}], "}"}]}], ";"}]}]], "Input",
+ CellChangeTimes->{{3.6702544453044047`*^9, 3.670254486519676*^9}, {
+  3.6702545233825407`*^9, 3.670254523491741*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"TensorDimensions", "[", "M2", "]"}], 
+  "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.6702545325709567`*^9, 3.6702545328049574`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"2", ",", "2"}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.670254494865691*^9, {3.670254525613345*^9, 3.670254534817361*^9}, 
+   3.670254650741163*^9, {3.670254767946667*^9, 3.670254797773919*^9}, {
+   3.670254854355218*^9, 3.6702548980976944`*^9}, 3.6702549360369606`*^9, 
+   3.670255151395336*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"R1", " ", "=", " ", 
+     RowBox[{"{", 
+      RowBox[{"x1", ",", "x2"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"TensorContract", "[", 
+    RowBox[{"R1", ",", 
+     RowBox[{"{", "1", "}"}]}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.6702546035354805`*^9, 3.670254648510359*^9}, {
+  3.6702547601154537`*^9, 3.6702547954651155`*^9}, {3.67025489566409*^9, 
+  3.670254921528935*^9}}],
+
+Cell[BoxData[
+ RowBox[{"x1", "+", "x2"}]], "Output",
+ CellChangeTimes->{
+  3.6702546507567625`*^9, {3.6702547680402675`*^9, 3.670254797773919*^9}, {
+   3.670254854370818*^9, 3.670254898113294*^9}, 3.6702549360525603`*^9, 
+   3.6702551514109364`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"T1", " ", "=", " ", 
+   RowBox[{"TensorProduct", "[", 
+    RowBox[{"M2", ",", "R1"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.6702548355259852`*^9, 3.6702548702984457`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"m11", " ", "x1"}], ",", 
+       RowBox[{"m11", " ", "x2"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"m12", " ", "x1"}], ",", 
+       RowBox[{"m12", " ", "x2"}]}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"m21", " ", "x1"}], ",", 
+       RowBox[{"m21", " ", "x2"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"m22", " ", "x1"}], ",", 
+       RowBox[{"m22", " ", "x2"}]}], "}"}]}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.6702548543864183`*^9, 3.670254898113294*^9}, 
+   3.6702549360525603`*^9, 3.6702551514109364`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"TensorDimensions", "[", "T1", "]"}]], "Input",
+ CellChangeTimes->{{3.670254874136052*^9, 3.670254881390065*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"2", ",", "2", ",", "2"}], "}"}]], "Output",
+ CellChangeTimes->{{3.6702548832464685`*^9, 3.670254898128894*^9}, 
+   3.67025493606816*^9, 3.670255151426536*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"TensorContract", "[", 
+   RowBox[{"T1", ",", 
+    RowBox[{"{", 
+     RowBox[{"2", ",", "3"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6702549244461403`*^9, 3.670254934071357*^9}, {
+  3.6702551264508924`*^9, 3.670255126638093*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"m11", " ", "x1"}], "+", 
+    RowBox[{"m12", " ", "x2"}]}], ",", 
+   RowBox[{
+    RowBox[{"m21", " ", "x1"}], "+", 
+    RowBox[{"m22", " ", "x2"}]}]}], "}"}]], "Output",
+ CellChangeTimes->{3.67025493606816*^9, 3.670255151426536*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"GN", " ", "=", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"1", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", 
+         RowBox[{"-", "1"}], ",", "0", ",", "0"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "0", ",", 
+         RowBox[{"-", "1"}], ",", "0"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "0", ",", "0", ",", 
+         RowBox[{"-", "1"}]}], "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]",
+    "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"R2", " ", "=", " ", 
+     RowBox[{"{", 
+      RowBox[{"x0", ",", "x1", ",", "x2", ",", "x3"}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"TensorContract", "[", 
+    RowBox[{
+     RowBox[{"TensorProduct", "[", 
+      RowBox[{"GN", ",", "R2"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3"}], "}"}]}], "]"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.670254983383043*^9, 3.670255147651329*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"x0", ",", 
+   RowBox[{"-", "x1"}], ",", 
+   RowBox[{"-", "x2"}], ",", 
+   RowBox[{"-", "x3"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.670255151442136*^9}]
+}, Open  ]]
+},
+WindowSize->{1272, 873},
+WindowMargins->{{255, Automatic}, {45, Automatic}},
+PrintingCopies->1,
+PrintingPageRange->{Automatic, Automatic},
+FrontEndVersion->"10.0 for Microsoft Windows (64-bit) (July 1, 2014)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[StyleDefinitions -> "Default.nb"]], 
+   Cell[
+    StyleData["Text"], FontSize -> 16]}, Visible -> False, FrontEndVersion -> 
+  "10.0 for Microsoft Windows (64-bit) (July 1, 2014)", StyleDefinitions -> 
+  "PrivateStylesheetFormatting.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 111, 2, 32, "Text"],
+Cell[671, 24, 173, 3, 52, "Input"],
+Cell[CellGroupData[{
+Cell[869, 31, 1195, 22, 112, "Input"],
+Cell[2067, 55, 1403, 21, 31, "Output"]
+}, Open  ]],
+Cell[3485, 79, 403, 11, 52, "Input"],
+Cell[CellGroupData[{
+Cell[3913, 94, 179, 4, 52, "Input"],
+Cell[4095, 100, 338, 7, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4470, 112, 476, 12, 72, "Input"],
+Cell[4949, 126, 249, 5, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5235, 136, 234, 5, 52, "Input"],
+Cell[5472, 143, 751, 24, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6260, 172, 136, 2, 31, "Input"],
+Cell[6399, 176, 198, 4, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6634, 185, 298, 7, 52, "Input"],
+Cell[6935, 194, 296, 9, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7268, 208, 1113, 31, 152, "Input"],
+Cell[8384, 241, 196, 6, 31, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
