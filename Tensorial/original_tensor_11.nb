@@ -1,0 +1,1348 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     47272,       1339]
+NotebookOptionsPosition[     45754,       1286]
+NotebookOutlinePosition[     46234,       1304]
+CellTagsIndexPosition[     46191,       1301]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["\<\
+
+support\
+\>", "Subtitle"],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"ClearAll", ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Unprotect", "[", "Symmetric", "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Needs", "[", "\"\<TensorCalculus3`Tensorial`\>\"", "]"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"DeclareBaseIndices", "[", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "1", ",", "2", ",", "3"}], "}"}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"DeclareIndexFlavor", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"red", ",", 
+       RowBox[{"RGBColor", "[", 
+        RowBox[{"1", ",", "0", ",", "0"}], "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"blue", ",", 
+       RowBox[{"RGBColor", "[", 
+        RowBox[{"0", ",", "0", ",", "1"}], "]"}]}], "}"}]}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"DefineTensorShortcuts", "[", 
+    RowBox[{"G", ",", "2"}], "]"}], "\[IndentingNewLine]", 
+   RowBox[{"SetTensorValues", "[", 
+    RowBox[{
+     RowBox[{"Gdd", "[", 
+      RowBox[{"i", ",", "j"}], "]"}], ",", 
+     RowBox[{"DiagonalMatrix", "[", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", 
+        RowBox[{"-", "1"}], ",", 
+        RowBox[{"-", "1"}], ",", 
+        RowBox[{"-", "1"}]}], "}"}], "]"}]}], "]"}], "\[IndentingNewLine]", 
+   RowBox[{"SetTensorValues", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Gdd", "[", 
+       RowBox[{"i", ",", "j"}], "]"}], "//", 
+      RowBox[{"ToFlavor", "[", "red", "]"}]}], ",", 
+     RowBox[{"DiagonalMatrix", "[", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", 
+        RowBox[{"-", "1"}], ",", 
+        RowBox[{"-", "1"}], ",", 
+        RowBox[{"-", "1"}]}], "}"}], "]"}]}], "]"}], "\[IndentingNewLine]", 
+   RowBox[{"SetTensorValues", "[", 
+    RowBox[{
+     RowBox[{"Guu", "[", 
+      RowBox[{"i", ",", "j"}], "]"}], ",", 
+     RowBox[{"DiagonalMatrix", "[", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", 
+        RowBox[{"-", "1"}], ",", 
+        RowBox[{"-", "1"}], ",", 
+        RowBox[{"-", "1"}]}], "}"}], "]"}]}], "]"}], "\[IndentingNewLine]", 
+   RowBox[{"SetTensorValues", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Guu", "[", 
+       RowBox[{"i", ",", "j"}], "]"}], "//", 
+      RowBox[{"ToFlavor", "[", "red", "]"}]}], ",", 
+     RowBox[{"DiagonalMatrix", "[", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", 
+        RowBox[{"-", "1"}], ",", 
+        RowBox[{"-", "1"}], ",", 
+        RowBox[{"-", "1"}]}], "}"}], "]"}]}], "]"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"DefineTensorShortcuts", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"X", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"Y", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"T", ",", "2"}], "}"}]}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.6704385047601447`*^9, 3.6704385275205846`*^9}}],
+
+Cell[BoxData[""], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ClearAll", "[", "LorentzMatrixRules", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"LorentzMatrixRules", "::", "usage"}], "=", 
+    "\"\<LorentzMatrixRules[L, newflavor, oldflavor][\[Beta], \[Phi], \
+\[Theta]] will generate and store the component rules of the Lorentz \
+transformation matrix to a frame moving with the velocity \[Beta] in the \
+spherical direction \[Phi] (angle from xy-plane) and \[Theta] (rotation from \
+x axis about z axis). The components will be stored under the label L with \
+the upper index in the newflavor and the lower index in the restflavor. \
+Identity can be used as the flavor for plain indices. The values are stored \
+as TensorValueRules[L]. The inverse values are also stored.\>\""}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"LorentzMatrixRules", "[", 
+    RowBox[{"L_", ",", "newflavor_", ",", 
+     RowBox[{"oldflavor_:", "Identity"}]}], "]"}], "[", 
+   RowBox[{
+    RowBox[{"\[Beta]_", "/;", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"NumericQ", "[", "\[Beta]", "]"}], ",", 
+       RowBox[{
+        RowBox[{"Abs", "[", "\[Beta]", "]"}], "<", "1"}], ",", "True"}], 
+      "]"}]}], ",", "\[Phi]_", ",", "\[Theta]_"}], "]"}], ":=", 
+  "\[IndentingNewLine]", 
+  RowBox[{"Module", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"\[Gamma]", "=", 
+       RowBox[{"1", "/", 
+        SqrtBox[
+         RowBox[{"1", "-", 
+          SuperscriptBox["\[Beta]", "2"]}]]}]}], ",", "\[IndentingNewLine]", 
+      "n1", ",", "n2", ",", "n3", ",", "\[Alpha]", ",", "\[Gamma]1", ",", 
+      "matrix"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"DefineTensorShortcuts", "[", 
+      RowBox[{"L", ",", "2"}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"n1", ",", "n2", ",", "n3"}], "}"}], "=", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Cos", "[", "\[Phi]", "]"}], 
+         RowBox[{"Cos", "[", "\[Theta]", "]"}]}], ",", 
+        RowBox[{
+         RowBox[{"Cos", "[", "\[Phi]", "]"}], 
+         RowBox[{"Sin", "[", "\[Theta]", "]"}]}], ",", 
+        RowBox[{"Sin", "[", "\[Phi]", "]"}]}], "}"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"\[Gamma]1", "=", 
+      RowBox[{"\[Gamma]", "-", "1"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"matrix", "=", 
+      RowBox[{"(", GridBox[{
+         {"\[Gamma]", 
+          RowBox[{
+           RowBox[{"-", "\[Alpha]"}], " ", "\[Gamma]", " ", "n1"}], 
+          RowBox[{
+           RowBox[{"-", "\[Alpha]"}], " ", "\[Gamma]", " ", "n2"}], 
+          RowBox[{
+           RowBox[{"-", "\[Alpha]"}], " ", "\[Gamma]", " ", "n3"}]},
+         {
+          RowBox[{
+           RowBox[{"-", "\[Alpha]"}], " ", "\[Gamma]", " ", "n1"}], 
+          RowBox[{"1", "+", 
+           RowBox[{"\[Gamma]1", " ", "n1", " ", "n1"}]}], 
+          RowBox[{"\[Gamma]1", " ", "n1", " ", "n2"}], 
+          RowBox[{"\[Gamma]1", " ", "n1", " ", "n3"}]},
+         {
+          RowBox[{
+           RowBox[{"-", "\[Alpha]"}], " ", "\[Gamma]", " ", "n2"}], 
+          RowBox[{"\[Gamma]1", " ", "n2", " ", "n1"}], 
+          RowBox[{"1", "+", 
+           RowBox[{"\[Gamma]1", " ", "n2", " ", "n2"}]}], 
+          RowBox[{"\[Gamma]1", " ", "n2", " ", "n3"}]},
+         {
+          RowBox[{
+           RowBox[{"-", "\[Alpha]"}], " ", "\[Gamma]", " ", "n3"}], 
+          RowBox[{"\[Gamma]1", " ", "n3", " ", "n1"}], 
+          RowBox[{"\[Gamma]1", " ", "n3", " ", "n2"}], 
+          RowBox[{"1", "+", 
+           RowBox[{"\[Gamma]1", " ", "n3", " ", "n3"}]}]}
+        }], ")"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"SetTensorValueRules", "[", 
+      RowBox[{
+       RowBox[{"Lud", "[", 
+        RowBox[{
+         RowBox[{"newflavor", "@", "i"}], ",", 
+         RowBox[{"oldflavor", "@", "j"}]}], "]"}], ",", " ", 
+       RowBox[{"matrix", "/.", 
+        RowBox[{"\[Alpha]", "\[Rule]", "\[Beta]"}]}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"SetTensorValueRules", "[", 
+      RowBox[{
+       RowBox[{"Lud", "[", 
+        RowBox[{
+         RowBox[{"oldflavor", "@", "i"}], ",", 
+         RowBox[{"newflavor", "@", "j"}]}], "]"}], ",", " ", 
+       RowBox[{"matrix", "/.", 
+        RowBox[{"\[Alpha]", "\[Rule]", 
+         RowBox[{"-", "\[Beta]"}]}]}]}], "]"}], ";"}]}], 
+   "\[IndentingNewLine]", "]"}]}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ClearAll", "[", "LorentzMatrixValues", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"LorentzMatrixValues", "::", "usage"}], "=", 
+    "\"\<LorentzMatrixValues[L, newflavor, oldflavor][\[Beta], \[Phi], \
+\[Theta]] will generate and store the component values of the Lorentz \
+transformation matrix to a frame moving with the velocity \[Beta] in the \
+spherical direction \[Phi] (angle from xy-plane) and \[Theta] (rotation from \
+x axis about z axis). The components will be stored under the label L with \
+the upper index in the newflavor and the lower index in the restflavor. \
+Identity can be used as the flavor for plain indices. The values are stored \
+as TensorValueRules[L]. The inverse values are also stored.\>\""}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"LorentzMatrixValues", "[", 
+    RowBox[{"L_", ",", "newflavor_", ",", 
+     RowBox[{"oldflavor_:", "Identity"}]}], "]"}], "[", 
+   RowBox[{
+    RowBox[{"\[Beta]_", "/;", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"NumericQ", "[", "\[Beta]", "]"}], ",", 
+       RowBox[{
+        RowBox[{"Abs", "[", "\[Beta]", "]"}], "<", "1"}], ",", "True"}], 
+      "]"}]}], ",", "\[Phi]_", ",", "\[Theta]_"}], "]"}], ":=", 
+  "\[IndentingNewLine]", 
+  RowBox[{"Module", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"\[Gamma]", "=", 
+       RowBox[{"1", "/", 
+        SqrtBox[
+         RowBox[{"1", "-", 
+          SuperscriptBox["\[Beta]", "2"]}]]}]}], ",", "\[IndentingNewLine]", 
+      "n1", ",", "n2", ",", "n3", ",", "\[Alpha]", ",", "\[Gamma]1", ",", 
+      "matrix"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"DefineTensorShortcuts", "[", 
+      RowBox[{"L", ",", "2"}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"n1", ",", "n2", ",", "n3"}], "}"}], "=", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Cos", "[", "\[Phi]", "]"}], 
+         RowBox[{"Cos", "[", "\[Theta]", "]"}]}], ",", 
+        RowBox[{
+         RowBox[{"Cos", "[", "\[Phi]", "]"}], 
+         RowBox[{"Sin", "[", "\[Theta]", "]"}]}], ",", 
+        RowBox[{"Sin", "[", "\[Phi]", "]"}]}], "}"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"\[Gamma]1", "=", 
+      RowBox[{"\[Gamma]", "-", "1"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"matrix", "=", 
+      RowBox[{"(", GridBox[{
+         {"\[Gamma]", 
+          RowBox[{
+           RowBox[{"-", "\[Alpha]"}], " ", "\[Gamma]", " ", "n1"}], 
+          RowBox[{
+           RowBox[{"-", "\[Alpha]"}], " ", "\[Gamma]", " ", "n2"}], 
+          RowBox[{
+           RowBox[{"-", "\[Alpha]"}], " ", "\[Gamma]", " ", "n3"}]},
+         {
+          RowBox[{
+           RowBox[{"-", "\[Alpha]"}], " ", "\[Gamma]", " ", "n1"}], 
+          RowBox[{"1", "+", 
+           RowBox[{"\[Gamma]1", " ", "n1", " ", "n1"}]}], 
+          RowBox[{"\[Gamma]1", " ", "n1", " ", "n2"}], 
+          RowBox[{"\[Gamma]1", " ", "n1", " ", "n3"}]},
+         {
+          RowBox[{
+           RowBox[{"-", "\[Alpha]"}], " ", "\[Gamma]", " ", "n2"}], 
+          RowBox[{"\[Gamma]1", " ", "n2", " ", "n1"}], 
+          RowBox[{"1", "+", 
+           RowBox[{"\[Gamma]1", " ", "n2", " ", "n2"}]}], 
+          RowBox[{"\[Gamma]1", " ", "n2", " ", "n3"}]},
+         {
+          RowBox[{
+           RowBox[{"-", "\[Alpha]"}], " ", "\[Gamma]", " ", "n3"}], 
+          RowBox[{"\[Gamma]1", " ", "n3", " ", "n1"}], 
+          RowBox[{"\[Gamma]1", " ", "n3", " ", "n2"}], 
+          RowBox[{"1", "+", 
+           RowBox[{"\[Gamma]1", " ", "n3", " ", "n3"}]}]}
+        }], ")"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"SetTensorValues", "[", 
+      RowBox[{
+       RowBox[{"Lud", "[", 
+        RowBox[{
+         RowBox[{"newflavor", "@", "i"}], ",", 
+         RowBox[{"oldflavor", "@", "j"}]}], "]"}], ",", " ", 
+       RowBox[{"matrix", "/.", 
+        RowBox[{"\[Alpha]", "\[Rule]", "\[Beta]"}]}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"SetTensorValues", "[", 
+      RowBox[{
+       RowBox[{"Lud", "[", 
+        RowBox[{
+         RowBox[{"oldflavor", "@", "i"}], ",", 
+         RowBox[{"newflavor", "@", "j"}]}], "]"}], ",", " ", 
+       RowBox[{"matrix", "/.", 
+        RowBox[{"\[Alpha]", "\[Rule]", 
+         RowBox[{"-", "\[Beta]"}]}]}]}], "]"}], ";"}]}], 
+   "\[IndentingNewLine]", "]"}]}]}], "Input"],
+
+Cell[BoxData[{
+ RowBox[{"DefineTensorShortcuts", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"X", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"Y", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"L", ",", "2"}], "}"}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"LorentzMatrixValues", "[", 
+    RowBox[{"L", ",", "red"}], "]"}], "[", 
+   RowBox[{"\[Beta]", ",", "0", ",", "0"}], "]"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]"}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+
+content
+\
+\>", "Subtitle"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Xu", "[", 
+     RowBox[{"red", "@", "i"}], "]"}], "\[Equal]", 
+    RowBox[{
+     RowBox[{"Lud", "[", 
+      RowBox[{
+       RowBox[{"red", "@", "i"}], ",", "j"}], "]"}], 
+     RowBox[{"Xu", "[", "j", "]"}]}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"%", "//", 
+     RowBox[{"ToArrayValues", "[", "]"}]}], "//", "TableForm"}]}]}]], "Input"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   RowBox[{
+    TemplateBox[{"X",InterpretationBox[
+       TagBox[
+        StyleBox[
+         TagBox[
+          StyleBox["i", FontColor -> RGBColor[1, 0, 0]], 
+          StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], ShowContents -> 
+         False], StyleForm[#, ShowContents -> False]& ], 
+       SequenceForm[
+        StyleForm[
+         $CellContext`red[$CellContext`i], ShowContents -> False]], Editable -> 
+       False],InterpretationBox[
+       TagBox[
+        StyleBox["i", FontColor -> RGBColor[1, 0, 0]], 
+        StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], 
+       SequenceForm[
+        $CellContext`red[$CellContext`i]], Editable -> False]},
+     "Subsuperscript"], "\[Equal]", 
+    RowBox[{
+     TemplateBox[{"L",InterpretationBox[
+        RowBox[{
+          TagBox[
+           StyleBox[
+            TagBox[
+             StyleBox["i", FontColor -> RGBColor[1, 0, 0]], 
+             StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], ShowContents -> 
+            False], StyleForm[#, ShowContents -> False]& ], 
+          "\[InvisibleSpace]", "j"}], 
+        SequenceForm[
+         StyleForm[
+          $CellContext`red[$CellContext`i], ShowContents -> 
+          False], $CellContext`j], Editable -> False],InterpretationBox[
+        RowBox[{
+          TagBox[
+           StyleBox["i", FontColor -> RGBColor[1, 0, 0]], 
+           StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], 
+          "\[InvisibleSpace]", 
+          TagBox[
+           StyleBox["j", ShowContents -> False], 
+           StyleForm[#, ShowContents -> False]& ]}], 
+        SequenceForm[
+         $CellContext`red[$CellContext`i], 
+         StyleForm[$CellContext`j, ShowContents -> False]], Editable -> 
+        False]},
+      "Subsuperscript"], " ", 
+     TemplateBox[{"X",InterpretationBox[
+        TagBox[
+         StyleBox["j", ShowContents -> False], 
+         StyleForm[#, ShowContents -> False]& ], 
+        SequenceForm[
+         StyleForm[$CellContext`j, ShowContents -> False]], Editable -> 
+        False],InterpretationBox["j", 
+        SequenceForm[$CellContext`j], Editable -> False]},
+      "Subsuperscript"]}]}],
+   FontFamily->"Courier",
+   FontSize->16],
+  StyleForm[#, FontSize -> 16, FontFamily -> "Courier"]& ]], "Output",
+ CellChangeTimes->{3.6704385522154274`*^9}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   TagBox[
+    TagBox[GridBox[{
+       {
+        RowBox[{
+         TemplateBox[{"X",InterpretationBox[
+            TagBox[
+             StyleBox[
+              TagBox[
+               StyleBox["0", FontColor -> RGBColor[1, 0, 0]], 
+               StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], ShowContents -> 
+              False], StyleForm[#, ShowContents -> False]& ], 
+            SequenceForm[
+             StyleForm[
+              $CellContext`red[0], ShowContents -> False]], Editable -> 
+            False],InterpretationBox[
+            TagBox[
+             StyleBox["0", FontColor -> RGBColor[1, 0, 0]], 
+             StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], 
+            SequenceForm[
+             $CellContext`red[0]], Editable -> False]},
+          "Subsuperscript"], "\[Equal]", 
+         RowBox[{
+          FractionBox[
+           TemplateBox[{"X",InterpretationBox[
+              TagBox[
+               StyleBox["0", ShowContents -> False], 
+               StyleForm[#, ShowContents -> False]& ], 
+              SequenceForm[
+               StyleForm[0, ShowContents -> False]], Editable -> False],
+             InterpretationBox["0", 
+              SequenceForm[0], Editable -> False]},
+            "Subsuperscript"], 
+           SqrtBox[
+            RowBox[{"1", "-", 
+             SuperscriptBox["\[Beta]", "2"]}]]], "-", 
+          FractionBox[
+           RowBox[{"\[Beta]", " ", 
+            TemplateBox[{"X",InterpretationBox[
+               TagBox[
+                StyleBox["1", ShowContents -> False], 
+                StyleForm[#, ShowContents -> False]& ], 
+               SequenceForm[
+                StyleForm[1, ShowContents -> False]], Editable -> False],
+              InterpretationBox["1", 
+               SequenceForm[1], Editable -> False]},
+             "Subsuperscript"]}], 
+           SqrtBox[
+            RowBox[{"1", "-", 
+             SuperscriptBox["\[Beta]", "2"]}]]]}]}]},
+       {
+        RowBox[{
+         TemplateBox[{"X",InterpretationBox[
+            TagBox[
+             StyleBox[
+              TagBox[
+               StyleBox["1", FontColor -> RGBColor[1, 0, 0]], 
+               StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], ShowContents -> 
+              False], StyleForm[#, ShowContents -> False]& ], 
+            SequenceForm[
+             StyleForm[
+              $CellContext`red[1], ShowContents -> False]], Editable -> 
+            False],InterpretationBox[
+            TagBox[
+             StyleBox["1", FontColor -> RGBColor[1, 0, 0]], 
+             StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], 
+            SequenceForm[
+             $CellContext`red[1]], Editable -> False]},
+          "Subsuperscript"], "\[Equal]", 
+         RowBox[{
+          RowBox[{"-", 
+           FractionBox[
+            RowBox[{"\[Beta]", " ", 
+             TemplateBox[{"X",InterpretationBox[
+                TagBox[
+                 StyleBox["0", ShowContents -> False], 
+                 StyleForm[#, ShowContents -> False]& ], 
+                SequenceForm[
+                 StyleForm[0, ShowContents -> False]], Editable -> False],
+               InterpretationBox["0", 
+                SequenceForm[0], Editable -> False]},
+              "Subsuperscript"]}], 
+            SqrtBox[
+             RowBox[{"1", "-", 
+              SuperscriptBox["\[Beta]", "2"]}]]]}], "+", 
+          FractionBox[
+           TemplateBox[{"X",InterpretationBox[
+              TagBox[
+               StyleBox["1", ShowContents -> False], 
+               StyleForm[#, ShowContents -> False]& ], 
+              SequenceForm[
+               StyleForm[1, ShowContents -> False]], Editable -> False],
+             InterpretationBox["1", 
+              SequenceForm[1], Editable -> False]},
+            "Subsuperscript"], 
+           SqrtBox[
+            RowBox[{"1", "-", 
+             SuperscriptBox["\[Beta]", "2"]}]]]}]}]},
+       {
+        RowBox[{
+         TemplateBox[{"X",InterpretationBox[
+            TagBox[
+             StyleBox[
+              TagBox[
+               StyleBox["2", FontColor -> RGBColor[1, 0, 0]], 
+               StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], ShowContents -> 
+              False], StyleForm[#, ShowContents -> False]& ], 
+            SequenceForm[
+             StyleForm[
+              $CellContext`red[2], ShowContents -> False]], Editable -> 
+            False],InterpretationBox[
+            TagBox[
+             StyleBox["2", FontColor -> RGBColor[1, 0, 0]], 
+             StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], 
+            SequenceForm[
+             $CellContext`red[2]], Editable -> False]},
+          "Subsuperscript"], "\[Equal]", 
+         TemplateBox[{"X",InterpretationBox[
+            TagBox[
+             StyleBox["2", ShowContents -> False], 
+             StyleForm[#, ShowContents -> False]& ], 
+            SequenceForm[
+             StyleForm[2, ShowContents -> False]], Editable -> False],
+           InterpretationBox["2", 
+            SequenceForm[2], Editable -> False]},
+          "Subsuperscript"]}]},
+       {
+        RowBox[{
+         TemplateBox[{"X",InterpretationBox[
+            TagBox[
+             StyleBox[
+              TagBox[
+               StyleBox["3", FontColor -> RGBColor[1, 0, 0]], 
+               StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], ShowContents -> 
+              False], StyleForm[#, ShowContents -> False]& ], 
+            SequenceForm[
+             StyleForm[
+              $CellContext`red[3], ShowContents -> False]], Editable -> 
+            False],InterpretationBox[
+            TagBox[
+             StyleBox["3", FontColor -> RGBColor[1, 0, 0]], 
+             StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], 
+            SequenceForm[
+             $CellContext`red[3]], Editable -> False]},
+          "Subsuperscript"], "\[Equal]", 
+         TemplateBox[{"X",InterpretationBox[
+            TagBox[
+             StyleBox["3", ShowContents -> False], 
+             StyleForm[#, ShowContents -> False]& ], 
+            SequenceForm[
+             StyleForm[3, ShowContents -> False]], Editable -> False],
+           InterpretationBox["3", 
+            SequenceForm[3], Editable -> False]},
+          "Subsuperscript"]}]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.5599999999999999]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     Column],
+    Function[BoxForm`e$, 
+     TableForm[BoxForm`e$]]],
+   FontFamily->"Courier",
+   FontSize->16],
+  StyleForm[#, FontSize -> 16, FontFamily -> "Courier"]& ]], "Output",
+ CellChangeTimes->{3.670438552246628*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Yu", "[", "i", "]"}], "\[Equal]", 
+    RowBox[{
+     RowBox[{"Lud", "[", 
+      RowBox[{"i", ",", 
+       RowBox[{"red", "@", "j"}]}], "]"}], 
+     RowBox[{"Xu", "[", 
+      RowBox[{"red", "@", "j"}], "]"}]}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"%", "//", 
+     RowBox[{"ToArrayValues", "[", "]"}]}], "//", "TableForm"}]}]}]], "Input"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   RowBox[{
+    TemplateBox[{"Y",InterpretationBox[
+       TagBox[
+        StyleBox["i", ShowContents -> False], 
+        StyleForm[#, ShowContents -> False]& ], 
+       SequenceForm[
+        StyleForm[$CellContext`i, ShowContents -> False]], Editable -> False],
+      InterpretationBox["i", 
+       SequenceForm[$CellContext`i], Editable -> False]},
+     "Subsuperscript"], "\[Equal]", 
+    RowBox[{
+     TemplateBox[{"L",InterpretationBox[
+        RowBox[{
+          TagBox[
+           StyleBox["i", ShowContents -> False], 
+           StyleForm[#, ShowContents -> False]& ], "\[InvisibleSpace]", 
+          TagBox[
+           StyleBox["j", FontColor -> RGBColor[1, 0, 0]], 
+           StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ]}], 
+        SequenceForm[
+         StyleForm[$CellContext`i, ShowContents -> False], 
+         $CellContext`red[$CellContext`j]], Editable -> False],
+       InterpretationBox[
+        RowBox[{"i", "\[InvisibleSpace]", 
+          TagBox[
+           StyleBox[
+            TagBox[
+             StyleBox["j", FontColor -> RGBColor[1, 0, 0]], 
+             StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], ShowContents -> 
+            False], StyleForm[#, ShowContents -> False]& ]}], 
+        SequenceForm[$CellContext`i, 
+         StyleForm[
+          $CellContext`red[$CellContext`j], ShowContents -> False]], Editable -> 
+        False]},
+      "Subsuperscript"], " ", 
+     TemplateBox[{"X",InterpretationBox[
+        TagBox[
+         StyleBox[
+          TagBox[
+           StyleBox["j", FontColor -> RGBColor[1, 0, 0]], 
+           StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], ShowContents -> 
+          False], StyleForm[#, ShowContents -> False]& ], 
+        SequenceForm[
+         StyleForm[
+          $CellContext`red[$CellContext`j], ShowContents -> False]], Editable -> 
+        False],InterpretationBox[
+        TagBox[
+         StyleBox["j", FontColor -> RGBColor[1, 0, 0]], 
+         StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], 
+        SequenceForm[
+         $CellContext`red[$CellContext`j]], Editable -> False]},
+      "Subsuperscript"]}]}],
+   FontFamily->"Courier",
+   FontSize->16],
+  StyleForm[#, FontSize -> 16, FontFamily -> "Courier"]& ]], "Output",
+ CellChangeTimes->{3.6704385522622275`*^9}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   TagBox[
+    TagBox[GridBox[{
+       {
+        RowBox[{
+         TemplateBox[{"Y",InterpretationBox[
+            TagBox[
+             StyleBox["0", ShowContents -> False], 
+             StyleForm[#, ShowContents -> False]& ], 
+            SequenceForm[
+             StyleForm[0, ShowContents -> False]], Editable -> False],
+           InterpretationBox["0", 
+            SequenceForm[0], Editable -> False]},
+          "Subsuperscript"], "\[Equal]", 
+         RowBox[{
+          FractionBox[
+           TemplateBox[{"X",InterpretationBox[
+              TagBox[
+               StyleBox[
+                TagBox[
+                 StyleBox["0", FontColor -> RGBColor[1, 0, 0]], 
+                 StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], 
+                ShowContents -> False], 
+               StyleForm[#, ShowContents -> False]& ], 
+              SequenceForm[
+               StyleForm[
+                $CellContext`red[0], ShowContents -> False]], Editable -> 
+              False],InterpretationBox[
+              TagBox[
+               StyleBox["0", FontColor -> RGBColor[1, 0, 0]], 
+               StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], 
+              SequenceForm[
+               $CellContext`red[0]], Editable -> False]},
+            "Subsuperscript"], 
+           SqrtBox[
+            RowBox[{"1", "-", 
+             SuperscriptBox["\[Beta]", "2"]}]]], "+", 
+          FractionBox[
+           RowBox[{"\[Beta]", " ", 
+            TemplateBox[{"X",InterpretationBox[
+               TagBox[
+                StyleBox[
+                 TagBox[
+                  StyleBox["1", FontColor -> RGBColor[1, 0, 0]], 
+                  StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], 
+                 ShowContents -> False], 
+                StyleForm[#, ShowContents -> False]& ], 
+               SequenceForm[
+                StyleForm[
+                 $CellContext`red[1], ShowContents -> False]], Editable -> 
+               False],InterpretationBox[
+               TagBox[
+                StyleBox["1", FontColor -> RGBColor[1, 0, 0]], 
+                StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], 
+               SequenceForm[
+                $CellContext`red[1]], Editable -> False]},
+             "Subsuperscript"]}], 
+           SqrtBox[
+            RowBox[{"1", "-", 
+             SuperscriptBox["\[Beta]", "2"]}]]]}]}]},
+       {
+        RowBox[{
+         TemplateBox[{"Y",InterpretationBox[
+            TagBox[
+             StyleBox["1", ShowContents -> False], 
+             StyleForm[#, ShowContents -> False]& ], 
+            SequenceForm[
+             StyleForm[1, ShowContents -> False]], Editable -> False],
+           InterpretationBox["1", 
+            SequenceForm[1], Editable -> False]},
+          "Subsuperscript"], "\[Equal]", 
+         RowBox[{
+          FractionBox[
+           RowBox[{"\[Beta]", " ", 
+            TemplateBox[{"X",InterpretationBox[
+               TagBox[
+                StyleBox[
+                 TagBox[
+                  StyleBox["0", FontColor -> RGBColor[1, 0, 0]], 
+                  StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], 
+                 ShowContents -> False], 
+                StyleForm[#, ShowContents -> False]& ], 
+               SequenceForm[
+                StyleForm[
+                 $CellContext`red[0], ShowContents -> False]], Editable -> 
+               False],InterpretationBox[
+               TagBox[
+                StyleBox["0", FontColor -> RGBColor[1, 0, 0]], 
+                StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], 
+               SequenceForm[
+                $CellContext`red[0]], Editable -> False]},
+             "Subsuperscript"]}], 
+           SqrtBox[
+            RowBox[{"1", "-", 
+             SuperscriptBox["\[Beta]", "2"]}]]], "+", 
+          FractionBox[
+           TemplateBox[{"X",InterpretationBox[
+              TagBox[
+               StyleBox[
+                TagBox[
+                 StyleBox["1", FontColor -> RGBColor[1, 0, 0]], 
+                 StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], 
+                ShowContents -> False], 
+               StyleForm[#, ShowContents -> False]& ], 
+              SequenceForm[
+               StyleForm[
+                $CellContext`red[1], ShowContents -> False]], Editable -> 
+              False],InterpretationBox[
+              TagBox[
+               StyleBox["1", FontColor -> RGBColor[1, 0, 0]], 
+               StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], 
+              SequenceForm[
+               $CellContext`red[1]], Editable -> False]},
+            "Subsuperscript"], 
+           SqrtBox[
+            RowBox[{"1", "-", 
+             SuperscriptBox["\[Beta]", "2"]}]]]}]}]},
+       {
+        RowBox[{
+         TemplateBox[{"Y",InterpretationBox[
+            TagBox[
+             StyleBox["2", ShowContents -> False], 
+             StyleForm[#, ShowContents -> False]& ], 
+            SequenceForm[
+             StyleForm[2, ShowContents -> False]], Editable -> False],
+           InterpretationBox["2", 
+            SequenceForm[2], Editable -> False]},
+          "Subsuperscript"], "\[Equal]", 
+         TemplateBox[{"X",InterpretationBox[
+            TagBox[
+             StyleBox[
+              TagBox[
+               StyleBox["2", FontColor -> RGBColor[1, 0, 0]], 
+               StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], ShowContents -> 
+              False], StyleForm[#, ShowContents -> False]& ], 
+            SequenceForm[
+             StyleForm[
+              $CellContext`red[2], ShowContents -> False]], Editable -> 
+            False],InterpretationBox[
+            TagBox[
+             StyleBox["2", FontColor -> RGBColor[1, 0, 0]], 
+             StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], 
+            SequenceForm[
+             $CellContext`red[2]], Editable -> False]},
+          "Subsuperscript"]}]},
+       {
+        RowBox[{
+         TemplateBox[{"Y",InterpretationBox[
+            TagBox[
+             StyleBox["3", ShowContents -> False], 
+             StyleForm[#, ShowContents -> False]& ], 
+            SequenceForm[
+             StyleForm[3, ShowContents -> False]], Editable -> False],
+           InterpretationBox["3", 
+            SequenceForm[3], Editable -> False]},
+          "Subsuperscript"], "\[Equal]", 
+         TemplateBox[{"X",InterpretationBox[
+            TagBox[
+             StyleBox[
+              TagBox[
+               StyleBox["3", FontColor -> RGBColor[1, 0, 0]], 
+               StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], ShowContents -> 
+              False], StyleForm[#, ShowContents -> False]& ], 
+            SequenceForm[
+             StyleForm[
+              $CellContext`red[3], ShowContents -> False]], Editable -> 
+            False],InterpretationBox[
+            TagBox[
+             StyleBox["3", FontColor -> RGBColor[1, 0, 0]], 
+             StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], 
+            SequenceForm[
+             $CellContext`red[3]], Editable -> False]},
+          "Subsuperscript"]}]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.5599999999999999]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}],
+     Column],
+    Function[BoxForm`e$, 
+     TableForm[BoxForm`e$]]],
+   FontFamily->"Courier",
+   FontSize->16],
+  StyleForm[#, FontSize -> 16, FontFamily -> "Courier"]& ]], "Output",
+ CellChangeTimes->{3.6704385522934275`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"DefineTensorShortcuts", "[", 
+  RowBox[{"{", 
+   RowBox[{"F", ",", "2"}], "}"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"FuuValues", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", 
+       RowBox[{"-", "E1"}], ",", 
+       RowBox[{"-", "E2"}], ",", 
+       RowBox[{"-", "E3"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"E1", ",", "0", ",", 
+       RowBox[{"-", "B3"}], ",", "B2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"E2", ",", "B3", ",", "0", ",", 
+       RowBox[{"-", "B1"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"E3", ",", 
+       RowBox[{"-", "B2"}], ",", "B1", ",", "0"}], "}"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"SetTensorValues", "[", 
+  RowBox[{
+   RowBox[{"Fuu", "[", 
+    RowBox[{"i", ",", "j"}], "]"}], ",", "FuuValues"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Fuu", "[", 
+    RowBox[{"i", ",", "j"}], "]"}], "//", 
+   RowBox[{"ToArrayValues", "[", "]"}]}], "//", 
+  "MatrixForm"}], "\[IndentingNewLine]"}], "Input"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"0", 
+        RowBox[{"-", "E1"}], 
+        RowBox[{"-", "E2"}], 
+        RowBox[{"-", "E3"}]},
+       {"E1", "0", 
+        RowBox[{"-", "B3"}], "B2"},
+       {"E2", "B3", "0", 
+        RowBox[{"-", "B1"}]},
+       {"E3", 
+        RowBox[{"-", "B2"}], "B1", "0"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]],
+   FontFamily->"Courier",
+   FontSize->16],
+  StyleForm[#, FontSize -> 16, FontFamily -> "Courier"]& ]], "Output",
+ CellChangeTimes->{3.6704385523090277`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"FddValues", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Gdd", "[", 
+      RowBox[{"i", ",", "m"}], "]"}], 
+     RowBox[{"Gdd", "[", 
+      RowBox[{"j", ",", "n"}], "]"}], 
+     RowBox[{"Fuu", "[", 
+      RowBox[{"m", ",", "n"}], "]"}]}], "//", 
+    RowBox[{"ToArrayValues", "[", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"FddValues", "//", "MatrixForm"}]}], "Input"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"0", "E1", "E2", "E3"},
+       {
+        RowBox[{"-", "E1"}], "0", 
+        RowBox[{"-", "B3"}], "B2"},
+       {
+        RowBox[{"-", "E2"}], "B3", "0", 
+        RowBox[{"-", "B1"}]},
+       {
+        RowBox[{"-", "E3"}], 
+        RowBox[{"-", "B2"}], "B1", "0"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]],
+   FontFamily->"Courier",
+   FontSize->16],
+  StyleForm[#, FontSize -> 16, FontFamily -> "Courier"]& ]], "Output",
+ CellChangeTimes->{3.670438552402628*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"SetTensorValues", "[", 
+  RowBox[{
+   RowBox[{"Fdd", "[", 
+    RowBox[{"i", ",", "j"}], "]"}], ",", "FddValues"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Fdd", "[", 
+    RowBox[{"i", ",", "j"}], "]"}], "//", 
+   RowBox[{"ToArrayValues", "[", "]"}]}], "//", "MatrixForm"}]}], "Input"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"0", "E1", "E2", "E3"},
+       {
+        RowBox[{"-", "E1"}], "0", 
+        RowBox[{"-", "B3"}], "B2"},
+       {
+        RowBox[{"-", "E2"}], "B3", "0", 
+        RowBox[{"-", "B1"}]},
+       {
+        RowBox[{"-", "E3"}], 
+        RowBox[{"-", "B2"}], "B1", "0"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]],
+   FontFamily->"Courier",
+   FontSize->16],
+  StyleForm[#, FontSize -> 16, FontFamily -> "Courier"]& ]], "Output",
+ CellChangeTimes->{3.670438552418228*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Lud", "[", 
+   RowBox[{
+    RowBox[{"red", "@", "i"}], ",", "m"}], "]"}], 
+  RowBox[{"Lud", "[", 
+   RowBox[{
+    RowBox[{"red", "@", "j"}], ",", "n"}], "]"}], 
+  RowBox[{"Fuu", "[", 
+   RowBox[{"m", ",", "n"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Lud", "[", 
+     RowBox[{
+      RowBox[{"red", "@", "i"}], ",", "m"}], "]"}], 
+    RowBox[{"Lud", "[", 
+     RowBox[{
+      RowBox[{"red", "@", "j"}], ",", "n"}], "]"}], 
+    RowBox[{"Fuu", "[", 
+     RowBox[{"m", ",", "n"}], "]"}]}], "//", 
+   RowBox[{"ToArrayValues", "[", "]"}]}], "//", "MatrixForm"}]}], "Input"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   RowBox[{
+    TemplateBox[{"F",InterpretationBox[
+       RowBox[{
+         TagBox[
+          StyleBox["m", ShowContents -> False], 
+          StyleForm[#, ShowContents -> False]& ], "\[InvisibleSpace]", 
+         TagBox[
+          StyleBox["n", ShowContents -> False], 
+          StyleForm[#, ShowContents -> False]& ]}], 
+       SequenceForm[
+        StyleForm[$CellContext`m, ShowContents -> False], 
+        StyleForm[$CellContext`n, ShowContents -> False]], Editable -> False],
+      InterpretationBox[
+       RowBox[{"m", "\[InvisibleSpace]", "n"}], 
+       SequenceForm[$CellContext`m, $CellContext`n], Editable -> False]},
+     "Subsuperscript"], " ", 
+    TemplateBox[{"L",InterpretationBox[
+       RowBox[{
+         TagBox[
+          StyleBox[
+           TagBox[
+            StyleBox["i", FontColor -> RGBColor[1, 0, 0]], 
+            StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], ShowContents -> 
+           False], StyleForm[#, ShowContents -> False]& ], 
+         "\[InvisibleSpace]", "m"}], 
+       SequenceForm[
+        StyleForm[
+         $CellContext`red[$CellContext`i], ShowContents -> 
+         False], $CellContext`m], Editable -> False],InterpretationBox[
+       RowBox[{
+         TagBox[
+          StyleBox["i", FontColor -> RGBColor[1, 0, 0]], 
+          StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], 
+         "\[InvisibleSpace]", 
+         TagBox[
+          StyleBox["m", ShowContents -> False], 
+          StyleForm[#, ShowContents -> False]& ]}], 
+       SequenceForm[
+        $CellContext`red[$CellContext`i], 
+        StyleForm[$CellContext`m, ShowContents -> False]], Editable -> False]},
+     "Subsuperscript"], " ", 
+    TemplateBox[{"L",InterpretationBox[
+       RowBox[{
+         TagBox[
+          StyleBox[
+           TagBox[
+            StyleBox["j", FontColor -> RGBColor[1, 0, 0]], 
+            StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], ShowContents -> 
+           False], StyleForm[#, ShowContents -> False]& ], 
+         "\[InvisibleSpace]", "n"}], 
+       SequenceForm[
+        StyleForm[
+         $CellContext`red[$CellContext`j], ShowContents -> 
+         False], $CellContext`n], Editable -> False],InterpretationBox[
+       RowBox[{
+         TagBox[
+          StyleBox["j", FontColor -> RGBColor[1, 0, 0]], 
+          StyleForm[#, FontColor -> RGBColor[1, 0, 0]]& ], 
+         "\[InvisibleSpace]", 
+         TagBox[
+          StyleBox["n", ShowContents -> False], 
+          StyleForm[#, ShowContents -> False]& ]}], 
+       SequenceForm[
+        $CellContext`red[$CellContext`j], 
+        StyleForm[$CellContext`n, ShowContents -> False]], Editable -> False]},
+     "Subsuperscript"]}],
+   FontFamily->"Courier",
+   FontSize->16],
+  StyleForm[#, FontSize -> 16, FontFamily -> "Courier"]& ]], "Output",
+ CellChangeTimes->{3.6704385524338284`*^9}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"0", 
+        RowBox[{
+         RowBox[{"-", 
+          FractionBox["E1", 
+           RowBox[{"1", "-", 
+            SuperscriptBox["\[Beta]", "2"]}]]}], "+", 
+         FractionBox[
+          RowBox[{"E1", " ", 
+           SuperscriptBox["\[Beta]", "2"]}], 
+          RowBox[{"1", "-", 
+           SuperscriptBox["\[Beta]", "2"]}]]}], 
+        RowBox[{
+         RowBox[{"-", 
+          FractionBox["E2", 
+           SqrtBox[
+            RowBox[{"1", "-", 
+             SuperscriptBox["\[Beta]", "2"]}]]]}], "+", 
+         FractionBox[
+          RowBox[{"B3", " ", "\[Beta]"}], 
+          SqrtBox[
+           RowBox[{"1", "-", 
+            SuperscriptBox["\[Beta]", "2"]}]]]}], 
+        RowBox[{
+         RowBox[{"-", 
+          FractionBox["E3", 
+           SqrtBox[
+            RowBox[{"1", "-", 
+             SuperscriptBox["\[Beta]", "2"]}]]]}], "-", 
+         FractionBox[
+          RowBox[{"B2", " ", "\[Beta]"}], 
+          SqrtBox[
+           RowBox[{"1", "-", 
+            SuperscriptBox["\[Beta]", "2"]}]]]}]},
+       {
+        RowBox[{
+         FractionBox["E1", 
+          RowBox[{"1", "-", 
+           SuperscriptBox["\[Beta]", "2"]}]], "-", 
+         FractionBox[
+          RowBox[{"E1", " ", 
+           SuperscriptBox["\[Beta]", "2"]}], 
+          RowBox[{"1", "-", 
+           SuperscriptBox["\[Beta]", "2"]}]]}], "0", 
+        RowBox[{
+         RowBox[{"-", 
+          FractionBox["B3", 
+           SqrtBox[
+            RowBox[{"1", "-", 
+             SuperscriptBox["\[Beta]", "2"]}]]]}], "+", 
+         FractionBox[
+          RowBox[{"E2", " ", "\[Beta]"}], 
+          SqrtBox[
+           RowBox[{"1", "-", 
+            SuperscriptBox["\[Beta]", "2"]}]]]}], 
+        RowBox[{
+         FractionBox["B2", 
+          SqrtBox[
+           RowBox[{"1", "-", 
+            SuperscriptBox["\[Beta]", "2"]}]]], "+", 
+         FractionBox[
+          RowBox[{"E3", " ", "\[Beta]"}], 
+          SqrtBox[
+           RowBox[{"1", "-", 
+            SuperscriptBox["\[Beta]", "2"]}]]]}]},
+       {
+        RowBox[{
+         FractionBox["E2", 
+          SqrtBox[
+           RowBox[{"1", "-", 
+            SuperscriptBox["\[Beta]", "2"]}]]], "-", 
+         FractionBox[
+          RowBox[{"B3", " ", "\[Beta]"}], 
+          SqrtBox[
+           RowBox[{"1", "-", 
+            SuperscriptBox["\[Beta]", "2"]}]]]}], 
+        RowBox[{
+         FractionBox["B3", 
+          SqrtBox[
+           RowBox[{"1", "-", 
+            SuperscriptBox["\[Beta]", "2"]}]]], "-", 
+         FractionBox[
+          RowBox[{"E2", " ", "\[Beta]"}], 
+          SqrtBox[
+           RowBox[{"1", "-", 
+            SuperscriptBox["\[Beta]", "2"]}]]]}], "0", 
+        RowBox[{"-", "B1"}]},
+       {
+        RowBox[{
+         FractionBox["E3", 
+          SqrtBox[
+           RowBox[{"1", "-", 
+            SuperscriptBox["\[Beta]", "2"]}]]], "+", 
+         FractionBox[
+          RowBox[{"B2", " ", "\[Beta]"}], 
+          SqrtBox[
+           RowBox[{"1", "-", 
+            SuperscriptBox["\[Beta]", "2"]}]]]}], 
+        RowBox[{
+         RowBox[{"-", 
+          FractionBox["B2", 
+           SqrtBox[
+            RowBox[{"1", "-", 
+             SuperscriptBox["\[Beta]", "2"]}]]]}], "-", 
+         FractionBox[
+          RowBox[{"E3", " ", "\[Beta]"}], 
+          SqrtBox[
+           RowBox[{"1", "-", 
+            SuperscriptBox["\[Beta]", "2"]}]]]}], "B1", "0"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]],
+   FontFamily->"Courier",
+   FontSize->16],
+  StyleForm[#, FontSize -> 16, FontFamily -> "Courier"]& ]], "Output",
+ CellChangeTimes->{3.670438552527428*^9}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1013, 537},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrintingCopies->1,
+PrintingPageRange->{Automatic, Automatic},
+PrivateNotebookOptions->{"VersionedStylesheet"->{"Default.nb"[8.] -> False}},
+FrontEndVersion->"10.0 for Microsoft Windows (64-bit) (July 1, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 36, 3, 77, "Subtitle"],
+Cell[619, 27, 2838, 79, 292, "Input"],
+Cell[3460, 108, 26, 0, 31, "Input"],
+Cell[3489, 110, 4445, 109, 501, "Input"],
+Cell[7937, 221, 4442, 109, 501, "Input"],
+Cell[12382, 332, 536, 15, 132, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12955, 352, 37, 4, 105, "Subtitle"],
+Cell[CellGroupData[{
+Cell[13017, 360, 432, 13, 72, "Input"],
+Cell[13452, 375, 2311, 60, 38, "Output"],
+Cell[15766, 437, 6879, 173, 153, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22682, 615, 433, 13, 72, "Input"],
+Cell[23118, 630, 2293, 58, 38, "Output"],
+Cell[25414, 690, 7689, 192, 153, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[33140, 887, 1074, 33, 112, "Input"],
+Cell[34217, 922, 1022, 31, 101, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[35276, 958, 412, 12, 52, "Input"],
+Cell[35691, 972, 1020, 31, 101, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[36748, 1008, 336, 10, 52, "Input"],
+Cell[37087, 1020, 1020, 31, 101, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[38144, 1056, 643, 21, 52, "Input"],
+Cell[38790, 1079, 2841, 72, 38, "Output"],
+Cell[41634, 1153, 4092, 129, 208, "Output"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

@@ -1,0 +1,350 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     12867,        341]
+NotebookOptionsPosition[     12214,        317]
+NotebookOutlinePosition[     12650,        335]
+CellTagsIndexPosition[     12607,        332]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{"ClearAll", ";"}], "\[IndentingNewLine]", 
+ RowBox[{"ClearCache", ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Unprotect", "[", "Symmetric", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Needs", "[", "\"\<TensorCalculus3`Tensorial`\>\"", "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"DeclareBaseIndices", "[", 
+  RowBox[{"{", 
+   RowBox[{"0", ",", "1", ",", "2", ",", "3"}], "}"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"DefineTensorShortcuts", "[", 
+  RowBox[{"G", ",", "2"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"SetMetricValues", "[", 
+  RowBox[{"G", ",", 
+   RowBox[{"DiagonalMatrix", "[", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", 
+      RowBox[{"-", "1"}], ",", 
+      RowBox[{"-", "1"}], ",", 
+      RowBox[{"-", "1"}]}], "}"}], "]"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.6704378376801805`*^9, 3.670437890127472*^9}, {
+   3.6704383156018147`*^9, 3.6704383463338685`*^9}, {3.6704442484125605`*^9, 
+   3.6704442504717646`*^9}, {3.670444396534819*^9, 3.6704444559085226`*^9}, {
+   3.670454144133815*^9, 3.6704541750062685`*^9}, {3.6704546014878125`*^9, 
+   3.670454662624319*^9}, {3.670455000973309*^9, 3.6704550076501207`*^9}, {
+   3.670457756421713*^9, 3.6704577623965235`*^9}, {3.670459815655306*^9, 
+   3.67045981838531*^9}, {3.6704599635591636`*^9, 3.6704599743855824`*^9}, 
+   3.6704601757039337`*^9, {3.6704620506712027`*^9, 3.6704620508896027`*^9}, {
+   3.6704636987899895`*^9, 3.67046369900839*^9}, {3.6704695542948947`*^9, 
+   3.670469556104498*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"DefineFourVectorU", "[", 
+   RowBox[{"V_", ",", "G_", ",", "VuValues_"}], "]"}], " ", ":=", " ", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "VdValues", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"DefineTensorShortcuts", "[", 
+      RowBox[{"V", ",", "1"}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"SetTensorValues", "[", 
+      RowBox[{
+       RowBox[{"Tensor", "[", 
+        RowBox[{"V", ",", 
+         RowBox[{"{", "i", "}"}], ",", 
+         RowBox[{"{", "Void", "}"}]}], "]"}], ",", " ", "VuValues"}], "]"}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"VdValues", " ", "=", " ", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Tensor", "[", 
+         RowBox[{"G", ",", 
+          RowBox[{"{", 
+           RowBox[{"Void", ",", "Void"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "j"}], "}"}]}], "]"}], 
+        RowBox[{"Tensor", "[", 
+         RowBox[{"V", ",", 
+          RowBox[{"{", "i", "}"}], ",", 
+          RowBox[{"{", "Void", "}"}]}], "]"}]}], "//", 
+       RowBox[{"ToArrayValues", "[", "]"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"SetTensorValues", "[", 
+      RowBox[{
+       RowBox[{"Tensor", "[", 
+        RowBox[{"V", ",", 
+         RowBox[{"{", "Void", "}"}], ",", 
+         RowBox[{"{", "i", "}"}]}], "]"}], ",", " ", "VdValues"}], "]"}], 
+     ";"}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.6704697642868614`*^9, 3.6704697645520616`*^9}, {
+  3.670470615627146*^9, 3.670470615845546*^9}, {3.6704706916616783`*^9, 
+  3.6704706918488784`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"DefineFourVectorU", "[", 
+   RowBox[{"X", ",", " ", "G", ",", 
+    RowBox[{"{", 
+     RowBox[{"a0", ",", "a1", ",", "a2", ",", "a3"}], "}"}]}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Xu", "[", "i", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"%", "//", 
+  RowBox[{"EinsteinArray", "[", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Xd", "[", "i", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"%", "//", 
+  RowBox[{"EinsteinArray", "[", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Xu", "[", "i", "]"}], 
+   RowBox[{"Xd", "[", "i", "]"}]}], "//", 
+  RowBox[{"EinsteinSum", "[", "]"}]}]}], "Input",
+ CellChangeTimes->{{3.670460247089658*^9, 3.670460249913263*^9}, {
+  3.670460397692321*^9, 3.6704603978951206`*^9}, {3.6704695638889112`*^9, 
+  3.670469607303787*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"DefineFourFieldUU", "[", 
+    RowBox[{"F_", ",", "G_", ",", "FuuValues_"}], "]"}], " ", ":=", " ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"FudValues", ",", "FddValues", ",", "FduValues"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"DefineTensorShortcuts", "[", 
+       RowBox[{"F", ",", "2"}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"SetTensorValues", "[", 
+       RowBox[{
+        RowBox[{"Tensor", "[", 
+         RowBox[{"F", ",", 
+          RowBox[{"{", 
+           RowBox[{"a", ",", "b"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Void", ",", "Void"}], "}"}]}], "]"}], ",", " ", 
+        RowBox[{"FuuValues", "//", 
+         RowBox[{"ToArrayValues", "[", "]"}]}]}], "]"}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"FudValues", " ", "=", " ", 
+       RowBox[{
+        RowBox[{"Tensor", "[", 
+         RowBox[{"G", ",", 
+          RowBox[{"{", 
+           RowBox[{"Void", ",", "Void"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"c", ",", "b"}], "}"}]}], "]"}], 
+        RowBox[{"Tensor", "[", 
+         RowBox[{"F", ",", 
+          RowBox[{"{", 
+           RowBox[{"a", ",", "b"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Void", ",", "Void"}], "}"}]}], "]"}]}]}], ";", 
+      RowBox[{"SetTensorValues", "[", 
+       RowBox[{
+        RowBox[{"Tensor", "[", 
+         RowBox[{"F", ",", 
+          RowBox[{"{", 
+           RowBox[{"a", ",", "Void"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Void", ",", "c"}], "}"}]}], "]"}], ",", " ", 
+        RowBox[{"FudValues", "//", 
+         RowBox[{"ToArrayValues", "[", "]"}]}]}], "]"}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"FddValues", " ", "=", " ", 
+       RowBox[{
+        RowBox[{"Tensor", "[", 
+         RowBox[{"G", ",", 
+          RowBox[{"{", 
+           RowBox[{"Void", ",", "Void"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"a", ",", "c"}], "}"}]}], "]"}], 
+        RowBox[{"Tensor", "[", 
+         RowBox[{"G", ",", 
+          RowBox[{"{", 
+           RowBox[{"Void", ",", "Void"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"b", ",", "d"}], "}"}]}], "]"}], 
+        RowBox[{"Tensor", "[", 
+         RowBox[{"F", ",", 
+          RowBox[{"{", 
+           RowBox[{"c", ",", "d"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Void", ",", "Void"}], "}"}]}], "]"}]}]}], ";", 
+      RowBox[{"SetTensorValues", "[", 
+       RowBox[{
+        RowBox[{"Tensor", "[", 
+         RowBox[{"F", ",", 
+          RowBox[{"{", 
+           RowBox[{"Void", ",", "Void"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"b", ",", "c"}], "}"}]}], "]"}], ",", " ", 
+        RowBox[{"FddValues", "//", 
+         RowBox[{"ToArrayValues", "[", "]"}]}]}], "]"}], ";", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{"FduValues", " ", "=", " ", 
+       RowBox[{
+        RowBox[{"Tensor", "[", 
+         RowBox[{"G", ",", 
+          RowBox[{"{", 
+           RowBox[{"Void", ",", "Void"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"c", ",", "a"}], "}"}]}], "]"}], 
+        RowBox[{"Tensor", "[", 
+         RowBox[{"F", ",", 
+          RowBox[{"{", 
+           RowBox[{"a", ",", "b"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Void", ",", "Void"}], "}"}]}], "]"}]}]}], ";", 
+      RowBox[{"SetTensorValues", "[", 
+       RowBox[{
+        RowBox[{"Tensor", "[", 
+         RowBox[{"F", ",", 
+          RowBox[{"{", 
+           RowBox[{"Void", ",", "c"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"b", ",", "Void"}], "}"}]}], "]"}], ",", " ", 
+        RowBox[{"FduValues", "//", 
+         RowBox[{"ToArrayValues", "[", "]"}]}]}], "]"}], ";"}]}], 
+    "\[IndentingNewLine]", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.6704697669388657`*^9, 3.670469790136106*^9}, {
+  3.670469961440005*^9, 3.670469998287269*^9}, {3.6704705760654764`*^9, 
+  3.670470905413251*^9}, {3.6704709499513283`*^9, 3.6704711507236786`*^9}, {
+  3.6704712996415377`*^9, 3.6704713001251388`*^9}, {3.670473016206131*^9, 
+  3.6704730411193743`*^9}, {3.6704731327539344`*^9, 3.670473163361188*^9}, {
+  3.670473225886097*^9, 3.670473275603383*^9}, {3.670473315055852*^9, 
+  3.67047331961106*^9}, {3.6704735591338778`*^9, 3.67047356016348*^9}, {
+  3.670473621658787*^9, 3.670473621814787*^9}, {3.670473667663267*^9, 
+  3.670473668006468*^9}, {3.670473788735078*^9, 3.6704738705416207`*^9}, {
+  3.670473907856886*^9, 3.6704739614117794`*^9}, {3.670474011706267*^9, 
+  3.670474072608773*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"DefineTensorShortcuts", "[", 
+    RowBox[{"{", 
+     RowBox[{"S", ",", "2"}], "}"}], "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"FuuValues", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"0", ",", 
+         RowBox[{"-", "E1"}], ",", 
+         RowBox[{"-", "E2"}], ",", 
+         RowBox[{"-", "E3"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"E1", ",", "0", ",", 
+         RowBox[{"-", "B3"}], ",", "B2"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"E2", ",", "B3", ",", "0", ",", 
+         RowBox[{"-", "B1"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"E3", ",", 
+         RowBox[{"-", "B2"}], ",", "B1", ",", "0"}], "}"}]}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"SetTensorValues", "[", 
+    RowBox[{
+     RowBox[{"Suu", "[", 
+      RowBox[{"i", ",", "j"}], "]"}], ",", "FuuValues"}], "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Suu", "[", 
+      RowBox[{"i", ",", "j"}], "]"}], "//", 
+     RowBox[{"ToArrayValues", "[", "]"}]}], "//", "MatrixForm"}]}]}]], "Input",
+ CellChangeTimes->{{3.670471356254037*^9, 3.670471357424039*^9}, {
+   3.6704714485593977`*^9, 3.670471483784259*^9}, 3.670548907872373*^9}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"DefineFourFieldUU", "[", 
+   RowBox[{"F", ",", "G", ",", "FuuValues"}], "]"}], 
+  " "}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Fuu", "[", 
+    RowBox[{"i", ",", "j"}], "]"}], "//", 
+   RowBox[{"ToArrayValues", "[", "]"}]}], "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.6704714185761456`*^9, 3.6704714885266676`*^9}, {
+   3.6704715325031443`*^9, 3.6704715326903443`*^9}, 3.6705489096819763`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Fud", "[", 
+    RowBox[{"i", ",", "j"}], "]"}], "//", 
+   RowBox[{"ToArrayValues", "[", "]"}]}], "//", "MatrixForm"}]], "Input",
+ CellChangeTimes->{
+  3.670471456671412*^9, {3.670471534671548*^9, 3.670471537838353*^9}, {
+   3.6704716733869896`*^9, 3.67047167348059*^9}, {3.6704730655022173`*^9, 
+   3.6704730662822185`*^9}, {3.670473895330064*^9, 3.6704738956888647`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Fdu", "[", 
+    RowBox[{"i", ",", "j"}], "]"}], "//", 
+   RowBox[{"ToArrayValues", "[", "]"}]}], "//", "MatrixForm"}]], "Input",
+ CellChangeTimes->{{3.670471564108799*^9, 3.670471584544835*^9}, {
+   3.67047337695676*^9, 3.6704733771751604`*^9}, 3.6704737098769407`*^9, {
+   3.670473897170867*^9, 3.6704739002440724`*^9}, {3.670473975810604*^9, 
+   3.6704739759978046`*^9}, 3.670548898574757*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Fdd", "[", 
+    RowBox[{"i", ",", "j"}], "]"}], "//", 
+   RowBox[{"ToArrayValues", "[", "]"}]}], "//", "MatrixForm"}]], "Input",
+ CellChangeTimes->{{3.6704733810439672`*^9, 3.6704733811375675`*^9}, {
+   3.6704735129109974`*^9, 3.6704735129889975`*^9}, 3.670473712747346*^9, {
+   3.6704739781662083`*^9, 3.6704739804126124`*^9}}]
+},
+WindowSize->{1331, 945},
+WindowMargins->{{Automatic, 41}, {-55, Automatic}},
+PrintingCopies->1,
+PrintingPageRange->{Automatic, Automatic},
+Magnification:>1.25 Inherited,
+FrontEndVersion->"10.0 for Microsoft Windows (64-bit) (July 1, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 1546, 31, 198, "Input"],
+Cell[2107, 53, 1601, 40, 152, "Input"],
+Cell[3711, 95, 821, 20, 152, "Input"],
+Cell[4535, 117, 4669, 115, 336, "Input"],
+Cell[9207, 234, 1296, 36, 129, "Input"],
+Cell[10506, 272, 459, 11, 60, "Input"],
+Cell[10968, 285, 419, 9, 36, "Input"],
+Cell[11390, 296, 442, 9, 36, "Input"],
+Cell[11835, 307, 375, 8, 36, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

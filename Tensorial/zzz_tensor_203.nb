@@ -1,0 +1,121 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      4367,        112]
+NotebookOptionsPosition[      3960,         94]
+NotebookOutlinePosition[      4393,        112]
+CellTagsIndexPosition[      4350,        109]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"Get", "[", "\"\<C:\\\\MyLib\\\\Math\\\\TensorInitialize1.m\>\"", 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.6704378376801805`*^9, 3.670437890127472*^9}, {
+   3.6704383156018147`*^9, 3.6704383463338685`*^9}, {3.6704442484125605`*^9, 
+   3.6704442504717646`*^9}, {3.670444396534819*^9, 3.6704444559085226`*^9}, {
+   3.670454144133815*^9, 3.6704541750062685`*^9}, {3.6704546014878125`*^9, 
+   3.670454662624319*^9}, {3.670455000973309*^9, 3.6704550076501207`*^9}, {
+   3.670457756421713*^9, 3.6704577623965235`*^9}, {3.670459815655306*^9, 
+   3.67045981838531*^9}, {3.6704599635591636`*^9, 3.6704599743855824`*^9}, 
+   3.6704601757039337`*^9, {3.6704620506712027`*^9, 3.6704620508896027`*^9}, {
+   3.6704636987899895`*^9, 3.67046369900839*^9}, {3.6704695542948947`*^9, 
+   3.670469556104498*^9}, {3.67054340007117*^9, 3.670543409805587*^9}, {
+   3.6705450580324607`*^9, 3.6705451113689537`*^9}, {3.670546263789763*^9, 
+   3.6705462683449707`*^9}, 3.6705499629954133`*^9}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"DefineTensorShortcuts", "[", 
+   RowBox[{"A1", ",", "1"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetTensorValues", "[", 
+   RowBox[{
+    RowBox[{"A1u", "[", "i", "]"}], ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"a0", ",", "a1", ",", "a2", ",", "a3"}], "}"}]}], "]"}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.6705101086370273`*^9, 3.670510158494714*^9}, {
+   3.6705102085552015`*^9, 3.6705102864853373`*^9}, {3.6705103871055126`*^9, 
+   3.670510412471157*^9}, 3.670510485182884*^9, {3.6705164168882265`*^9, 
+   3.6705164170442266`*^9}, 3.670517186967969*^9, {3.6705176664940057`*^9, 
+   3.6705176735296173`*^9}, {3.6705187489798927`*^9, 3.670518749432294*^9}, 
+   3.670526557044107*^9, {3.670530101158687*^9, 3.670530114761911*^9}, 
+   3.6705332061933136`*^9, {3.6705486693323574`*^9, 3.670548672733163*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"CreateFourVectorU", "[", 
+   RowBox[{"C1", ",", " ", "G", ",", 
+    RowBox[{"{", 
+     RowBox[{"c0", ",", "c1", ",", "c2", ",", "c3"}], "}"}]}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"C1u", "[", "i", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"C1u", "[", "i", "]"}], "//", 
+  RowBox[{"EinsteinArray", "[", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"C1u", "[", "i", "]"}], "//", 
+  RowBox[{"ToArrayValues", "[", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"C1u", "[", "j", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"C1u", "[", "j", "]"}], "//", 
+  RowBox[{"EinsteinArray", "[", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"C1u", "[", "j", "]"}], "//", 
+  RowBox[{"ToArrayValues", "[", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"C1d", "[", "i", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"C1d", "[", "i", "]"}], "//", 
+  RowBox[{"EinsteinArray", "[", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"C1d", "[", "i", "]"}], "//", 
+  RowBox[{"ToArrayValues", "[", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"C1d", "[", "j", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"C1d", "[", "j", "]"}], "//", 
+  RowBox[{"EinsteinArray", "[", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"C1d", "[", "j", "]"}], "//", 
+  RowBox[{"ToArrayValues", "[", "]"}]}]}], "Input",
+ CellChangeTimes->{{3.6705486576011367`*^9, 3.670548660143941*^9}, {
+  3.670548715617638*^9, 3.6705487923073716`*^9}, {3.670549116350737*^9, 
+  3.6705491188935413`*^9}}]
+},
+WindowSize->{1331, 945},
+WindowMargins->{{Automatic, 0}, {0, Automatic}},
+PrintingCopies->1,
+PrintingPageRange->{Automatic, Automatic},
+Magnification:>1.25 Inherited,
+FrontEndVersion->"10.0 for Microsoft Windows (64-bit) (July 1, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 991, 14, 36, "Input"],
+Cell[1552, 36, 867, 17, 60, "Input"],
+Cell[2422, 55, 1534, 37, 313, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

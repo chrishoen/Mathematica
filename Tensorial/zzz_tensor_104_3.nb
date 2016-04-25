@@ -1,0 +1,423 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     14630,        414]
+NotebookOptionsPosition[     13578,        379]
+NotebookOutlinePosition[     14014,        397]
+CellTagsIndexPosition[     13971,        394]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{"ClearAll", ";"}], "\[IndentingNewLine]", 
+ RowBox[{"ClearCache", ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Unprotect", "[", "Symmetric", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Needs", "[", "\"\<TensorCalculus3`Tensorial`\>\"", "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"DeclareBaseIndices", "[", 
+  RowBox[{"{", 
+   RowBox[{"0", ",", "1", ",", "2", ",", "3"}], "}"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"DefineTensorShortcuts", "[", 
+  RowBox[{"G", ",", "2"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"SetMetricValues", "[", 
+  RowBox[{"G", ",", 
+   RowBox[{"DiagonalMatrix", "[", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", 
+      RowBox[{"-", "1"}], ",", 
+      RowBox[{"-", "1"}], ",", 
+      RowBox[{"-", "1"}]}], "}"}], "]"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.6704378376801805`*^9, 3.670437890127472*^9}, {
+   3.6704383156018147`*^9, 3.6704383463338685`*^9}, {3.6704442484125605`*^9, 
+   3.6704442504717646`*^9}, {3.670444396534819*^9, 3.6704444559085226`*^9}, {
+   3.670454144133815*^9, 3.6704541750062685`*^9}, {3.6704546014878125`*^9, 
+   3.670454662624319*^9}, {3.670455000973309*^9, 3.6704550076501207`*^9}, {
+   3.670457756421713*^9, 3.6704577623965235`*^9}, {3.670459815655306*^9, 
+   3.67045981838531*^9}, {3.6704599635591636`*^9, 3.6704599743855824`*^9}, 
+   3.6704601757039337`*^9, {3.6704620506712027`*^9, 3.6704620508896027`*^9}, {
+   3.6704636987899895`*^9, 3.67046369900839*^9}, {3.6704695542948947`*^9, 
+   3.670469556104498*^9}}],
+
+Cell[BoxData[
+ RowBox[{"(*", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Clear", "[", "c1", "]"}], ";", "\[IndentingNewLine]", 
+   RowBox[{"DefineTensorShortcuts", "[", 
+    RowBox[{"C1", ",", "1"}], "]"}], ";", "\[IndentingNewLine]", 
+   RowBox[{"SetTensorValues", "[", 
+    RowBox[{
+     RowBox[{"C1u", "[", "i", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"c0", ",", "c1", ",", "c2", ",", "c3"}], "}"}]}], "]"}], ";", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"C1u", "[", "i", "]"}], "\[IndentingNewLine]", 
+        RowBox[{"C1u", "[", "i", "]"}]}], "//", 
+       RowBox[{
+        RowBox[{"EinsteinArray", "[", "]"}], "\[IndentingNewLine]", 
+        RowBox[{"C1u", "[", "i", "]"}]}]}], "//", 
+      RowBox[{
+       RowBox[{"ToArrayValues", "[", "]"}], "\[IndentingNewLine]", 
+       RowBox[{"C1u", "[", "j", "]"}], "\[IndentingNewLine]", 
+       RowBox[{"C1u", "[", "j", "]"}]}]}], "//", 
+     RowBox[{
+      RowBox[{"EinsteinArray", "[", "]"}], "\[IndentingNewLine]", 
+      RowBox[{"C1u", "[", "j", "]"}]}]}], "//", 
+    RowBox[{"ToArrayValues", "[", "]"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.6705153103470974`*^9, 3.670515324090721*^9}, 
+   3.67051537502481*^9, {3.6705154097036705`*^9, 3.6705154104524717`*^9}, {
+   3.6705162412319202`*^9, 3.6705162505451365`*^9}, {3.670516305348032*^9, 
+   3.670516306455634*^9}, {3.670516419555831*^9, 3.670516477369532*^9}, {
+   3.6705171350198784`*^9, 3.6705171447854958`*^9}, {3.67051719323918*^9, 
+   3.6705172159216194`*^9}, {3.6705174199699755`*^9, 
+   3.6705174201727757`*^9}, {3.670517676571623*^9, 3.670517707397277*^9}, {
+   3.670547889360597*^9, 3.6705479138214397`*^9}, {3.6705480868101416`*^9, 
+   3.670548103486571*^9}, {3.6705481988807373`*^9, 3.6705482001287394`*^9}},
+ EmphasizeSyntaxErrors->True],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"SetTensorValues", "[", 
+     RowBox[{
+      RowBox[{"C1d", "[", "i", "]"}], ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Gdd", "[", 
+         RowBox[{"i", ",", "j"}], "]"}], 
+        RowBox[{"C1u", "[", "j", "]"}]}], "//", 
+       RowBox[{"ToArrayValues", "[", "]"}]}]}], "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"C1d", "[", "i", "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"C1d", "[", "i", "]"}], "//", 
+    RowBox[{"EinsteinArray", "[", "]"}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"C1d", "[", "i", "]"}], "//", 
+    RowBox[{"ToArrayValues", "[", "]"}]}], "\[IndentingNewLine]", 
+   RowBox[{"C1d", "[", "j", "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"C1d", "[", "j", "]"}], "//", 
+    RowBox[{"EinsteinArray", "[", "]"}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"C1d", "[", "j", "]"}], "//", 
+    RowBox[{"ToArrayValues", "[", "]"}]}], "\[IndentingNewLine]"}], 
+  "*)"}]], "Input",
+ CellChangeTimes->{{3.6705153379591455`*^9, 3.6705153592531824`*^9}, {
+   3.670516259218752*^9, 3.670516267923567*^9}, 3.6705163028832273`*^9, {
+   3.6705163422888966`*^9, 3.6705163510717115`*^9}, 3.670517184050764*^9, {
+   3.6705173160113945`*^9, 3.670517455850038*^9}, {3.6705176506287775`*^9, 
+   3.6705176829052343`*^9}, {3.6705482091611547`*^9, 3.67054821217196*^9}},
+ EmphasizeSyntaxErrors->True],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.6705159328037825`*^9, 3.6705159981210966`*^9}, 
+   3.6705162708407717`*^9, {3.670516352194914*^9, 3.6705163566409216`*^9}, 
+   3.670517191523177*^9, {3.6705177115312843`*^9, 3.6705177370061283`*^9}, 
+   3.6705177692201843`*^9, {3.670517874863569*^9, 3.670517875050769*^9}, {
+   3.6705479320266714`*^9, 3.6705479324790726`*^9}, 3.6705482272259865`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SetFourVectorD", "[", 
+   RowBox[{"V_", ",", "G_"}], "]"}], " ", ":=", " ", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "VdValues", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"VdValues", " ", "=", " ", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Tensor", "[", 
+         RowBox[{"G", ",", 
+          RowBox[{"{", 
+           RowBox[{"Void", ",", "Void"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "j"}], "}"}]}], "]"}], 
+        RowBox[{"Tensor", "[", 
+         RowBox[{"V", ",", 
+          RowBox[{"{", "j", "}"}], ",", 
+          RowBox[{"{", "Void", "}"}]}], "]"}]}], "//", 
+       RowBox[{"ToArrayValues", "[", "]"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"SetTensorValues", "[", 
+      RowBox[{
+       RowBox[{"Tensor", "[", 
+        RowBox[{"V", ",", 
+         RowBox[{"{", "Void", "}"}], ",", 
+         RowBox[{"{", "i", "}"}]}], "]"}], ",", " ", "VdValues"}], "]"}], 
+     ";"}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{
+  3.6705178508707266`*^9, {3.6705480472016726`*^9, 3.670548047544873*^9}, {
+   3.670548130708618*^9, 3.670548131067419*^9}, 3.670548235447201*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", "c2", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"DefineTensorShortcuts", "[", 
+   RowBox[{"C2", ",", "1"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetTensorValues", "[", 
+   RowBox[{
+    RowBox[{"C2u", "[", "i", "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"a0", ",", "a1", ",", "a2", ",", "a3"}], "}"}]}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"C2u", "[", "i", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"C2u", "[", "i", "]"}], "//", 
+  RowBox[{"EinsteinArray", "[", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"C2u", "[", "i", "]"}], "//", 
+  RowBox[{"ToArrayValues", "[", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"C2u", "[", "j", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"C2u", "[", "j", "]"}], "//", 
+  RowBox[{"EinsteinArray", "[", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"C2u", "[", "j", "]"}], "//", 
+  RowBox[{"ToArrayValues", "[", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"SetFourVectorD", "[", 
+  RowBox[{"C2", ",", "G"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"C2d", "[", "i", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"C2d", "[", "i", "]"}], "//", 
+  RowBox[{"EinsteinArray", "[", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"C2d", "[", "i", "]"}], "//", 
+  RowBox[{"ToArrayValues", "[", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"C2d", "[", "j", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"C2d", "[", "j", "]"}], "//", 
+  RowBox[{"EinsteinArray", "[", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"C2d", "[", "j", "]"}], "//", 
+  RowBox[{"ToArrayValues", "[", "]"}]}]}], "Input",
+ CellChangeTimes->{{3.6705178391083064`*^9, 3.6705178982948093`*^9}, {
+  3.6705479485159006`*^9, 3.6705479570959153`*^9}, {3.67054805141368*^9, 
+  3.6705480518816805`*^9}, {3.6705481099293823`*^9, 3.6705481743730946`*^9}, {
+  3.6705482675832567`*^9, 3.6705482989237113`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   TemplateBox[{"C2",InterpretationBox[
+      TagBox[
+       StyleBox["i", ShowContents -> False], 
+       StyleForm[#, ShowContents -> False]& ], 
+      SequenceForm[
+       StyleForm[$CellContext`i, ShowContents -> False]], Editable -> False],
+     InterpretationBox["i", 
+      SequenceForm[$CellContext`i], Editable -> False]},
+    "Subsuperscript"],
+   FontFamily->"Courier",
+   FontSize->16],
+  StyleForm[#, FontSize -> 16, FontFamily -> "Courier"]& ]], "Output",
+ CellChangeTimes->{3.6705483051637225`*^9}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   RowBox[{"{", 
+    RowBox[{"a0", ",", "a1", ",", "a2", ",", "a3"}], "}"}],
+   FontFamily->"Courier",
+   FontSize->16],
+  StyleForm[#, FontSize -> 16, FontFamily -> "Courier"]& ]], "Output",
+ CellChangeTimes->{3.6705483051637225`*^9}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   RowBox[{"{", 
+    RowBox[{"a0", ",", "a1", ",", "a2", ",", "a3"}], "}"}],
+   FontFamily->"Courier",
+   FontSize->16],
+  StyleForm[#, FontSize -> 16, FontFamily -> "Courier"]& ]], "Output",
+ CellChangeTimes->{3.6705483051793222`*^9}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   TemplateBox[{"C2",InterpretationBox[
+      TagBox[
+       StyleBox["j", ShowContents -> False], 
+       StyleForm[#, ShowContents -> False]& ], 
+      SequenceForm[
+       StyleForm[$CellContext`j, ShowContents -> False]], Editable -> False],
+     InterpretationBox["j", 
+      SequenceForm[$CellContext`j], Editable -> False]},
+    "Subsuperscript"],
+   FontFamily->"Courier",
+   FontSize->16],
+  StyleForm[#, FontSize -> 16, FontFamily -> "Courier"]& ]], "Output",
+ CellChangeTimes->{3.6705483051793222`*^9}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   RowBox[{"{", 
+    RowBox[{"a0", ",", "a1", ",", "a2", ",", "a3"}], "}"}],
+   FontFamily->"Courier",
+   FontSize->16],
+  StyleForm[#, FontSize -> 16, FontFamily -> "Courier"]& ]], "Output",
+ CellChangeTimes->{3.6705483051793222`*^9}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   RowBox[{"{", 
+    RowBox[{"a0", ",", "a1", ",", "a2", ",", "a3"}], "}"}],
+   FontFamily->"Courier",
+   FontSize->16],
+  StyleForm[#, FontSize -> 16, FontFamily -> "Courier"]& ]], "Output",
+ CellChangeTimes->{3.6705483051793222`*^9}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   TemplateBox[{"C2",InterpretationBox["i", 
+      SequenceForm[$CellContext`i], Editable -> False],InterpretationBox[
+      TagBox[
+       StyleBox["i", ShowContents -> False], 
+       StyleForm[#, ShowContents -> False]& ], 
+      SequenceForm[
+       StyleForm[$CellContext`i, ShowContents -> False]], Editable -> False]},
+    "Subsuperscript"],
+   FontFamily->"Courier",
+   FontSize->16],
+  StyleForm[#, FontSize -> 16, FontFamily -> "Courier"]& ]], "Output",
+ CellChangeTimes->{3.6705483052105227`*^9}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   RowBox[{"{", 
+    RowBox[{"a0", ",", 
+     RowBox[{"-", "a1"}], ",", 
+     RowBox[{"-", "a2"}], ",", 
+     RowBox[{"-", "a3"}]}], "}"}],
+   FontFamily->"Courier",
+   FontSize->16],
+  StyleForm[#, FontSize -> 16, FontFamily -> "Courier"]& ]], "Output",
+ CellChangeTimes->{3.6705483052105227`*^9}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   RowBox[{"{", 
+    RowBox[{"a0", ",", 
+     RowBox[{"-", "a1"}], ",", 
+     RowBox[{"-", "a2"}], ",", 
+     RowBox[{"-", "a3"}]}], "}"}],
+   FontFamily->"Courier",
+   FontSize->16],
+  StyleForm[#, FontSize -> 16, FontFamily -> "Courier"]& ]], "Output",
+ CellChangeTimes->{3.6705483052105227`*^9}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   TemplateBox[{"C2",InterpretationBox["j", 
+      SequenceForm[$CellContext`j], Editable -> False],InterpretationBox[
+      TagBox[
+       StyleBox["j", ShowContents -> False], 
+       StyleForm[#, ShowContents -> False]& ], 
+      SequenceForm[
+       StyleForm[$CellContext`j, ShowContents -> False]], Editable -> False]},
+    "Subsuperscript"],
+   FontFamily->"Courier",
+   FontSize->16],
+  StyleForm[#, FontSize -> 16, FontFamily -> "Courier"]& ]], "Output",
+ CellChangeTimes->{3.6705483052105227`*^9}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   RowBox[{"{", 
+    RowBox[{"a0", ",", 
+     RowBox[{"-", "a1"}], ",", 
+     RowBox[{"-", "a2"}], ",", 
+     RowBox[{"-", "a3"}]}], "}"}],
+   FontFamily->"Courier",
+   FontSize->16],
+  StyleForm[#, FontSize -> 16, FontFamily -> "Courier"]& ]], "Output",
+ CellChangeTimes->{3.6705483052105227`*^9}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   RowBox[{"{", 
+    RowBox[{"a0", ",", 
+     RowBox[{"-", "a1"}], ",", 
+     RowBox[{"-", "a2"}], ",", 
+     RowBox[{"-", "a3"}]}], "}"}],
+   FontFamily->"Courier",
+   FontSize->16],
+  StyleForm[#, FontSize -> 16, FontFamily -> "Courier"]& ]], "Output",
+ CellChangeTimes->{3.6705483052261224`*^9}]
+}, Open  ]]
+},
+WindowSize->{1331, 945},
+WindowMargins->{{Automatic, 41}, {-55, Automatic}},
+PrintingCopies->1,
+PrintingPageRange->{Automatic, Automatic},
+Magnification:>1.25 Inherited,
+FrontEndVersion->"10.0 for Microsoft Windows (64-bit) (July 1, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 1546, 31, 198, "Input"],
+Cell[2107, 53, 1837, 39, 244, "Input"],
+Cell[3947, 94, 1413, 34, 198, "Input"],
+Cell[5363, 130, 400, 5, 36, "Input"],
+Cell[5766, 137, 1201, 31, 106, "Input"],
+Cell[CellGroupData[{
+Cell[6992, 172, 1942, 46, 382, "Input"],
+Cell[8937, 220, 548, 15, 42, "Output"],
+Cell[9488, 237, 270, 8, 40, "Output"],
+Cell[9761, 247, 270, 8, 40, "Output"],
+Cell[10034, 257, 548, 15, 46, "Output"],
+Cell[10585, 274, 270, 8, 40, "Output"],
+Cell[10858, 284, 270, 8, 40, "Output"],
+Cell[11131, 294, 542, 14, 42, "Output"],
+Cell[11676, 310, 333, 11, 40, "Output"],
+Cell[12012, 323, 333, 11, 40, "Output"],
+Cell[12348, 336, 542, 14, 46, "Output"],
+Cell[12893, 352, 333, 11, 40, "Output"],
+Cell[13229, 365, 333, 11, 40, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

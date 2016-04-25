@@ -1,0 +1,1018 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     22257,        804]*)
+(*NotebookOutlinePosition[     23007,        830]*)
+(*  CellTagsIndexPosition[     22963,        826]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Matrices, Arrays and Tensors", "Title"],
+
+Cell[TextData[{
+  "How do we go from tensor contractions in Tensorial to matrix or array \
+operations in ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  "?"
+}], "Chaptertitle"],
+
+Cell["David Park", "Subtitle"],
+
+Cell[TextData[{
+  "We have the tensor formaulation where we carry out expansions using  ",
+  Cell[BoxData[
+      \(EinsteinSum[]\)]],
+  " and ",
+  Cell[BoxData[
+      \(EinsteinArray[]\)]],
+  " or ",
+  Cell[BoxData[
+      \(ToArrayValues\)]],
+  ". On the other hand, we can carry out vector, matrix and more general \
+array operations with ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " arrays. This notebook explores the relation between the two methods. You \
+should seldom have to use the methods of this notebook."
+}], "Text"],
+
+Cell[TextData[{
+  "Actually, Tensorial will generally be easier and more efficient when we \
+are working with expressions that have contractions. Consider this: with \
+Tensorial we start with simple indicial expressions and then, when expanding, \
+",
+  StyleBox["generate only the terms needed",
+    FontWeight->"Bold"],
+  ". When we go to a vector-matrix-array representation we are always \
+starting with the full arrays. If we take a direct product we will obtain a \
+huge array, which is then simplified. This is very inefficient as regards to \
+space. If we can arrange it as a series of dot products it might be more \
+efficient."
+}], "Text"],
+
+Cell["\<\
+I think that tensor methods have prospered precisely because they are much \
+more economical than matrix and array methods in day to day use.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Initialization", "Section"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input"],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[{{u, v}, 1}, {{R, S, T}, 2}, {{T, \[Epsilon]}, 
+        3}]\)], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  "Some ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " Pointers"
+}], "Section"],
+
+Cell[TextData[{
+  "The Prime Rule for Products of 'Tensor' Arrays in ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  ":",
+  StyleBox["\n\t",
+    FontWeight->"Plain"],
+  "S.T dots the lowest level of S with the highest level of T,\nor \
+equivalently\n\tS.T dots the last level of S with the first level of T."
+}], "EmphasisText",
+  FontWeight->"Bold"],
+
+Cell[TextData[{
+  "The ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " ",
+  Cell[BoxData[
+      \(Transpose[T, {n1, n2, n3,  ... }]\)]],
+  " moves levels ",
+  Cell[BoxData[
+      \({1, 2, 3,  ... }\)]],
+  " to levels ",
+  Cell[BoxData[
+      \({n1, n2, n3,  ... }\)]],
+  ". We will always want to move the contracted level to the first or last \
+level when doing Dot products and to the first two levels when doing single \
+array contractions."
+}], "EmphasisText",
+  FontWeight->"Bold"],
+
+Cell[TextData[{
+  "If R, S, T,... are ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " tensor arrays, then their direct product is given by ",
+  Cell[BoxData[
+      \(Outer[Times, R, S, T,  ... ]\)]],
+  ". This will produce a single ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " array."
+}], "EmphasisText",
+  FontWeight->"Bold"],
+
+Cell[TextData[{
+  "The basic ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " command for contraction of the top two levels in a single array T is ",
+  Cell[BoxData[
+      \(Tr[T, Plus, 2]\)]],
+  ". We will have to use Transpose on T to put the contraction slots in the \
+first two levels. We will have to repeat the operation if we want to do \
+multiple contractions."
+}], "EmphasisText",
+  FontWeight->"Bold"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["1. Contracting two vectors", "Section"],
+
+Cell["A trivial exercise, but it will fit our pattern.", "Text"],
+
+Cell[BoxData[
+    \(DefineTensorShortcuts[{u, v}, 1]\)], "Input"],
+
+Cell["The following is the Tensorial contraction of two vectors.", "Text"],
+
+Cell[BoxData[{
+    \(e1 = uu[i] vd[i]\), "\[IndentingNewLine]", 
+    \(% // EinsteinSum[]\)}], "Input"],
+
+Cell[BoxData[{
+    \(uvec = uu[i] // EinsteinArray[]\), "\[IndentingNewLine]", 
+    \(vvec = vd[i] // EinsteinArray[]\)}], "Input"],
+
+Cell["\<\
+We do the array operations, by putting the two vectors side by side and \
+dotting. Since the dot product is symmetrical, the order doesn't matter.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(uvec . vvec\)], "Input"],
+
+Cell[TextData[{
+  "We can also produce a single tensor and contract using ",
+  Cell[BoxData[
+      \(Tr\)]],
+  ". Notice that we generate extra terms, which are then eliminated."
+}], "Text"],
+
+Cell[BoxData[{
+    \(uv = Outer[Times, uvec, vvec]\), "\[IndentingNewLine]", 
+    \(Tr[uv]\)}], "Input"],
+
+Cell[BoxData[
+    \(Clear[uvec, vvec]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["2. Contracting a vector on a 2nd order tensor", "Section"],
+
+Cell[TextData[{
+  "We can contract a vector on either slot of a 2nd order tensor. In tensor \
+indicial expressions the factors can appear in any order. Here we contract ",
+  Cell[BoxData[
+      \(u\)]],
+  " on the second index of ",
+  Cell[BoxData[
+      \(T\)]],
+  ". Contracting a second order tensor on a vector gives us a vector."
+}], "Text"],
+
+Cell[BoxData[{
+    \(Tdd[i, j] uu[j]\), "\[IndentingNewLine]", 
+    \(% // ToArrayValues[]\)}], "Input"],
+
+Cell["The following uses the dot product.", "Text"],
+
+Cell[BoxData[{
+    \(Tmat = Tdd[i, j] // ToArrayValues[]\), "\[IndentingNewLine]", 
+    \(uvec = uu[j] // ToArrayValues[]\), "\[IndentingNewLine]", 
+    \(MatrixForm[Tmat] . MatrixForm[uvec]\), "\[IndentingNewLine]", 
+    \(% /. MatrixForm \[Rule] Identity\)}], "Input"],
+
+Cell[TextData[{
+  "We can also form the tensor product with ",
+  Cell[BoxData[
+      \(Outer\)]],
+  " and contract using ",
+  Cell[BoxData[
+      \(ContractArray\)]],
+  " on the 2nd and 3rd slots or levels. Notice again that many extra unused \
+terms are generated."
+}], "Text"],
+
+Cell[BoxData[{
+    \(Tu = Outer[Times, Tmat, uvec]\), "\n", 
+    \(ContractArray[Tu, {2, 3}]\)}], "Input"],
+
+Cell["If we contract the vector on the first index we obtain...", "Text"],
+
+Cell[BoxData[{
+    \(Tdd[j, i] uu[j]\), "\[IndentingNewLine]", 
+    \(% // ToArrayValues[]\)}], "Input"],
+
+Cell["\<\
+which is definitely different than contracting on the second slot.\
+\>", "Text"],
+
+Cell[TextData[{
+  "In the following, the more explicit version of ",
+  Cell[BoxData[
+      \(Transpose\)]],
+  " is used, because we are going to have to become familiar with its use. We \
+are contracting on the first slot, so we have to move the first slot to be \
+adjacent to the vector in the array operation. The following does the \
+contraction by using a dot product."
+}], "Text"],
+
+Cell[BoxData[{
+    \(MatrixForm[Transpose[Tmat, {2, 1}]] . 
+      MatrixForm[uvec]\), "\[IndentingNewLine]", 
+    \(% /. MatrixForm \[Rule] Identity\)}], "Input"],
+
+Cell[TextData[{
+  "The following does the contraction, using ",
+  Cell[BoxData[
+      \(ContractArray\)]],
+  ", by contracting the 1st and 3rd levels in the direct product array."
+}], "Text"],
+
+Cell[BoxData[
+    \(ContractArray[Tu, {1, 3}]\)], "Input"],
+
+Cell[TextData[{
+  "We can actually do that directly, bypassing ",
+  Cell[BoxData[
+      \(ContractArray\)]],
+  ". We have to move slots 1 and 3 to the first two levels. (This can be \
+slightly confusing. It means that the first and third positions in the \
+transpose list must be 1 and 2. The list gives the target levels.)"
+}], "Text"],
+
+Cell[BoxData[
+    \(Tr[Transpose[Tu, {1, 3, 2}], Plus, 2]\)], "Input"],
+
+Cell[BoxData[
+    \(Clear[Tu]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["3. Single contraction of two 2nd order tensors", "Section"],
+
+Cell["\<\
+We have four choices on how we do the contraction. Furthermore, we have to \
+think about the slot order in the output tensor, and the corresponding array.\
+\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Choice 1", "Subsection"],
+
+Cell[TextData[{
+  "Contract the second slot of ",
+  Cell[BoxData[
+      \(S\)]],
+  " with the first slot of ",
+  Cell[BoxData[
+      \(T\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(Rud[i, j] == Sud[i, k] Tud[k, j]\), "\[IndentingNewLine]", 
+    \(ToArrayValues[] /@ %\), "\[IndentingNewLine]", 
+    \(\(step1 = Last[%];\)\)}], "Input"],
+
+Cell[TextData[{
+  "We will always expand in the order of the slots. ",
+  Cell[BoxData[
+      \(ArrayExpansion\)]],
+  " gives us explicit control on the order of expansion. The array expression \
+is ",
+  Cell[BoxData[
+      \(S . T\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(\(Smat = Sud[i, k] // ArrayExpansion[i, k];\)\), "\n", 
+    \(\(Tmat = Tud[k, j] // ArrayExpansion[k, j];\)\), "\n", 
+    \(MatrixForm[Smat] . MatrixForm[Tmat]\), "\n", 
+    \(% /. MatrixForm \[Rule] Identity\), "\[IndentingNewLine]", 
+    \(% == step1\)}], "Input"],
+
+Cell["The alternative method is to form the direct product...", "Text"],
+
+Cell[BoxData[
+    \(ST = Outer[Times, Smat, Tmat]\)], "Input"],
+
+Cell["... and contract on the 2nd and 3rd indices.", "Text"],
+
+Cell[BoxData[{
+    \(ContractArray[ST, {2, 3}]\), "\[IndentingNewLine]", 
+    \(% == step1\)}], "Input"],
+
+Cell["Or doing it explicitly...", "Text"],
+
+Cell[BoxData[{
+    \(Tr[Transpose[ST, {3, 1, 2, 4}], Plus, 2]\), "\[IndentingNewLine]", 
+    \(% == step1\)}], "Input"],
+
+Cell[TextData[{
+  "(Remember that the list in ",
+  Cell[BoxData[
+      \(Transpose\)]],
+  " gives the recipient slots and we always contract on slots 1 and 2. The \
+3rd and 4th slots will survive and we want them to be the original 1st and \
+4th slots - in that order.)"
+}], "Text"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Choice 2", "Subsection"],
+
+Cell[TextData[{
+  "Contract the second slot of ",
+  Cell[BoxData[
+      \(S\)]],
+  " with the second slot of ",
+  Cell[BoxData[
+      \(T\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(Rud[i, j] == Sud[i, k] Tdu[j, k]\), "\[IndentingNewLine]", 
+    \(ToArrayValues[] /@ %\), "\[IndentingNewLine]", 
+    \(\(step1 = Last[%];\)\)}], "Input"],
+
+Cell[TextData[{
+  "We will always expand in the order of the slots. The array expression is \
+",
+  Cell[BoxData[
+      \(S . Transpose[T]\)]],
+  ", to bring the ",
+  Cell[BoxData[
+      \(k\)]],
+  " indicies adjacent to each other."
+}], "Text"],
+
+Cell[BoxData[{
+    \(\(Smat = Sud[i, k] // ArrayExpansion[i, k];\)\), "\n", 
+    \(\(Tmat = Tdu[j, k] // ArrayExpansion[j, k];\)\), "\n", 
+    \(MatrixForm[Smat] . MatrixForm[Transpose[Tmat, {2, 1}]]\), "\n", 
+    \(% /. MatrixForm \[Rule] Identity\), "\[IndentingNewLine]", 
+    \(% == step1\)}], "Input"],
+
+Cell["Forming the direct product and contracting...", "Text"],
+
+Cell[BoxData[
+    \(ST = Outer[Times, Smat, Tmat]\)], "Input"],
+
+Cell["...and contracting on the second and forth slots...", "Text"],
+
+Cell[BoxData[{
+    \(ContractArray[ST, {2, 4}]\), "\[IndentingNewLine]", 
+    \(% == step1\)}], "Input"],
+
+Cell["Let's also do it directly.", "Text"],
+
+Cell[BoxData[{
+    \(Tr[Transpose[ST, {3, 1, 4, 2}], Plus, 2]\), "\[IndentingNewLine]", 
+    \(% == step1\)}], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Choice 3", "Subsection"],
+
+Cell[TextData[{
+  "Contracting the first slot of ",
+  Cell[BoxData[
+      \(S\)]],
+  " with the second slot of ",
+  Cell[BoxData[
+      \(T\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(Rud[i, j] == Sdu[k, i] Tdu[j, k]\), "\[IndentingNewLine]", 
+    \(ToArrayValues[] /@ %\), "\[IndentingNewLine]", 
+    \(\(step1 = Last[%];\)\)}], "Input"],
+
+Cell[TextData[{
+  "The array expression is ",
+  Cell[BoxData[
+      \(Transpose[T . S]\)]],
+  ". (",
+  Cell[BoxData[
+      \(T . S\)]],
+  " puts j first!)"
+}], "Text"],
+
+Cell[BoxData[{
+    \(\(Smat = Sdu[k, i] // ArrayExpansion[k, i];\)\), "\n", 
+    \(\(Tmat = Tdu[j, k] // ArrayExpansion[j, k];\)\), "\n", 
+    \(Transpose[MatrixForm[Tmat] . MatrixForm[Smat]]\), "\n", 
+    \(% /. MatrixForm \[Rule] Identity\), "\[IndentingNewLine]", 
+    \(% == step1\)}], "Input"],
+
+Cell["Doing it with ContractArray...", "Text"],
+
+Cell[BoxData[{
+    \(ST = Outer[Times, Smat, Tmat]\), "\n", 
+    \(ContractArray[ST, {1, 4}]\), "\n", 
+    \(% == step1\)}], "Input"],
+
+Cell["Or doing it by hand...", "Text"],
+
+Cell[BoxData[{
+    \(Tr[Transpose[ST, {1, 3, 4, 2}], Plus, 2]\), "\[IndentingNewLine]", 
+    \(% == step1\)}], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Choice 4", "Subsection"],
+
+Cell[TextData[{
+  "Contract the first slot of ",
+  Cell[BoxData[
+      \(S\)]],
+  " with the first slot of ",
+  Cell[BoxData[
+      \(T\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(Rdu[i, j] == Sud[k, i] Tdu[k, j]\), "\[IndentingNewLine]", 
+    \(ToArrayValues[] /@ %\), "\[IndentingNewLine]", 
+    \(\(step1 = Last[%];\)\)}], "Input"],
+
+Cell[TextData[{
+  "The array expression is ",
+  Cell[BoxData[
+      \(Transpose[S] . T\)]],
+  ". We most move the first slot of ",
+  Cell[BoxData[
+      \(S\)]],
+  " adjacent to the first slot of ",
+  Cell[BoxData[
+      \(T\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(\(Smat = Sud[k, i] // ArrayExpansion[k, i];\)\), "\n", 
+    \(\(Tmat = Tdu[k, j] // ArrayExpansion[k, j];\)\), "\n", 
+    \(MatrixForm[Transpose[Smat, {2, 1}]] . MatrixForm[Tmat]\), "\n", 
+    \(% /. MatrixForm \[Rule] Identity\), "\[IndentingNewLine]", 
+    \(% == step1\)}], "Input"],
+
+Cell["Forming the direct product and contracting...", "Text"],
+
+Cell[BoxData[{
+    \(ST = Outer[Times, Smat, Tmat]\), "\n", 
+    \(ContractArray[ST, {1, 3}]\), "\n", 
+    \(% == step1\)}], "Input"],
+
+Cell["Doing it by hand....", "Text"],
+
+Cell[BoxData[{
+    \(Tr[Transpose[ST, {1, 3, 2, 4}], Plus, 2]\), "\[IndentingNewLine]", 
+    \(% == step1\)}], "Input"]
+}, Closed]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["4. Fully contracting two 2nd order tensors", "Section"],
+
+Cell["\<\
+There are two cases that don't involve contraction within a single tensor.\
+\>", "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Case 1", "Subsection"],
+
+Cell[BoxData[{
+    \(Suu[i, j] Tdd[i, j]\), "\[IndentingNewLine]", 
+    \(step1 = % // ToArrayValues[]\)}], "Input"],
+
+Cell[TextData[{
+  "This is one way to do it. Dot ",
+  Cell[BoxData[
+      \(S\)]],
+  " with the transpose of ",
+  Cell[BoxData[
+      \(T\)]],
+  " and then take the trace of the result. We can use ",
+  Cell[BoxData[
+      \(ToArrayValues\)]],
+  " here because the sort order of the indices is the same as the slot \
+order."
+}], "Text"],
+
+Cell[BoxData[{
+    \(\(Smat = Suu[i, j] // ToArrayValues[];\)\), "\n", 
+    \(\(Tmat = Tdd[i, j] // ToArrayValues[];\)\), "\n", 
+    \(MatrixForm[Smat] . MatrixForm[Transpose[Tmat, {2, 1}]]\), "\n", 
+    \(% /. MatrixForm \[Rule] Identity\), "\[IndentingNewLine]", 
+    \(Tr[%]\), "\n", 
+    \(% == step1\)}], "Input"],
+
+Cell["\<\
+Another way to to form the direct product and then do two contractions...\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(ST = Outer[Times, Smat, Tmat]\), "\n", 
+    \(ContractArray[ST, {1, 3}, {2, 4}]\), "\n", 
+    \(% == step1\)}], "Input"],
+
+Cell["We can do it by hand in two steps...", "Text"],
+
+Cell[BoxData[{
+    \(Tr[Transpose[ST, {1, 3, 2, 4}], Plus, 2]\), "\[IndentingNewLine]", 
+    \(Tr[%]\), "\[IndentingNewLine]", 
+    \(% == step1\)}], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Case 2", "Subsection"],
+
+Cell[BoxData[{
+    \(Suu[i, j] Tdd[j, i]\), "\[IndentingNewLine]", 
+    \(step1 = % // ToArrayValues[]\)}], "Input"],
+
+Cell["Using a Dot product and a trace...", "Text"],
+
+Cell[BoxData[{
+    \(\(Smat = Suu[i, j] // ToArrayValues[];\)\), "\n", 
+    \(\(Tmat = Tdd[i, j] // ToArrayValues[];\)\), "\n", 
+    \(MatrixForm[Smat] . MatrixForm[Tmat]\), "\n", 
+    \(% /. MatrixForm \[Rule] Identity\), "\[IndentingNewLine]", 
+    \(Tr[%]\), "\n", 
+    \(% == step1\)}], "Input"],
+
+Cell["\<\
+Another way to to form the direct product and then do two contractions...\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(ST = Outer[Times, Smat, Tmat]\), "\n", 
+    \(ContractArray[ST, {2, 3}, {1, 4}]\), "\n", 
+    \(% == step1\)}], "Input"],
+
+Cell["We can do it by hand in two steps...", "Text"],
+
+Cell[BoxData[{
+    \(Tr[Transpose[ST, {3, 1, 2, 4}], Plus, 2]\), "\[IndentingNewLine]", 
+    \(Tr[%]\), "\[IndentingNewLine]", 
+    \(% == step1\)}], "Input"],
+
+Cell[BoxData[
+    \(Clear[Smat, Tmat, ST]\)], "Input"]
+}, Closed]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["5. Contracting a 3rd order tensor with a 2nd order tensor", "Section"],
+
+Cell[TextData[{
+  "We could do a single contraction and a double contraction. Also, we can \
+contract on various slots of the ",
+  Cell[BoxData[
+      \(T\)]],
+  " tensor. Let's just do one case of a double contraction."
+}], "Text"],
+
+Cell[BoxData[{
+    \(step0 = Tduu[i, j, k] Sdd[j, k]\), "\[IndentingNewLine]", 
+    \(step1 = % // ToArrayValues[]\)}], "Input"],
+
+Cell["\<\
+Doing a Dot and then a trace. This is a little tricky because we have to \
+shift the 2nd and 3rd slots from the first contraction into the 1st and 2nd \
+slots for the trace.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\(Tarray = Tduu[i, j, k] // ToArrayValues[];\)\), "\n", 
+    \(\(Smat = Sdd[i, j] // ToArrayValues[];\)\), "\n", 
+    \(MatrixForm[Tarray] . MatrixForm[Transpose[Smat, {2, 1}]]\), "\n", 
+    \(% /. MatrixForm \[Rule] Identity\), "\[IndentingNewLine]", 
+    \(Tr[Transpose[%, {3, 1, 2}], Plus, 2]\), "\n", 
+    \(% == step1\)}], "Input"],
+
+Cell["\<\
+It should be clearer using the direct product. (This is where the arrays \
+begin to get quite large.)\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(ST = Outer[Times, Smat, Tarray]\), "\n", 
+    \(ContractArray[ST, {1, 4}, {2, 5}]\), "\n", 
+    \(% == step1\)}], "Input"],
+
+Cell["Or doing it by hand in a two step process.", "Text"],
+
+Cell[BoxData[{
+    \(Transpose[ST, {1, 3, 5, 2, 4}]\), "\[IndentingNewLine]", 
+    \(Tr[%, Plus, 2]\), "\[IndentingNewLine]", 
+    \(Tr[%, Plus, 2]\), "\[IndentingNewLine]", 
+    \(% == step1\)}], "Input"],
+
+Cell["Or", "Text"],
+
+Cell[BoxData[{
+    \(Transpose[ST, {1, 3, 5, 2, 4}]\), "\[IndentingNewLine]", 
+    \(Nest[Tr[#, Plus, 2] &, %, 2]\), "\[IndentingNewLine]", 
+    \(% == step1\)}], "Input"],
+
+Cell[TextData[{
+  "which is just what the ",
+  Cell[BoxData[
+      \(ContractArray\)]],
+  " routine is."
+}], "Text"],
+
+Cell["That should be enough practice.", "Text"],
+
+Cell[BoxData[
+    \(Clear[Smat, Tarray, ST]\)], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  "6. Sometimes ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " Array Methods Are Better"
+}], "Section"],
+
+Cell["\<\
+If we wanted to calculate the determinant of a tensor with the following \
+values...\
+\>", "Text"],
+
+Cell[BoxData[
+    RowBox[{"SetTensorValues", "[", 
+      RowBox[{\(Tuu[i, j]\), ",", 
+        RowBox[{"(", GridBox[{
+              {"1", "0", "1"},
+              {"2", "3", "5"},
+              {"4", \(-1\), \(-2\)}
+              }], ")"}]}], "]"}]], "Input"],
+
+Cell[TextData[{
+  "We could expand the tensor and use the ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  " ",
+  Cell[BoxData[
+      \(Det\)]],
+  " function."
+}], "Text"],
+
+Cell[BoxData[
+    \(Det[Tuu[i, j] // ToArrayValues[]]\)], "Input"],
+
+Cell["\<\
+Or we could calculate using the Levi-Civita symbol and Tensorial methods. \
+First we define our private Levi-Civita tensor...\
+\>", "Text"],
+
+Cell[BoxData[
+    \(SetTensorValues[\[Epsilon]ddd[i, j, k], 
+      Table[Signature[{i, j, k}], {i, 1, NDim}, {j, 1, NDim}, {k, 1, 
+          NDim}]]\)], "Input"],
+
+Cell[TextData[{
+  "But this is the same as using ",
+  Cell[BoxData[
+      \(PermutationPseudotensor\)]],
+  "..."
+}], "Text"],
+
+Cell[BoxData[
+    \(SetTensorValues[\[Epsilon]ddd[i, j, k], 
+      PermutationPseudotensor[NDim]]\)], "Input"],
+
+Cell["\<\
+and then evaluate the determinant by tensor methods. We obtain the same \
+answer.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\[Epsilon]ddd[i, j, k] Tuu[1, i] Tuu[2, j] 
+      Tuu[3, k]\), "\[IndentingNewLine]", 
+    \(% // EinsteinSum[]\)}], "Input"],
+
+Cell[TextData[{
+  "But the array method is considerably faster. In the first statement ",
+  Cell[BoxData[
+      \(ArrayExpansion\)]],
+  " is faster than ",
+  Cell[BoxData[
+      \(EinsteinSum\)]],
+  ", which in turn is faster than ",
+  Cell[BoxData[
+      \(ToArrayValues\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(Do[Det[Tuu[i, j] // ArrayExpansion[i, j]], {1000}] // Timing\), "\n", 
+    \(Do[\[Epsilon]ddd[i, j, k] Tuu[1, i] Tuu[2, j] Tuu[3, k] // 
+          EinsteinSum[], {1000}] // Timing\)}], "Input"],
+
+Cell[BoxData[{
+    \(\(ClearTensorValues /@ {Tuu[i, j], \[Epsilon]ddd[i, j, k]};\)\), "\n", 
+    \(ClearTensorShortcuts[{{u, v}, 1}, {{R, S, T}, 2}, {{T, \[Epsilon]}, 
+        3}]\)}], "Input"]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+AutoGeneratedPackage->None,
+WindowToolbars->{},
+WindowSize->{701, 706},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+Magnification->1,
+StyleDefinitions -> "TensorialStyle.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 45, 0, 76, "Title"],
+Cell[1824, 55, 185, 6, 75, "Chaptertitle"],
+Cell[2012, 63, 30, 0, 45, "Subtitle"],
+Cell[2045, 65, 542, 16, 94, "Text"],
+Cell[2590, 83, 648, 12, 115, "Text"],
+Cell[3241, 97, 165, 3, 54, "Text"],
+
+Cell[CellGroupData[{
+Cell[3431, 104, 33, 0, 61, "Section"],
+Cell[3467, 106, 72, 1, 46, "Input"],
+Cell[3542, 109, 114, 2, 46, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3693, 116, 107, 5, 61, "Section"],
+Cell[3803, 123, 359, 10, 108, "EmphasisText"],
+Cell[4165, 135, 497, 17, 108, "EmphasisText"],
+Cell[4665, 154, 351, 12, 68, "EmphasisText"],
+Cell[5019, 168, 421, 11, 108, "EmphasisText"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[5477, 184, 45, 0, 41, "Section"],
+Cell[5525, 186, 64, 0, 34, "Text"],
+Cell[5592, 188, 65, 1, 46, "Input"],
+Cell[5660, 191, 74, 0, 34, "Text"],
+Cell[5737, 193, 103, 2, 66, "Input"],
+Cell[5843, 197, 131, 2, 66, "Input"],
+Cell[5977, 201, 170, 3, 54, "Text"],
+Cell[6150, 206, 44, 1, 46, "Input"],
+Cell[6197, 209, 190, 5, 54, "Text"],
+Cell[6390, 216, 104, 2, 66, "Input"],
+Cell[6497, 220, 50, 1, 46, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[6584, 226, 64, 0, 41, "Section"],
+Cell[6651, 228, 346, 9, 74, "Text"],
+Cell[7000, 239, 104, 2, 66, "Input"],
+Cell[7107, 243, 51, 0, 34, "Text"],
+Cell[7161, 245, 270, 4, 106, "Input"],
+Cell[7434, 251, 278, 9, 54, "Text"],
+Cell[7715, 262, 106, 2, 66, "Input"],
+Cell[7824, 266, 73, 0, 34, "Text"],
+Cell[7900, 268, 104, 2, 66, "Input"],
+Cell[8007, 272, 90, 2, 34, "Text"],
+Cell[8100, 276, 385, 8, 74, "Text"],
+Cell[8488, 286, 162, 3, 66, "Input"],
+Cell[8653, 291, 191, 5, 54, "Text"],
+Cell[8847, 298, 58, 1, 46, "Input"],
+Cell[8908, 301, 336, 7, 74, "Text"],
+Cell[9247, 310, 70, 1, 46, "Input"],
+Cell[9320, 313, 42, 1, 46, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[9399, 319, 65, 0, 41, "Section"],
+Cell[9467, 321, 180, 4, 54, "Text"],
+
+Cell[CellGroupData[{
+Cell[9672, 329, 30, 0, 49, "Subsection"],
+Cell[9705, 331, 159, 8, 34, "Text"],
+Cell[9867, 341, 175, 3, 86, "Input"],
+Cell[10045, 346, 253, 9, 54, "Text"],
+Cell[10301, 357, 287, 5, 126, "Input"],
+Cell[10591, 364, 71, 0, 34, "Text"],
+Cell[10665, 366, 62, 1, 46, "Input"],
+Cell[10730, 369, 60, 0, 34, "Text"],
+Cell[10793, 371, 104, 2, 66, "Input"],
+Cell[10900, 375, 41, 0, 34, "Text"],
+Cell[10944, 377, 119, 2, 66, "Input"],
+Cell[11066, 381, 282, 7, 54, "Text"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[11385, 393, 30, 0, 33, "Subsection"],
+Cell[11418, 395, 160, 8, 34, "Text"],
+Cell[11581, 405, 175, 3, 86, "Input"],
+Cell[11759, 410, 244, 9, 54, "Text"],
+Cell[12006, 421, 306, 5, 126, "Input"],
+Cell[12315, 428, 61, 0, 34, "Text"],
+Cell[12379, 430, 62, 1, 46, "Input"],
+Cell[12444, 433, 67, 0, 34, "Text"],
+Cell[12514, 435, 104, 2, 66, "Input"],
+Cell[12621, 439, 42, 0, 34, "Text"],
+Cell[12666, 441, 119, 2, 66, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[12822, 448, 30, 0, 33, "Subsection"],
+Cell[12855, 450, 162, 8, 34, "Text"],
+Cell[13020, 460, 175, 3, 86, "Input"],
+Cell[13198, 465, 167, 8, 34, "Text"],
+Cell[13368, 475, 298, 5, 126, "Input"],
+Cell[13669, 482, 46, 0, 34, "Text"],
+Cell[13718, 484, 133, 3, 86, "Input"],
+Cell[13854, 489, 38, 0, 34, "Text"],
+Cell[13895, 491, 119, 2, 66, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[14051, 498, 30, 0, 33, "Subsection"],
+Cell[14084, 500, 158, 8, 34, "Text"],
+Cell[14245, 510, 175, 3, 86, "Input"],
+Cell[14423, 515, 247, 11, 34, "Text"],
+Cell[14673, 528, 306, 5, 126, "Input"],
+Cell[14982, 535, 61, 0, 34, "Text"],
+Cell[15046, 537, 133, 3, 86, "Input"],
+Cell[15182, 542, 36, 0, 34, "Text"],
+Cell[15221, 544, 119, 2, 66, "Input"]
+}, Closed]]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[15389, 552, 61, 0, 41, "Section"],
+Cell[15453, 554, 98, 2, 34, "Text"],
+
+Cell[CellGroupData[{
+Cell[15576, 560, 28, 0, 49, "Subsection"],
+Cell[15607, 562, 116, 2, 66, "Input"],
+Cell[15726, 566, 335, 12, 54, "Text"],
+Cell[16064, 580, 318, 6, 146, "Input"],
+Cell[16385, 588, 97, 2, 34, "Text"],
+Cell[16485, 592, 141, 3, 86, "Input"],
+Cell[16629, 597, 52, 0, 34, "Text"],
+Cell[16684, 599, 158, 3, 86, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[16879, 607, 28, 0, 33, "Subsection"],
+Cell[16910, 609, 116, 2, 66, "Input"],
+Cell[17029, 613, 50, 0, 34, "Text"],
+Cell[17082, 615, 299, 6, 146, "Input"],
+Cell[17384, 623, 97, 2, 34, "Text"],
+Cell[17484, 627, 141, 3, 86, "Input"],
+Cell[17628, 632, 52, 0, 34, "Text"],
+Cell[17683, 634, 158, 3, 86, "Input"],
+Cell[17844, 639, 54, 1, 46, "Input"]
+}, Closed]]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[17947, 646, 76, 0, 41, "Section"],
+Cell[18026, 648, 232, 6, 54, "Text"],
+Cell[18261, 656, 128, 2, 66, "Input"],
+Cell[18392, 660, 197, 4, 54, "Text"],
+Cell[18592, 666, 357, 6, 146, "Input"],
+Cell[18952, 674, 125, 3, 34, "Text"],
+Cell[19080, 679, 143, 3, 86, "Input"],
+Cell[19226, 684, 58, 0, 34, "Text"],
+Cell[19287, 686, 205, 4, 106, "Input"],
+Cell[19495, 692, 18, 0, 34, "Text"],
+Cell[19516, 694, 171, 3, 86, "Input"],
+Cell[19690, 699, 116, 5, 34, "Text"],
+Cell[19809, 706, 47, 0, 34, "Text"],
+Cell[19859, 708, 56, 1, 46, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[19952, 714, 131, 5, 41, "Section"],
+Cell[20086, 721, 108, 3, 34, "Text"],
+Cell[20197, 726, 258, 7, 73, "Input"],
+Cell[20458, 735, 179, 8, 34, "Text"],
+Cell[20640, 745, 66, 1, 46, "Input"],
+Cell[20709, 748, 149, 3, 54, "Text"],
+Cell[20861, 753, 161, 3, 66, "Input"],
+Cell[21025, 758, 124, 5, 34, "Text"],
+Cell[21152, 765, 110, 2, 46, "Input"],
+Cell[21265, 769, 105, 3, 34, "Text"],
+Cell[21373, 774, 146, 3, 66, "Input"],
+Cell[21522, 779, 294, 11, 54, "Text"],
+Cell[21819, 792, 214, 3, 86, "Input"],
+Cell[22036, 797, 193, 3, 66, "Input"]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

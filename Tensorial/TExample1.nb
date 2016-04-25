@@ -1,0 +1,918 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     24314,        760]*)
+(*NotebookOutlinePosition[     25154,        788]*)
+(*  CellTagsIndexPosition[     25110,        784]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Tensorial Tutorials", "Title"],
+
+Cell["Common Tensor Operations With an Oblique Coordinate System", \
+"Chaptertitle"],
+
+Cell["David Park", "Subtitle"],
+
+Cell["\<\
+The notebook must be evaluated in order as later sections depend upon results \
+established in earlier sections.\
+\>", "Text"],
+
+Cell[TextData[{
+  "In this notebook we show how to:\n1) Represent and manipulate various \
+objects in an oblique coordinate system.\n2) Use full tensor notation with a \
+tensor basis and ",
+  Cell[BoxData[
+      \(CircleTimes\)]],
+  ".\n3) Evaluate expressions such as ",
+  Cell[BoxData[
+      \(T[u, v]\)]],
+  " where ",
+  Cell[BoxData[
+      \(T\)]],
+  " is a tensor and ",
+  Cell[BoxData[
+      \(u\)]],
+  " and ",
+  Cell[BoxData[
+      \(v\)]],
+  " are vectors.\n4) Write transformations between coordinate systems."
+}], "Text"],
+
+Cell[CellGroupData[{
+
+Cell["Initialization", "Section"],
+
+Cell[BoxData[
+    \(Needs["\<TensorCalculus3`Tensorial`\>"]\)], "Input"],
+
+Cell["\<\
+We define tensor shortcuts and index flavors for the various tensors that \
+will be used in the notebook.\
+\>", "Text"],
+
+Cell[BoxData[
+    \(DeclareIndexFlavor[{red, Red}]\)], "Input"],
+
+Cell[BoxData[{
+    \(DefineTensorShortcuts[{{g, u, v}, 1}, {{g, T, A, \[Delta]}, 
+        2}]\), "\n", 
+    \(SetTensorValues[\[Delta]ud[i, j], IdentityMatrix[NDim]]\), "\n", 
+    \(SetTensorValues[\[Delta]ud[i, j] // ToFlavor[red], 
+      IdentityMatrix[NDim]]\)}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["1. Basis Vectors and Reciprocal Basis", "Section"],
+
+Cell[TextData[{
+  "We establish the natural and dual basis vectors for a Cartesian coordinate \
+system. Notice that a first order tensor ",
+  Cell[BoxData[
+      \(g\)]],
+  " can be given vector components."
+}], "Text"],
+
+Cell[BoxData[{
+    \(SetTensorValueRules[gu[i], 
+      IdentityMatrix[3]]\), "\[IndentingNewLine]", 
+    \(SetTensorValueRules[gd[i], 
+      IdentityMatrix[3]]\), "\[IndentingNewLine]", 
+    \(TensorValueRules[g]\)}], "Input"],
+
+Cell["\<\
+We will represent tensors in the oblique frame by red indices. The rows of \
+the GBasis matrix will be the oblique basis vectors. The following \
+establishes the oblique basis as tensor objects.\
+\>", "Text"],
+
+Cell[BoxData[{
+    RowBox[{
+      RowBox[{"GBasis", "=", 
+        RowBox[{"(", GridBox[{
+              {"1", "1", "0"},
+              {"0", "1", "2"},
+              {"1", "0", "1"}
+              }], ")"}]}], 
+      ";"}], "\[IndentingNewLine]", \(SetTensorValueRules[gd[red@i], 
+      GBasis]\), "\[IndentingNewLine]", \(TensorValueRules[g]\)}], "Input"],
+
+Cell[TextData[{
+  "There is an easy way to calculate the red reciprocal basis vectors. Just \
+take the rows of ",
+  Cell[BoxData[
+      \(Transpose[Inverse[GBasis]]\)]],
+  ". However, let's work by more formal tensor methods.  This gives us some \
+practice in performing tensor manipulations with Tensorial and ",
+  StyleBox["Mathematica",
+    FontSlant->"Italic"],
+  ". We first usurp ",
+  Cell[BoxData[
+      \(guu[red@i, red@j]\)]],
+  " to represent the ",
+  StyleBox["components",
+    FontSlant->"Italic"],
+  " of ",
+  Cell[BoxData[
+      \(gu[i]\)]],
+  ". (We will later use it to represent the metric tensor.)"
+}], "Text",
+  ParagraphSpacing->{0, 0}],
+
+Cell[BoxData[{
+    \(SetTensorValueRules[
+      gu[red@i], \(guu[i, j] // ToFlavor[red]\) // ToArrayValues[]]\), "\n", 
+    \(\(Print["\<Definition of dual basis.\>"];\)\), "\[IndentingNewLine]", 
+    \(gu[i] . gd[j] == \[Delta]ud[i, j] // ToFlavor[red]\), "\n", 
+    \(\(Print["\<Expanding to an array of equations.\>"];\)\), "\
+\[IndentingNewLine]", 
+    \(%% // ToArrayValues[]\), "\n", 
+    \(\(Print["\<Solving the equations.\>"];\)\), "\[IndentingNewLine]", 
+    \(gsols = \(Solve[
+          Flatten[%%]]\)\[LeftDoubleBracket]1\[RightDoubleBracket]\), "\
+\[IndentingNewLine]", 
+    \(\(Print["\<Substituting into the components array and saving as up \
+components of g\>"];\)\), "\[IndentingNewLine]", 
+    \(\((gu[red@i] // ToArrayValues[])\) /. gsols\), "\n", 
+    \(SetTensorValueRules[gu[red@i], %]\), "\n", 
+    \(TensorValueRules[g]\)}], "Input"],
+
+Cell["\<\
+We now have the basis and reciprocal basis vectors in both the black \
+(Cartesian) and red (oblique) coordinate system.\
+\>", "Text"],
+
+Cell["\<\
+We can check that we have obtained a proper solution for the reciprocal \
+basis.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(gd[red@i] . gu[red@j]\), "\[IndentingNewLine]", 
+    \(% // ToArrayValues[]\)}], "Input"],
+
+Cell[TextData[{
+  "Notice how convenient and powerful the ",
+  Cell[BoxData[
+      \(ToArrayValues\)]],
+  " command is."
+}], "Text"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["2. Calculating the Metric", "Section"],
+
+Cell["\<\
+We can calculate the metric in the red coordinates by the standard \
+definition. (The metric in the black coordinates is just the IdentityMatrix.)\
+\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(gd[i] . gd[j] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(metric = % // ToArrayValues[]\)}], "Input"],
+
+Cell[TextData[{
+  Cell[BoxData[
+      \(SetMetricValuesRules\)]],
+  " calculates the inverse metric matrix and then sets substitution rules for \
+both the metric tensor and the inverse metric tensor. For no other reason \
+than to illustrate the difference, we will set the Cartesian metric values \
+using ",
+  Cell[BoxData[
+      \(SetMetricValues\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(SetMetricValueRules[g, \ metric, \ red]\), "\[IndentingNewLine]", 
+    \(SetMetricValues[g, IdentityMatrix[NDim]]\)}], "Input"],
+
+Cell["\<\
+Notice again that we are using g with one index and g with two indices. They \
+are different objects and do not interfer with each other. \
+\>", "Text"],
+
+Cell[BoxData[
+    \(TensorValueRules[g]\)], "Input"],
+
+Cell[TextData[{
+  "What happened to the Cartesian metric values? They are stored as UpValues \
+of ",
+  Cell[BoxData[
+      \(g\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[
+    \(UpValues[g]\)], "Input"],
+
+Cell["\<\
+The following illustrates how definitions are immediately applied, but the \
+substitution rules are only applied when specified. Using substitution rules \
+is nice for learning tensor calculus and Tensorial. We can more clearly \
+control and see the explicit steps.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \({gdd[i, j], gdd[red@i, red@j]}\), "\[IndentingNewLine]", 
+    \(MatrixForm /@ \(EinsteinArray[] /@ %\)\), "\[IndentingNewLine]", 
+    \(% /. TensorValueRules[g]\)}], "Input"],
+
+Cell[TextData[{
+  "One the other hand, ",
+  Cell[BoxData[
+      \(ToArrayValues\)]],
+  " automatically uses not only value definitions, but also uses value \
+rules."
+}], "Text"],
+
+Cell[BoxData[{
+    \({gdd[i, j], gdd[red@i, red@j]}\), "\[IndentingNewLine]", 
+    \(MatrixForm /@ \(ToArrayValues[] /@ %\)\)}], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["3. Dot Product of Two Vectors in the Two Coordinate Systems", "Section"],
+
+Cell["\<\
+Here are two vectors in the black coordinate system. In the natural Cartesian \
+basis the up and down components of the vectors are the same.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(SetTensorValueRules[uu[i], {2, \(-1\), 3}]\), "\[IndentingNewLine]", 
+    \(SetTensorValueRules[vu[i], {1, 1, 2}]\), "\[IndentingNewLine]", 
+    \(SetTensorValueRules[ud[i], {2, \(-1\), 3}]\), "\[IndentingNewLine]", 
+    \(SetTensorValueRules[vd[i], {1, 1, 2}]\), "\[IndentingNewLine]", 
+    \(TensorValueRules[u, v]\)}], "Input"],
+
+Cell["The tensor method of taking their dot product is...", "Text"],
+
+Cell[BoxData[{
+    \(gdd[i, j] uu[i] vu[j]\), "\[IndentingNewLine]", 
+    \(% // ToArrayValues[]\)}], "Input"],
+
+Cell["\<\
+To compute the up components of u in the red frame we use the standard \
+definition.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\(Print["\<Standard definition of vector component.\>"];\)\), "\
+\[IndentingNewLine]", 
+    \(u . gu[red@i]\), "\[IndentingNewLine]", 
+    \(\(Print["\<Substitute indicial expression of vector.\>"];\)\), "\
+\[IndentingNewLine]", 
+    \(%% /. u \[Rule] uu[j] gd[j]\), "\[IndentingNewLine]", 
+    \(\(Print["\<Break out vector components from dot product.\>"];\)\), "\
+\[IndentingNewLine]", 
+    \(%% // \(LinearBreakout[Dot]\)[gu[_], gd[_]]\), "\[IndentingNewLine]", 
+    \(\(Print["\<Evaluate to array values and save results.\>"];\)\), "\
+\[IndentingNewLine]", 
+    \(%% // ToArrayValues[]\), "\[IndentingNewLine]", 
+    \(SetTensorValueRules[uu[red@i], %]\)}], "Input"],
+
+Cell["We can calculate the down values by lowering the index.", "Text"],
+
+Cell[BoxData[{
+    \(gdd[i, j] uu[j] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // ToArrayValues[]\), "\[IndentingNewLine]", 
+    \(SetTensorValueRules[ud[red@i], %]\), "\[IndentingNewLine]", 
+    \(TensorValueRules[u]\)}], "Input"],
+
+Cell[TextData[{
+  "All of these different u components represent the ",
+  StyleBox["same",
+    FontWeight->"Bold"],
+  " geometric object. Now, let's calculate the components of v in the red \
+frame. ",
+  "Just for variety we will calculate the down components of the v vector \
+first and then raise the index to obtain the up values."
+}], "Text"],
+
+Cell[BoxData[{
+    \(v . gd[red@i]\), "\[IndentingNewLine]", 
+    \(% /. v \[Rule] vu[j] gd[j]\), "\[IndentingNewLine]", 
+    \(% // \(LinearBreakout[Dot]\)[gu[_], gd[_]]\), "\[IndentingNewLine]", 
+    \(% // ToArrayValues[]\), "\[IndentingNewLine]", 
+    \(SetTensorValueRules[vd[red@i], %]\)}], "Input"],
+
+Cell[BoxData[{
+    \(guu[i, j] vd[j] // ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // ToArrayValues[]\), "\[IndentingNewLine]", 
+    \(SetTensorValueRules[vu[red@i], %]\), "\[IndentingNewLine]", 
+    \(TensorValueRules[v]\)}], "Input"],
+
+Cell["\<\
+We can calculate the dot product by 4 different methods in each of the \
+coordinate systems. We should and do obtain the same answer by all methods.\
+\>", "Text"],
+
+Cell[BoxData[{
+    \(\(step1 = {ud[i] vu[i], uu[i] vd[i], gdd[i, j] uu[i] vu[j], 
+          guu[i, j] ud[i] vd[j]};\)\), "\[IndentingNewLine]", 
+    \(Join[step1, step1 // ToFlavor[red]]\), "\[IndentingNewLine]", 
+    \(ToArrayValues[] /@ %\)}], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+4. A Second Order Tensor T Evaluated on Two Vectors
+Working with Tensor Bases\
+\>", "Section"],
+
+Cell["\<\
+Suppose we have a second order tensor T with the following components in the \
+standard Cartesian frame.\
+\>", "Text"],
+
+Cell[BoxData[{
+    RowBox[{
+      RowBox[{"Tcomponents", "=", 
+        RowBox[{"(", GridBox[{
+              {"0", "2", "3"},
+              {"2", \(-1\), "2"},
+              {"5", "0", \(-4\)}
+              }], ")"}]}], 
+      ";"}], "\[IndentingNewLine]", \(SetTensorValueRules[Tuu[i, j], 
+      Tcomponents]\), "\[IndentingNewLine]", \(TensorValueRules[
+      T]\)}], "Input"],
+
+Cell[TextData[{
+  "Let's evaluate this tensor operating on the ",
+  Cell[BoxData[
+      \(u\)]],
+  " and ",
+  Cell[BoxData[
+      \(v\)]],
+  " vectors defined in Section 3. We can evaluate ",
+  Cell[BoxData[
+      \(T\)]],
+  " on the two vectors by two methods. So far, we have only the up components \
+of ",
+  Cell[BoxData[
+      \(T\)]],
+  " but all components of the metric ",
+  Cell[BoxData[
+      \(g\)]],
+  " and the vectors ",
+  Cell[BoxData[
+      \(u\)]],
+  " and ",
+  Cell[BoxData[
+      \(v\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \({Tuu[i, j] ud[i] vd[j], 
+      gdd[i, m] gdd[j, n] Tuu[m, n] uu[i] vu[j]}\), "\[IndentingNewLine]", 
+    \(ToArrayValues[] /@ %\)}], "Input"],
+
+Cell[TextData[{
+  "Let's be more formal and write out ",
+  Cell[BoxData[
+      \(T\)]],
+  " explicitly in terms of the second order basis tensors, which are..."
+}], "Text"],
+
+Cell[BoxData[
+    \(GenerateBasisTensors[g, "\<dd\>"]\)], "Input"],
+
+Cell[TextData[{
+  "The multiplication symbol is CircleTimes. It can be entered \[EscapeKey]c*\
+\[EscapeKey] or by typing \"\\[ \" followed by \"CircleTimes]\". I have it on \
+a palette. It is also on the General Operators subpalette in the \
+CompleteCharacters palette. This type of expression is sometimes called a ",
+  StyleBox["dyad.",
+    FontWeight->"Bold"]
+}], "Text"],
+
+Cell["So the tensor can be represented as...", "Text"],
+
+Cell[BoxData[{
+    \(T\), "\[IndentingNewLine]", 
+    \(% /. T \[Rule] 
+        Tuu[i, j] gd[i]\[CircleTimes]gd[j]\), "\[IndentingNewLine]", 
+    \(% // EinsteinSum[]\), "\[IndentingNewLine]", 
+    \(% /. TensorValueRules[T]\)}], "Input"],
+
+Cell["We call this the basis form of a tensor.", "Text"],
+
+Cell[TextData[{
+  "The following cell evaluates ",
+  Cell[BoxData[
+      \(T\)]],
+  " on ",
+  Cell[BoxData[
+      \(u\)]],
+  " and ",
+  Cell[BoxData[
+      \(v\)]],
+  " using the full basis of the tensor. (Notice ",
+  StyleBox["Mathematica'",
+    FontSlant->"Italic"],
+  "s slight inconsistency in the use of brackets in TraditionalForm.)"
+}], "Text"],
+
+Cell[BoxData[{
+    \(\(Print["\<General expression of a tensor evaluated on \
+vectors.\>"];\)\), "\[IndentingNewLine]", 
+    \(T[u, v]\), "\[IndentingNewLine]", 
+    \(\(Print["\<Subsstituting the indexed expressions for the tensor and \
+vectors.\>"];\)\), "\[IndentingNewLine]", 
+    \(%% /. {T \[Rule] Tuu[i, j] gd[i]\[CircleTimes]gd[j], 
+        u \[Rule] uu[m] gd[m], 
+        v \[Rule] vu[n] gd[n]}\), "\[IndentingNewLine]", 
+    \(\(Print["\<Pushing the arguments onto the individual dyads.\>"];\)\), "\
+\[IndentingNewLine]", 
+    \(%% // PushOnto[{CircleTimes[__]}]\), "\[IndentingNewLine]", 
+    \(\(Print["\<Evaluating each vector on the corresponding slot of the \
+dyad.\>"];\)\), "\[IndentingNewLine]", 
+    \(%% /. CircleEvalRule\), "\[IndentingNewLine]", 
+    \(\(Print["\<Factoring out the vector components from the dot \
+products.\>"];\)\), "\[IndentingNewLine]", 
+    \(%% // \(LinearBreakout[Dot]\)[gd[_]]\), "\[IndentingNewLine]", 
+    \(\(Print["\<Converting dot products of basis vectors to metric \
+components.\>"];\)\), "\[IndentingNewLine]", 
+    \(%% /. BasisDotProductRules[g, \ g]\), "\[IndentingNewLine]", 
+    \(\(Print["\<Expanding and evaluating.\>"];\)\), "\[IndentingNewLine]", 
+    \(%% // ToArrayValues[]\)}], "Input"],
+
+Cell[TextData[{
+  "Providing we have the down components of ",
+  Cell[BoxData[
+      \(u\)]],
+  " and ",
+  Cell[BoxData[
+      \(v\)]],
+  " we could also evaluate in one less step using ",
+  Cell[BoxData[
+      \(EvaluateDotProducts\)]],
+  "."
+}], "Text"],
+
+Cell[BoxData[{
+    \(\(Print["\<General expression of a tensor evaluated on \
+vectors.\>"];\)\), "\[IndentingNewLine]", 
+    \(T[u, v]\), "\[IndentingNewLine]", 
+    \(\(Print["\<Subsstituting the indexed expressions for the tensor and \
+vectors.\>"];\)\), "\[IndentingNewLine]", 
+    \(%% /. {T \[Rule] Tuu[i, j] gd[i]\[CircleTimes]gd[j], 
+        u \[Rule] uu[m] gd[m], 
+        v \[Rule] vu[n] gd[n]}\), "\[IndentingNewLine]", 
+    \(\(Print["\<Pushing the arguments onto the individual dyads.\>"];\)\), "\
+\[IndentingNewLine]", 
+    \(%% // PushOnto[{CircleTimes[__]}]\), "\[IndentingNewLine]", 
+    \(\(Print["\<Evaluating each vector on the corresponding slot of the \
+dyad.\>"];\)\), "\[IndentingNewLine]", 
+    \(%% /. CircleEvalRule\), "\[IndentingNewLine]", 
+    \(\(Print["\<Evaluating the the dot products.\>"];\)\), "\
+\[IndentingNewLine]", 
+    \(%% // EvaluateDotProducts[g, g]\), "\[IndentingNewLine]", 
+    \(\(Print["\<Expanding and evaluating.\>"];\)\), "\[IndentingNewLine]", 
+    \(%% // ToArrayValues[]\)}], "Input"],
+
+Cell["\<\
+With Tensorial, we can concentrate on the basic definitions and operations. \
+All the tedious calculations, plug and chug as in the last step above, can be \
+relegated to the computer.\
+\>", "Text"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["5. T Components in Oblique Coordinates", "Section"],
+
+Cell[CellGroupData[{
+
+Cell["Using Basic Definitions", "Subsection"],
+
+Cell[TextData[{
+  "Now, let's calculate and store the components of ",
+  Cell[BoxData[
+      \(T\)]],
+  " in oblique coordinates. We start with the standard definition for \
+calculating the components."
+}], "Text"],
+
+Cell[BoxData[{
+    \(\(ClearTensorValues[
+        Tuu[i, j] // ToFlavor[red]];\)\), "\[IndentingNewLine]", 
+    \(\(Print["\<Definition of components.\>"];\)\), "\[IndentingNewLine]", 
+    \(Tuu[i, j] == T[gu[i], gu[j]] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(\(Print["\<Substitute tensor in Cartesian basis.\>"];\)\), "\
+\[IndentingNewLine]", 
+    \(%% /. 
+      T[a_, b_] \[Rule] 
+        Tuu[m, n] \((gd[m]\[CircleTimes]gd[n])\)[a, 
+            b]\), "\[IndentingNewLine]", 
+    \(\(Print["\<Evaluate on the slots.\>"];\)\), "\[IndentingNewLine]", 
+    \(%% /. CircleEvalRule\), "\[IndentingNewLine]", 
+    \(\(Print["\<Since all the quantities on the rhs are known, expand to \
+array values.\>"];\)\), "\[IndentingNewLine]", 
+    \(ToArrayValues[] /@ %%\), "\[IndentingNewLine]", 
+    \(SetTensorValueRules[Tuu[i, j] // ToFlavor[red], 
+      Last[%]]\), "\[IndentingNewLine]", 
+    \(TensorValueRules[T]\)}], "Input"],
+
+Cell[TextData[{
+  "Since we have previously calculated the components of ",
+  Cell[BoxData[
+      \(u\)]],
+  ", ",
+  Cell[BoxData[
+      \(v\)]],
+  " and ",
+  Cell[BoxData[
+      \(g\)]],
+  " in the red frame, we can now evaluate ",
+  Cell[BoxData[
+      \(T[u, v]\)]],
+  " completely in the red frame. We should obtain the same answer as in the \
+black frame."
+}], "Text"],
+
+Cell[BoxData[{
+    \(gdd[i, m] gdd[j, n] Tuu[m, n] uu[i] vu[j] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(% // ToArrayValues[]\)}], "Input"],
+
+Cell[TextData[{
+  "We could calculate the red frame components of ",
+  Cell[BoxData[
+      \(T\)]],
+  " for other index configurations by the same method as above. Just put the \
+desired combination or red basis or reciprocal basis vectors in the slots. \
+But, since we have one set of components in the red frame, we can calculate \
+the other index configurations simply by lowering indices with the metric \
+tensor. For example..."
+}], "Text"],
+
+Cell[BoxData[{
+    \(Tud[i, j] == gdd[j, m] Tuu[i, m] // 
+      ToFlavor[red]\), "\[IndentingNewLine]", 
+    \(ToArrayValues[] /@ %\)}], "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["As Linear Transformations", "Subsection"],
+
+Cell["\<\
+There is another and perhaps more conventional method for calculating the \
+components in the red frame. In Section 1, we simply gave the red basis \
+vectors. But instead, we could have considered them to have been obtained as \
+a linear transformation of the natural Cartesian basis vectors. We can \
+represent this linear transformation by...\
+\>", "Text"],
+
+Cell[BoxData[
+    \(Aud[i, red@j]\)], "Input"],
+
+Cell[TextData[{
+  "We will always write the transformation matrices with the indices going \
+northwest to southeast, that is, in the up-down configuration, ",
+  Cell[BoxData[
+      \(Aud\)]],
+  ". The two indices correspond to different coordinate systems. If you are \
+using colors, then they will always have different colors. It turns out that \
+the components of ",
+  Cell[BoxData[
+      \(Aud\)]],
+  " will be given by the transpose of the ",
+  Cell[BoxData[
+      \(GBasis\)]],
+  " matrix of Section 1, so let's set them and check them."
+}], "Text"],
+
+Cell[BoxData[{
+    \(SetTensorValueRules[Aud[i, red@j], 
+      Transpose[GBasis]]\), "\[IndentingNewLine]", 
+    \(TensorValueRules[A]\)}], "Input"],
+
+Cell[BoxData[{
+    \(gd[red@i] == Aud[k, red@i] gd[k]\), "\[IndentingNewLine]", 
+    \(% // ToArrayValues[]\)}], "Input"],
+
+Cell[TextData[{
+  "To write the transformation going from one frame to another, we put in an \
+",
+  Cell[BoxData[
+      \(A\)]],
+  " matrix for each index to be transformed and line up the colors. We have \
+to be careful how the ",
+  Cell[BoxData[
+      \(A\)]],
+  " tensor is initially defined. As a matrix equation  we would obtain the \
+obliqe basis by ",
+  Cell[BoxData[
+      \(GBasis . \((Euclidean\ basis\ vectors)\)\)]],
+  ". But if we look at the first equation above, we really have the transpose \
+when ",
+  Cell[BoxData[
+      \(g\)]],
+  " is written on the right. The ",
+  Cell[BoxData[
+      \(k\)]],
+  " summation indicies are not adjacent. This tells us that ",
+  Cell[BoxData[
+      \(A\)]],
+  " must be the transpose of ",
+  Cell[BoxData[
+      \(GBasis\)]],
+  "."
+}], "Text"],
+
+Cell[TextData[{
+  "To obtain the transformation going the other way we need the inverse of ",
+  Cell[BoxData[
+      \(A\)]],
+  ". This corresponds to simply switching the colors of the first and second \
+slots of ",
+  Cell[BoxData[
+      \(A\)]],
+  ". But we must actually calculate and set the values."
+}], "Text"],
+
+Cell[BoxData[{
+    \(SetTensorValueRules[Aud[red@i, j], 
+      Inverse[Transpose[GBasis]]]\), "\[IndentingNewLine]", 
+    \(TensorValueRules[A]\)}], "Input"],
+
+Cell["Here is the inverse transformation...", "Text"],
+
+Cell[BoxData[{
+    \(gd[i] == Aud[red@k, i] gd[red@k]\), "\[IndentingNewLine]", 
+    \(% // ToArrayValues[]\)}], "Input"],
+
+Cell[TextData[{
+  "We will generally need both forms of the transformation matrix. One form \
+will be used to transform down indices and the other form will be used to \
+transform up indices. Let's see how we use them to transform the ",
+  Cell[BoxData[
+      \(T\)]],
+  " matrix from the black to the red frame. Just line up the colors of the \
+indices, with summations on the \"old\" components. This checks with our \
+previous calculation."
+}], "Text"],
+
+Cell[BoxData[{
+    \(Tuu[red@i, red@j] == 
+      Aud[red@i, m] Aud[red@j, n] Tuu[m, n]\), "\[IndentingNewLine]", 
+    \(% // ToArrayValues[]\)}], "Input"],
+
+Cell["\<\
+We can then obtain the other index configurations by lowering indices.\
+\>", "Text"],
+
+Cell[TextData[{
+  "Previously we calculated the up and down components of ",
+  Cell[BoxData[
+      \(u\)]],
+  " in the red frame."
+}], "Text"],
+
+Cell[BoxData[
+    \(TensorValueRules[u]\)], "Input"],
+
+Cell[TextData[{
+  "Let's calculate the down components of ",
+  Cell[BoxData[
+      \(u\)]],
+  " in the black frame starting from the red frame."
+}], "Text"],
+
+Cell[BoxData[{
+    \(ud[i] == Aud[red@k, i] ud[red@k]\), "\[IndentingNewLine]", 
+    \(% // ToArrayValues[]\)}], "Input"],
+
+Cell[TextData[{
+  "Since the black frame has the natural Cartesian basis vectors, the down \
+components should be the same as the up components. The following is not a \
+proper tensor equation and if we try to use ",
+  Cell[BoxData[
+      \(ToArrayValues\)]],
+  " on the entire equation we will obtain error messages because the free \
+indices do not agree. But, if we map ",
+  Cell[BoxData[
+      \(ToArrayValues\)]],
+  " to each side of the equation, the calculation will work."
+}], "Text"],
+
+Cell[BoxData[{
+    \(uu[i] == Aud[red@k, i] ud[red@k]\), "\[IndentingNewLine]", 
+    \(ToArrayValues[] /@ %\)}], "Input"]
+}, Closed]]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 943}},
+AutoGeneratedPackage->None,
+ScreenStyleEnvironment->"Working",
+WindowToolbars->{},
+WindowSize->{810, 706},
+WindowMargins->{{3, Automatic}, {Automatic, 0}},
+CommonDefaultFormatTypes->{"Output"->TraditionalForm},
+Magnification->1,
+StyleDefinitions -> "TensorialStyle.nb"
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 36, 0, 76, "Title"],
+Cell[1815, 55, 84, 1, 45, "Chaptertitle"],
+Cell[1902, 58, 30, 0, 45, "Subtitle"],
+Cell[1935, 60, 136, 3, 34, "Text"],
+Cell[2074, 65, 532, 19, 114, "Text"],
+
+Cell[CellGroupData[{
+Cell[2631, 88, 33, 0, 61, "Section"],
+Cell[2667, 90, 72, 1, 46, "Input"],
+Cell[2742, 93, 129, 3, 34, "Text"],
+Cell[2874, 98, 63, 1, 46, "Input"],
+Cell[2940, 101, 275, 5, 86, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3252, 111, 56, 0, 61, "Section"],
+Cell[3311, 113, 219, 6, 54, "Text"],
+Cell[3533, 121, 226, 5, 86, "Input"],
+Cell[3762, 128, 218, 4, 54, "Text"],
+Cell[3983, 134, 354, 9, 116, "Input"],
+Cell[4340, 145, 656, 20, 94, "Text"],
+Cell[4999, 167, 858, 16, 246, "Input"],
+Cell[5860, 185, 143, 3, 34, "Text"],
+Cell[6006, 190, 104, 3, 34, "Text"],
+Cell[6113, 195, 110, 2, 66, "Input"],
+Cell[6226, 199, 132, 5, 34, "Text"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[6395, 209, 44, 0, 41, "Section"],
+Cell[6442, 211, 172, 4, 54, "Text"],
+Cell[6617, 217, 128, 2, 66, "Input"],
+Cell[6748, 221, 370, 10, 74, "Text"],
+Cell[7121, 233, 148, 2, 66, "Input"],
+Cell[7272, 237, 162, 3, 54, "Text"],
+Cell[7437, 242, 52, 1, 46, "Input"],
+Cell[7492, 245, 149, 6, 34, "Text"],
+Cell[7644, 253, 44, 1, 46, "Input"],
+Cell[7691, 256, 289, 5, 54, "Text"],
+Cell[7983, 263, 195, 3, 86, "Input"],
+Cell[8181, 268, 177, 6, 34, "Text"],
+Cell[8361, 276, 137, 2, 66, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[8535, 283, 78, 0, 41, "Section"],
+Cell[8616, 285, 165, 3, 54, "Text"],
+Cell[8784, 290, 351, 5, 126, "Input"],
+Cell[9138, 297, 67, 0, 34, "Text"],
+Cell[9208, 299, 110, 2, 66, "Input"],
+Cell[9321, 303, 108, 3, 34, "Text"],
+Cell[9432, 308, 692, 13, 206, "Input"],
+Cell[10127, 323, 71, 0, 34, "Text"],
+Cell[10201, 325, 241, 4, 106, "Input"],
+Cell[10445, 331, 346, 8, 55, "Text"],
+Cell[10794, 341, 305, 5, 126, "Input"],
+Cell[11102, 348, 241, 4, 106, "Input"],
+Cell[11346, 354, 172, 3, 54, "Text"],
+Cell[11521, 359, 254, 4, 86, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[11812, 368, 104, 3, 70, "Section"],
+Cell[11919, 373, 128, 3, 34, "Text"],
+Cell[12050, 378, 377, 10, 116, "Input"],
+Cell[12430, 390, 524, 24, 54, "Text"],
+Cell[12957, 416, 162, 3, 66, "Input"],
+Cell[13122, 421, 172, 5, 34, "Text"],
+Cell[13297, 428, 66, 1, 46, "Input"],
+Cell[13366, 431, 374, 7, 75, "Text"],
+Cell[13743, 440, 54, 0, 34, "Text"],
+Cell[13800, 442, 238, 5, 106, "Input"],
+Cell[14041, 449, 56, 0, 34, "Text"],
+Cell[14100, 451, 351, 14, 54, "Text"],
+Cell[14454, 467, 1253, 22, 306, "Input"],
+Cell[15710, 491, 255, 11, 34, "Text"],
+Cell[15968, 504, 1038, 19, 266, "Input"],
+Cell[17009, 525, 208, 4, 54, "Text"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[17254, 534, 57, 0, 41, "Section"],
+
+Cell[CellGroupData[{
+Cell[17336, 538, 45, 0, 49, "Subsection"],
+Cell[17384, 540, 214, 6, 54, "Text"],
+Cell[17601, 548, 938, 19, 246, "Input"],
+Cell[18542, 569, 373, 15, 54, "Text"],
+Cell[18918, 586, 154, 3, 66, "Input"],
+Cell[19075, 591, 445, 9, 74, "Text"],
+Cell[19523, 602, 145, 3, 66, "Input"]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[19705, 610, 47, 0, 33, "Subsection"],
+Cell[19755, 612, 368, 6, 74, "Text"],
+Cell[20126, 620, 46, 1, 46, "Input"],
+Cell[20175, 623, 555, 14, 94, "Text"],
+Cell[20733, 639, 148, 3, 66, "Input"],
+Cell[20884, 644, 121, 2, 66, "Input"],
+Cell[21008, 648, 794, 27, 94, "Text"],
+Cell[21805, 677, 315, 9, 54, "Text"],
+Cell[22123, 688, 157, 3, 66, "Input"],
+Cell[22283, 693, 53, 0, 34, "Text"],
+Cell[22339, 695, 121, 2, 66, "Input"],
+Cell[22463, 699, 455, 9, 74, "Text"],
+Cell[22921, 710, 154, 3, 66, "Input"],
+Cell[23078, 715, 94, 2, 34, "Text"],
+Cell[23175, 719, 142, 5, 34, "Text"],
+Cell[23320, 726, 52, 1, 46, "Input"],
+Cell[23375, 729, 156, 5, 34, "Text"],
+Cell[23534, 736, 121, 2, 66, "Input"],
+Cell[23658, 740, 492, 11, 94, "Text"],
+Cell[24153, 753, 121, 2, 66, "Input"]
+}, Closed]]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+
