@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     19162,        498]
-NotebookOptionsPosition[     18797,        481]
-NotebookOutlinePosition[     19234,        499]
-CellTagsIndexPosition[     19191,        496]
+NotebookDataLength[     19416,        504]
+NotebookOptionsPosition[     19051,        487]
+NotebookOutlinePosition[     19488,        505]
+CellTagsIndexPosition[     19445,        502]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -133,7 +133,8 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{
    RowBox[{"SetFourVectorD", "[", 
-    RowBox[{"V_", ",", "G_"}], "]"}], " ", ":=", " ", 
+    RowBox[{"V_", ",", "G_", ",", 
+     RowBox[{"flavor_:", "Identity"}]}], "]"}], " ", ":=", " ", 
    RowBox[{"Module", "[", 
     RowBox[{
      RowBox[{"{", "VdValues", "}"}], ",", "\[IndentingNewLine]", 
@@ -146,10 +147,13 @@ Cell[BoxData[{
            RowBox[{"{", 
             RowBox[{"Void", ",", "Void"}], "}"}], ",", 
            RowBox[{"{", 
-            RowBox[{"i", ",", "j"}], "}"}]}], "]"}], 
+            RowBox[{
+             RowBox[{"flavor", "@", "i"}], ",", 
+             RowBox[{"flavor", "@", "j"}]}], "}"}]}], "]"}], 
          RowBox[{"Tensor", "[", 
           RowBox[{"V", ",", 
-           RowBox[{"{", "j", "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"flavor", "@", "j"}], "}"}], ",", 
            RowBox[{"{", "Void", "}"}]}], "]"}]}], "//", 
         RowBox[{"ToArrayValues", "[", "]"}]}]}], ";", "\[IndentingNewLine]", 
       RowBox[{"SetTensorValues", "[", 
@@ -157,8 +161,9 @@ Cell[BoxData[{
         RowBox[{"Tensor", "[", 
          RowBox[{"V", ",", 
           RowBox[{"{", "Void", "}"}], ",", 
-          RowBox[{"{", "i", "}"}]}], "]"}], ",", " ", "VdValues"}], "]"}], 
-      ";"}]}], "\[IndentingNewLine]", "]"}]}], 
+          RowBox[{"{", 
+           RowBox[{"flavor", "@", "i"}], "}"}]}], "]"}], ",", " ", 
+        "VdValues"}], "]"}], ";"}]}], "\[IndentingNewLine]", "]"}]}], 
   "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
@@ -477,7 +482,8 @@ Cell[BoxData[{
    3.6705472795763345`*^9}, 3.670547470683468*^9, {3.670548337892579*^9, 
    3.67054834402339*^9}, {3.670549069769456*^9, 3.6705490779126697`*^9}, {
    3.6705513621238537`*^9, 3.670551369455867*^9}, {3.6705555821049623`*^9, 
-   3.670555619077027*^9}, {3.6705909451666*^9, 3.6705909489418073`*^9}}]
+   3.670555619077027*^9}, {3.6705909451666*^9, 3.6705909489418073`*^9}, {
+   3.6706046668734646`*^9, 3.6706046773566833`*^9}}]
 },
 WindowSize->{1331, 945},
 WindowMargins->{{Automatic, 201}, {-35, Automatic}},
@@ -498,7 +504,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 18235, 459, 1795, "Input",
+Cell[558, 20, 18489, 465, 1795, "Input",
  InitializationCell->True]
 }
 ]
