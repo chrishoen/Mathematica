@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     19416,        504]
-NotebookOptionsPosition[     19051,        487]
-NotebookOutlinePosition[     19488,        505]
-CellTagsIndexPosition[     19445,        502]
+NotebookDataLength[     23831,        625]
+NotebookOptionsPosition[     23466,        608]
+NotebookOutlinePosition[     23903,        626]
+CellTagsIndexPosition[     23860,        623]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -416,44 +416,161 @@ Cell[BoxData[{
               SuperscriptBox["\[Beta]", "2"]}]}]}]}], "}"}]}], "}"}]}], ";", 
       "\[IndentingNewLine]", 
       RowBox[{"Return", "[", "LT", "]"}], ";"}]}], "]"}]}], 
-  "\n"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\n", 
  RowBox[{
-  RowBox[{"CreateBoost", "[", 
-   RowBox[{"L_", ",", "V_", ",", "newflavor_", ",", 
-    RowBox[{"oldflavor_:", "Identity"}]}], "]"}], " ", ":=", " ", 
+  RowBox[{
+   RowBox[{"CreateBoost", "[", 
+    RowBox[{"L_", ",", "V_", ",", "newflavor_", ",", 
+     RowBox[{"oldflavor_:", "Identity"}]}], "]"}], " ", ":=", " ", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"FudValues", ",", "FddValues", ",", "FduValues"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"DefineTensorShortcuts", "[", 
+       RowBox[{"L", ",", "2"}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"SetTensorValues", "[", 
+       RowBox[{
+        RowBox[{"Tensor", "[", 
+         RowBox[{"L", ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"newflavor", "@", "i"}], ",", "Void"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Void", ",", 
+            RowBox[{"oldflavor", "@", "j"}]}], "}"}]}], "]"}], ",", 
+        RowBox[{"LorentzMatrix", "[", "V", "]"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"SetTensorValues", "[", 
+       RowBox[{
+        RowBox[{"Tensor", "[", 
+         RowBox[{"L", ",", 
+          RowBox[{"{", 
+           RowBox[{"Void", ",", 
+            RowBox[{"newflavor", "@", "i"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"oldflavor", "@", "j"}], ",", "Void"}], "}"}]}], "]"}], 
+        ",", 
+        RowBox[{"LorentzMatrix", "[", "V", "]"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"SetTensorValues", "[", 
+       RowBox[{
+        RowBox[{"Tensor", "[", 
+         RowBox[{"L", ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"oldflavor", "@", "i"}], ",", "Void"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Void", ",", 
+            RowBox[{"newflavor", "@", "j"}]}], "}"}]}], "]"}], ",", 
+        RowBox[{"LorentzMatrix", "[", 
+         RowBox[{"-", "V"}], "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+      RowBox[{"SetTensorValues", "[", 
+       RowBox[{
+        RowBox[{"Tensor", "[", 
+         RowBox[{"L", ",", 
+          RowBox[{"{", 
+           RowBox[{"Void", ",", 
+            RowBox[{"oldflavor", "@", "i"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"newflavor", "@", "j"}], ",", "Void"}], "}"}]}], "]"}], 
+        ",", 
+        RowBox[{"LorentzMatrix", "[", 
+         RowBox[{"-", "V"}], "]"}]}], "]"}], ";"}]}], "\[IndentingNewLine]", 
+    "]"}]}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Gamma]", "[", "v_", "]"}], ":=", " ", 
+   RowBox[{"1", "/", 
+    RowBox[{"Sqrt", "[", 
+     RowBox[{"1", "-", 
+      RowBox[{"v", "^", "2"}]}], "]"}]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Gamma]", "[", 
+    RowBox[{"{", 
+     RowBox[{"v1_", ",", "v2_", ",", "v2_"}], "}"}], "]"}], ":=", " ", 
+   RowBox[{"1", "/", 
+    RowBox[{"Sqrt", "[", 
+     RowBox[{"1", "-", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"v1", "^", "2"}], " ", "+", " ", 
+        RowBox[{
+         RowBox[{"v2", "^", "2"}], "  ", 
+         RowBox[{"v3", "^", "2"}]}]}], ")"}]}], " ", "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"MyNorm3", "[", "a3_", "]"}], " ", ":=", " ", 
+  RowBox[{"Sqrt", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"a3", "[", 
+      RowBox[{"[", "1", "]"}], "]"}], "^", "2"}], " ", "+", " ", 
+    RowBox[{
+     RowBox[{"a3", "[", 
+      RowBox[{"[", "2", "]"}], "]"}], "^", "2"}], " ", "+", " ", 
+    RowBox[{
+     RowBox[{"a3", "[", 
+      RowBox[{"[", "3", "]"}], "]"}], "^", "2"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"VelocityArray4From3", "[", "v3_", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"\[Gamma]", "[", 
+    RowBox[{"MyNorm3", "[", "v3", "]"}], "]"}], " ", 
+   RowBox[{"Prepend", "[", 
+    RowBox[{"v3", ",", "1"}], "]"}]}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"VelocityArray3From4", "[", "v4_", "]"}], ":=", 
+   RowBox[{
+    RowBox[{"Rest", "[", "v4", "]"}], "/", 
+    RowBox[{"First", "[", "v4", "]"}]}]}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"CreateFourVelocity", "[", 
+   RowBox[{"V_", ",", "G_", ",", "v3_"}], "]"}], " ", ":=", " ", 
   RowBox[{"Module", "[", 
    RowBox[{
     RowBox[{"{", 
-     RowBox[{"FudValues", ",", "FddValues", ",", "FduValues"}], "}"}], ",", 
-    "\[IndentingNewLine]", 
+     RowBox[{"VuValues", ",", "VdValues"}], "}"}], ",", "\[IndentingNewLine]", 
     RowBox[{
      RowBox[{"DefineTensorShortcuts", "[", 
-      RowBox[{"L", ",", "2"}], "]"}], ";", "\[IndentingNewLine]", 
-     RowBox[{"SetTensorValues", "[", 
-      RowBox[{
-       RowBox[{"Tensor", "[", 
-        RowBox[{"L", ",", 
-         RowBox[{"{", 
-          RowBox[{
-           RowBox[{"newflavor", "@", "i"}], ",", "Void"}], "}"}], ",", 
-         RowBox[{"{", 
-          RowBox[{"Void", ",", 
-           RowBox[{"oldflavor", "@", "j"}]}], "}"}]}], "]"}], ",", 
-       RowBox[{"LorentzMatrix", "[", "V", "]"}]}], "]"}], ";", 
+      RowBox[{"V", ",", "1"}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"VuValues", " ", "=", " ", 
+      RowBox[{"VelocityArray4From3", "[", "v3", "]"}]}], ";", 
      "\[IndentingNewLine]", 
      RowBox[{"SetTensorValues", "[", 
       RowBox[{
        RowBox[{"Tensor", "[", 
-        RowBox[{"L", ",", 
-         RowBox[{"{", 
-          RowBox[{
-           RowBox[{"oldflavor", "@", "i"}], ",", "Void"}], "}"}], ",", 
-         RowBox[{"{", 
-          RowBox[{"Void", ",", 
-           RowBox[{"newflavor", "@", "j"}]}], "}"}]}], "]"}], ",", 
-       RowBox[{"LorentzMatrix", "[", 
-        RowBox[{"-", "V"}], "]"}]}], "]"}], ";"}]}], "\[IndentingNewLine]", 
-   "]"}]}], "\[IndentingNewLine]"}], "Input",
+        RowBox[{"V", ",", 
+         RowBox[{"{", "i", "}"}], ",", 
+         RowBox[{"{", "Void", "}"}]}], "]"}], ",", " ", "VuValues"}], "]"}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"VdValues", " ", "=", " ", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Tensor", "[", 
+         RowBox[{"G", ",", 
+          RowBox[{"{", 
+           RowBox[{"Void", ",", "Void"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "j"}], "}"}]}], "]"}], 
+        RowBox[{"Tensor", "[", 
+         RowBox[{"V", ",", 
+          RowBox[{"{", "i", "}"}], ",", 
+          RowBox[{"{", "Void", "}"}]}], "]"}]}], "//", 
+       RowBox[{"ToArrayValues", "[", "]"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"SetTensorValues", "[", 
+      RowBox[{
+       RowBox[{"Tensor", "[", 
+        RowBox[{"V", ",", 
+         RowBox[{"{", "Void", "}"}], ",", 
+         RowBox[{"{", "i", "}"}]}], "]"}], ",", " ", "VdValues"}], "]"}], 
+     ";"}]}], "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]"}], "Input",
  InitializationCell->True,
  CellChangeTimes->{{3.6704378376801805`*^9, 3.670437890127472*^9}, {
    3.6704383156018147`*^9, 3.6704383463338685`*^9}, {3.6704442484125605`*^9, 
@@ -483,7 +600,11 @@ Cell[BoxData[{
    3.67054834402339*^9}, {3.670549069769456*^9, 3.6705490779126697`*^9}, {
    3.6705513621238537`*^9, 3.670551369455867*^9}, {3.6705555821049623`*^9, 
    3.670555619077027*^9}, {3.6705909451666*^9, 3.6705909489418073`*^9}, {
-   3.6706046668734646`*^9, 3.6706046773566833`*^9}}]
+   3.6706046668734646`*^9, 3.6706046773566833`*^9}, {3.670686388216716*^9, 
+   3.6706864638924475`*^9}, {3.6706869127244315`*^9, 
+   3.6706869147212353`*^9}, {3.6706870704507074`*^9, 
+   3.6706870838667307`*^9}, {3.670687154952856*^9, 3.6706871604440656`*^9}, {
+   3.6706922559740157`*^9, 3.6706922620112267`*^9}}]
 },
 WindowSize->{1331, 945},
 WindowMargins->{{Automatic, 201}, {-35, Automatic}},
@@ -504,7 +625,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 18489, 465, 1795, "Input",
+Cell[558, 20, 22904, 586, 2163, "Input",
  InitializationCell->True]
 }
 ]

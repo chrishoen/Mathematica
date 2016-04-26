@@ -1,0 +1,436 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     15419,        427]
+NotebookOptionsPosition[     14401,        388]
+NotebookOutlinePosition[     14835,        406]
+CellTagsIndexPosition[     14792,        403]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"Get", "[", "\"\<C:\\\\MyLib\\\\Math\\\\TensorInitialize1.m\>\"", 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.6704378376801805`*^9, 3.670437890127472*^9}, {
+   3.6704383156018147`*^9, 3.6704383463338685`*^9}, {3.6704442484125605`*^9, 
+   3.6704442504717646`*^9}, {3.670444396534819*^9, 3.6704444559085226`*^9}, {
+   3.670454144133815*^9, 3.6704541750062685`*^9}, {3.6704546014878125`*^9, 
+   3.670454662624319*^9}, {3.670455000973309*^9, 3.6704550076501207`*^9}, {
+   3.670457756421713*^9, 3.6704577623965235`*^9}, {3.670459815655306*^9, 
+   3.67045981838531*^9}, {3.6704599635591636`*^9, 3.6704599743855824`*^9}, 
+   3.6704601757039337`*^9, {3.6704620506712027`*^9, 3.6704620508896027`*^9}, {
+   3.6704636987899895`*^9, 3.67046369900839*^9}, {3.6704695542948947`*^9, 
+   3.670469556104498*^9}, {3.67054340007117*^9, 3.670543409805587*^9}, {
+   3.6705450580324607`*^9, 3.6705451113689537`*^9}, {3.670546263789763*^9, 
+   3.6705462683449707`*^9}, 3.670549025106578*^9, {3.670550450754665*^9, 
+   3.670550461752684*^9}, 3.670550555196847*^9, {3.6705506617762327`*^9, 
+   3.6705506806678658`*^9}, {3.6705512330180287`*^9, 
+   3.6705512334548297`*^9}, {3.670551301080948*^9, 3.670551307664159*^9}, {
+   3.6705514231427603`*^9, 3.670551455169616*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"DefineTensorShortcuts", "[", 
+   RowBox[{"T", ",", "2"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"SetTensorValues", "[", 
+    RowBox[{
+     RowBox[{"Tud", "[", 
+      RowBox[{"i", ",", "j"}], "]"}], ",", 
+     RowBox[{"LorentzMatrix", "[", 
+      RowBox[{"{", 
+       RowBox[{"\[Beta]1", ",", "0", ",", "0"}], "}"}], "]"}]}], "]"}], ";"}],
+   "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GAdd", " ", "=", " ", 
+   RowBox[{
+    RowBox[{"Gdd", "[", 
+     RowBox[{"a", ",", "b"}], "]"}], "//", 
+    RowBox[{"ToArrayValues", "[", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"GAuu", " ", "=", " ", 
+   RowBox[{
+    RowBox[{"Guu", "[", 
+     RowBox[{"a", ",", "b"}], "]"}], "//", 
+    RowBox[{"ToArrayValues", "[", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"TAud", " ", "=", " ", 
+   RowBox[{"LorentzMatrix", "[", 
+    RowBox[{"{", 
+     RowBox[{"\[Beta]1", ",", "0", ",", "0"}], "}"}], "]"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.6705523113927093`*^9, 3.670552416240492*^9}, 
+   3.6705524784846*^9, 3.670552511416258*^9, {3.670555428912695*^9, 
+   3.6705554319859004`*^9}, 3.6705555740709486`*^9, {3.670603632760461*^9, 
+   3.6706036375496693`*^9}, {3.6706037390826464`*^9, 
+   3.6706037434974546`*^9}, {3.6706763562330956`*^9, 
+   3.6706764156535993`*^9}, {3.6706764603008766`*^9, 
+   3.6706766377667866`*^9}, {3.670676975242175*^9, 3.670676975460575*^9}, {
+   3.670677715401065*^9, 3.6706777424671125`*^9}, {3.6706782169847403`*^9, 
+   3.6706782903828683`*^9}, {3.6706783541089797`*^9, 
+   3.6706784177414904`*^9}, {3.670678489127215*^9, 3.6706784892988153`*^9}, {
+   3.670680736318333*^9, 3.67068079169843*^9}, {3.670681776677348*^9, 
+   3.6706818123546104`*^9}, {3.6706820870554895`*^9, 
+   3.6706821256343565`*^9}, {3.6706821736980405`*^9, 
+   3.6706821951012783`*^9}, {3.670682238640954*^9, 3.6706822492021723`*^9}, {
+   3.67068401952731*^9, 3.670684023802555*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"GAdd", ";"}], "\[IndentingNewLine]", 
+ RowBox[{"%", "//", "MatrixForm"}]}], "Input"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0", "0", "0"},
+       {"0", 
+        RowBox[{"-", "1"}], "0", "0"},
+       {"0", "0", 
+        RowBox[{"-", "1"}], "0"},
+       {"0", "0", "0", 
+        RowBox[{"-", "1"}]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]],
+   FontFamily->"Courier",
+   FontSize->16],
+  StyleForm[#, FontSize -> 16, FontFamily -> "Courier"]& ]], "Output",
+ CellChangeTimes->{
+  3.670682263538597*^9, {3.6706837846428757`*^9, 3.6706838027729125`*^9}, {
+   3.670683891670997*^9, 3.67068392913414*^9}, {3.6706839798990436`*^9, 
+   3.6706839879225025`*^9}, 3.6706840865411434`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"TAud", ";"}], "\[IndentingNewLine]", 
+ RowBox[{"%", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.670682139643181*^9, 3.67068215613241*^9}, {
+  3.6706840427226367`*^9, 3.6706840429226484`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {
+        FractionBox["1", 
+         SqrtBox[
+          RowBox[{"1", "-", 
+           SuperscriptBox["\[Beta]1", "2"]}]]], 
+        RowBox[{"-", 
+         FractionBox["\[Beta]1", 
+          SqrtBox[
+           RowBox[{"1", "-", 
+            SuperscriptBox["\[Beta]1", "2"]}]]]}], "0", "0"},
+       {
+        RowBox[{"-", 
+         FractionBox["\[Beta]1", 
+          SqrtBox[
+           RowBox[{"1", "-", 
+            SuperscriptBox["\[Beta]1", "2"]}]]]}], 
+        FractionBox["1", 
+         SqrtBox[
+          RowBox[{"1", "-", 
+           SuperscriptBox["\[Beta]1", "2"]}]]], "0", "0"},
+       {"0", "0", "1", "0"},
+       {"0", "0", "0", "1"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]],
+   FontFamily->"Courier",
+   FontSize->16],
+  StyleForm[#, FontSize -> 16, FontFamily -> "Courier"]& ]], "Output",
+ CellChangeTimes->{
+  3.6706822635541973`*^9, {3.670683784654876*^9, 3.670683802782913*^9}, {
+   3.670683891681998*^9, 3.6706839291441402`*^9}, {3.6706839799100437`*^9, 
+   3.6706839879325027`*^9}, 3.6706840865521436`*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.670552625998458*^9, 3.6705527474602695`*^9}, {
+   3.670552820515197*^9, 3.670552820686797*^9}, {3.6705528721572876`*^9, 
+   3.670552872391288*^9}, {3.670552912592558*^9, 3.6705529127953587`*^9}, {
+   3.6705530259735556`*^9, 3.670553030247963*^9}, {3.6705532258567038`*^9, 
+   3.670553228586709*^9}, {3.670553737756798*^9, 3.6705537400968018`*^9}, {
+   3.6705556913519526`*^9, 3.6705556939883575`*^9}, 3.670555852226633*^9, {
+   3.6706034030616603`*^9, 3.6706034290825057`*^9}, {3.6706034963342233`*^9, 
+   3.670603502589834*^9}, {3.6706035928399916`*^9, 3.6706035956791964`*^9}, 
+   3.6706036473308864`*^9, {3.670603699723778*^9, 3.6706036999265785`*^9}, {
+   3.6706738510743265`*^9, 3.670673860106742*^9}, 3.6706765357582083`*^9, {
+   3.6706769245576863`*^9, 3.670676980655384*^9}, {3.6706770709483414`*^9, 
+   3.670677071151142*^9}, {3.670677113162015*^9, 3.670677113380416*^9}, 
+   3.6706777196910725`*^9, 3.6706782950628767`*^9, {3.670678449066345*^9, 
+   3.670678495398426*^9}, {3.6706785490781193`*^9, 3.67067854923412*^9}, {
+   3.6706808093888607`*^9, 3.6706808597925487`*^9}, {3.670681825084233*^9, 
+   3.670681859061092*^9}, {3.6706819487144485`*^9, 3.6706820653090515`*^9}, 
+   3.670682211840107*^9, {3.670683756536268*^9, 3.6706837795165825`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"TAdu", " ", "=", " ", 
+   RowBox[{"GAuu", ".", "TAud", ".", "GAdd"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"%", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.670673896688806*^9, 3.6706738977652073`*^9}, {
+   3.6706739462056923`*^9, 3.670673975315343*^9}, {3.6706770736159463`*^9, 
+   3.6706770771259527`*^9}, {3.6706771107908115`*^9, 3.670677142880067*^9}, {
+   3.6706772400214367`*^9, 3.6706772402086368`*^9}, {3.670677721641076*^9, 
+   3.6706777238094797`*^9}, 3.6706782979644814`*^9, {3.6706785507317224`*^9, 
+   3.670678585597783*^9}, {3.6706787097583995`*^9, 3.6706787099300003`*^9}, 
+   3.6706807426363444`*^9, {3.6706818622902975`*^9, 3.670681910868782*^9}, {
+   3.6706820505358257`*^9, 3.670682071829863*^9}, 3.6706822093285027`*^9, {
+   3.6706837740842714`*^9, 3.670683792309314*^9}, {3.670683887071734*^9, 
+   3.6706838872547445`*^9}, {3.67068405467132*^9, 3.67068405484733*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {
+        FractionBox["1", 
+         SqrtBox[
+          RowBox[{"1", "-", 
+           SuperscriptBox["\[Beta]1", "2"]}]]], 
+        FractionBox["\[Beta]1", 
+         SqrtBox[
+          RowBox[{"1", "-", 
+           SuperscriptBox["\[Beta]1", "2"]}]]], "0", "0"},
+       {
+        FractionBox["\[Beta]1", 
+         SqrtBox[
+          RowBox[{"1", "-", 
+           SuperscriptBox["\[Beta]1", "2"]}]]], 
+        FractionBox["1", 
+         SqrtBox[
+          RowBox[{"1", "-", 
+           SuperscriptBox["\[Beta]1", "2"]}]]], "0", "0"},
+       {"0", "0", "1", "0"},
+       {"0", "0", "0", "1"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]],
+   FontFamily->"Courier",
+   FontSize->16],
+  StyleForm[#, FontSize -> 16, FontFamily -> "Courier"]& ]], "Output",
+ CellChangeTimes->{
+  3.6706822635853977`*^9, {3.6706837846768775`*^9, 3.670683802801914*^9}, {
+   3.6706838916989985`*^9, 3.6706839291681423`*^9}, {3.670683979927045*^9, 
+   3.6706839879455037`*^9}, 3.670684086568145*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"TBud", " ", "=", " ", 
+    RowBox[{"LorentzMatrix", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "\[Beta]1"}], ",", "0", ",", "0"}], "}"}], "]"}]}], 
+   ";"}]}]], "Input",
+ CellChangeTimes->{{3.670684029614887*^9, 3.670684037338329*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"TBud", ";"}], "\[IndentingNewLine]", 
+   RowBox[{"%", "//", "MatrixForm"}]}]}]], "Input",
+ CellChangeTimes->{{3.670684047455908*^9, 3.67068405152614*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {
+        FractionBox["1", 
+         SqrtBox[
+          RowBox[{"1", "-", 
+           SuperscriptBox["\[Beta]1", "2"]}]]], 
+        FractionBox["\[Beta]1", 
+         SqrtBox[
+          RowBox[{"1", "-", 
+           SuperscriptBox["\[Beta]1", "2"]}]]], "0", "0"},
+       {
+        FractionBox["\[Beta]1", 
+         SqrtBox[
+          RowBox[{"1", "-", 
+           SuperscriptBox["\[Beta]1", "2"]}]]], 
+        FractionBox["1", 
+         SqrtBox[
+          RowBox[{"1", "-", 
+           SuperscriptBox["\[Beta]1", "2"]}]]], "0", "0"},
+       {"0", "0", "1", "0"},
+       {"0", "0", "0", "1"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]],
+   FontFamily->"Courier",
+   FontSize->16],
+  StyleForm[#, FontSize -> 16, FontFamily -> "Courier"]& ]], "Output",
+ CellChangeTimes->{3.6706840865831456`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"TBdu", " ", "=", " ", 
+   RowBox[{"GAuu", ".", "TBud", ".", "GAdd"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"%", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.670684062942793*^9, 3.6706840825319138`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {
+        FractionBox["1", 
+         SqrtBox[
+          RowBox[{"1", "-", 
+           SuperscriptBox["\[Beta]1", "2"]}]]], 
+        RowBox[{"-", 
+         FractionBox["\[Beta]1", 
+          SqrtBox[
+           RowBox[{"1", "-", 
+            SuperscriptBox["\[Beta]1", "2"]}]]]}], "0", "0"},
+       {
+        RowBox[{"-", 
+         FractionBox["\[Beta]1", 
+          SqrtBox[
+           RowBox[{"1", "-", 
+            SuperscriptBox["\[Beta]1", "2"]}]]]}], 
+        FractionBox["1", 
+         SqrtBox[
+          RowBox[{"1", "-", 
+           SuperscriptBox["\[Beta]1", "2"]}]]], "0", "0"},
+       {"0", "0", "1", "0"},
+       {"0", "0", "0", "1"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]],
+   FontFamily->"Courier",
+   FontSize->16],
+  StyleForm[#, FontSize -> 16, FontFamily -> "Courier"]& ]], "Output",
+ CellChangeTimes->{3.6706840865931463`*^9}]
+}, Open  ]]
+},
+WindowSize->{661, 945},
+WindowMargins->{{78, Automatic}, {33, Automatic}},
+PrintingCopies->1,
+PrintingPageRange->{Automatic, Automatic},
+Magnification:>1.25 Inherited,
+FrontEndVersion->"10.0 for Microsoft Windows (64-bit) (July 1, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 1267, 18, 36, "Input"],
+Cell[1828, 40, 2004, 46, 175, "Input"],
+Cell[CellGroupData[{
+Cell[3857, 90, 109, 2, 60, "Input"],
+Cell[3969, 94, 1116, 31, 129, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5122, 130, 227, 4, 60, "Input"],
+Cell[5352, 136, 1583, 46, 163, "Output"]
+}, Open  ]],
+Cell[6950, 185, 1307, 17, 36, "Input"],
+Cell[CellGroupData[{
+Cell[8282, 206, 939, 14, 60, "Input"],
+Cell[9224, 222, 1527, 44, 163, "Output"]
+}, Open  ]],
+Cell[10766, 269, 322, 9, 60, "Input"],
+Cell[CellGroupData[{
+Cell[11113, 282, 224, 5, 83, "Input"],
+Cell[11340, 289, 1348, 41, 163, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12725, 335, 253, 5, 60, "Input"],
+Cell[12981, 342, 1404, 43, 163, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
