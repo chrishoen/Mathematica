@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     23831,        625]
-NotebookOptionsPosition[     23466,        608]
-NotebookOutlinePosition[     23903,        626]
-CellTagsIndexPosition[     23860,        623]
+NotebookDataLength[     24118,        633]
+NotebookOptionsPosition[     23753,        616]
+NotebookOutlinePosition[     24190,        634]
+CellTagsIndexPosition[     24147,        631]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -416,7 +416,7 @@ Cell[BoxData[{
               SuperscriptBox["\[Beta]", "2"]}]}]}]}], "}"}]}], "}"}]}], ";", 
       "\[IndentingNewLine]", 
       RowBox[{"Return", "[", "LT", "]"}], ";"}]}], "]"}]}], 
-  "\[IndentingNewLine]"}], "\n", 
+  "\n"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{
    RowBox[{"CreateBoost", "[", 
@@ -529,10 +529,11 @@ Cell[BoxData[{
    RowBox[{"VelocityArray3From4", "[", "v4_", "]"}], ":=", 
    RowBox[{
     RowBox[{"Rest", "[", "v4", "]"}], "/", 
-    RowBox[{"First", "[", "v4", "]"}]}]}], "\n"}], "\[IndentingNewLine]", 
+    RowBox[{"First", "[", "v4", "]"}]}]}], "\[IndentingNewLine]"}], "\n", 
  RowBox[{
   RowBox[{"CreateFourVelocity", "[", 
-   RowBox[{"V_", ",", "G_", ",", "v3_"}], "]"}], " ", ":=", " ", 
+   RowBox[{"V_", ",", "G_", ",", "v3_", ",", 
+    RowBox[{"flavor_:", "Identity"}]}], "]"}], " ", ":=", " ", 
   RowBox[{"Module", "[", 
    RowBox[{
     RowBox[{"{", 
@@ -547,7 +548,8 @@ Cell[BoxData[{
       RowBox[{
        RowBox[{"Tensor", "[", 
         RowBox[{"V", ",", 
-         RowBox[{"{", "i", "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"flavor", "@", "i"}], "}"}], ",", 
          RowBox[{"{", "Void", "}"}]}], "]"}], ",", " ", "VuValues"}], "]"}], 
      ";", "\[IndentingNewLine]", 
      RowBox[{"VdValues", " ", "=", " ", 
@@ -558,10 +560,13 @@ Cell[BoxData[{
           RowBox[{"{", 
            RowBox[{"Void", ",", "Void"}], "}"}], ",", 
           RowBox[{"{", 
-           RowBox[{"i", ",", "j"}], "}"}]}], "]"}], 
+           RowBox[{
+            RowBox[{"flavor", "@", "i"}], ",", 
+            RowBox[{"flavor", "@", "j"}]}], "}"}]}], "]"}], 
         RowBox[{"Tensor", "[", 
          RowBox[{"V", ",", 
-          RowBox[{"{", "i", "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"flavor", "@", "i"}], "}"}], ",", 
           RowBox[{"{", "Void", "}"}]}], "]"}]}], "//", 
        RowBox[{"ToArrayValues", "[", "]"}]}]}], ";", "\[IndentingNewLine]", 
      RowBox[{"SetTensorValues", "[", 
@@ -569,8 +574,10 @@ Cell[BoxData[{
        RowBox[{"Tensor", "[", 
         RowBox[{"V", ",", 
          RowBox[{"{", "Void", "}"}], ",", 
-         RowBox[{"{", "i", "}"}]}], "]"}], ",", " ", "VdValues"}], "]"}], 
-     ";"}]}], "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]"}], "Input",
+         RowBox[{"{", 
+          RowBox[{"flavor", "@", "i"}], "}"}]}], "]"}], ",", " ", 
+       "VdValues"}], "]"}], ";"}]}], "\[IndentingNewLine]", 
+   "]"}]}], "\[IndentingNewLine]"}], "Input",
  InitializationCell->True,
  CellChangeTimes->{{3.6704378376801805`*^9, 3.670437890127472*^9}, {
    3.6704383156018147`*^9, 3.6704383463338685`*^9}, {3.6704442484125605`*^9, 
@@ -604,7 +611,8 @@ Cell[BoxData[{
    3.6706864638924475`*^9}, {3.6706869127244315`*^9, 
    3.6706869147212353`*^9}, {3.6706870704507074`*^9, 
    3.6706870838667307`*^9}, {3.670687154952856*^9, 3.6706871604440656`*^9}, {
-   3.6706922559740157`*^9, 3.6706922620112267`*^9}}]
+   3.6706922559740157`*^9, 3.6706922620112267`*^9}, {3.6707804400733576`*^9, 
+   3.670780471928613*^9}}]
 },
 WindowSize->{1331, 945},
 WindowMargins->{{Automatic, 201}, {-35, Automatic}},
@@ -625,7 +633,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 22904, 586, 2163, "Input",
+Cell[558, 20, 23191, 594, 2163, "Input",
  InitializationCell->True]
 }
 ]
