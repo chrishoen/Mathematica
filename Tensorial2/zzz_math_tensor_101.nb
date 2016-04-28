@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      6785,        202]
-NotebookOptionsPosition[      6081,        174]
-NotebookOutlinePosition[      6514,        192]
-CellTagsIndexPosition[      6471,        189]
+NotebookDataLength[      6838,        203]
+NotebookOptionsPosition[      6132,        175]
+NotebookOutlinePosition[      6567,        193]
+CellTagsIndexPosition[      6524,        190]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -161,7 +161,8 @@ Cell[BoxData[
      RowBox[{"G", ",", "X1"}], "]"}], ",", 
     RowBox[{"{", 
      RowBox[{"2", ",", "3"}], "}"}]}], "]"}]}]], "Input",
- CellChangeTimes->{{3.6708646683801575`*^9, 3.6708646780989747`*^9}}],
+ CellChangeTimes->{{3.6708646683801575`*^9, 3.6708646780989747`*^9}, {
+  3.670870120547254*^9, 3.6708701211244555`*^9}}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -173,7 +174,7 @@ Cell[BoxData[
 }, Open  ]]
 },
 WindowSize->{1331, 945},
-WindowMargins->{{Automatic, 0}, {0, Automatic}},
+WindowMargins->{{201, Automatic}, {0, Automatic}},
 PrintingCopies->1,
 PrintingPageRange->{Automatic, Automatic},
 Magnification:>1.25 Inherited,
@@ -201,8 +202,8 @@ Cell[4731, 126, 247, 7, 36, "Output"]
 }, Open  ]],
 Cell[4993, 136, 552, 15, 83, "Input"],
 Cell[CellGroupData[{
-Cell[5570, 155, 294, 8, 60, "Input"],
-Cell[5867, 165, 198, 6, 36, "Output"]
+Cell[5570, 155, 345, 9, 60, "Input"],
+Cell[5918, 166, 198, 6, 36, "Output"]
 }, Open  ]]
 }
 ]
