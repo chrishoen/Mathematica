@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     12466,        324]
-NotebookOptionsPosition[     12102,        307]
-NotebookOutlinePosition[     12539,        325]
-CellTagsIndexPosition[     12496,        322]
+NotebookDataLength[     13146,        344]
+NotebookOptionsPosition[     12782,        327]
+NotebookOutlinePosition[     13219,        345]
+CellTagsIndexPosition[     13176,        342]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -260,7 +260,26 @@ Cell[BoxData[{
       RowBox[{"Guu", ",", "A1"}], "]"}], ",", 
      RowBox[{"{", 
       RowBox[{"2", ",", 
-       RowBox[{"2", "+", "I"}]}], "}"}]}], "]"}]}], ";"}]}], "Input",
+       RowBox[{"2", "+", "I"}]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"TVectorNorm", "[", "A_", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"TCP", "[", 
+    RowBox[{"A", ",", 
+     RowBox[{"TLower", "[", 
+      RowBox[{"A", ",", "1"}], "]"}]}], "]"}], "[", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2"}], "}"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"TOneFormNorm", "[", "A_", "]"}], ":=", 
+  RowBox[{
+   RowBox[{"TCP", "[", 
+    RowBox[{"A", ",", 
+     RowBox[{"TRaise", "[", 
+      RowBox[{"A", ",", "1"}], "]"}]}], "]"}], "[", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2"}], "}"}], "]"}]}]}], "Input",
  InitializationCell->True,
  CellChangeTimes->{{3.6704378376801805`*^9, 3.670437890127472*^9}, {
    3.6704383156018147`*^9, 3.6704383463338685`*^9}, {3.6704442484125605`*^9, 
@@ -303,7 +322,8 @@ Cell[BoxData[{
    3.6708774653730183`*^9, 3.6708774726894307`*^9}, {3.670878148710322*^9, 
    3.6708781554495335`*^9}, {3.6708782007676125`*^9, 3.670878216788841*^9}, {
    3.67088067480713*^9, 3.6708806774123344`*^9}, {3.6709382682789726`*^9, 
-   3.6709382703069763`*^9}}]
+   3.6709382703069763`*^9}, {3.6709497302537456`*^9, 
+   3.6709497377729588`*^9}, {3.6709498163730955`*^9, 3.6709498168722963`*^9}}]
 },
 WindowSize->{1331, 945},
 WindowMargins->{{Automatic, 201}, {-35, Automatic}},
@@ -324,7 +344,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 11540, 285, 737, "Input",
+Cell[558, 20, 12220, 305, 783, "Input",
  InitializationCell->True]
 }
 ]
