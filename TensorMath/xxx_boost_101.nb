@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      8384,        243]
-NotebookOptionsPosition[      7713,        215]
-NotebookOutlinePosition[      8146,        233]
-CellTagsIndexPosition[      8103,        230]
+NotebookDataLength[      8590,        246]
+NotebookOptionsPosition[      7919,        218]
+NotebookOutlinePosition[      8352,        236]
+CellTagsIndexPosition[      8309,        233]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -111,7 +111,7 @@ Cell[BoxData[
         Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
   Function[BoxForm`e$, 
    MatrixForm[BoxForm`e$]]]], "Output",
- CellChangeTimes->{3.6708759395585566`*^9}]
+ CellChangeTimes->{3.670877570789602*^9, 3.67087829684978*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -120,10 +120,11 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{"Xb1", " ", "=", " ", 
    RowBox[{
-    RowBox[{"TCP", "[", 
-     RowBox[{"Lba", ",", "Xa1", ",", 
-      RowBox[{"{", 
-       RowBox[{"2", ",", "3"}], "}"}]}], "]"}], "//", "FullSimplify"}]}], 
+    RowBox[{
+     RowBox[{"TCP", "[", 
+      RowBox[{"Lba", ",", "Xa1"}], "]"}], "[", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3"}], "}"}], "]"}], "//", "FullSimplify"}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{"Xb1", "//", "MatrixForm"}]}], "Input",
  CellChangeTimes->{{3.6708702110430117`*^9, 3.6708702170646224`*^9}, 
@@ -131,7 +132,7 @@ Cell[BoxData[{
    3.670875189475649*^9, 3.6708752108320866`*^9}, {3.670875265775382*^9, 
    3.670875285181816*^9}, {3.6708755188234234`*^9, 3.6708755189950237`*^9}, {
    3.6708756752472963`*^9, 3.67087568321891*^9}, {3.6708758511220026`*^9, 
-   3.670875856550812*^9}}],
+   3.670875856550812*^9}, {3.6708782824041553`*^9, 3.6708782839329576`*^9}}],
 
 Cell[BoxData[
  TagBox[
@@ -167,7 +168,7 @@ Cell[BoxData[
     Column], "\[NoBreak]", ")"}],
   Function[BoxForm`e$, 
    MatrixForm[BoxForm`e$]]]], "Output",
- CellChangeTimes->{3.6708759395741568`*^9}]
+ CellChangeTimes->{3.670877570789602*^9, 3.67087829692778*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -176,17 +177,19 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{"Xa2", " ", "=", " ", 
    RowBox[{
-    RowBox[{"TCP", "[", 
-     RowBox[{"Lab", ",", "Xb1", ",", 
-      RowBox[{"{", 
-       RowBox[{"2", ",", "3"}], "}"}]}], "]"}], "//", "FullSimplify"}]}], 
+    RowBox[{
+     RowBox[{"TCP", "[", 
+      RowBox[{"Lab", ",", "Xb1"}], "]"}], "[", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3"}], "}"}], "]"}], "//", "FullSimplify"}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{"Xa2", "//", "MatrixForm"}]}], "Input",
  CellChangeTimes->{{3.6708704561118393`*^9, 3.6708705443455935`*^9}, {
    3.6708706484601746`*^9, 3.6708706486785755`*^9}, {3.6708707607647705`*^9, 
    3.670870761139171*^9}, {3.670874703498201*^9, 3.670874703669801*^9}, 
    3.6708752142328925`*^9, {3.6708755218498287`*^9, 3.6708756221136036`*^9}, {
-   3.670875783651885*^9, 3.6708758202339487`*^9}}],
+   3.670875783651885*^9, 3.6708758202339487`*^9}, {3.6708782929653735`*^9, 
+   3.670878293916975*^9}}],
 
 Cell[BoxData[
  TagBox[
@@ -210,7 +213,7 @@ Cell[BoxData[
     Column], "\[NoBreak]", ")"}],
   Function[BoxForm`e$, 
    MatrixForm[BoxForm`e$]]]], "Output",
- CellChangeTimes->{3.670875939589757*^9}]
+ CellChangeTimes->{3.6708775708052015`*^9, 3.6708782969433804`*^9}]
 }, Open  ]]
 },
 WindowSize->{1331, 945},
@@ -235,15 +238,15 @@ Notebook[{
 Cell[558, 20, 1388, 20, 36, "Input"],
 Cell[CellGroupData[{
 Cell[1971, 44, 1307, 29, 129, "Input"],
-Cell[3281, 75, 1205, 38, 154, "Output"]
+Cell[3281, 75, 1224, 38, 154, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[4523, 118, 710, 15, 60, "Input"],
-Cell[5236, 135, 1061, 34, 154, "Output"]
+Cell[4542, 118, 780, 16, 60, "Input"],
+Cell[5325, 136, 1080, 34, 154, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[6334, 174, 661, 14, 60, "Input"],
-Cell[6998, 190, 699, 22, 110, "Output"]
+Cell[6442, 175, 733, 16, 60, "Input"],
+Cell[7178, 193, 725, 22, 110, "Output"]
 }, Open  ]]
 }
 ]
