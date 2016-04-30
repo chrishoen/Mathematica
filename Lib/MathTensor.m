@@ -40,6 +40,8 @@ TLower[A1_,GGdd_,I_] := TensorContract[TensorProduct[GGdd,A1],{2,2+I}];
 TRaise[A1_,GGuu_,I_] := TensorContract[TensorProduct[GGuu,A1],{2,2+I}];
 TLower[A1_,I_] := TensorContract[TensorProduct[Gdd,A1],{2,2+I}];
 TRaise[A1_,I_] := TensorContract[TensorProduct[Guu,A1],{2,2+I}];
-TVectorNorm[A_]:=TCP[A,TLower[A,1]][{1,2}]
-TVectorNorm[A_,B_]:=TCP[A,TLower[B,1]][{1,2}]
-TOneFormNorm[A_]:=TCP[A,TRaise[A,1]][{1,2}]
+TInnerU[A_]:=TCP[A,TLower[A,1]][{1,2}]
+TInnerD[A_]:=TCP[A,TRaise[A,1]][{1,2}]
+TInnerUU[A_,B_]:=TCP[A,TLower[B,1]][{1,2}]
+TInnerUD[A_,B_]:=TCP[A,B][{1,2}]
+
