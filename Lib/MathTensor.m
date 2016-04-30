@@ -22,6 +22,8 @@ Return[LT];]
 MyNorm3[a3_] := Sqrt[a3[[1]]^2 + a3[[2]]^2 + a3[[3]]^2]
 Velocity4From3[v3_]:=\[Gamma][MyNorm3[v3]] Prepend[v3,1]
 Velocity3From4[v4_]:=Rest[v4]/First[v4]
+DistSQFrom4[a_,b_] := (a[[2]] - b[[2]])^2 + (a[[3]] - b[[3]])^2 +(a[[4]] - b[[4]])^2 ;
+DistFrom4[a_,b_] := Sqrt[(a[[2]] - b[[2]])^2 + (a[[3]] - b[[3]])^2 +(a[[4]] - b[[4]])^2 ];
 
 TP=TensorProduct[##]&;
 TC=TensorContract[##]&;
