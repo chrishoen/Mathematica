@@ -24,6 +24,14 @@ Velocity4From3[v3_]:=\[Gamma][MyNorm3[v3]] Prepend[v3,1]
 Velocity3From4[v4_]:=Rest[v4]/First[v4]
 DistSQFrom4[a_,b_] := (a[[2]] - b[[2]])^2 + (a[[3]] - b[[3]])^2 +(a[[4]] - b[[4]])^2 ;
 DistFrom4[a_,b_] := Sqrt[(a[[2]] - b[[2]])^2 + (a[[3]] - b[[3]])^2 +(a[[4]] - b[[4]])^2 ];
+DistSQ3[a_,b_] := (a[[1]] - b[[1]])^2 + (a[[2]] - b[[2]])^2 + (a[[3]] - b[[3]])^2
+DistSQ4[a_,b_] := (a[[2]] - b[[2]])^2 + (a[[3]] - b[[3]])^2 +(a[[4]] - b[[4]])^2 
+Position3From4[A4_]:=Return[{A4[[2]],A4[[3]],A4[[4]]}];
+Coulomb3[R3o_,R3s_]:=Module[{Numer,Denom},
+Numer=(R3o-R3s);
+Denom=(((R3o[[1]] - R3s[[1]])^2 + (R3o[[2]] - R3s[[2]])^2 + (R3o[[3]] - R3s[[3]])^2)^(3/2));
+Return[Numer/Denom];
+]
 
 TP=TensorProduct[##]&;
 TC=TensorContract[##]&;
