@@ -33,4 +33,5 @@ TRaise[A1_,GGuu_,I_] := TensorContract[TensorProduct[GGuu,A1],{2,2+I}];
 TLower[A1_,I_] := TensorContract[TensorProduct[Gdd,A1],{2,2+I}];
 TRaise[A1_,I_] := TensorContract[TensorProduct[Guu,A1],{2,2+I}];
 TVectorNorm[A_]:=TCP[A,TLower[A,1]][{1,2}]
+TVectorNorm[A_,B_]:=TCP[A,TLower[B,1]][{1,2}]
 TOneFormNorm[A_]:=TCP[A,TRaise[A,1]][{1,2}]

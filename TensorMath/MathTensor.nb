@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     14948,        399]
-NotebookOptionsPosition[     14584,        382]
-NotebookOutlinePosition[     15021,        400]
-CellTagsIndexPosition[     14978,        397]
+NotebookDataLength[     15310,        410]
+NotebookOptionsPosition[     14946,        393]
+NotebookOutlinePosition[     15383,        411]
+CellTagsIndexPosition[     15340,        408]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -326,6 +326,16 @@ Cell[BoxData[{
    RowBox[{"{", 
     RowBox[{"1", ",", "2"}], "}"}], "]"}]}], "\[IndentingNewLine]", 
  RowBox[{
+  RowBox[{"TVectorNorm", "[", 
+   RowBox[{"A_", ",", "B_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"TCP", "[", 
+    RowBox[{"A", ",", 
+     RowBox[{"TLower", "[", 
+      RowBox[{"B", ",", "1"}], "]"}]}], "]"}], "[", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2"}], "}"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
   RowBox[{"TOneFormNorm", "[", "A_", "]"}], ":=", 
   RowBox[{
    RowBox[{"TCP", "[", 
@@ -378,7 +388,8 @@ Cell[BoxData[{
    3.67088067480713*^9, 3.6708806774123344`*^9}, {3.6709382682789726`*^9, 
    3.6709382703069763`*^9}, {3.6709497302537456`*^9, 
    3.6709497377729588`*^9}, {3.6709498163730955`*^9, 
-   3.6709498168722963`*^9}, {3.6709701773955097`*^9, 3.6709701783159113`*^9}}]
+   3.6709498168722963`*^9}, {3.6709701773955097`*^9, 
+   3.6709701783159113`*^9}, {3.6710212696059885`*^9, 3.67102128194561*^9}}]
 },
 WindowSize->{1331, 945},
 WindowMargins->{{Automatic, 201}, {-35, Automatic}},
@@ -399,7 +410,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 14022, 360, 829, "Input",
+Cell[558, 20, 14384, 371, 852, "Input",
  InitializationCell->True]
 }
 ]
