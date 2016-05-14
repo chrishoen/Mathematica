@@ -38,12 +38,16 @@ Return[Numer/Denom];
 TP=TensorProduct[##]&;
 TC=TensorContract[##]&;
 TCP[A1__][A2_] := TensorContract[TensorProduct[A1],A2];
-TLower[A1_,GGdd_,I_] := TensorContract[TensorProduct[GGdd,A1],{2,2+I}];
-TRaise[A1_,GGuu_,I_] := TensorContract[TensorProduct[GGuu,A1],{2,2+I}];
-TLower[A1_,I_] := TensorContract[TensorProduct[Gdd,A1],{2,2+I}];
-TRaise[A1_,I_] := TensorContract[TensorProduct[Guu,A1],{2,2+I}];
+TLower[A_,GGdd_,I_] := TensorContract[TensorProduct[GGdd,A],{2,2+I}];
+TRaise[A_,GGuu_,I_] := TensorContract[TensorProduct[GGuu,A],{2,2+I}];
+TLower[A_,I_] := TensorContract[TensorProduct[Gdd,A],{2,2+I}];
+TRaise[A_,I_] := TensorContract[TensorProduct[Guu,A],{2,2+I}];
 TInnerU[A_]:=TCP[A,TLower[A,1]][{1,2}]
 TInnerD[A_]:=TCP[A,TRaise[A,1]][{1,2}]
 TInnerUU[A_,B_]:=TCP[A,TLower[B,1]][{1,2}]
+TInnerUD[A_,B_]:=TCP[A,B][{1,2}]
+TInnerU[A_,GGdd_]:=TCP[A,TLower[A,GGdd,1]][{1,2}]
+TInnerD[A_,GGuu_]:=TCP[A,TRaise[A,GGuu,1]][{1,2}]
+TInnerUU[A_,B_,GGdd_]:=TCP[A,TLower[B,GGdd,1]][{1,2}]
 TInnerUD[A_,B_]:=TCP[A,B][{1,2}]
 

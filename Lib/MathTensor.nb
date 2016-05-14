@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     20456,        565]
-NotebookOptionsPosition[     20091,        548]
-NotebookOutlinePosition[     20528,        566]
-CellTagsIndexPosition[     20485,        563]
+NotebookDataLength[     21776,        604]
+NotebookOptionsPosition[     21411,        587]
+NotebookOutlinePosition[     21848,        605]
+CellTagsIndexPosition[     21805,        602]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -412,11 +412,11 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{
    RowBox[{"TLower", "[", 
-    RowBox[{"A1_", ",", "GGdd_", ",", "I_"}], "]"}], " ", ":=", " ", 
+    RowBox[{"A_", ",", "GGdd_", ",", "I_"}], "]"}], " ", ":=", " ", 
    RowBox[{"TensorContract", "[", 
     RowBox[{
      RowBox[{"TensorProduct", "[", 
-      RowBox[{"GGdd", ",", "A1"}], "]"}], ",", 
+      RowBox[{"GGdd", ",", "A"}], "]"}], ",", 
      RowBox[{"{", 
       RowBox[{"2", ",", 
        RowBox[{"2", "+", "I"}]}], "}"}]}], "]"}]}], 
@@ -424,11 +424,11 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{
    RowBox[{"TRaise", "[", 
-    RowBox[{"A1_", ",", "GGuu_", ",", "I_"}], "]"}], " ", ":=", " ", 
+    RowBox[{"A_", ",", "GGuu_", ",", "I_"}], "]"}], " ", ":=", " ", 
    RowBox[{"TensorContract", "[", 
     RowBox[{
      RowBox[{"TensorProduct", "[", 
-      RowBox[{"GGuu", ",", "A1"}], "]"}], ",", 
+      RowBox[{"GGuu", ",", "A"}], "]"}], ",", 
      RowBox[{"{", 
       RowBox[{"2", ",", 
        RowBox[{"2", "+", "I"}]}], "}"}]}], "]"}]}], 
@@ -436,11 +436,11 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{
    RowBox[{"TLower", "[", 
-    RowBox[{"A1_", ",", "I_"}], "]"}], " ", ":=", " ", 
+    RowBox[{"A_", ",", "I_"}], "]"}], " ", ":=", " ", 
    RowBox[{"TensorContract", "[", 
     RowBox[{
      RowBox[{"TensorProduct", "[", 
-      RowBox[{"Gdd", ",", "A1"}], "]"}], ",", 
+      RowBox[{"Gdd", ",", "A"}], "]"}], ",", 
      RowBox[{"{", 
       RowBox[{"2", ",", 
        RowBox[{"2", "+", "I"}]}], "}"}]}], "]"}]}], 
@@ -448,11 +448,11 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{
    RowBox[{"TRaise", "[", 
-    RowBox[{"A1_", ",", "I_"}], "]"}], " ", ":=", " ", 
+    RowBox[{"A_", ",", "I_"}], "]"}], " ", ":=", " ", 
    RowBox[{"TensorContract", "[", 
     RowBox[{
      RowBox[{"TensorProduct", "[", 
-      RowBox[{"Guu", ",", "A1"}], "]"}], ",", 
+      RowBox[{"Guu", ",", "A"}], "]"}], ",", 
      RowBox[{"{", 
       RowBox[{"2", ",", 
        RowBox[{"2", "+", "I"}]}], "}"}]}], "]"}]}], 
@@ -483,6 +483,44 @@ Cell[BoxData[{
     RowBox[{"A", ",", 
      RowBox[{"TLower", "[", 
       RowBox[{"B", ",", "1"}], "]"}]}], "]"}], "[", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2"}], "}"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"TInnerUD", "[", 
+   RowBox[{"A_", ",", "B_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"TCP", "[", 
+    RowBox[{"A", ",", "B"}], "]"}], "[", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2"}], "}"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"TInnerU", "[", 
+   RowBox[{"A_", ",", "GGdd_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"TCP", "[", 
+    RowBox[{"A", ",", 
+     RowBox[{"TLower", "[", 
+      RowBox[{"A", ",", "GGdd", ",", "1"}], "]"}]}], "]"}], "[", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2"}], "}"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"TInnerD", "[", 
+   RowBox[{"A_", ",", "GGuu_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"TCP", "[", 
+    RowBox[{"A", ",", 
+     RowBox[{"TRaise", "[", 
+      RowBox[{"A", ",", "GGuu", ",", "1"}], "]"}]}], "]"}], "[", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2"}], "}"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"TInnerUU", "[", 
+   RowBox[{"A_", ",", "B_", ",", "GGdd_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"TCP", "[", 
+    RowBox[{"A", ",", 
+     RowBox[{"TLower", "[", 
+      RowBox[{"B", ",", "GGdd", ",", "1"}], "]"}]}], "]"}], "[", 
    RowBox[{"{", 
     RowBox[{"1", ",", "2"}], "}"}], "]"}]}], "\[IndentingNewLine]", 
  RowBox[{
@@ -544,7 +582,8 @@ Cell[BoxData[{
    3.6710240707292747`*^9, 3.6710240721644773`*^9}, {3.671028204935087*^9, 
    3.671028224419521*^9}, {3.671028255525975*^9, 3.6710283190336857`*^9}, {
    3.671031287055663*^9, 3.671031294574876*^9}, {3.6710324675213213`*^9, 
-   3.671032514149802*^9}}]
+   3.671032514149802*^9}, {3.672239059003935*^9, 3.6722390718739576`*^9}, {
+   3.6722391058352165`*^9, 3.6722392225234203`*^9}}]
 },
 WindowSize->{1331, 945},
 WindowMargins->{{Automatic, 201}, {-35, Automatic}},
@@ -565,7 +604,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 19529, 526, 1128, "Input",
+Cell[558, 20, 20849, 565, 1220, "Input",
  InitializationCell->True]
 }
 ]
