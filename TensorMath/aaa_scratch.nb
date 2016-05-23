@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      5063,        151]
-NotebookOptionsPosition[      4328,        121]
-NotebookOutlinePosition[      4733,        138]
-CellTagsIndexPosition[      4690,        135]
+NotebookDataLength[      3714,        111]
+NotebookOptionsPosition[      3146,         89]
+NotebookOutlinePosition[      3551,        106]
+CellTagsIndexPosition[      3508,        103]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -26,8 +26,6 @@ Cell[BoxData[""], "Input",
    3.670933870279276*^9, 3.670933873742482*^9}, {3.670933909669345*^9, 
    3.6709339099657454`*^9}, 3.6709377480064635`*^9}],
 
-Cell[CellGroupData[{
-
 Cell[BoxData[{
  RowBox[{"NotebookDirectory", "[", "]"}], "\[IndentingNewLine]", 
  RowBox[{"ParentDirectory", "[", 
@@ -37,23 +35,6 @@ Cell[BoxData[{
    3.6709374859809017`*^9}, {3.6709375227345657`*^9, 
    3.6709375254801702`*^9}, {3.670937693172368*^9, 3.6709377163696084`*^9}, 
    3.6709377571636796`*^9, {3.6709378269582014`*^9, 3.6709378271298018`*^9}}],
-
-Cell[BoxData["\<\"C:\\\\Prime\\\\Mathematica\\\\TensorMath\\\\\"\>"], "Output",
- CellChangeTimes->{{3.670937178642446*^9, 3.67093720386769*^9}, 
-   3.670937488133705*^9, 3.6709375400661955`*^9, {3.67093770011438*^9, 
-   3.670937718272812*^9}, 3.6709377663520956`*^9, {3.6709378419186277`*^9, 
-   3.670937876800288*^9}, 3.6709380160297318`*^9, 3.670938100379079*^9, 
-   3.6709381338255377`*^9, 3.6709381702672005`*^9}],
-
-Cell[BoxData["\<\"C:\\\\Prime\\\\Mathematica\"\>"], "Output",
- CellChangeTimes->{{3.670937178642446*^9, 3.67093720386769*^9}, 
-   3.670937488133705*^9, 3.6709375400661955`*^9, {3.67093770011438*^9, 
-   3.670937718272812*^9}, 3.6709377663520956`*^9, {3.6709378419186277`*^9, 
-   3.670937876800288*^9}, 3.6709380160297318`*^9, 3.670938100379079*^9, 
-   3.6709381338255377`*^9, 3.670938170298401*^9}]
-}, Open  ]],
-
-Cell[CellGroupData[{
 
 Cell[BoxData[
  RowBox[{
@@ -68,13 +49,6 @@ Cell[BoxData[
   3.6709379646900425`*^9, 3.670938008370119*^9}, {3.6709380961514716`*^9, 
   3.67093812396632*^9}}],
 
-Cell[BoxData["\<\"C:\\\\Prime\\\\Mathematica\\\\Lib\\\\MathTensor.m\"\>"], \
-"Output",
- CellChangeTimes->{{3.6709378652406683`*^9, 3.67093787768949*^9}, 
-   3.6709380162481327`*^9, 3.6709381004258795`*^9, 3.6709381338567376`*^9, 
-   3.670938170314001*^9}]
-}, Open  ]],
-
 Cell[BoxData[
  RowBox[{"\[IndentingNewLine]", 
   RowBox[{"Get", "[", 
@@ -86,38 +60,32 @@ Cell[BoxData[
       ",", "\"\<MathTensor.m\>\""}], "}"}], "]"}], "]"}]}]], "Input",
  CellChangeTimes->{{3.670938126103524*^9, 3.670938132468335*^9}}],
 
-Cell[CellGroupData[{
-
 Cell[BoxData[
  RowBox[{"\[IndentingNewLine]", 
   RowBox[{"Gdd", "//", "MatrixForm"}]}]], "Input",
  CellChangeTimes->{{3.6709381609695845`*^9, 3.670938168488798*^9}}],
 
 Cell[BoxData[
- TagBox[
-  RowBox[{"(", "\[NoBreak]", GridBox[{
-     {"1", "0", "0", "0"},
-     {"0", 
-      RowBox[{"-", "1"}], "0", "0"},
-     {"0", "0", 
-      RowBox[{"-", "1"}], "0"},
-     {"0", "0", "0", 
-      RowBox[{"-", "1"}]}
-    },
-    GridBoxAlignment->{
-     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
-      "RowsIndexed" -> {}},
-    GridBoxSpacings->{"Columns" -> {
-        Offset[0.27999999999999997`], {
-         Offset[0.7]}, 
-        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
-        Offset[0.2], {
-         Offset[0.4]}, 
-        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
-  Function[BoxForm`e$, 
-   MatrixForm[BoxForm`e$]]]], "Output",
- CellChangeTimes->{3.6709381703452015`*^9}]
-}, Open  ]]
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"n", "=", 
+    RowBox[{"{", 
+     RowBox[{"n1", ",", "n2", ",", "n3"}], "}"}]}], "\[IndentingNewLine]", 
+   RowBox[{"b", "=", 
+    RowBox[{"{", 
+     RowBox[{"b1", ",", "b2", ",", "b3"}], "}"}]}], "\[IndentingNewLine]", 
+   RowBox[{"c", "=", 
+    RowBox[{"n", "\[Cross]", 
+     RowBox[{"(", 
+      RowBox[{"n", "\[Cross]", "b"}], ")"}]}]}]}]}]], "Input",
+ CellChangeTimes->{{3.6727805155483155`*^9, 3.672780587347641*^9}, {
+  3.6727806394205313`*^9, 3.6727806569705625`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"FullSimplify", "[", "c", "]"}]}]], "Input",
+ CellChangeTimes->{{3.672780600248863*^9, 3.6727806059116735`*^9}, 
+   3.6727806869694147`*^9}]
 },
 WindowSize->{1013, 832},
 WindowMargins->{{Automatic, 186}, {Automatic, 16}},
@@ -139,20 +107,12 @@ CellTagsIndex->{}
 Notebook[{
 Cell[558, 20, 51, 1, 31, "Input"],
 Cell[612, 23, 218, 3, 31, "Input"],
-Cell[CellGroupData[{
-Cell[855, 30, 525, 8, 52, "Input"],
-Cell[1383, 40, 417, 5, 31, "Output"],
-Cell[1803, 47, 397, 5, 31, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[2237, 57, 455, 11, 52, "Input"],
-Cell[2695, 70, 255, 4, 31, "Output"]
-}, Open  ]],
-Cell[2965, 77, 385, 9, 52, "Input"],
-Cell[CellGroupData[{
-Cell[3375, 90, 165, 3, 52, "Input"],
-Cell[3543, 95, 769, 23, 86, "Output"]
-}, Open  ]]
+Cell[833, 28, 525, 8, 52, "Input"],
+Cell[1361, 38, 455, 11, 52, "Input"],
+Cell[1819, 51, 385, 9, 52, "Input"],
+Cell[2207, 62, 165, 3, 52, "Input"],
+Cell[2375, 67, 544, 14, 92, "Input"],
+Cell[2922, 83, 220, 4, 72, InheritFromParent]
 }
 ]
 *)
