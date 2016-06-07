@@ -1,0 +1,253 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 4.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[      6486,        189]*)
+(*NotebookOutlinePosition[      7196,        213]*)
+(*  CellTagsIndexPosition[      7152,        209]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[BoxData[
+    \(\(ClearAll;\)\)], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(Rotate1[
+        t_]\  := \ \((M1\  = \ {{1, 0, 0}, {0, Cos[t], \(-Sin[t]\)}, {0, 
+              Sin[t], Cos[t]}}; Return[M1])\)\), "\[IndentingNewLine]", 
+    \(Rotate2[
+        t_]\  := \ \((M1\  = \ {{Cos[t], 0, Sin[t]}, {0, 1, 0}, {\(-Sin[t]\), 
+              0, Cos[t]}}; Return[M1])\)\), "\[IndentingNewLine]", 
+    \(Rotate3[
+        t_]\  := \ \((M1\  = \ {{Cos[t], \(-Sin[t]\), 0}, {Sin[t], Cos[t], 
+              0}, {0, 0, 1}}; Return[M1])\)\), "\[IndentingNewLine]", 
+    \(Rotate1[a] // MatrixForm\), "\[IndentingNewLine]", 
+    \(Rotate2[a] // MatrixForm\), "\[IndentingNewLine]", 
+    \(Rotate3[a] // MatrixForm\)}], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {"1", "0", "0"},
+            {"0", \(Cos[a]\), \(-Sin[a]\)},
+            {"0", \(Sin[a]\), \(Cos[a]\)}
+            }], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {\(Cos[a]\), "0", \(Sin[a]\)},
+            {"0", "1", "0"},
+            {\(-Sin[a]\), "0", \(Cos[a]\)}
+            }], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {\(Cos[a]\), \(-Sin[a]\), "0"},
+            {\(Sin[a]\), \(Cos[a]\), "0"},
+            {"0", "0", "1"}
+            }], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(term101 := \ 
+        Rotate1[R] . Rotate2[P] . Rotate3[Y];\)\), "\[IndentingNewLine]", 
+    \(Simplify[term101] // MatrixForm\)}], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {\(Cos[P]\ Cos[Y]\), \(\(-Cos[P]\)\ Sin[Y]\), \(Sin[P]\)},
+            {\(Cos[Y]\ Sin[P]\ Sin[R] + Cos[R]\ Sin[Y]\), \(Cos[R]\ Cos[Y] - 
+                Sin[P]\ Sin[R]\ Sin[Y]\), \(\(-Cos[P]\)\ Sin[R]\)},
+            {\(\(-Cos[R]\)\ Cos[Y]\ Sin[P] + 
+                Sin[R]\ Sin[Y]\), \(Cos[Y]\ Sin[R] + 
+                Cos[R]\ Sin[P]\ Sin[Y]\), \(Cos[P]\ Cos[R]\)}
+            }], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(term102 := \ Inverse[term101];\)\), "\[IndentingNewLine]", 
+    \(Simplify[term102] // MatrixForm\)}], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {\(Cos[P]\ Cos[Y]\), \(Cos[Y]\ Sin[P]\ Sin[R] + 
+                Cos[R]\ Sin[Y]\), \(\(-Cos[R]\)\ Cos[Y]\ Sin[P] + 
+                Sin[R]\ Sin[Y]\)},
+            {\(\(-Cos[P]\)\ Sin[Y]\), \(Cos[R]\ Cos[Y] - 
+                Sin[P]\ Sin[R]\ Sin[Y]\), \(Cos[Y]\ Sin[R] + 
+                Cos[R]\ Sin[P]\ Sin[Y]\)},
+            {\(Sin[P]\), \(\(-Cos[P]\)\ Sin[R]\), \(Cos[P]\ Cos[R]\)}
+            }], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]],
+
+Cell[BoxData[""], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(term201 := \ 
+        Rotate3[Y] . Rotate2[P] . Rotate1[R];\)\), "\[IndentingNewLine]", 
+    \(Simplify[term201] // MatrixForm\)}], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {\(Cos[P]\ Cos[Y]\), \(Cos[Y]\ Sin[P]\ Sin[R] - 
+                Cos[R]\ Sin[Y]\), \(Cos[R]\ Cos[Y]\ Sin[P] + 
+                Sin[R]\ Sin[Y]\)},
+            {\(Cos[P]\ Sin[Y]\), \(Cos[R]\ Cos[Y] + 
+                Sin[P]\ Sin[R]\ Sin[Y]\), \(\(-Cos[Y]\)\ Sin[R] + 
+                Cos[R]\ Sin[P]\ Sin[Y]\)},
+            {\(-Sin[P]\), \(Cos[P]\ Sin[R]\), \(Cos[P]\ Cos[R]\)}
+            }], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(term301 := \ 
+        Rotate1[\(-R\)] . Rotate2[\(-P\)] . 
+          Rotate3[\(-Y\)];\)\), "\[IndentingNewLine]", 
+    \(Simplify[term301] // MatrixForm\)}], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {\(Cos[P]\ Cos[Y]\), \(Cos[P]\ Sin[Y]\), \(-Sin[P]\)},
+            {\(Cos[Y]\ Sin[P]\ Sin[R] - Cos[R]\ Sin[Y]\), \(Cos[R]\ Cos[Y] + 
+                Sin[P]\ Sin[R]\ Sin[Y]\), \(Cos[P]\ Sin[R]\)},
+            {\(Cos[R]\ Cos[Y]\ Sin[P] + 
+                Sin[R]\ Sin[Y]\), \(\(-Cos[Y]\)\ Sin[R] + 
+                Cos[R]\ Sin[P]\ Sin[Y]\), \(Cos[P]\ Cos[R]\)}
+            }], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]]
+},
+FrontEndVersion->"4.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1185}, {0, 979}},
+WindowSize->{1013, 832},
+WindowMargins->{{Automatic, 40}, {-163, Automatic}},
+PrintingCopies->1,
+PrintingPageRange->{Automatic, Automatic}
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1754, 51, 46, 1, 30, "Input"],
+
+Cell[CellGroupData[{
+Cell[1825, 56, 661, 12, 130, "Input"],
+Cell[2489, 70, 295, 8, 71, "Output"],
+Cell[2787, 80, 295, 8, 71, "Output"],
+Cell[3085, 90, 295, 8, 71, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3417, 103, 163, 3, 50, "Input"],
+Cell[3583, 108, 559, 11, 71, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4179, 124, 134, 2, 50, "Input"],
+Cell[4316, 128, 576, 12, 71, "Output"]
+}, Open  ]],
+Cell[4907, 143, 26, 0, 30, "Input"],
+
+Cell[CellGroupData[{
+Cell[4958, 147, 163, 3, 50, "Input"],
+Cell[5124, 152, 567, 12, 71, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[5728, 169, 189, 4, 50, "Input"],
+Cell[5920, 175, 550, 11, 71, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+
