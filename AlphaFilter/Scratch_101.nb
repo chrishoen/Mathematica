@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[      7343,        184]
-NotebookOptionsPosition[      6496,        154]
-NotebookOutlinePosition[      7110,        175]
-CellTagsIndexPosition[      7067,        172]
+NotebookDataLength[      8255,        213]
+NotebookOptionsPosition[      7259,        178]
+NotebookOutlinePosition[      7873,        199]
+CellTagsIndexPosition[      7830,        196]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -107,7 +107,8 @@ Cell[BoxData["10.`20."], "Output",
   3.677061055443226*^9, 3.677061786139706*^9, 3.677061899175706*^9, 
    3.677062006339293*^9, 3.677062059765787*^9, 3.6770623173844404`*^9, {
    3.6770623558707075`*^9, 3.6770623830635552`*^9}, {3.677062783664456*^9, 
-   3.67706279179207*^9}, {3.677062881982424*^9, 3.677062887226033*^9}}]
+   3.67706279179207*^9}, {3.677062881982424*^9, 3.677062887226033*^9}, 
+   3.67706396309589*^9}]
 }, Open  ]],
 
 Cell[BoxData[
@@ -149,7 +150,30 @@ Cell[BoxData[
 
 Cell[BoxData["4"], "Output",
  CellChangeTimes->{
-  3.6770627919324703`*^9, {3.677062881998024*^9, 3.677062887257233*^9}}]
+  3.6770627919324703`*^9, {3.677062881998024*^9, 3.677062887257233*^9}, 
+   3.6770639631114902`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"Beta", " ", "=", " ", "8"}]}]], "Input",
+ CellChangeTimes->{{3.6770639583690825`*^9, 3.6770639608806868`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox[
+   RowBox[{"Set", "::", "wrsym"}], "MessageName"], 
+  RowBox[{
+  ":", " "}], "\<\"Symbol \[NoBreak]\\!\\(Beta\\)\[NoBreak] is Protected. \\!\
+\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/wrsym\\\", \
+ButtonNote -> \\\"Set::wrsym\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.677063963236291*^9}],
+
+Cell[BoxData["8"], "Output",
+ CellChangeTimes->{3.677063963251891*^9}]
 }, Open  ]]
 },
 WindowSize->{1272, 873},
@@ -178,13 +202,18 @@ Cell[557, 20, 236, 4, 52, "Input"],
 Cell[796, 26, 1492, 29, 72, "Input"],
 Cell[CellGroupData[{
 Cell[2313, 59, 2321, 43, 132, "Input"],
-Cell[4637, 104, 344, 5, 31, "Output"]
+Cell[4637, 104, 369, 6, 31, "Output"]
 }, Open  ]],
-Cell[4996, 112, 963, 22, 92, "Input"],
-Cell[5962, 136, 154, 3, 31, "Input"],
+Cell[5021, 113, 963, 22, 92, "Input"],
+Cell[5987, 137, 154, 3, 31, "Input"],
 Cell[CellGroupData[{
-Cell[6141, 143, 215, 4, 52, "Input"],
-Cell[6359, 149, 121, 2, 31, "Output"]
+Cell[6166, 144, 215, 4, 52, "Input"],
+Cell[6384, 150, 149, 3, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6570, 158, 168, 3, 52, "Input"],
+Cell[6741, 163, 429, 9, 21, "Message"],
+Cell[7173, 174, 70, 1, 31, "Output"]
 }, Open  ]]
 }
 ]
