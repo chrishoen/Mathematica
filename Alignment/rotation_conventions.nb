@@ -10,16 +10,17 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      8939,        268]
-NotebookOptionsPosition[      8262,        241]
-NotebookOutlinePosition[      8668,        258]
-CellTagsIndexPosition[      8625,        255]
+NotebookDataLength[     12329,        363]
+NotebookOptionsPosition[     11495,        332]
+NotebookOutlinePosition[     11900,        349]
+CellTagsIndexPosition[     11857,        346]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
 Notebook[{
 Cell[BoxData[{
  RowBox[{"ClearAll", ";"}], "\[IndentingNewLine]", 
+ RowBox[{"ClearSystemCache", ";"}], "\[IndentingNewLine]", 
  RowBox[{"Get", "[", 
   RowBox[{"FileNameJoin", "[", 
    RowBox[{"{", 
@@ -27,27 +28,14 @@ Cell[BoxData[{
      RowBox[{"ParentDirectory", "[", 
       RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ",", "\"\<Lib\>\"", 
      ",", "\"\<Rotations.m\>\""}], "}"}], "]"}], "]"}]}], "Input",
- CellChangeTimes->{{3.6771515156172924`*^9, 3.677151558334167*^9}}],
+ CellChangeTimes->{{3.6771515156172924`*^9, 3.677151558334167*^9}, {
+  3.6771537852052584`*^9, 3.6771537910708685`*^9}}],
 
-Cell[BoxData[{
- RowBox[{
-  RowBox[{"$Assumptions", "=", "True"}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"$Assumptions", "=", 
-   RowBox[{"$Assumptions", " ", "&&", " ", 
-    RowBox[{"Reals", "[", 
-     RowBox[{"X0", ",", "X1", ",", "Y0", ",", "Y1"}], "]"}]}]}], 
-  ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"$Assumptions", "=", 
-   RowBox[{"$Assumptions", " ", "&&", " ", 
-    RowBox[{"X0", ">", "X1"}]}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"$Assumptions", "=", 
-   RowBox[{"$Assumptions", " ", "&&", " ", 
-    RowBox[{"X0", ">", "X1"}]}]}], ";"}]}], "Input",
+Cell["\<\
+Here are the three matrices that define rotations about coordinate axis.\
+\>", "Text",
  CellChangeTimes->{{3.6771515628737745`*^9, 3.6771515661341805`*^9}, 
-   3.677151616150868*^9}],
+   3.677151616150868*^9, {3.6771538211069217`*^9, 3.6771538783152213`*^9}}],
 
 Cell[CellGroupData[{
 
@@ -89,7 +77,8 @@ Cell[BoxData[
    MatrixForm[BoxForm`e$]]]], "Output",
  CellChangeTimes->{{3.674498641568523*^9, 3.674498648949336*^9}, 
    3.674498704781678*^9, 3.674498799151045*^9, 3.6744995215266285`*^9, 
-   3.677151569800187*^9, {3.677151638647107*^9, 3.6771516762909727`*^9}}],
+   3.677151569800187*^9, {3.677151638647107*^9, 3.6771516762909727`*^9}, 
+   3.6771536512152243`*^9}],
 
 Cell[BoxData[
  TagBox[
@@ -117,7 +106,8 @@ Cell[BoxData[
    MatrixForm[BoxForm`e$]]]], "Output",
  CellChangeTimes->{{3.674498641568523*^9, 3.674498648949336*^9}, 
    3.674498704781678*^9, 3.674498799151045*^9, 3.6744995215266285`*^9, 
-   3.677151569800187*^9, {3.677151638647107*^9, 3.6771516762909727`*^9}}],
+   3.677151569800187*^9, {3.677151638647107*^9, 3.6771516762909727`*^9}, 
+   3.6771536512308245`*^9}],
 
 Cell[BoxData[
  TagBox[
@@ -145,14 +135,27 @@ Cell[BoxData[
    MatrixForm[BoxForm`e$]]]], "Output",
  CellChangeTimes->{{3.674498641568523*^9, 3.674498648949336*^9}, 
    3.674498704781678*^9, 3.674498799151045*^9, 3.6744995215266285`*^9, 
-   3.677151569800187*^9, {3.677151638647107*^9, 3.6771516762909727`*^9}}]
+   3.677151569800187*^9, {3.677151638647107*^9, 3.6771516762909727`*^9}, 
+   3.6771536512308245`*^9}]
 }, Open  ]],
+
+Cell["\<\
+Here we use two coordinate systems, S0 and S1, where S0 is lab coordinates \
+and S1 is body coordinates. For three successive rotations about body axis, \
+roll, pitch, and yaw L01 is the coordinate transformation matrix to transform \
+the components of a vector from S1 to S0. Given a vector A with components A0 \
+in the S0 system and A1 in the S1 system, then the components transform by A0 \
+= L01.A1.\
+\>", "Text",
+ CellChangeTimes->{
+  3.677152971799038*^9, {3.6771530267297335`*^9, 3.6771531445959396`*^9}, {
+   3.6771531756419935`*^9, 3.6771534408710566`*^9}}],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[{
  RowBox[{
-  RowBox[{"L01", ":=", " ", 
+  RowBox[{"L01", "=", " ", 
    RowBox[{
     RowBox[{
      RowBox[{"RotateY", "[", "AR", "]"}], ".", 
@@ -161,9 +164,10 @@ Cell[BoxData[{
   ";"}], "\[IndentingNewLine]", 
  RowBox[{"L01", "//", "MatrixForm"}]}], "Input",
  CellChangeTimes->{{3.6744984974642696`*^9, 3.6744985071518865`*^9}, {
-  3.67449868286364*^9, 3.674498703003275*^9}, {3.6744987755774035`*^9, 
-  3.6744987974974422`*^9}, {3.6744995035707245`*^9, 3.6744995185685844`*^9}, {
-  3.6771516701133623`*^9, 3.6771516744189696`*^9}}],
+   3.67449868286364*^9, 3.674498703003275*^9}, {3.6744987755774035`*^9, 
+   3.6744987974974422`*^9}, {3.6744995035707245`*^9, 
+   3.6744995185685844`*^9}, {3.6771516701133623`*^9, 3.6771516744189696`*^9}, 
+   3.6771536279701834`*^9}],
 
 Cell[BoxData[
  TagBox[
@@ -233,14 +237,101 @@ Cell[BoxData[
    MatrixForm[BoxForm`e$]]]], "Output",
  CellChangeTimes->{{3.674498641693323*^9, 3.6744986489649363`*^9}, 
    3.6744987052652793`*^9, 3.6744987994006453`*^9, 3.6744995215456295`*^9, 
-   3.6771515701121874`*^9, {3.6771516386783075`*^9, 3.677151676306573*^9}}]
+   3.6771515701121874`*^9, {3.6771516386783075`*^9, 3.677151676306573*^9}, 
+   3.677153651511625*^9}]
 }, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"L10", "=", " ", 
+   RowBox[{
+    RowBox[{"Transpose", "[", "L01", "]"}], "//", "FullSimplify"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"L10", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.6771535335080185`*^9, 3.677153534631221*^9}, {
+  3.6771536307937884`*^9, 3.677153649312021*^9}}],
+
+Cell["\<\
+
+Here is the inverse transformation. Given a vector A with components A0 in \
+the S0 system and A1 in the S1 system, then the components transform by A1 = \
+L10.A0.\
+\>", "Text",
+ CellChangeTimes->{{3.6771536660042505`*^9, 3.677153731849165*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", GridBox[{
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"Cos", "[", "AR", "]"}], " ", 
+        RowBox[{"Cos", "[", "AY", "]"}]}], "+", 
+       RowBox[{
+        RowBox[{"Sin", "[", "AP", "]"}], " ", 
+        RowBox[{"Sin", "[", "AR", "]"}], " ", 
+        RowBox[{"Sin", "[", "AY", "]"}]}]}], 
+      RowBox[{
+       RowBox[{"Cos", "[", "AP", "]"}], " ", 
+       RowBox[{"Sin", "[", "AY", "]"}]}], 
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", 
+         RowBox[{"Cos", "[", "AY", "]"}]}], " ", 
+        RowBox[{"Sin", "[", "AR", "]"}]}], "+", 
+       RowBox[{
+        RowBox[{"Cos", "[", "AR", "]"}], " ", 
+        RowBox[{"Sin", "[", "AP", "]"}], " ", 
+        RowBox[{"Sin", "[", "AY", "]"}]}]}]},
+     {
+      RowBox[{
+       RowBox[{
+        RowBox[{"Cos", "[", "AY", "]"}], " ", 
+        RowBox[{"Sin", "[", "AP", "]"}], " ", 
+        RowBox[{"Sin", "[", "AR", "]"}]}], "-", 
+       RowBox[{
+        RowBox[{"Cos", "[", "AR", "]"}], " ", 
+        RowBox[{"Sin", "[", "AY", "]"}]}]}], 
+      RowBox[{
+       RowBox[{"Cos", "[", "AP", "]"}], " ", 
+       RowBox[{"Cos", "[", "AY", "]"}]}], 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Cos", "[", "AR", "]"}], " ", 
+        RowBox[{"Cos", "[", "AY", "]"}], " ", 
+        RowBox[{"Sin", "[", "AP", "]"}]}], "+", 
+       RowBox[{
+        RowBox[{"Sin", "[", "AR", "]"}], " ", 
+        RowBox[{"Sin", "[", "AY", "]"}]}]}]},
+     {
+      RowBox[{
+       RowBox[{"Cos", "[", "AP", "]"}], " ", 
+       RowBox[{"Sin", "[", "AR", "]"}]}], 
+      RowBox[{"-", 
+       RowBox[{"Sin", "[", "AP", "]"}]}], 
+      RowBox[{
+       RowBox[{"Cos", "[", "AP", "]"}], " ", 
+       RowBox[{"Cos", "[", "AR", "]"}]}]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.7]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.6771536515272245`*^9}],
 
 Cell[BoxData["\[IndentingNewLine]"], "Input",
  CellChangeTimes->{3.6744995262709293`*^9}]
 },
 WindowSize->{1013, 832},
-WindowMargins->{{Automatic, 40}, {-163, Automatic}},
+WindowMargins->{{Automatic, 274}, {26, Automatic}},
 PrintingCopies->1,
 PrintingPageRange->{Automatic, Automatic},
 FrontEndVersion->"10.0 for Microsoft Windows (64-bit) (July 1, 2014)",
@@ -257,19 +348,23 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 398, 9, 52, "Input"],
-Cell[959, 31, 695, 18, 92, "Input"],
+Cell[558, 20, 511, 11, 72, "Input"],
+Cell[1072, 33, 242, 4, 30, "Text"],
 Cell[CellGroupData[{
-Cell[1679, 53, 433, 10, 72, "Input"],
-Cell[2115, 65, 988, 26, 71, "Output"],
-Cell[3106, 93, 988, 26, 71, "Output"],
-Cell[4097, 121, 988, 26, 71, "Output"]
+Cell[1339, 41, 433, 10, 72, "Input"],
+Cell[1775, 53, 1016, 27, 71, "Output"],
+Cell[2794, 82, 1016, 27, 71, "Output"],
+Cell[3813, 111, 1016, 27, 71, "Output"]
 }, Open  ]],
+Cell[4844, 141, 577, 10, 68, "Text"],
 Cell[CellGroupData[{
-Cell[5122, 152, 601, 13, 52, "Input"],
-Cell[5726, 167, 2428, 68, 71, "Output"]
+Cell[5446, 155, 631, 14, 52, "Input"],
+Cell[6080, 171, 2454, 69, 71, "Output"]
 }, Open  ]],
-Cell[8169, 238, 89, 1, 52, "Input"]
+Cell[8549, 243, 336, 8, 52, "Input"],
+Cell[8888, 253, 256, 6, 68, "Text"],
+Cell[9147, 261, 2252, 66, 71, "Output"],
+Cell[11402, 329, 89, 1, 52, "Input"]
 }
 ]
 *)
