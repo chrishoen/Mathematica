@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      8650,        261]
-NotebookOptionsPosition[      7532,        223]
-NotebookOutlinePosition[      8305,        249]
-CellTagsIndexPosition[      8262,        246]
+NotebookDataLength[     12956,        399]
+NotebookOptionsPosition[     11614,        353]
+NotebookOutlinePosition[     12387,        379]
+CellTagsIndexPosition[     12344,        376]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -130,7 +130,9 @@ Cell[BoxData[
         Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
   Function[BoxForm`e$, 
    MatrixForm[BoxForm`e$]]]], "Output",
- CellChangeTimes->{3.678972719321955*^9}]
+ CellChangeTimes->{3.678972719321955*^9, 3.6789728493085847`*^9, 
+  3.678973028744504*^9, 3.678973066097969*^9, 3.678973134053688*^9, 
+  3.6789731880503826`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -148,7 +150,7 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{"N3", " ", "=", " ", 
    RowBox[{"{", 
-    RowBox[{"N3x", ",", "N13", ",", 
+    RowBox[{"N3x", ",", "N3y", ",", 
      RowBox[{"Sqrt", "[", 
       RowBox[{"1", "-", 
        RowBox[{"N3x", "^", "2"}], "-", 
@@ -158,7 +160,8 @@ Cell[BoxData[{
  RowBox[{"N3", "//", "MatrixForm"}]}], "Input",
  CellChangeTimes->{{3.6771535335080185`*^9, 3.677153534631221*^9}, {
   3.6771536307937884`*^9, 3.677153649312021*^9}, {3.6771647369230776`*^9, 
-  3.6771647587047157`*^9}, {3.67897194940481*^9, 3.6789720771966333`*^9}}],
+  3.6771647587047157`*^9}, {3.67897194940481*^9, 3.6789720771966333`*^9}, {
+  3.678973054616349*^9, 3.6789730617143617`*^9}}],
 
 Cell[BoxData[
  TagBox[
@@ -185,14 +188,16 @@ Cell[BoxData[
     Column], "\[NoBreak]", ")"}],
   Function[BoxForm`e$, 
    MatrixForm[BoxForm`e$]]]], "Output",
- CellChangeTimes->{3.678972719337555*^9}],
+ CellChangeTimes->{3.678972719337555*^9, 3.6789728493085847`*^9, 
+  3.6789730287601037`*^9, 3.6789730661135693`*^9, 3.6789731340692883`*^9, 
+  3.6789731880659823`*^9}],
 
 Cell[BoxData[
  TagBox[
   RowBox[{"(", "\[NoBreak]", 
    TagBox[GridBox[{
       {"N3x"},
-      {"N13"},
+      {"N3y"},
       {
        SqrtBox[
         RowBox[{"1", "-", 
@@ -212,14 +217,139 @@ Cell[BoxData[
     Column], "\[NoBreak]", ")"}],
   Function[BoxForm`e$, 
    MatrixForm[BoxForm`e$]]]], "Output",
- CellChangeTimes->{3.678972719337555*^9}]
+ CellChangeTimes->{3.678972719337555*^9, 3.6789728493085847`*^9, 
+  3.6789730287601037`*^9, 3.6789730661135693`*^9, 3.6789731340692883`*^9, 
+  3.6789731880659823`*^9}]
 }, Open  ]],
 
 Cell["\<\
 SOLVE*************************************************************************\
 ********************\
 \>", "Text",
- CellChangeTimes->{{3.678972757341222*^9, 3.678972834145358*^9}}]
+ CellChangeTimes->{{3.678972757341222*^9, 3.678972834145358*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"EQ101", " ", "=", " ", 
+   RowBox[{"N1", "\[Equal]", 
+    RowBox[{"R13", ".", "N3"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.6789730016764565`*^9, 3.6789730244856963`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"{", 
+   RowBox[{"N1x", ",", "N1y", ",", 
+    SqrtBox[
+     RowBox[{"1", "-", 
+      SuperscriptBox["N1x", "2"], "-", 
+      SuperscriptBox["N1y", "2"]}]]}], "}"}], "\[Equal]", 
+  RowBox[{"{", 
+   RowBox[{"N3x", ",", 
+    RowBox[{
+     RowBox[{"N3y", " ", 
+      RowBox[{"Cos", "[", "AP", "]"}]}], "-", 
+     RowBox[{
+      SqrtBox[
+       RowBox[{"1", "-", 
+        SuperscriptBox["N3x", "2"], "-", 
+        SuperscriptBox["N3y", "2"]}]], " ", 
+      RowBox[{"Sin", "[", "AP", "]"}]}]}], ",", 
+    RowBox[{
+     RowBox[{
+      SqrtBox[
+       RowBox[{"1", "-", 
+        SuperscriptBox["N3x", "2"], "-", 
+        SuperscriptBox["N3y", "2"]}]], " ", 
+      RowBox[{"Cos", "[", "AP", "]"}]}], "+", 
+     RowBox[{"N3y", " ", 
+      RowBox[{"Sin", "[", "AP", "]"}]}]}]}], "}"}]}]], "Output",
+ CellChangeTimes->{3.678973028775704*^9, 3.6789730661291695`*^9, 
+  3.6789731340692883`*^9, 3.678973188081582*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{"Solve", "[", 
+   RowBox[{"EQ101", ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Cos", "[", "AP", "]"}], ",", 
+      RowBox[{"Sin", "[", "AP", "]"}]}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6789730920886145`*^9, 3.678973185505578*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Cos", "[", "AP", "]"}], "\[Rule]", 
+     FractionBox[
+      RowBox[{
+       RowBox[{
+        RowBox[{"-", "N1y"}], " ", "N3y"}], "-", 
+       RowBox[{
+        SqrtBox[
+         RowBox[{"1", "-", 
+          SuperscriptBox["N1x", "2"], "-", 
+          SuperscriptBox["N1y", "2"]}]], " ", 
+        SqrtBox[
+         RowBox[{"1", "-", 
+          SuperscriptBox["N3x", "2"], "-", 
+          SuperscriptBox["N3y", "2"]}]]}]}], 
+      RowBox[{
+       RowBox[{"-", "1"}], "+", 
+       SuperscriptBox["N3x", "2"]}]]}], ",", 
+    RowBox[{
+     RowBox[{"Sin", "[", "AP", "]"}], "\[Rule]", 
+     FractionBox[
+      RowBox[{
+       SqrtBox[
+        RowBox[{"1", "-", 
+         SuperscriptBox["N1x", "2"], "-", 
+         SuperscriptBox["N1y", "2"]}]], "+", 
+       FractionBox[
+        SqrtBox[
+         RowBox[{"1", "-", 
+          SuperscriptBox["N1x", "2"], "-", 
+          SuperscriptBox["N1y", "2"]}]], 
+        RowBox[{
+         RowBox[{"-", "1"}], "+", 
+         SuperscriptBox["N3x", "2"]}]], "-", 
+       FractionBox[
+        RowBox[{
+         SqrtBox[
+          RowBox[{"1", "-", 
+           SuperscriptBox["N1x", "2"], "-", 
+           SuperscriptBox["N1y", "2"]}]], " ", 
+         SuperscriptBox["N3x", "2"]}], 
+        RowBox[{
+         RowBox[{"-", "1"}], "+", 
+         SuperscriptBox["N3x", "2"]}]], "-", 
+       FractionBox[
+        RowBox[{
+         SqrtBox[
+          RowBox[{"1", "-", 
+           SuperscriptBox["N1x", "2"], "-", 
+           SuperscriptBox["N1y", "2"]}]], " ", 
+         SuperscriptBox["N3y", "2"]}], 
+        RowBox[{
+         RowBox[{"-", "1"}], "+", 
+         SuperscriptBox["N3x", "2"]}]], "+", 
+       FractionBox[
+        RowBox[{"N1y", " ", "N3y", " ", 
+         SqrtBox[
+          RowBox[{"1", "-", 
+           SuperscriptBox["N3x", "2"], "-", 
+           SuperscriptBox["N3y", "2"]}]]}], 
+        RowBox[{
+         RowBox[{"-", "1"}], "+", 
+         SuperscriptBox["N3x", "2"]}]]}], "N3y"]}]}], "}"}], "}"}]], "Output",
+ CellChangeTimes->{3.6789731342252884`*^9, 3.6789731881439824`*^9}]
+}, Open  ]]
 },
 WindowSize->{1011, 1022},
 WindowMargins->{{Automatic, 277}, {Automatic, 0}},
@@ -255,14 +385,22 @@ Cell[2332, 67, 190, 4, 30, "Text"],
 Cell[2525, 73, 1127, 23, 52, "Input"],
 Cell[CellGroupData[{
 Cell[3677, 100, 268, 6, 52, "Input"],
-Cell[3948, 108, 822, 24, 71, "Output"]
+Cell[3948, 108, 942, 26, 71, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[4807, 137, 894, 23, 92, "Input"],
-Cell[5704, 162, 808, 25, 84, "Output"],
-Cell[6515, 189, 808, 25, 84, "Output"]
+Cell[4927, 139, 945, 24, 92, "Input"],
+Cell[5875, 165, 934, 27, 84, "Output"],
+Cell[6812, 194, 934, 27, 84, "Output"]
 }, Open  ]],
-Cell[7338, 217, 190, 4, 30, "Text"]
+Cell[7761, 224, 190, 4, 30, "Text"],
+Cell[CellGroupData[{
+Cell[7976, 232, 229, 5, 52, "Input"],
+Cell[8208, 239, 936, 29, 45, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9181, 273, 311, 8, 52, "Input"],
+Cell[9495, 283, 2103, 67, 129, "Output"]
+}, Open  ]]
 }
 ]
 *)
