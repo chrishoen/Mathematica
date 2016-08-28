@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     19981,        579]
-NotebookOptionsPosition[     18430,        528]
-NotebookOutlinePosition[     19202,        554]
-CellTagsIndexPosition[     19159,        551]
+NotebookDataLength[     19633,        574]
+NotebookOptionsPosition[     18082,        523]
+NotebookOutlinePosition[     18856,        549]
+CellTagsIndexPosition[     18813,        546]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -111,15 +111,16 @@ Cell[BoxData[
    FractionBox["\[Pi]", "4"]}], "&&", 
   RowBox[{"0", "\[LessEqual]", "\[Phi]", "<", 
    FractionBox["\[Pi]", "4"]}]}]], "Output",
- CellChangeTimes->{3.6790138988978605`*^9}]
+ CellChangeTimes->{3.681416534361964*^9}]
 }, Open  ]],
 
 Cell["\<\
-V\[Phi]IABLES*****************************************************************\
-***********************\
+VARIABLES*********************************************************************\
+*******************\
 \>", "Text",
  CellChangeTimes->{{3.678972757341222*^9, 3.678972811070716*^9}, {
-   3.6790116192118363`*^9, 3.6790116287922535`*^9}, 3.6790138825802326`*^9}],
+   3.6790116192118363`*^9, 3.6790116287922535`*^9}, 3.6790138825802326`*^9, {
+   3.6814165184494963`*^9, 3.6814165233784447`*^9}}],
 
 Cell[BoxData[{
  RowBox[{
@@ -208,7 +209,7 @@ Cell[BoxData[
         Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
   Function[BoxForm`e$, 
    MatrixForm[BoxForm`e$]]]], "Output",
- CellChangeTimes->{3.679013898975861*^9}],
+ CellChangeTimes->{3.681416534414997*^9}],
 
 Cell[BoxData[
  TagBox[
@@ -235,7 +236,7 @@ Cell[BoxData[
     Column], "\[NoBreak]", ")"}],
   Function[BoxForm`e$, 
    MatrixForm[BoxForm`e$]]]], "Output",
- CellChangeTimes->{3.679013898975861*^9}],
+ CellChangeTimes->{3.681416534430583*^9}],
 
 Cell[BoxData[
  TagBox[
@@ -262,7 +263,7 @@ Cell[BoxData[
     Column], "\[NoBreak]", ")"}],
   Function[BoxForm`e$, 
    MatrixForm[BoxForm`e$]]]], "Output",
- CellChangeTimes->{3.679013898975861*^9}]
+ CellChangeTimes->{3.681416534430583*^9}]
 }, Open  ]],
 
 Cell["\<\
@@ -318,7 +319,7 @@ Cell[BoxData[
     Column], "\[NoBreak]", ")"}],
   Function[BoxForm`e$, 
    MatrixForm[BoxForm`e$]]]], "Output",
- CellChangeTimes->{3.6790138989914613`*^9}],
+ CellChangeTimes->{3.681416534446211*^9}],
 
 Cell[BoxData[
  TagBox[
@@ -376,7 +377,7 @@ Cell[BoxData[
     Column], "\[NoBreak]", ")"}],
   Function[BoxForm`e$, 
    MatrixForm[BoxForm`e$]]]], "Output",
- CellChangeTimes->{3.6790138989914613`*^9}]
+ CellChangeTimes->{3.681416534446211*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -405,30 +406,24 @@ Cell[BoxData[{
   3.6790138824866323`*^9}}],
 
 Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Eliminate", "::", "ifun"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Inverse functions are being used by \
-\[NoBreak]\\!\\(Eliminate\\)\[NoBreak], so some solutions may not be found; \
-use Reduce for complete solution information. \\!\\(\\*ButtonBox[\\\"\
-\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/Eliminate/ifun\\\", ButtonNote -> \
-\\\"Eliminate::ifun\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.6790138991942616`*^9}],
+ TemplateBox[{
+  "Eliminate","ifun",
+   "\"Inverse functions are being used by \
+\\!\\(\\*RowBox[{\\\"Eliminate\\\"}]\\), so some solutions may not be found; \
+use Reduce for complete solution information.\"",2,20,1,23991197072486253759,
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.6814165345833454`*^9}],
 
 Cell[BoxData[
- RowBox[{
-  StyleBox[
-   RowBox[{"Solve", "::", "ifun"}], "MessageName"], 
-  RowBox[{
-  ":", " "}], "\<\"Inverse functions are being used by \
-\[NoBreak]\\!\\(Solve\\)\[NoBreak], so some solutions may not be found; use \
-Reduce for complete solution information. \\!\\(\\*ButtonBox[\\\"\
-\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
-ButtonData:>\\\"paclet:ref/message/Solve/ifun\\\", ButtonNote -> \
-\\\"Solve::ifun\\\"]\\)\"\>"}]], "Message", "MSG",
- CellChangeTimes->{3.679013899911863*^9}],
+ TemplateBox[{
+  "Solve","ifun",
+   "\"Inverse functions are being used by \
+\\!\\(\\*RowBox[{\\\"Solve\\\"}]\\), so some solutions may not be found; use \
+Reduce for complete solution information.\"",2,21,2,23991197072486253759,
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.681416534946741*^9}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -523,7 +518,7 @@ Cell[BoxData[
        RowBox[{
         RowBox[{"-", "1"}], "+", 
         SuperscriptBox["N1x", "2"]}]], "]"}]}], "}"}]}], "}"}]], "Output",
- CellChangeTimes->{3.679013902863268*^9}]
+ CellChangeTimes->{3.681416536650179*^9}]
 }, Open  ]]
 },
 WindowSize->{943, 1022},
@@ -533,13 +528,13 @@ PrintingPageRange->{32000, 32000},
 PrintingOptions->{"Magnification"->1.,
 "PaperOrientation"->"Portrait",
 "PaperSize"->{612, 792}},
-FrontEndVersion->"10.0 for Microsoft Windows (64-bit) (July 1, 2014)",
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
 StyleDefinitions->Notebook[{
    Cell[
     StyleData[StyleDefinitions -> "Default.nb"]], 
    Cell[
     StyleData["Text"], FontColor -> RGBColor[0.5, 0, 0.5]]}, Visible -> False,
-   FrontEndVersion -> "10.0 for Microsoft Windows (64-bit) (July 1, 2014)", 
+   FrontEndVersion -> "11.0 for Microsoft Windows (64-bit) (July 28, 2016)", 
   StyleDefinitions -> "PrivateStylesheetFormatting.nb"]
 ]
 (* End of Notebook Content *)
@@ -554,35 +549,34 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[558, 20, 244, 5, 30, "Text"],
-Cell[805, 27, 511, 11, 72, "Input"],
+Cell[805, 27, 511, 11, 69, "Input"],
 Cell[1319, 40, 236, 5, 30, "Text"],
 Cell[CellGroupData[{
-Cell[1580, 49, 1977, 44, 152, "Input"],
-Cell[3560, 95, 633, 18, 44, "Output"]
+Cell[1580, 49, 1977, 44, 145, "Input"],
+Cell[3560, 95, 631, 18, 44, "Output"]
 }, Open  ]],
-Cell[4208, 116, 271, 5, 30, "Text"],
-Cell[4482, 123, 1594, 36, 72, "Input"],
+Cell[4206, 116, 321, 6, 30, "Text"],
+Cell[4530, 124, 1594, 36, 69, "Input"],
 Cell[CellGroupData[{
-Cell[6101, 163, 534, 8, 72, "Input"],
-Cell[6638, 173, 1303, 37, 71, "Output"],
-Cell[7944, 212, 808, 25, 84, "Output"],
-Cell[8755, 239, 808, 25, 84, "Output"]
+Cell[6149, 164, 534, 8, 69, "Input"],
+Cell[6686, 174, 1303, 37, 77, "Output"],
+Cell[7992, 213, 808, 25, 87, "Output"],
+Cell[8803, 240, 808, 25, 87, "Output"]
 }, Open  ]],
-Cell[9578, 267, 190, 4, 30, "Text"],
-Cell[9771, 273, 418, 8, 31, "Input"],
+Cell[9626, 268, 190, 4, 30, "Text"],
+Cell[9819, 274, 418, 8, 30, "Input"],
 Cell[CellGroupData[{
-Cell[10214, 285, 304, 8, 52, "Input"],
-Cell[10521, 295, 810, 25, 84, "Output"],
-Cell[11334, 322, 1976, 56, 110, "Output"]
+Cell[10262, 286, 304, 8, 50, "Input"],
+Cell[10569, 296, 808, 25, 87, "Output"],
+Cell[11380, 323, 1974, 56, 107, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[13347, 383, 983, 21, 92, "Input"],
-Cell[14333, 406, 549, 11, 21, "Message"],
-Cell[14885, 419, 531, 11, 21, "Message"],
-Cell[15419, 432, 2995, 93, 207, "Output"]
+Cell[13391, 384, 983, 21, 88, "Input"],
+Cell[14377, 407, 349, 8, 21, "Message"],
+Cell[14729, 417, 339, 8, 21, "Message"],
+Cell[15071, 427, 2995, 93, 207, "Output"]
 }, Open  ]]
 }
 ]
 *)
 
-(* End of internal cache information *)
