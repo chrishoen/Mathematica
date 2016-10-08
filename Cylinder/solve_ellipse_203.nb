@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     16770,        390]
-NotebookOptionsPosition[     15417,        348]
-NotebookOutlinePosition[     16221,        375]
-CellTagsIndexPosition[     16178,        372]
+NotebookDataLength[     16810,        389]
+NotebookOptionsPosition[     15457,        347]
+NotebookOutlinePosition[     16261,        374]
+CellTagsIndexPosition[     16218,        371]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -329,14 +329,13 @@ Cell[BoxData[{
    RowBox[{"GroebnerBasis", "[", 
     RowBox[{"Eq101", ",", 
      RowBox[{"{", 
-      RowBox[{"h", ",", "k", ",", "a", ",", "cos", ",", "sin"}], "}"}]}], 
-    "]"}]}], ";"}], "\[IndentingNewLine]", "Grob1", "\[IndentingNewLine]"}], \
-"Input",
+      RowBox[{"a", ",", "c", ",", "s", ",", "h", ",", "k"}], "}"}]}], "]"}]}],
+   ";"}], "\[IndentingNewLine]", "Grob1", "\[IndentingNewLine]"}], "Input",
  CellChangeTimes->{{3.684941987907112*^9, 3.684942042278463*^9}, {
   3.6849426906204453`*^9, 3.6849427407920527`*^9}, {3.68494279693007*^9, 
   3.6849428012183833`*^9}, {3.684956688689237*^9, 3.6849566895708127`*^9}, {
   3.6849567281011047`*^9, 3.6849567306078744`*^9}, {3.6849579223712645`*^9, 
-  3.6849579261960373`*^9}}],
+  3.6849579261960373`*^9}, {3.6849582457290115`*^9, 3.684958258260957*^9}}],
 
 Cell["\<\
 SOLVE*************************************************************************\
@@ -390,8 +389,8 @@ Cell[10751, 240, 366, 7, 38, "Text"],
 Cell[11120, 249, 1875, 48, 158, "Input"],
 Cell[12998, 299, 1253, 17, 37, "Input"],
 Cell[14254, 318, 188, 5, 63, "Text"],
-Cell[14445, 325, 625, 13, 86, "Input"],
-Cell[15073, 340, 340, 6, 38, "Text"]
+Cell[14445, 325, 665, 12, 86, "Input"],
+Cell[15113, 339, 340, 6, 38, "Text"]
 }
 ]
 *)
