@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     17212,        402]
-NotebookOptionsPosition[     15857,        360]
-NotebookOutlinePosition[     16661,        387]
-CellTagsIndexPosition[     16618,        384]
+NotebookDataLength[     17258,        402]
+NotebookOptionsPosition[     15903,        360]
+NotebookOutlinePosition[     16707,        387]
+CellTagsIndexPosition[     16664,        384]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -253,28 +253,28 @@ Cell[BoxData[{
    RowBox[{
     RowBox[{"GeneralEllipse", "[", 
      RowBox[{
-     "x1", ",", "y1", ",", "a", ",", "c", ",", "s", ",", "h", ",", "k"}], 
+     "x1", ",", "0", ",", "a", ",", "c", ",", "s", ",", "h", ",", "k"}], 
      "]"}], "//", "Expand"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Eq2", "=", 
    RowBox[{
     RowBox[{"GeneralEllipse", "[", 
      RowBox[{
-     "x2", ",", "y2", ",", "a", ",", "c", ",", "s", ",", "h", ",", "k"}], 
+     "0", ",", "y2", ",", "a", ",", "c", ",", "s", ",", "h", ",", "k"}], 
      "]"}], "//", "Expand"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Eq3", "=", 
    RowBox[{
     RowBox[{"GeneralEllipse", "[", 
      RowBox[{
-     "x3", ",", "y1", ",", "a", ",", "c", ",", "s", ",", "h", ",", "k"}], 
+     "x3", ",", "0", ",", "a", ",", "c", ",", "s", ",", "h", ",", "k"}], 
      "]"}], "//", "Expand"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Eq4", "=", 
    RowBox[{
     RowBox[{"GeneralEllipse", "[", 
      RowBox[{
-     "x2", ",", "y4", ",", "a", ",", "c", ",", "s", ",", "h", ",", "k"}], 
+     "0", ",", "y4", ",", "a", ",", "c", ",", "s", ",", "h", ",", "k"}], 
      "]"}], "//", "Expand"}]}], ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Eq5", "=", 
@@ -295,7 +295,7 @@ Cell[BoxData[{
    3.6849566647495794`*^9, 3.6849567191475897`*^9}, {3.684957082794094*^9, 
    3.6849570885896626`*^9}, {3.6849571438068075`*^9, 
    3.6849571638336477`*^9}, {3.6849577654983845`*^9, 3.684957767891189*^9}, 
-   3.6849578943909817`*^9}],
+   3.6849578943909817`*^9, {3.6850194967247334`*^9, 3.6850195124995174`*^9}}],
 
 Cell[BoxData[""], "Input",
  CellChangeTimes->{{3.6789749918907485`*^9, 3.6789751305763907`*^9}, {
@@ -399,11 +399,11 @@ Cell[9478, 209, 194, 4, 38, "Text"],
 Cell[9675, 215, 609, 12, 62, "Input"],
 Cell[10287, 229, 461, 9, 62, "Input"],
 Cell[10751, 240, 366, 7, 38, "Text"],
-Cell[11120, 249, 1875, 48, 158, "Input"],
-Cell[12998, 299, 1253, 17, 37, "Input"],
-Cell[14254, 318, 188, 5, 63, "Text"],
-Cell[14445, 325, 1065, 25, 134, "Input"],
-Cell[15513, 352, 340, 6, 38, "Text"]
+Cell[11120, 249, 1921, 48, 158, "Input"],
+Cell[13044, 299, 1253, 17, 37, "Input"],
+Cell[14300, 318, 188, 5, 63, "Text"],
+Cell[14491, 325, 1065, 25, 134, "Input"],
+Cell[15559, 352, 340, 6, 38, "Text"]
 }
 ]
 *)
