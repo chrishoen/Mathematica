@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     18014,        448]
-NotebookOptionsPosition[     16698,        407]
-NotebookOutlinePosition[     17503,        434]
-CellTagsIndexPosition[     17460,        431]
+NotebookDataLength[     18047,        449]
+NotebookOptionsPosition[     16731,        408]
+NotebookOutlinePosition[     17536,        435]
+CellTagsIndexPosition[     17493,        432]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -162,22 +162,22 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{"Xa1", " ", "=", " ", 
    RowBox[{"{", 
-    RowBox[{"xa1", ",", "ya1", ",", "za"}], "}"}]}], 
+    RowBox[{"xa1", ",", "0", ",", "za"}], "}"}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Xa2", " ", "=", " ", 
    RowBox[{"{", 
-    RowBox[{"xa2", ",", "ya2", ",", "za"}], "}"}]}], 
+    RowBox[{"0", ",", "ya2", ",", "za"}], "}"}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Xa3", " ", "=", " ", 
    RowBox[{"{", 
-    RowBox[{"xa3", ",", "ya3", ",", "za"}], "}"}]}], 
+    RowBox[{"xa3", ",", "0", ",", "za"}], "}"}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Xa4", " ", "=", " ", 
    RowBox[{"{", 
-    RowBox[{"xa4", ",", "ya4", ",", "za"}], "}"}]}], 
+    RowBox[{"0", ",", "ya4", ",", "za"}], "}"}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Xbc", " ", "=", " ", 
@@ -187,22 +187,22 @@ Cell[BoxData[{
  RowBox[{
   RowBox[{"Xb1", " ", "=", " ", 
    RowBox[{"{", 
-    RowBox[{"xb1", ",", "yb1", ",", "zb"}], "}"}]}], 
+    RowBox[{"xb1", ",", "0", ",", "zb"}], "}"}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Xb2", " ", "=", " ", 
    RowBox[{"{", 
-    RowBox[{"xb2", ",", "yb2", ",", "zb"}], "}"}]}], 
+    RowBox[{"0", ",", "yb2", ",", "zb"}], "}"}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Xb3", " ", "=", " ", 
    RowBox[{"{", 
-    RowBox[{"xb3", ",", "yb3", ",", "zb"}], "}"}]}], 
+    RowBox[{"xb3", ",", "0", ",", "zb"}], "}"}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"Xb4", " ", "=", " ", 
    RowBox[{"{", 
-    RowBox[{"xb4", ",", "yb4", ",", "zb"}], "}"}]}], ";"}]}], "Input",
+    RowBox[{"0", ",", "yb4", ",", "zb"}], "}"}]}], ";"}]}], "Input",
  CellChangeTimes->{{3.6744984974642696`*^9, 3.6744985071518865`*^9}, {
    3.67449868286364*^9, 3.674498703003275*^9}, {3.6744987755774035`*^9, 
    3.6744987974974422`*^9}, {3.6744995035707245`*^9, 
@@ -221,7 +221,8 @@ Cell[BoxData[{
    3.6848582857705717`*^9}, {3.6848605253825235`*^9, 3.684860555469706*^9}, {
    3.6848614672969875`*^9, 3.6848614922984147`*^9}, {3.684864564516692*^9, 
    3.684864586818997*^9}, {3.6848681212109957`*^9, 3.6848681454296827`*^9}, {
-   3.684877883354499*^9, 3.684877884245428*^9}, 3.6848792321259284`*^9}],
+   3.684877883354499*^9, 3.684877884245428*^9}, 3.6848792321259284`*^9, {
+   3.68501997167517*^9, 3.685020004869701*^9}}],
 
 Cell["\<\
 FUNCTIONS*********************************************************************\
@@ -440,16 +441,16 @@ Cell[1190, 37, 236, 5, 38, "Text"],
 Cell[1429, 44, 4265, 90, 398, "Input"],
 Cell[5697, 136, 318, 6, 38, "Text"],
 Cell[6018, 144, 333, 9, 110, "Input"],
-Cell[6354, 155, 2814, 68, 254, "Input"],
-Cell[9171, 225, 239, 5, 38, "Text"],
-Cell[9413, 232, 2771, 67, 206, "Input"],
-Cell[12187, 301, 194, 4, 38, "Text"],
-Cell[12384, 307, 449, 8, 37, "Input"],
-Cell[12836, 317, 366, 7, 38, "Text"],
-Cell[13205, 326, 147, 2, 37, "Input"],
-Cell[13355, 330, 2239, 49, 158, "Input"],
-Cell[15597, 381, 193, 5, 63, "Text"],
-Cell[15793, 388, 901, 17, 86, "Input"]
+Cell[6354, 155, 2847, 69, 254, "Input"],
+Cell[9204, 226, 239, 5, 38, "Text"],
+Cell[9446, 233, 2771, 67, 206, "Input"],
+Cell[12220, 302, 194, 4, 38, "Text"],
+Cell[12417, 308, 449, 8, 37, "Input"],
+Cell[12869, 318, 366, 7, 38, "Text"],
+Cell[13238, 327, 147, 2, 37, "Input"],
+Cell[13388, 331, 2239, 49, 158, "Input"],
+Cell[15630, 382, 193, 5, 63, "Text"],
+Cell[15826, 389, 901, 17, 86, "Input"]
 }
 ]
 *)
