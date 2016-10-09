@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     16810,        389]
-NotebookOptionsPosition[     15457,        347]
-NotebookOutlinePosition[     16261,        374]
-CellTagsIndexPosition[     16218,        371]
+NotebookDataLength[     17212,        402]
+NotebookOptionsPosition[     15857,        360]
+NotebookOutlinePosition[     16661,        387]
+CellTagsIndexPosition[     16618,        384]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -323,19 +323,32 @@ GROENER***********************************************************************\
 \>", "Text",
  CellChangeTimes->{{3.684941910626377*^9, 3.684941973179777*^9}}],
 
-Cell[BoxData[{
+Cell[BoxData[
  RowBox[{
-  RowBox[{"Grob1", " ", "=", " ", 
-   RowBox[{"GroebnerBasis", "[", 
-    RowBox[{"Eq101", ",", 
-     RowBox[{"{", 
-      RowBox[{"a", ",", "c", ",", "s", ",", "h", ",", "k"}], "}"}]}], "]"}]}],
-   ";"}], "\[IndentingNewLine]", "Grob1", "\[IndentingNewLine]"}], "Input",
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Grob1", " ", "=", " ", 
+     RowBox[{"GroebnerBasis", "[", 
+      RowBox[{"Eq101", ",", 
+       RowBox[{"{", 
+        RowBox[{"a", ",", "c", ",", "s", ",", "h", ",", "k"}], "}"}]}], 
+      "]"}]}], ";", "\[IndentingNewLine]", "Grob1"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Solu1", " ", "=", " ", 
+     RowBox[{"Solve", "[", 
+      RowBox[{"Eq101", ",", 
+       RowBox[{"{", 
+        RowBox[{"a", ",", "c", ",", "s", ",", "h", ",", "k"}], "}"}]}], 
+      "]"}]}], ";"}], "\[IndentingNewLine]", "Solu1", 
+   "\[IndentingNewLine]"}]}]], "Input",
  CellChangeTimes->{{3.684941987907112*^9, 3.684942042278463*^9}, {
   3.6849426906204453`*^9, 3.6849427407920527`*^9}, {3.68494279693007*^9, 
   3.6849428012183833`*^9}, {3.684956688689237*^9, 3.6849566895708127`*^9}, {
   3.6849567281011047`*^9, 3.6849567306078744`*^9}, {3.6849579223712645`*^9, 
-  3.6849579261960373`*^9}, {3.6849582457290115`*^9, 3.684958258260957*^9}}],
+  3.6849579261960373`*^9}, {3.6849582457290115`*^9, 3.684958258260957*^9}, {
+  3.684968025768393*^9, 3.6849680754343576`*^9}}],
 
 Cell["\<\
 SOLVE*************************************************************************\
@@ -389,8 +402,8 @@ Cell[10751, 240, 366, 7, 38, "Text"],
 Cell[11120, 249, 1875, 48, 158, "Input"],
 Cell[12998, 299, 1253, 17, 37, "Input"],
 Cell[14254, 318, 188, 5, 63, "Text"],
-Cell[14445, 325, 665, 12, 86, "Input"],
-Cell[15113, 339, 340, 6, 38, "Text"]
+Cell[14445, 325, 1065, 25, 134, "Input"],
+Cell[15513, 352, 340, 6, 38, "Text"]
 }
 ]
 *)
