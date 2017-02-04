@@ -248,15 +248,15 @@ Cell[BoxData["0.021852536336128706235037300954396348949300966867617188687`19.\
 Cell[BoxData["\[IndentingNewLine]"], "Input",
  CellChangeTimes->{{3.677062288895791*^9, 3.677062304107817*^9}}]
 },
-WindowSize->{1272, 873},
-WindowMargins->{{223, Automatic}, {48, Automatic}},
+WindowSize->{977, 873},
+WindowMargins->{{49, Automatic}, {Automatic, 23}},
 PrintingCopies->1,
 PrintingPageRange->{Automatic, Automatic},
-FrontEndVersion->"10.0 for Microsoft Windows (64-bit) (July 1, 2014)",
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
 StyleDefinitions->Notebook[{
    Cell[
     StyleData[StyleDefinitions -> "Default.nb"]]}, Visible -> False, 
-  FrontEndVersion -> "10.0 for Microsoft Windows (64-bit) (July 1, 2014)", 
+  FrontEndVersion -> "11.0 for Microsoft Windows (64-bit) (July 28, 2016)", 
   StyleDefinitions -> "PrivateStylesheetFormatting.nb"]
 ]
 (* End of Notebook Content *)
@@ -270,21 +270,19 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 236, 4, 52, "Input"],
-Cell[797, 26, 4812, 118, 452, "Input"],
+Cell[558, 20, 236, 4, 50, "Input"],
+Cell[797, 26, 4812, 118, 430, "Input"],
 Cell[CellGroupData[{
-Cell[5634, 148, 2321, 43, 132, "Input"],
-Cell[7958, 193, 271, 4, 31, "Output"]
+Cell[5634, 148, 2321, 43, 126, "Input"],
+Cell[7958, 193, 271, 4, 30, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[8266, 202, 1220, 28, 112, "Input"],
-Cell[9489, 232, 342, 5, 31, "Output"],
-Cell[9834, 239, 342, 5, 31, "Output"]
+Cell[8266, 202, 1220, 28, 107, "Input"],
+Cell[9489, 232, 342, 5, 30, "Output"],
+Cell[9834, 239, 342, 5, 30, "Output"]
 }, Open  ]],
-Cell[10191, 247, 111, 1, 52, "Input"]
+Cell[10191, 247, 111, 1, 50, "Input"]
 }
 ]
 *)
-
-(* End of internal cache information *)
 
