@@ -1,0 +1,314 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     11874,        306]
+NotebookOptionsPosition[     10474,        259]
+NotebookOutlinePosition[     11186,        283]
+CellTagsIndexPosition[     11143,        280]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{"ClearAll", ";"}], "\[IndentingNewLine]", 
+ RowBox[{"ClearSystemCache", ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Get", "[", 
+  RowBox[{"FileNameJoin", "[", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"ParentDirectory", "[", 
+      RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ",", "\"\<Lib\>\"", 
+     ",", "\"\<Rotations.m\>\""}], "}"}], "]"}], 
+  "]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.6771515156172924`*^9, 3.677151558334167*^9}, 
+   3.6891835936739254`*^9, {3.689183654927356*^9, 3.68918365908646*^9}, {
+   3.6891848670875807`*^9, 3.689184868188568*^9}, {3.689192955413163*^9, 
+   3.68919296235433*^9}}],
+
+Cell["Test Target Display Specified Parameters", "Text",
+ CellChangeTimes->{{3.6891836671665688`*^9, 3.689183694976012*^9}, 
+   3.689184871437935*^9, {3.6891930002615557`*^9, 3.689193007352886*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"WidthMM", " ", "=", " ", "132.48"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"HeightMM", " ", "=", "99.36"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"PixelPitchMM", "=", "0.207"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"NumPixelH", "=", "640"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"NumPixelV", "=", "480"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.6744984596458035`*^9, 3.674498483999446*^9}, 
+   3.6771515386147327`*^9, {3.6771516199728746`*^9, 3.677151620160075*^9}, 
+   3.6829776011997967`*^9, {3.682977631670542*^9, 3.6829776762723837`*^9}, {
+   3.6829778014424057`*^9, 3.6829778174875154`*^9}, {3.6891837213534365`*^9, 
+   3.6891838077643347`*^9}, {3.6891839216200213`*^9, 3.68918405369987*^9}, {
+   3.689184084885705*^9, 3.6891841599949617`*^9}, {3.6891842585556197`*^9, 
+   3.689184313007495*^9}, {3.689184407132762*^9, 3.689184418137444*^9}, {
+   3.6891845182096233`*^9, 3.689184536675631*^9}, {3.68918465277627*^9, 
+   3.6891846857413177`*^9}, {3.689184827197891*^9, 3.6891848278998995`*^9}, 
+   3.689185294351778*^9, 3.6891853933285475`*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"NumPixelH", "*", "PixelPitchMM"}], "\[IndentingNewLine]", 
+ RowBox[{"NumPixelV", "*", "PixelPitchMM"}]}], "Input",
+ CellChangeTimes->{{3.6744984974642696`*^9, 3.6744985071518865`*^9}, {
+   3.67449868286364*^9, 3.674498703003275*^9}, {3.6744987755774035`*^9, 
+   3.6744987974974422`*^9}, {3.6744995035707245`*^9, 
+   3.6744995185685844`*^9}, {3.6771516701133623`*^9, 
+   3.6771516744189696`*^9}, {3.682977605425116*^9, 3.6829776090042405`*^9}, {
+   3.682977721539486*^9, 3.6829777382869387`*^9}, {3.682977823873996*^9, 
+   3.682977830149413*^9}, 3.6891835835296135`*^9, {3.6891841566694355`*^9, 
+   3.6891842115665216`*^9}, {3.689184696196373*^9, 3.6891847007359715`*^9}, {
+   3.689192988523527*^9, 3.6891929886845856`*^9}}],
+
+Cell[BoxData["132.48`"], "Output",
+ CellChangeTimes->{
+  3.689194027448872*^9, {3.689194086265581*^9, 3.689194108581276*^9}, 
+   3.6891941687051015`*^9, {3.6891942092594614`*^9, 3.6891942565692215`*^9}, {
+   3.6891942907083883`*^9, 3.6891943368363757`*^9}, {3.6891943717625155`*^9, 
+   3.6891944174355645`*^9}}],
+
+Cell[BoxData["99.36`"], "Output",
+ CellChangeTimes->{
+  3.689194027448872*^9, {3.689194086265581*^9, 3.689194108581276*^9}, 
+   3.6891941687051015`*^9, {3.6891942092594614`*^9, 3.6891942565692215`*^9}, {
+   3.6891942907083883`*^9, 3.6891943368363757`*^9}, {3.6891943717625155`*^9, 
+   3.6891944174370823`*^9}}]
+}, Open  ]],
+
+Cell["Maximum Corner", "Text",
+ CellChangeTimes->{{3.6829832882519217`*^9, 3.682983319623785*^9}, {
+   3.6829833542746725`*^9, 3.682983360299362*^9}, {3.68298341319726*^9, 
+   3.6829834501300573`*^9}, 3.6891835863249035`*^9, {3.6891850514784846`*^9, 
+   3.689185053340351*^9}, {3.689193042646449*^9, 3.6891930536719112`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Corner1MM", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{"WidthMM", ",", "HeightMM", ",", "0.0"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Corner1MM", "//", "MatrixForm"}]}], "Input",
+ CellChangeTimes->{{3.689193066932803*^9, 3.689193179352991*^9}, 
+   3.68919401656968*^9}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", 
+   TagBox[GridBox[{
+      {"132.48`"},
+      {"99.36`"},
+      {"0.`"}
+     },
+     GridBoxAlignment->{
+      "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}},
+        "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.5599999999999999]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}],
+    Column], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{
+  3.6891940274689283`*^9, {3.6891940862803144`*^9, 3.689194108594812*^9}, 
+   3.6891941687176394`*^9, {3.6891942092705145`*^9, 3.689194256579749*^9}, {
+   3.689194290718892*^9, 3.68919433684594*^9}, {3.6891943717735434`*^9, 
+   3.689194417444101*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"MaxAngleX", " ", "=", " ", 
+     RowBox[{"1.0", " ", "Degree"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MaxAngleY", " ", "=", " ", 
+     RowBox[{
+      RowBox[{"-", "1.0"}], " ", "Degree"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"MaxAngleZ", " ", "=", " ", 
+     RowBox[{
+      RowBox[{"-", "1.0"}], " ", "Degree"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Corner2MM", " ", "=", " ", 
+      RowBox[{
+       RowBox[{"RotateZ", "[", "MaxAngleZ", "]"}], ".", 
+       RowBox[{"RotateY", "[", "MaxAngleY", "]"}], ".", 
+       RowBox[{"RotateX", "[", "MaxAngleX", "]"}], ".", "Corner1MM"}]}], 
+     ";"}], "//", "FullSimplify"}], "\[IndentingNewLine]", 
+   RowBox[{"Corner2MM", "//", "MatrixForm"}]}]}]], "Input",
+ CellChangeTimes->{{3.6891931999362035`*^9, 3.689193344466416*^9}, {
+  3.6891933860254903`*^9, 3.6891934458654857`*^9}, {3.689193868697896*^9, 
+  3.689193946823042*^9}, {3.68919408180026*^9, 3.6891941063678927`*^9}, {
+  3.6891942044977307`*^9, 3.689194335323842*^9}, {3.6891943654873753`*^9, 
+  3.689194415043284*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"(", "\[NoBreak]", 
+   TagBox[GridBox[{
+      {"134.143196273544`"},
+      {"97.01852179936665`"},
+      {"4.045901800991568`"}
+     },
+     GridBoxAlignment->{
+      "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}},
+        "RowsIndexed" -> {}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.5599999999999999]}, 
+         Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+         Offset[0.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}, "RowsIndexed" -> {}}],
+    Column], "\[NoBreak]", ")"}],
+  Function[BoxForm`e$, 
+   MatrixForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{
+  3.6891940274919586`*^9, {3.6891940862923584`*^9, 3.6891941086043024`*^9}, 
+   3.6891941687310953`*^9, {3.6891942092805395`*^9, 3.689194256589306*^9}, {
+   3.689194290729909*^9, 3.6891943368594685`*^9}, {3.689194371785084*^9, 
+   3.689194417457612*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"MinWidthMM", " ", "=", " ", 
+  RowBox[{"Corner2MM", "[", 
+   RowBox[{"[", "1", "]"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"MinHeightMM", " ", "=", " ", 
+  RowBox[{"Corner2MM", "[", 
+   RowBox[{"[", "2", "]"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"MinPixelPitchHMM", " ", "=", " ", 
+  RowBox[{"MinWidthMM", "/", "NumPixelH"}]}], "\[IndentingNewLine]", 
+ RowBox[{"MinPixelPitchVMM", " ", "=", " ", 
+  RowBox[{"MinHeightMM", "/", "NumPixelV"}]}], "\[IndentingNewLine]", 
+ RowBox[{"DOF", " ", "=", " ", 
+  RowBox[{"Corner2MM", "[", 
+   RowBox[{"[", "3", "]"}], "]"}]}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.6891935394573803`*^9, 3.689193575334791*^9}, {
+  3.689193663849348*^9, 3.6891936977976913`*^9}, {3.6891937384433336`*^9, 
+  3.6891938257249775`*^9}, {3.689194143334031*^9, 3.6891941642359896`*^9}}],
+
+Cell[BoxData["134.143196273544`"], "Output",
+ CellChangeTimes->{
+  3.689194027499477*^9, {3.689194086308427*^9, 3.6891941086133227`*^9}, 
+   3.689194168739622*^9, {3.689194209292549*^9, 3.689194256599801*^9}, {
+   3.6891942907424426`*^9, 3.6891943368699656`*^9}, {3.6891943717961187`*^9, 
+   3.68919441747097*^9}}],
+
+Cell[BoxData["97.01852179936665`"], "Output",
+ CellChangeTimes->{
+  3.689194027499477*^9, {3.689194086308427*^9, 3.6891941086133227`*^9}, 
+   3.689194168739622*^9, {3.689194209292549*^9, 3.689194256599801*^9}, {
+   3.6891942907424426`*^9, 3.6891943368699656`*^9}, {3.6891943717961187`*^9, 
+   3.689194417472474*^9}}],
+
+Cell[BoxData["0.2095987441774125`"], "Output",
+ CellChangeTimes->{
+  3.689194027499477*^9, {3.689194086308427*^9, 3.6891941086133227`*^9}, 
+   3.689194168739622*^9, {3.689194209292549*^9, 3.689194256599801*^9}, {
+   3.6891942907424426`*^9, 3.6891943368699656`*^9}, {3.6891943717961187`*^9, 
+   3.6891944174739866`*^9}}],
+
+Cell[BoxData["0.20212192041534718`"], "Output",
+ CellChangeTimes->{
+  3.689194027499477*^9, {3.689194086308427*^9, 3.6891941086133227`*^9}, 
+   3.689194168739622*^9, {3.689194209292549*^9, 3.689194256599801*^9}, {
+   3.6891942907424426`*^9, 3.6891943368699656`*^9}, {3.6891943717961187`*^9, 
+   3.6891944174749804`*^9}}],
+
+Cell[BoxData["4.045901800991568`"], "Output",
+ CellChangeTimes->{
+  3.689194027499477*^9, {3.689194086308427*^9, 3.6891941086133227`*^9}, 
+   3.689194168739622*^9, {3.689194209292549*^9, 3.689194256599801*^9}, {
+   3.6891942907424426`*^9, 3.6891943368699656`*^9}, {3.6891943717961187`*^9, 
+   3.689194417476485*^9}}]
+}, Open  ]],
+
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{{3.6891936041998987`*^9, 3.6891936144637947`*^9}, {
+  3.689193674366641*^9, 3.68919368857374*^9}}]
+},
+WindowSize->{1013, 832},
+WindowMargins->{{Automatic, -4}, {Automatic, 51}},
+PrintingCopies->1,
+PrintingPageRange->{Automatic, Automatic},
+Magnification:>1.25 Inherited,
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[StyleDefinitions -> "Default.nb"]], 
+   Cell[
+    StyleData["Text"], FontColor -> RGBColor[1, 0, 1]]}, Visible -> False, 
+  FrontEndVersion -> "11.0 for Microsoft Windows (64-bit) (July 28, 2016)", 
+  StyleDefinitions -> "PrivateStylesheetFormatting.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 658, 14, 110, "Input"],
+Cell[1219, 36, 198, 2, 38, "Text"],
+Cell[1420, 40, 1179, 22, 158, "Input"],
+Cell[CellGroupData[{
+Cell[2624, 66, 748, 11, 62, "Input"],
+Cell[3375, 79, 311, 5, 37, "Output"],
+Cell[3689, 86, 310, 5, 37, "Output"]
+}, Open  ]],
+Cell[4014, 94, 325, 4, 38, "Text"],
+Cell[CellGroupData[{
+Cell[4364, 102, 323, 8, 62, "Input"],
+Cell[4690, 112, 925, 25, 93, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5652, 142, 1179, 27, 158, "Input"],
+Cell[6834, 171, 965, 25, 93, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7836, 201, 856, 16, 158, "Input"],
+Cell[8695, 219, 314, 5, 37, "Output"],
+Cell[9012, 226, 316, 5, 37, "Output"],
+Cell[9331, 233, 319, 5, 37, "Output"],
+Cell[9653, 240, 320, 5, 37, "Output"],
+Cell[9976, 247, 316, 5, 37, "Output"]
+}, Open  ]],
+Cell[10307, 255, 163, 2, 62, "Input"]
+}
+]
+*)
+
