@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     35355,       1007]
-NotebookOptionsPosition[     34016,        960]
-NotebookOutlinePosition[     34728,        984]
-CellTagsIndexPosition[     34685,        981]
+NotebookDataLength[     35596,       1008]
+NotebookOptionsPosition[     34257,        961]
+NotebookOutlinePosition[     34969,        985]
+CellTagsIndexPosition[     34926,        982]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -56,19 +56,19 @@ Cell[BoxData[{
     RowBox[{
      RowBox[{
       RowBox[{"(", 
-       RowBox[{"1", "-", "u"}], ")"}], 
+       RowBox[{"1", "-", "v"}], ")"}], 
       RowBox[{"(", 
        RowBox[{"y1", "+", 
         RowBox[{
          RowBox[{"(", 
-          RowBox[{"y2", "-", "y1"}], ")"}], "v"}]}], ")"}]}], " ", "+", " ", 
+          RowBox[{"y2", "-", "y1"}], ")"}], "u"}]}], ")"}]}], " ", "+", " ", 
      RowBox[{
-      RowBox[{"(", "u", ")"}], 
+      RowBox[{"(", "v", ")"}], 
       RowBox[{"(", 
        RowBox[{"y3", "+", 
         RowBox[{
          RowBox[{"(", 
-          RowBox[{"y4", "-", "y3"}], ")"}], "v"}]}], ")"}]}]}]}]}], 
+          RowBox[{"y4", "-", "y3"}], ")"}], "u"}]}], ")"}]}]}]}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"EBx", " ", "=", " ", 
@@ -76,19 +76,19 @@ Cell[BoxData[{
     RowBox[{
      RowBox[{
       RowBox[{"(", 
-       RowBox[{"1", "-", "v"}], ")"}], 
+       RowBox[{"1", "-", "u"}], ")"}], 
       RowBox[{"(", 
        RowBox[{"x1", "+", 
         RowBox[{
          RowBox[{"(", 
-          RowBox[{"x3", "-", "x1"}], ")"}], "u"}]}], ")"}]}], " ", "+", " ", 
+          RowBox[{"x3", "-", "x1"}], ")"}], "v"}]}], ")"}]}], " ", "+", " ", 
      RowBox[{
-      RowBox[{"(", "v", ")"}], 
+      RowBox[{"(", "u", ")"}], 
       RowBox[{"(", 
        RowBox[{"x2", "+", 
         RowBox[{
          RowBox[{"(", 
-          RowBox[{"x4", "-", "x2"}], ")"}], "u"}]}], ")"}]}]}]}]}], 
+          RowBox[{"x4", "-", "x2"}], ")"}], "v"}]}], ")"}]}]}]}]}], 
   ";"}], "\[IndentingNewLine]", 
  RowBox[{
   RowBox[{"EBy", " ", "=", " ", 
@@ -118,7 +118,8 @@ Cell[BoxData[{
    3.7052682894310637`*^9}, {3.7052709918234863`*^9, 3.705270995511101*^9}, {
    3.705315755690135*^9, 3.7053157564021816`*^9}, {3.715721434629594*^9, 
    3.7157214388085318`*^9}, {3.715726251475976*^9, 3.7157262541148696`*^9}, {
-   3.715726293072445*^9, 3.7157262935786743`*^9}}],
+   3.715726293072445*^9, 3.7157262935786743`*^9}, {3.7158013400474367`*^9, 
+   3.7158013432612042`*^9}}],
 
 Cell[CellGroupData[{
 
@@ -127,7 +128,7 @@ Cell[BoxData[
   RowBox[{
    RowBox[{"Solve", "[", 
     RowBox[{
-     RowBox[{"EAx", " ", "&&", " ", "EBy"}], ",", 
+     RowBox[{"EAx", " ", "&&", " ", "EAy"}], ",", 
      RowBox[{"{", 
       RowBox[{"u", ",", "v"}], "}"}]}], "]"}], "//", 
    "FullSimplify"}]}]], "Input",
@@ -145,7 +146,7 @@ Cell[BoxData[
    3.7053160915327525`*^9, 3.7053161060054126`*^9}, {3.715721445859626*^9, 
    3.715721474306847*^9}, {3.715726286929679*^9, 3.7157262898976526`*^9}, {
    3.7157275863903394`*^9, 3.715727591092493*^9}, {3.71572801248399*^9, 
-   3.715728015456456*^9}}],
+   3.715728015456456*^9}, {3.715801348102104*^9, 3.71580134946813*^9}}],
 
 Cell[BoxData[
  RowBox[{"{", 
@@ -507,7 +508,7 @@ Cell[BoxData[
              RowBox[{"y2", "-", "y4"}], ")"}]}]}], ")"}]}], ")"}]}]}]}], 
     "}"}]}], "}"}]], "Output",
  CellChangeTimes->{3.7157263276575346`*^9, 3.7157276874085765`*^9, 
-  3.7157280271284122`*^9}]
+  3.7157280271284122`*^9, 3.715801354718461*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -613,7 +614,7 @@ Cell[BoxData[
         RowBox[{"(", 
          RowBox[{"y3", "-", "y4"}], ")"}]}]}], ")"}]}], ")"}]}]}]], "Output",
  CellChangeTimes->{3.7157263276731997`*^9, 3.715727687471118*^9, 
-  3.715728027161177*^9}]
+  3.715728027161177*^9, 3.7158013547496805`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -719,7 +720,7 @@ Cell[BoxData[
            RowBox[{"y2", "-", "y4"}], ")"}]}]}], ")"}]}], ")"}]}], 
     ")"}]}]}]], "Output",
  CellChangeTimes->{3.7157263276887884`*^9, 3.71572768748872*^9, 
-  3.715728027192563*^9}]
+  3.715728027192563*^9, 3.7158013547653093`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -825,7 +826,7 @@ Cell[BoxData[
            RowBox[{"y3", "-", "y4"}], ")"}]}]}], ")"}]}], ")"}]}], 
     ")"}]}]}]], "Output",
  CellChangeTimes->{3.7157263277245617`*^9, 3.715727687508792*^9, 
-  3.71572802720819*^9}]
+  3.71572802720819*^9, 3.7158013547824416`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -926,7 +927,7 @@ Cell[BoxData[
         RowBox[{"(", 
          RowBox[{"y2", "-", "y4"}], ")"}]}]}], ")"}]}], ")"}]}]}]], "Output",
  CellChangeTimes->{3.715726327741696*^9, 3.715727687540049*^9, 
-  3.715728027228402*^9}]
+  3.715728027228402*^9, 3.7158013548187714`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -955,7 +956,7 @@ Cell["\<\
    (2.*((x3 - x4)*(y1 - y2) - (x1 - x2)*(y3 - y4)))\
 \>", "Output",
  CellChangeTimes->{3.7157263277729654`*^9, 3.7157276875556774`*^9, 
-  3.715728027259694*^9}]
+  3.715728027259694*^9, 3.7158013548344226`*^9}]
 }, Open  ]]
 },
 WindowSize->{835, 941},
@@ -984,30 +985,30 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[558, 20, 423, 9, 86, "Input"],
-Cell[984, 31, 2869, 89, 110, "Input"],
+Cell[984, 31, 2923, 90, 110, "Input"],
 Cell[CellGroupData[{
-Cell[3878, 124, 1264, 23, 37, "Input"],
-Cell[5145, 149, 13571, 360, 759, "Output"]
+Cell[3932, 125, 1309, 23, 37, "Input"],
+Cell[5244, 150, 13593, 360, 759, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[18753, 514, 579, 10, 37, "Input"],
-Cell[19335, 526, 2997, 89, 187, "Output"]
+Cell[18874, 515, 579, 10, 37, "Input"],
+Cell[19456, 527, 3021, 89, 187, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[22369, 620, 423, 8, 37, "Input"],
-Cell[22795, 630, 3195, 91, 220, "Output"]
+Cell[22514, 621, 423, 8, 37, "Input"],
+Cell[22940, 631, 3219, 91, 220, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[26027, 726, 405, 8, 37, "Input"],
-Cell[26435, 736, 3195, 91, 220, "Output"]
+Cell[26196, 727, 405, 8, 37, "Input"],
+Cell[26604, 737, 3219, 91, 220, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[29667, 832, 279, 6, 37, "Input"],
-Cell[29949, 840, 2973, 88, 211, "Output"]
+Cell[29860, 833, 279, 6, 37, "Input"],
+Cell[30142, 841, 2997, 88, 211, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[32959, 933, 481, 11, 37, "Input"],
-Cell[33443, 946, 557, 11, 196, "Output"]
+Cell[33176, 934, 481, 11, 37, "Input"],
+Cell[33660, 947, 581, 11, 196, "Output"]
 }, Open  ]]
 }
 ]
