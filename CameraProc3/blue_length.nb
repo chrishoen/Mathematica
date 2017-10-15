@@ -1,0 +1,204 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      7683,        196]
+NotebookOptionsPosition[      6445,        154]
+NotebookOutlinePosition[      7126,        177]
+CellTagsIndexPosition[      7083,        174]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ClearAll", ";"}], "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.6771515156172924`*^9, 3.677151558334167*^9}, 
+   3.6891835936739254`*^9}],
+
+Cell["\<\
+Working distance and angular deflection, millimeters and degrees\
+\>", "Text",
+ CellChangeTimes->{{3.717013252891053*^9, 3.7170132796300526`*^9}, {
+  3.7170133715686893`*^9, 3.7170133856308575`*^9}, {3.717013474967603*^9, 
+  3.7170134774403048`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Xmm", " ", "=", " ", "188.2"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"alpha", " ", "=", " ", 
+    RowBox[{"0.001", "  ", "Degree"}]}], ";"}], " "}]}], "Input",
+ CellChangeTimes->{{3.6744984596458035`*^9, 3.674498483999446*^9}, 
+   3.6771515386147327`*^9, {3.6771516199728746`*^9, 3.677151620160075*^9}, 
+   3.6829776011997967`*^9, {3.682977631670542*^9, 3.6829776762723837`*^9}, {
+   3.6829778014424057`*^9, 3.6829778174875154`*^9}, {3.7170124302134085`*^9, 
+   3.7170124910801325`*^9}, {3.717012528417372*^9, 3.717012593238789*^9}, 
+   3.7170126964761515`*^9, {3.717012729129109*^9, 3.7170127999058576`*^9}, {
+   3.717013144559475*^9, 3.71701314564675*^9}, 3.71701329228514*^9, 
+   3.7170133807466125`*^9}],
+
+Cell["Transverse displacement, millimeters  and micrometers", "Text",
+ CellChangeTimes->{{3.7170133013516145`*^9, 3.7170133538064823`*^9}, 
+   3.71701339166168*^9, {3.717013428579084*^9, 3.7170134301630373`*^9}, {
+   3.7170134820702696`*^9, 3.7170134901763477`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"Ymm", " ", "=", "  ", 
+  RowBox[{"Xmm", " ", 
+   RowBox[{"Tan", "[", "alpha", "]"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"Yum", " ", "=", " ", 
+  RowBox[{"Ymm", " ", "1000"}]}]}], "Input",
+ CellChangeTimes->{{3.7170132936757727`*^9, 3.71701329523629*^9}, 
+   3.7170133944378796`*^9}],
+
+Cell[BoxData["0.003284709652586855`"], "Output",
+ CellChangeTimes->{{3.717013454087308*^9, 3.7170134953210254`*^9}, {
+   3.7170138916406612`*^9, 3.717013904731589*^9}, 3.717014158425267*^9, {
+   3.7170141972510333`*^9, 3.7170142057937393`*^9}, 3.717014278889408*^9}],
+
+Cell[BoxData["3.284709652586855`"], "Output",
+ CellChangeTimes->{{3.717013454087308*^9, 3.7170134953210254`*^9}, {
+   3.7170138916406612`*^9, 3.717013904731589*^9}, 3.717014158425267*^9, {
+   3.7170141972510333`*^9, 3.7170142057937393`*^9}, 3.7170142788914137`*^9}]
+}, Open  ]],
+
+Cell["Transverse displacement, thousands of an inch", "Text",
+ CellChangeTimes->{{3.7170135420148587`*^9, 3.7170136259064035`*^9}, {
+  3.7170142624163694`*^9, 3.7170142757004337`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"MMperINCH", " ", "=", " ", "25.4"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"UMperMINCH", " ", "=", " ", "MMperINCH"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"MINCHperUM", " ", "=", " ", 
+   RowBox[{"1", "/", "UMperMINCH"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Yminch", " ", "=", " ", 
+  RowBox[{"Yum", " ", "MINCHperUM"}]}]}], "Input",
+ CellChangeTimes->{{3.717013629462356*^9, 3.7170136425269947`*^9}, {
+   3.717013681604846*^9, 3.717013757499441*^9}, {3.717013800345068*^9, 
+   3.7170138631947203`*^9}, {3.717013902338171*^9, 3.7170139030072975`*^9}, 
+   3.717014078759519*^9, {3.717014110866971*^9, 3.717014155620037*^9}, {
+   3.717014195269652*^9, 3.7170142042234077`*^9}}],
+
+Cell[BoxData["0.12931927766089982`"], "Output",
+ CellChangeTimes->{{3.7170138916526575`*^9, 3.7170139047472277`*^9}, 
+   3.717014158425267*^9, {3.717014197266701*^9, 3.7170142058094025`*^9}, 
+   3.7170142788994403`*^9}]
+}, Open  ]],
+
+Cell["Wavelength of blue light is 400 nanometers", "Text",
+ CellChangeTimes->{{3.6744984974642696`*^9, 3.6744985071518865`*^9}, {
+   3.67449868286364*^9, 3.674498703003275*^9}, {3.6744987755774035`*^9, 
+   3.6744987974974422`*^9}, {3.6744995035707245`*^9, 
+   3.6744995185685844`*^9}, {3.6771516701133623`*^9, 
+   3.6771516744189696`*^9}, {3.682977605425116*^9, 3.6829776090042405`*^9}, {
+   3.682977721539486*^9, 3.6829777382869387`*^9}, {3.682977823873996*^9, 
+   3.682977830149413*^9}, 3.6891835835296135`*^9, {3.717012602061028*^9, 
+   3.717012625744377*^9}, {3.7170126869459457`*^9, 3.7170127166634502`*^9}, {
+   3.7170128329050293`*^9, 3.7170128488800173`*^9}, {3.7170129815048513`*^9, 
+   3.7170129822072725`*^9}, {3.7170131426765084`*^9, 
+   3.7170131852965794`*^9}, {3.7170134619594097`*^9, 3.7170134673727818`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Lnm", " ", "=", " ", "400"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Lum", " ", "=", " ", 
+   RowBox[{"Lnm", "/", "1000"}]}], ";"}]}], "Input",
+ CellChangeTimes->{
+  3.6744995262709293`*^9, {3.681568379011154*^9, 3.6815683975526886`*^9}, 
+   3.6829776121143417`*^9, {3.7170128631019573`*^9, 3.717012880380211*^9}, {
+   3.7170129405605946`*^9, 3.7170129534990983`*^9}, {3.7170130483887973`*^9, 
+   3.717013065296623*^9}}],
+
+Cell["Number of wavelengths of blue light in the displacement", "Text",
+ CellChangeTimes->{{3.717013210087102*^9, 3.717013233989517*^9}, {
+   3.7170133622087555`*^9, 3.7170133684083757`*^9}, 3.717013403582775*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"NL", " ", "=", " ", 
+  RowBox[{"Yum", "/", "Lum"}]}]], "Input",
+ CellChangeTimes->{{3.6829832882519217`*^9, 3.682983319623785*^9}, {
+   3.6829833542746725`*^9, 3.682983360299362*^9}, {3.68298341319726*^9, 
+   3.6829834501300573`*^9}, 3.6891835863249035`*^9, {3.717012894332999*^9, 
+   3.717012921617739*^9}}],
+
+Cell[BoxData["8.211774131467138`"], "Output",
+ CellChangeTimes->{{3.7170134541031656`*^9, 3.717013495336649*^9}, {
+   3.7170138916677*^9, 3.717013904762844*^9}, 3.7170141584565706`*^9, {
+   3.7170141972822866`*^9, 3.7170142058249907`*^9}, 3.717014278911695*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.682983490242663*^9, 3.6829835162010527`*^9}, {
+   3.682983549174061*^9, 3.682983562339014*^9}, 3.689183588733966*^9}]
+},
+WindowSize->{1013, 832},
+WindowMargins->{{Automatic, 93}, {58, Automatic}},
+PrintingCopies->1,
+PrintingPageRange->{Automatic, Automatic},
+FrontEndVersion->"11.0 for Microsoft Windows (64-bit) (July 28, 2016)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[StyleDefinitions -> "Default.nb"]], 
+   Cell[
+    StyleData["Text"], FontColor -> RGBColor[1, 0, 1]]}, Visible -> False, 
+  FrontEndVersion -> "11.0 for Microsoft Windows (64-bit) (July 28, 2016)", 
+  StyleDefinitions -> "PrivateStylesheetFormatting.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 183, 4, 50, "Input"],
+Cell[744, 26, 260, 5, 30, "Text"],
+Cell[1007, 33, 769, 14, 50, "Input"],
+Cell[1779, 49, 266, 3, 30, "Text"],
+Cell[CellGroupData[{
+Cell[2070, 56, 309, 7, 50, "Input"],
+Cell[2382, 65, 266, 3, 30, "Output"],
+Cell[2651, 70, 265, 3, 30, "Output"]
+}, Open  ]],
+Cell[2931, 76, 184, 2, 30, "Text"],
+Cell[CellGroupData[{
+Cell[3140, 82, 749, 15, 88, "Input"],
+Cell[3892, 99, 219, 3, 30, "Output"]
+}, Open  ]],
+Cell[4126, 105, 825, 11, 30, "Text"],
+Cell[4954, 118, 469, 10, 50, "Input"],
+Cell[5426, 130, 213, 2, 30, "Text"],
+Cell[CellGroupData[{
+Cell[5664, 136, 332, 6, 30, "Input"],
+Cell[5999, 144, 261, 3, 30, "Output"]
+}, Open  ]],
+Cell[6275, 150, 166, 2, 30, "Input"]
+}
+]
+*)
+
