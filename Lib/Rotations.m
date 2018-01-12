@@ -21,3 +21,6 @@ RotateSmallerX[t_]:=(M1={{1,0,0},{0,1,-t},{0,t,1}};Return[M1]);
 RotateSmallerY[t_]:=(M1={{1,0,t},{0,1,0},{-t,0,1}};Return[M1]);
 RotateSmallerZ[t_]:=(M1={{1,-t,0},{t,1,0},{0,0,1}};Return[M1]);
 
+Rotate2[t_] := (M1 = {{Cos[t],-Sin[t]},{Sin[t],Cos[t]}};Return[M1]);
+
+

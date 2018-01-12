@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     11261,        353]
-NotebookOptionsPosition[     10927,        337]
-NotebookOutlinePosition[     11334,        354]
-CellTagsIndexPosition[     11291,        351]
+NotebookDataLength[     12067,        377]
+NotebookOptionsPosition[     11733,        361]
+NotebookOutlinePosition[     12140,        378]
+CellTagsIndexPosition[     12097,        375]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -314,26 +314,50 @@ Cell[BoxData[{
      RowBox[{"Return", "[", "M1", "]"}]}], ")"}]}], ";"}], "\n", 
  RowBox[{
   RowBox[{
-   RowBox[{"RotateSmallerZ", "[", "t_", "]"}], ":=", 
-   RowBox[{"(", 
-    RowBox[{
-     RowBox[{"M1", "=", 
-      RowBox[{"{", 
-       RowBox[{
-        RowBox[{"{", 
-         RowBox[{"1", ",", 
-          RowBox[{"-", "t"}], ",", "0"}], "}"}], ",", 
-        RowBox[{"{", 
-         RowBox[{"t", ",", "1", ",", "0"}], "}"}], ",", 
-        RowBox[{"{", 
-         RowBox[{"0", ",", "0", ",", "1"}], "}"}]}], "}"}]}], ";", 
-     RowBox[{"Return", "[", "M1", "]"}]}], ")"}]}], ";"}], "\n"}], "Input",
+   RowBox[{
+    RowBox[{"RotateSmallerZ", "[", "t_", "]"}], ":=", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"M1", "=", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"1", ",", 
+           RowBox[{"-", "t"}], ",", "0"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", "1", ",", "0"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "0", ",", "1"}], "}"}]}], "}"}]}], ";", 
+      RowBox[{"Return", "[", "M1", "]"}]}], ")"}]}], ";"}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Rotate2", "[", "t_", "]"}], " ", ":=", " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"M1", " ", "=", " ", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Cos", "[", "t", "]"}], ",", 
+           RowBox[{"-", 
+            RowBox[{"Sin", "[", "t", "]"}]}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Sin", "[", "t", "]"}], ",", 
+           RowBox[{"Cos", "[", "t", "]"}]}], "}"}]}], "}"}]}], ";", 
+      RowBox[{"Return", "[", "M1", "]"}]}], ")"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]"}], "Input",
  InitializationCell->True,
  CellChangeTimes->{{3.6744984596458035`*^9, 3.674498483999446*^9}, 
    3.6771511359462285`*^9, {3.6771511778957014`*^9, 3.67715130863393*^9}, {
    3.681566196748214*^9, 3.681566393806427*^9}, {3.681567770800324*^9, 
    3.6815678020316095`*^9}, {3.6815697907843256`*^9, 
-   3.6815698632993493`*^9}, {3.6857075934631934`*^9, 3.6857077652457843`*^9}}]
+   3.6815698632993493`*^9}, {3.6857075934631934`*^9, 
+   3.6857077652457843`*^9}, {3.7247515769794865`*^9, 
+   3.7247516406316624`*^9}, {3.724752111490876*^9, 3.7247521160516014`*^9}}]
 },
 WindowSize->{1013, 832},
 WindowMargins->{{Automatic, 40}, {-163, Automatic}},
@@ -353,7 +377,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 10365, 315, 408, "Input",
+Cell[558, 20, 11171, 339, 465, "Input",
  InitializationCell->True]
 }
 ]
