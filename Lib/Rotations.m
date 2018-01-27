@@ -23,4 +23,13 @@ RotateSmallerZ[t_]:=(M1={{1,-t,0},{t,1,0},{0,0,1}};Return[M1]);
 
 Rotate2[t_] := (M1 = {{Cos[t],-Sin[t]},{Sin[t],Cos[t]}};Return[M1]);
 
+RotateFromSAA[a1_,a2_,a3_] := Module[{c1,c2,c3,R,R1,R2,R3},
+c1=Sin[a2]Cos[a3];
+c2=Sin[a2]Sin[a3];
+c3=Cos[a2];
+R1=Cos[a1]IdentityMatrix[3]; 
+R2=(1-Cos[a1]){{c1 c1,c1 c2,c1 c3},{c2 c1,c2 c2,c2 c3},{c3 c1,c3 c2,c3 c3}};
+R3=Sin[a1]{{0,-c3,c2},{c3,0,-c1},{-c2,c1,0}};
+R=R1+R2+R3;
+Return[R]]
 
