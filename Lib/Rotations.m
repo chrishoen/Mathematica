@@ -33,3 +33,10 @@ R3=Sin[a1]{{0,-c3,c2},{c3,0,-c1},{-c2,c1,0}};
 R=R1+R2+R3;
 Return[R]]
 
+RotateFromAA[a1_,c1_,c2_,c3_] := Module[{R,R1,R2,R3},
+R1=Cos[a1]IdentityMatrix[3]; 
+R2=(1-Cos[a1]){{c1 c1,c1 c2,c1 c3},{c2 c1,c2 c2,c2 c3},{c3 c1,c3 c2,c3 c3}};
+R3=Sin[a1]{{0,-c3,c2},{c3,0,-c1},{-c2,c1,0}};
+R=R1+R2+R3;
+Return[R]]
+
