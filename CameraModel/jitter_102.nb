@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     14323,        314]
-NotebookOptionsPosition[     12820,        262]
-NotebookOutlinePosition[     13533,        286]
-CellTagsIndexPosition[     13490,        283]
+NotebookDataLength[     15605,        355]
+NotebookOptionsPosition[     13911,        296]
+NotebookOutlinePosition[     14624,        320]
+CellTagsIndexPosition[     14581,        317]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -44,7 +44,9 @@ Cell[BoxData[{
    3.7264894877541943`*^9, 3.7264894895199003`*^9}}],
 
 Cell[BoxData["True"], "Output",
- CellChangeTimes->{3.7287618764182034`*^9}]
+ CellChangeTimes->{
+  3.7287618764182034`*^9, 3.728777949083005*^9, {3.728778065173617*^9, 
+   3.728778131381923*^9}}]
 }, Open  ]],
 
 Cell["Geometry", "Text",
@@ -122,10 +124,14 @@ Cell[BoxData[{
    3.7287618698791413`*^9}],
 
 Cell[BoxData["3768.1159420289855`"], "Output",
- CellChangeTimes->{3.72876187646535*^9}],
+ CellChangeTimes->{
+  3.72876187646535*^9, 3.7287779491328564`*^9, {3.728778065347608*^9, 
+   3.7287781314131765`*^9}}],
 
 Cell[BoxData["15.203193876205676`"], "Output",
- CellChangeTimes->{3.72876187646535*^9}]
+ CellChangeTimes->{
+  3.72876187646535*^9, 3.7287779491328564`*^9, {3.728778065347608*^9, 
+   3.7287781314131765`*^9}}]
 }, Open  ]],
 
 Cell["Jitter", "Text",
@@ -139,15 +145,8 @@ Cell[CellGroupData[{
 Cell[BoxData[{
  RowBox[{
   RowBox[{"rate", " ", "=", " ", "0.10"}], ";"}], "\[IndentingNewLine]", 
- RowBox[{
-  RowBox[{"exposure", " ", "=", " ", 
-   RowBox[{"1.0", "/", "20.0"}]}], ";"}], "\[IndentingNewLine]", 
- RowBox[{"alpha2", " ", "=", 
-  RowBox[{"rate", " ", "exposure"}]}], "\[IndentingNewLine]", 
- RowBox[{"jitter", " ", "=", " ", 
-  RowBox[{"fps", " ", 
-   RowBox[{"Tan", "[", 
-    RowBox[{"alpha2", " ", "Degree"}], "]"}]}]}]}], "Input",
+ RowBox[{"exposure", " ", "=", " ", 
+  RowBox[{"1.0", "/", "20.0"}]}]}], "Input",
  CellChangeTimes->{
   3.6897262776972065`*^9, {3.689726320492235*^9, 3.68972643779506*^9}, {
    3.68977786112496*^9, 3.6897778623852654`*^9}, {3.711230203182678*^9, 
@@ -180,13 +179,40 @@ Cell[BoxData[{
    3.7270265831895247`*^9, 3.727026589685204*^9}, {3.7283905257496724`*^9, 
    3.728390536372178*^9}, {3.7287447124470277`*^9, 3.728744713411408*^9}, {
    3.728744889341733*^9, 3.728744891309712*^9}, {3.728748845723941*^9, 
-   3.7287488546263247`*^9}, {3.728748931755155*^9, 3.728748933179207*^9}}],
+   3.7287488546263247`*^9}, {3.728748931755155*^9, 3.728748933179207*^9}, {
+   3.7287780504791126`*^9, 3.728778079069837*^9}}],
+
+Cell[BoxData["0.05`"], "Output",
+ CellChangeTimes->{{3.72877808319376*^9, 3.728778131434864*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"alpha2", " ", "=", 
+  RowBox[{"rate", " ", "exposure"}]}]], "Input",
+ CellChangeTimes->{{3.7287780529877987`*^9, 3.7287780615549097`*^9}, {
+  3.728778110413786*^9, 3.728778122887754*^9}}],
 
 Cell[BoxData["0.005000000000000001`"], "Output",
- CellChangeTimes->{3.7287618764809775`*^9}],
+ CellChangeTimes->{
+  3.7287618764809775`*^9, 3.7287779491484437`*^9, {3.728778065378862*^9, 
+   3.728778131434864*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"jitter", " ", "=", " ", 
+  RowBox[{"fps", " ", 
+   RowBox[{"Tan", "[", 
+    RowBox[{"alpha2", " ", "Degree"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.728778097101282*^9, 3.7287781271900177`*^9}}],
 
 Cell[BoxData["0.32883014976119623`"], "Output",
- CellChangeTimes->{3.7287618764809775`*^9}]
+ CellChangeTimes->{
+  3.7287618764809775`*^9, 3.7287779491484437`*^9, {3.728778065378862*^9, 
+   3.7287781314661245`*^9}}]
 }, Open  ]],
 
 Cell["Motion Test Jig Amplitude1", "Text",
@@ -221,10 +247,14 @@ Cell[BoxData[{
    3.7287614885324187`*^9}}],
 
 Cell[BoxData["0.28284271247461906`"], "Output",
- CellChangeTimes->{3.728761876496606*^9}],
+ CellChangeTimes->{
+  3.728761876496606*^9, 3.7287779491641026`*^9, {3.728778065394491*^9, 
+   3.728778131481745*^9}}],
 
 Cell[BoxData["0.1`"], "Output",
- CellChangeTimes->{3.728761876496606*^9}]
+ CellChangeTimes->{
+  3.728761876496606*^9, 3.7287779491641026`*^9, {3.728778065394491*^9, 
+   3.728778131481745*^9}}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -237,7 +267,9 @@ Cell[BoxData[
   3.72876185476024*^9}}],
 
 Cell[BoxData["0.17771531752633468`"], "Output",
- CellChangeTimes->{3.7287618765310345`*^9}]
+ CellChangeTimes->{
+  3.7287618765310345`*^9, 3.7287779491797314`*^9, {3.728778065410619*^9, 
+   3.728778131497383*^9}}]
 }, Open  ]],
 
 Cell["Motion Test Jig Amplitude2", "Text",
@@ -257,7 +289,9 @@ Cell[BoxData[{
    3.728761756235059*^9, {3.7287618001090937`*^9, 3.7287618339565067`*^9}}],
 
 Cell[BoxData["0.25132741228718347`"], "Output",
- CellChangeTimes->{3.728761876554095*^9}]
+ CellChangeTimes->{
+  3.728761876554095*^9, 3.7287779492015824`*^9, {3.728778065426319*^9, 
+   3.7287781315130005`*^9}}]
 }, Open  ]]
 },
 WindowSize->{1013, 832},
@@ -287,34 +321,41 @@ CellTagsIndex->{}
 Notebook[{
 Cell[CellGroupData[{
 Cell[580, 22, 1136, 21, 134, "Input"],
-Cell[1719, 45, 75, 1, 37, "Output"]
+Cell[1719, 45, 150, 3, 37, "Output"]
 }, Open  ]],
-Cell[1809, 49, 342, 5, 38, "Text"],
+Cell[1884, 51, 342, 5, 38, "Text"],
 Cell[CellGroupData[{
-Cell[2176, 58, 4268, 63, 134, "Input"],
-Cell[6447, 123, 87, 1, 37, "Output"],
-Cell[6537, 126, 87, 1, 37, "Output"]
+Cell[2251, 60, 4268, 63, 134, "Input"],
+Cell[6522, 125, 166, 3, 37, "Output"],
+Cell[6691, 130, 166, 3, 37, "Output"]
 }, Open  ]],
-Cell[6639, 130, 287, 4, 38, "Text"],
+Cell[6872, 136, 287, 4, 38, "Text"],
 Cell[CellGroupData[{
-Cell[6951, 138, 2848, 44, 110, "Input"],
-Cell[9802, 184, 92, 1, 37, "Output"],
-Cell[9897, 187, 91, 1, 37, "Output"]
-}, Open  ]],
-Cell[10003, 191, 302, 4, 38, "Text"],
-Cell[CellGroupData[{
-Cell[10330, 199, 1290, 21, 86, "Input"],
-Cell[11623, 222, 89, 1, 37, "Output"],
-Cell[11715, 225, 73, 1, 37, "Output"]
+Cell[7184, 144, 2632, 38, 62, "Input"],
+Cell[9819, 184, 97, 1, 37, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[11825, 231, 254, 5, 37, "Input"],
-Cell[12082, 238, 91, 1, 37, "Output"]
+Cell[9953, 190, 211, 4, 37, "Input"],
+Cell[10167, 196, 169, 3, 37, "Output"]
 }, Open  ]],
-Cell[12188, 242, 163, 3, 38, "Text"],
 Cell[CellGroupData[{
-Cell[12376, 249, 336, 7, 62, "Input"],
-Cell[12715, 258, 89, 1, 37, "Output"]
+Cell[10373, 204, 223, 5, 37, "Input"],
+Cell[10599, 211, 170, 3, 37, "Output"]
+}, Open  ]],
+Cell[10784, 217, 302, 4, 38, "Text"],
+Cell[CellGroupData[{
+Cell[11111, 225, 1290, 21, 86, "Input"],
+Cell[12404, 248, 166, 3, 37, "Output"],
+Cell[12573, 253, 150, 3, 37, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12760, 261, 254, 5, 37, "Input"],
+Cell[13017, 268, 168, 3, 37, "Output"]
+}, Open  ]],
+Cell[13200, 274, 163, 3, 38, "Text"],
+Cell[CellGroupData[{
+Cell[13388, 281, 336, 7, 62, "Input"],
+Cell[13727, 290, 168, 3, 37, "Output"]
 }, Open  ]]
 }
 ]
